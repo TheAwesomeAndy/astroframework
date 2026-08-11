@@ -17,20 +17,28 @@ NAF distinguishes six classes of statements:
 5. **Research-exploratory** — new numerical descriptors whose astrological significance has not been established.
 6. **Interpretive inference** — traditional, transpersonal, Jyotish or AI-generated meaning. Interpretation never retroactively changes the calculation layer.
 
-## Birth input
+## Public birth input
 
-The core birth-data contract is:
+The public contract is intentionally simple:
 
 ```json
 {
-  "timestamp": "YYYY-MM-DDTHH:MM:SS-04:00",
+  "local_datetime": "YYYY-MM-DDTHH:MM:SS",
   "latitude": 40.789,
   "longitude": -73.135,
   "elevation_m": 0
 }
 ```
 
-The timestamp must contain an explicit UTC offset or `Z`. Plain local clock time is rejected because it cannot be reconstructed uniquely without a time-zone rule/history. Latitude is north-positive. Longitude is east-positive; western longitudes are negative.
+Latitude is north-positive. Longitude is east-positive; western longitudes are negative.
+
+Civil time cannot be inferred from longitude alone because legal time zones and daylight-saving rules are historical human conventions. NAF therefore resolves an IANA time-zone name from latitude/longitude using a pinned coordinate lookup dataset and then converts the local wall time under the historical IANA zone rules exposed by JavaScript `Intl`.
+
+The resolved zone, UTC offset, UTC instant, lookup version and conversion method are retained in provenance. An advanced `timezone_override` is available so an expert can replace the coordinate-derived zone when historical or boundary circumstances require it.
+
+Repeated local times during an autumn DST transition can correspond to two distinct UTC instants. NAF does not guess; it reports the alternatives and requires `ambiguity_index`. Local times that never occurred because the clock jumped forward are rejected as nonexistent civil times.
+
+The lower-level astronomy adapter still requires an explicit ISO timestamp with offset or `Z`. The public pipeline resolves that timestamp before astronomy begins.
 
 ## Open astronomy adapter
 
