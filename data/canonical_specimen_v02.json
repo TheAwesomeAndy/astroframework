@@ -1,0 +1,68 @@
+{
+  "framework": "Noetic Atlas Framework",
+  "version": "0.2",
+  "specimen_id": "NAF-CANON-0001",
+  "house_system": "Whole Sign",
+  "zodiac": "Tropical",
+  "epistemic_status": "User-supplied natal data; v0.2 does not yet recompute positions from an ephemeris.",
+  "angles": {
+    "ASC": {"sign":"Leo","degree":"11°38′"},
+    "MC": {"sign":"Taurus","degree":"0°44′"}
+  },
+  "objects": [
+    {"id":"Sun","sign":"Libra","degree":"10°57′","house":3,"type":"planet"},
+    {"id":"Moon","sign":"Gemini","degree":"8°03′","house":11,"type":"planet"},
+    {"id":"Mercury","sign":"Libra","degree":"19°30′","house":3,"type":"planet"},
+    {"id":"Venus","sign":"Virgo","degree":"14°49′","house":2,"type":"planet"},
+    {"id":"Mars","sign":"Virgo","degree":"15°17′","house":2,"type":"planet"},
+    {"id":"Jupiter","sign":"Aquarius","degree":"7°07′","house":7,"type":"planet"},
+    {"id":"Saturn","sign":"Scorpio","degree":"25°09′","house":4,"type":"planet"},
+    {"id":"Uranus","sign":"Sagittarius","degree":"14°42′","house":5,"type":"planet"},
+    {"id":"Neptune","sign":"Capricorn","degree":"0°58′","house":6,"type":"planet"},
+    {"id":"Pluto","sign":"Scorpio","degree":"3°44′","house":4,"type":"planet"},
+    {"id":"NorthNode","sign":"Taurus","degree":"10°31′","house":10,"type":"derived","retrograde":true},
+    {"id":"Lilith","sign":"Taurus","degree":"13°47′","house":10,"type":"derived"},
+    {"id":"Chiron","sign":"Gemini","degree":"14°33′","house":11,"type":"derived","retrograde":true},
+    {"id":"Fortune","sign":"Sagittarius","degree":"14°32′","house":5,"type":"derived"},
+    {"id":"Vertex","sign":"Sagittarius","degree":"28°23′","house":5,"type":"derived"}
+  ],
+  "major_aspects_used_in_v02": [
+    {"a":"Sun","b":"Moon","aspect":"trine","orb_deg":2.90,"phase":"applying"},
+    {"a":"Sun","b":"Mercury","aspect":"conjunction","orb_deg":8.55,"phase":"separating"},
+    {"a":"Sun","b":"Jupiter","aspect":"trine","orb_deg":3.82,"phase":"separating"},
+    {"a":"Sun","b":"Uranus","aspect":"sextile","orb_deg":3.75,"phase":"applying"},
+    {"a":"Sun","b":"Neptune","aspect":"square","orb_deg":9.97,"phase":"separating"},
+    {"a":"Moon","b":"Venus","aspect":"square","orb_deg":6.77,"phase":"applying"},
+    {"a":"Moon","b":"Mars","aspect":"square","orb_deg":7.23,"phase":"applying"},
+    {"a":"Moon","b":"Jupiter","aspect":"trine","orb_deg":0.92,"phase":"separating"},
+    {"a":"Moon","b":"Uranus","aspect":"opposition","orb_deg":6.65,"phase":"applying"},
+    {"a":"Venus","b":"Mars","aspect":"conjunction","orb_deg":0.45,"phase":"applying"},
+    {"a":"Venus","b":"Uranus","aspect":"square","orb_deg":0.10,"phase":"separating"},
+    {"a":"Mars","b":"Uranus","aspect":"square","orb_deg":0.57,"phase":"separating"},
+    {"a":"Jupiter","b":"Pluto","aspect":"square","orb_deg":3.38,"phase":"applying"},
+    {"a":"Neptune","b":"Pluto","aspect":"sextile","orb_deg":2.75,"phase":"separating"},
+    {"a":"Chiron","b":"Sun","aspect":"trine","orb_deg":3.60,"phase":"applying"},
+    {"a":"Chiron","b":"Mercury","aspect":"trine","orb_deg":4.95,"phase":"separating"},
+    {"a":"Chiron","b":"Venus","aspect":"square","orb_deg":0.25,"phase":"separating"},
+    {"a":"Chiron","b":"Mars","aspect":"square","orb_deg":0.72,"phase":"separating"},
+    {"a":"Chiron","b":"Uranus","aspect":"opposition","orb_deg":0.13,"phase":"separating"},
+    {"a":"Fortune","b":"Uranus","aspect":"conjunction","orb_deg":0.17,"phase":"applying"},
+    {"a":"Fortune","b":"Chiron","aspect":"opposition","orb_deg":0.02,"phase":"applying"},
+    {"a":"Fortune","b":"Venus","aspect":"square","orb_deg":0.27,"phase":"applying"},
+    {"a":"Fortune","b":"Mars","aspect":"square","orb_deg":0.73,"phase":"applying"}
+  ],
+  "traditional_domicile_rulers": {
+    "Aries":"Mars","Taurus":"Venus","Gemini":"Mercury","Cancer":"Moon","Leo":"Sun","Virgo":"Mercury","Libra":"Venus","Scorpio":"Mars","Sagittarius":"Jupiter","Capricorn":"Saturn","Aquarius":"Saturn","Pisces":"Jupiter"
+  },
+  "computed_topology": {
+    "terminal_scc": ["Mercury","Venus"],
+    "terminal_house_circuit": [3,2],
+    "classical_planets_reaching_terminal_scc": 7,
+    "classical_planets_total": 7
+  },
+  "v02_design_contract": {
+    "primary_goal":"Show natal architecture before interpretation.",
+    "views":["Natal Field","Aspect Matrix","Flow Map","Method"],
+    "locked_until_v03":["Ephemeris-backed transit timeline","State-space trajectory","AI-generated interpretation"]
+  }
+}
