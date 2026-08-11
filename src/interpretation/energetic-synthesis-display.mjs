@@ -17,7 +17,6 @@ function ordinal(n){
   if(x%10===3)return `${x}rd`;
   return `${x}th`;
 }
-
 function normalizeString(s){return String(s).replace(/\b(\d{1,2})th house\b/gi,(_,n)=>`${ordinal(n)} house`);}
 function normalize(value){
   if(typeof value==='string')return normalizeString(value);
@@ -37,17 +36,20 @@ function conditionText(record){
   if(e.bound?.self_ruled)present.push('its own Egyptian bound');
   if(e.triplicity?.active_for_chart)present.push('active sect triplicity rulership');
   const sect=s.condition?.status||'indeterminate',ang=p.class||'indeterminate';
-  const dignity=present.length?`The currently implemented primitive condition layer marks ${record.planet} with ${present.join(', ')}.`:`The currently implemented primitive condition layer does not mark ${record.planet} as being in domicile, exaltation, adversity, or depression at this position.`;
-  const sectText=sect==='in_sect'?`${record.planet} is in sect, so its planetary function belongs to the chart's sect family under the selected rule model.`:sect==='out_of_sect'?`${record.planet} is out of sect, so its function operates outside the chart's sect family and may require more deliberate regulation under the selected traditional model.`:`Its sect match is indeterminate in the current state.`;
-  const angularText=ang==='angular'?`Its Whole-Sign place is angular, placing the function in a more action-producing/topically prominent place classification.`:ang==='succedent'?`Its Whole-Sign place is succedent, emphasizing continuity, accumulation, support and what follows from angular action.`:ang==='declining'?`Its Whole-Sign place is declining/cadent, emphasizing dispersal, preparation, transition, learning, service or movement away from the angular pivot rather than immediate angular manifestation.`:`Its Whole-Sign angular-triad class is indeterminate.`;
-  const bound=e.bound?.bound_ruler?` At ${record.identity?.degree_in_sign?.toFixed?.(2)??record.identity?.degree_in_sign}° of ${record.identity?.sign}, the Egyptian bound ruler is ${e.bound.bound_ruler}${e.bound.self_ruled?' itself':''}.`:'';
-  return `${dignity} ${sectText} ${angularText}${bound} These are traditional rule qualifications of availability and circumstance; they do not replace the sign, house, aspects, or ruler-routing story.`;
+  const dignity=present.length?`The traditional condition layer marks ${record.planet} with ${present.join(', ')}.`:`The current primitive condition layer does not place ${record.planet} in domicile, exaltation, adversity, or depression at this position.`;
+  const sectText=sect==='in_sect'?`${record.planet} is in sect, so its planetary family matches the chart sect under the selected rule model.`:sect==='out_of_sect'?`${record.planet} is out of sect, so its function operates outside the chart's sect family and may require more deliberate regulation under the selected traditional model.`:`Its sect match is indeterminate in the current state.`;
+  const angularText=ang==='angular'?`Its Whole-Sign place is angular, giving the function an action-producing and topically prominent place classification.`:ang==='succedent'?`Its Whole-Sign place is succedent, emphasizing continuity, accumulation, support and what develops from prior action.`:ang==='declining'?`Its Whole-Sign place is declining/cadent, emphasizing dispersal, preparation, learning, service, transition or movement away from an angular pivot.`:`Its Whole-Sign angular-triad class is indeterminate.`;
+  const bound=e.bound?.bound_ruler?` At ${record.identity?.degree_in_sign?.toFixed?.(2)??record.identity?.degree_in_sign}° of ${record.identity?.sign}, its Egyptian bound ruler is ${e.bound.bound_ruler}${e.bound.self_ruled?' itself':''}.`:'';
+  return `${dignity} ${sectText} ${angularText}${bound} These facts qualify how the planetary function is situated inside the selected traditional model; they do not replace sign, house, aspects, or ruler routing.`;
 }
 
 function enrichPlacementConditions(out,conditions){
   for(const card of out.placements||[]){
     const id=card.objects?.[0],record=conditions?.by_planet?.[id];
-    if(record)card.sections.traditional_condition=conditionText(record);
+    if(!record)continue;
+    const text=conditionText(record);
+    card.sections.traditional_condition=text;
+    card.sections.graph_context=[card.sections.graph_context,`Traditional condition qualifier: ${text}`].filter(Boolean).join(' ');
   }
 }
 
@@ -66,9 +68,13 @@ function enrichTerminalCircuit(out,analysis,graph,conditions){
   card.sections.energetic_synthesis += ` In this specific chart, the terminal processors are ${descriptors.join(' and ')}.${reciprocal?` Their rulership is recursive: each planet occupies a sign ruled by the other, so neither function reaches a one-way stopping point; the circuit keeps handing the agenda back across the pair.`:''} This makes the graph result a house circuit as well as a planet circuit: ${houseLoop}.`;
   if(members.length===2){
     const [a,b]=members;
-    card.sections.material_expression=`The material translation is a repeated feedback loop between ${ordinal(a.computed_house)}-house ${HOUSE_SHORT[a.computed_house]||'themes'} and ${ordinal(b.computed_house)}-house ${HOUSE_SHORT[b.computed_house]||'themes'}. An issue may begin somewhere else in the chart, but once its ruler path reaches this circuit, the question often becomes: what has to be decided, exchanged, valued, communicated, organized or made usable across these two house fields before the larger issue can settle? The point is not that every event is “about” these houses. The point is that the selected rulership model repeatedly routes disparate topics through them.`;
+    card.sections.material_expression=`The material translation is a repeated feedback loop between ${ordinal(a.computed_house)}-house ${HOUSE_SHORT[a.computed_house]||'themes'} and ${ordinal(b.computed_house)}-house ${HOUSE_SHORT[b.computed_house]||'themes'}. An issue may begin somewhere else in the chart, but once its ruler path reaches this circuit, the practical question often becomes: what has to be decided, exchanged, valued, communicated, organized or made usable across these two house fields before the larger issue can settle? This does not mean every event is “about” these houses. It means the selected rulership model repeatedly routes disparate topics through them.`;
   }
-  if(conditionBits.length)card.sections.traditional_condition=conditionBits.join(' ');
+  if(conditionBits.length){
+    const c=conditionBits.join(' ');
+    card.sections.traditional_condition=c;
+    card.sections.energetic_synthesis+=` The terminal circuit is also asymmetrically conditioned rather than abstractly equal: ${c}`;
+  }
 }
 
 export function buildEnergeticSynthesis(analysis,graph,conditions=null){
