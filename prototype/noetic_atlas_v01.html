@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Noetic Atlas — NAF v0.1</title>
+<style>
+:root{--bg:#0e1116;--panel:#151a22;--panel2:#10151c;--text:#e8edf2;--muted:#99a5b3;--line:#2a3440;--gold:#e6c87a;--green:#8fc7a3;--red:#d78d8d;--violet:#b6a1d6;--blue:#8eb8d8}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 Inter,system-ui,-apple-system,Segoe UI,sans-serif}header{padding:22px 26px;border-bottom:1px solid var(--line)}h1{margin:0 0 4px;font-size:21px}header p,.meta{margin:0;color:var(--muted)}main{max-width:1400px;margin:auto;padding:18px}.tabs,.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}button{border:1px solid var(--line);background:var(--panel2);color:var(--muted);padding:8px 11px;border-radius:8px;cursor:pointer}.tabs button.active,.chips button.active{background:#202935;color:white;border-color:#657386}.view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(300px,.8fr);gap:14px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}.panel h2{font-size:15px;margin:0 0 10px}.panel h3{font-size:13px;margin:16px 0 8px}.finding{padding:10px 0;border-top:1px solid #26303b}.finding:first-of-type{border-top:0}.finding p{margin:4px 0 0;color:#b7c1ca;font-size:12px}.callout{border-left:3px solid var(--gold);background:#121821;padding:11px 12px;border-radius:6px;color:#c6d0d9;font-size:12px}svg{width:100%;height:auto;background:#0f141b;border:1px solid #202934;border-radius:10px}.metric{display:flex;justify-content:space-between;gap:15px;padding:8px 0;border-top:1px solid #26303b;font-size:12px}.metric span:last-child{font-weight:700;text-align:right}.housegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px}.chain{font:12px/1.8 ui-monospace,SFMono-Regular,Menlo,monospace;background:#0f141b;border:1px solid #202934;border-radius:10px;padding:12px;min-height:72px}.cycle{color:var(--gold);font-weight:700}.timeline{border:1px solid #26313c;border-radius:10px;overflow:hidden}.row{display:grid;grid-template-columns:130px 1fr;min-height:40px;border-top:1px solid #1e2731}.row:first-child{border-top:0}.label{padding:10px;border-right:1px solid #1e2731;color:#bdc7d0}.track{position:relative;background:#0f141b}.ghost{position:absolute;top:10px;left:12%;right:18%;height:18px;border-radius:7px;background:repeating-linear-gradient(90deg,#293542 0 8px,#222b36 8px 16px);opacity:.45}.empty{padding:28px;border:1px dashed #34404c;border-radius:10px;background:#0f141b;color:#9ba8b6}.small{font-size:11px;color:#758291;margin-top:12px}@media(max-width:850px){.grid{grid-template-columns:1fr}.housegrid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header>
+<h1>Noetic Atlas <span style="font-size:11px;color:#9dacbb;font-weight:500">NAF v0.1 · canonical specimen</span></h1>
+<p>See the structure. Follow the flow. Watch it change.</p>
+</header>
+<main>
+<div class="tabs">
+<button class="active" data-view="structure">Natal Field</button>
+<button data-view="flow">Flow Map</button>
+<button data-view="time">Life Spectrum</button>
+<button data-view="state">Life Space</button>
+</div>
+
+<section id="structure" class="view active">
+<div class="grid">
+<div class="panel">
+<h2>Natal Field</h2>
+<p class="meta">A node-link view of supplied major relationships. Width increases as orb tightens. This is symbolic coupling inside an explicit astrological model, not a measured physical force.</p>
+<div class="chips" style="margin-top:10px"><button class="active" data-filter="all">All core</button><button data-filter="coherence">Coherence</button><button data-filter="tension">Tension</button><button data-filter="derived">Derived</button></div>
+<svg id="field" viewBox="0 0 1000 620" aria-label="Natal structural network"></svg>
+</div>
+<aside class="panel">
+<h2>What becomes visible</h2>
+<div class="finding"><b>Air coherence</b><p>Sun in Libra, Moon in Gemini, and Jupiter in Aquarius form a complete trine subnetwork.</p></div>
+<div class="finding"><b>Mutable hinge</b><p>Venus–Mars in Virgo, Uranus–Fortune in Sagittarius, and Chiron in Gemini form a tightly coupled mutable tension structure.</p></div>
+<div class="finding"><b>Co-presence is not aspect</b><p>Saturn and Pluto share Scorpio/4H but are not treated as a conjunction merely because they occupy the same place.</p></div>
+<h3>Computed / supplied facts</h3>
+<div id="metrics"></div>
+<div class="callout"><b>Topology result:</b> under traditional domicile rulership, the planetary dispositor graph terminates in a Mercury ↔ Venus strongly connected component spanning the 3rd and 2nd houses.</div>
+</aside>
+</div>
+</section>
+
+<section id="flow" class="view">
+<div class="grid">
+<div class="panel">
+<h2>Flow Map</h2>
+<p class="meta">Select a whole-sign house. The system traces house → sign → ruler → dispositor until it reaches the terminal Mercury–Venus cycle.</p>
+<div id="houses" class="housegrid" style="margin-top:12px"></div>
+<div id="chain" class="chain"></div>
+<svg id="flowSvg" viewBox="0 0 1000 470" style="margin-top:12px" aria-label="Traditional dispositor network"></svg>
+</div>
+<aside class="panel">
+<h2>Why Flow matters</h2>
+<div class="finding"><b>Mercury ↔ Venus is not merely another aspect.</b><p>It is a directed mutual-disposition cycle: Mercury in Libra routes to Venus; Venus in Virgo routes back to Mercury.</p></div>
+<div class="finding"><b>Seven of seven classical planets reach the cycle.</b><p>Sun → Venus; Moon → Mercury; Mars → Mercury; Jupiter → Saturn → Mars → Mercury; Saturn → Mars → Mercury.</p></div>
+<div class="finding"><b>House topology</b><p>The terminal planetary cycle is simultaneously a 3H ↔ 2H circuit because Mercury occupies the 3rd and Venus occupies the 2nd.</p></div>
+</aside>
+</div>
+</section>
+
+<section id="time" class="view">
+<div class="panel">
+<h2>Life Spectrum</h2>
+<p class="meta">The production view will place time on the x-axis and natal architecture on the y-axis. Intensity will be calculated from explicit transit/time-lord models.</p>
+<div class="timeline" style="margin-top:14px"><div class="row"><div class="label">1H / ASC</div><div class="track"><div class="ghost"></div></div></div><div class="row"><div class="label">2H–3H loop</div><div class="track"><div class="ghost" style="left:30%;right:8%"></div></div></div><div class="row"><div class="label">5H–11H axis</div><div class="track"><div class="ghost" style="left:8%;right:42%"></div></div></div><div class="row"><div class="label">4H Scorpio</div><div class="track"><div class="ghost" style="left:52%;right:10%"></div></div></div></div>
+<div class="callout" style="margin-top:12px"><b>Placeholder only.</b> These bands are intentionally non-astrological until an ephemeris-backed temporal engine exists. NAF does not manufacture mathematically styled transit data.</div>
+</div>
+</section>
+
+<section id="state" class="view">
+<div class="panel">
+<h2>Life Space</h2>
+<div class="empty"><b>State-space visualization is intentionally deferred.</b><br>A valid trajectory requires a reproducible time-indexed feature vector x(t). PCA/UMAP/recurrence analysis will be added only after the feature semantics and temporal calculation layer are stable.</div>
+</div>
+</section>
+
+<p class="small">Epistemic contract: astronomy/calculation → deterministic data; topology/weights → explicit model; interpretation → labeled tradition or AI synthesis. No layer may masquerade as another.</p>
+</main>
+<script>
+const NS='http://www.w3.org/2000/svg';
+const nodes=[
+['Sun',315,150,'Libra · 3H'],['Moon',500,82,'Gemini · 11H'],['Mercury',205,270,'Libra · 3H'],['Venus',405,350,'Virgo · 2H'],['Mars',495,382,'Virgo · 2H'],['Jupiter',735,160,'Aquarius · 7H'],['Saturn',750,455,'Scorpio · 4H'],['Uranus',625,315,'Sagittarius · 5H'],['Pluto',620,545,'Scorpio · 4H'],['Chiron',285,470,'Gemini · 11H'],['Fortune',300,565,'Sagittarius · 5H'],['ASC',90,150,'Leo 11°38′']];
+const edges=[
+['Sun','Moon','trine',2.90,'coherence'],['Moon','Jupiter','trine',.92,'coherence'],['Sun','Jupiter','trine',3.82,'coherence'],['Sun','Uranus','sextile',3.75,'coherence'],['Venus','Mars','conjunction',.45,'tension'],['Venus','Uranus','square',.10,'tension'],['Mars','Uranus','square',.57,'tension'],['Moon','Uranus','opposition',6.65,'tension'],['Jupiter','Pluto','square',3.38,'tension'],['Chiron','Venus','square',.25,'derived'],['Chiron','Mars','square',.72,'derived'],['Chiron','Uranus','opposition',.13,'derived'],['Fortune','Uranus','conjunction',.17,'derived'],['Fortune','Chiron','opposition',.02,'derived'],['Fortune','Venus','square',.27,'derived'],['Fortune','Mars','square',.73,'derived']];
+const pos=Object.fromEntries(nodes.map(n=>[n[0],n]));
+const colors={coherence:'#8fc7a3',tension:'#d78d8d',derived:'#b6a1d6'};
+function renderField(filter='all'){
+ const svg=document.getElementById('field');svg.innerHTML='';
+ edges.filter(e=>filter==='all'||e[4]===filter).forEach(e=>{const a=pos[e[0]],b=pos[e[1]],l=document.createElementNS(NS,'line');for(const [k,v] of [['x1',a[1]],['y1',a[2]],['x2',b[1]],['y2',b[2]]])l.setAttribute(k,v);l.setAttribute('stroke',colors[e[4]]);l.setAttribute('stroke-width',Math.max(1.3,5.4-e[3]*.65));l.setAttribute('stroke-opacity',Math.max(.25,1-e[3]/9));svg.appendChild(l)});
+ nodes.forEach(n=>{const g=document.createElementNS(NS,'g');g.setAttribute('transform',`translate(${n[1]},${n[2]})`);const c=document.createElementNS(NS,'circle');c.setAttribute('r',30);c.setAttribute('fill',(n[0]==='Fortune'||n[0]==='Chiron')?'#2a2435':'#1c2530');c.setAttribute('stroke','#dbe2e8');const t=document.createElementNS(NS,'text');t.setAttribute('text-anchor','middle');t.setAttribute('y','-2');t.setAttribute('fill','#f2f5f7');t.setAttribute('font-size','11');t.setAttribute('font-weight','700');t.textContent=n[0];const s=document.createElementNS(NS,'text');s.setAttribute('text-anchor','middle');s.setAttribute('y','13');s.setAttribute('fill','#aeb8c2');s.setAttribute('font-size','9');s.textContent=n[3];g.append(c,t,s);svg.appendChild(g)});
+}
+renderField();
+document.querySelectorAll('.chips button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.chips button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderField(b.dataset.filter)});
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.view).classList.add('active')});
+const houses={1:'Leo',2:'Virgo',3:'Libra',4:'Scorpio',5:'Sagittarius',6:'Capricorn',7:'Aquarius',8:'Pisces',9:'Aries',10:'Taurus',11:'Gemini',12:'Cancer'};
+const rulers={Aries:'Mars',Taurus:'Venus',Gemini:'Mercury',Cancer:'Moon',Leo:'Sun',Virgo:'Mercury',Libra:'Venus',Scorpio:'Mars',Sagittarius:'Jupiter',Capricorn:'Saturn',Aquarius:'Saturn',Pisces:'Jupiter'};
+const sign={Sun:'Libra',Moon:'Gemini',Mercury:'Libra',Venus:'Virgo',Mars:'Virgo',Jupiter:'Aquarius',Saturn:'Scorpio'};const ph={Sun:3,Moon:11,Mercury:3,Venus:2,Mars:2,Jupiter:7,Saturn:4};
+function trace(h){let p=rulers[houses[h]],out=[`${h}H ${houses[h]}`,`${p} (${sign[p]} · ${ph[p]}H)`],seen=new Set([p]);for(let i=0;i<10;i++){const q=rulers[sign[p]];if((p==='Mercury'&&q==='Venus')||(p==='Venus'&&q==='Mercury')){out.push(`<span class="cycle">${q} (${sign[q]} · ${ph[q]}H) ↺ terminal cycle</span>`);break}if(seen.has(q)){out.push(`${q} ↺`);break}out.push(`${q} (${sign[q]} · ${ph[q]}H)`);seen.add(q);p=q}document.getElementById('chain').innerHTML=out.join(' → ')}
+Object.entries(houses).forEach(([h,s])=>{const b=document.createElement('button');b.textContent=`${h}H · ${s} → ${rulers[s]}`;b.onclick=()=>trace(h);document.getElementById('houses').appendChild(b)});trace(1);
+function flow(){const svg=document.getElementById('flowSvg'),P={Sun:[110,90],Moon:[110,200],Jupiter:[300,80],Saturn:[470,135],Mars:[620,215],Mercury:[790,160],Venus:[790,315],Uranus:[300,320],Pluto:[620,405]};const E=[['Sun','Venus'],['Moon','Mercury'],['Jupiter','Saturn'],['Saturn','Mars'],['Mars','Mercury'],['Mercury','Venus'],['Venus','Mercury'],['Uranus','Jupiter'],['Pluto','Mars']];const defs=document.createElementNS(NS,'defs'),m=document.createElementNS(NS,'marker'),pa=document.createElementNS(NS,'path');m.id='arrow';m.setAttribute('markerWidth','8');m.setAttribute('markerHeight','8');m.setAttribute('refX','7');m.setAttribute('refY','3');m.setAttribute('orient','auto');pa.setAttribute('d','M0,0 L0,6 L8,3 z');pa.setAttribute('fill','#77899c');m.appendChild(pa);defs.appendChild(m);svg.appendChild(defs);E.forEach(([a,b])=>{const l=document.createElementNS(NS,'line'),hot=(a==='Mercury'&&b==='Venus')||(a==='Venus'&&b==='Mercury');l.setAttribute('x1',P[a][0]);l.setAttribute('y1',P[a][1]);l.setAttribute('x2',P[b][0]);l.setAttribute('y2',P[b][1]);l.setAttribute('stroke',hot?'#e6c87a':'#77899c');l.setAttribute('stroke-width',hot?'4':'2');l.setAttribute('marker-end','url(#arrow)');svg.appendChild(l)});Object.entries(P).forEach(([id,p])=>{const g=document.createElementNS(NS,'g');g.setAttribute('transform',`translate(${p[0]},${p[1]})`);const c=document.createElementNS(NS,'circle');c.setAttribute('r',(id==='Mercury'||id==='Venus')?36:28);c.setAttribute('fill',(id==='Mercury'||id==='Venus')?'#2f2a1e':'#1c2530');c.setAttribute('stroke',(id==='Mercury'||id==='Venus')?'#e6c87a':'#aeb9c3');const t=document.createElementNS(NS,'text');t.setAttribute('text-anchor','middle');t.setAttribute('y','4');t.setAttribute('fill','white');t.setAttribute('font-size','11');t.textContent=id;g.append(c,t);svg.appendChild(g)})}flow();
+[['Terminal SCC','Mercury ↔ Venus'],['Classical planets reaching SCC','7 / 7'],['Tightest supplied major geometry','Fortune ☍ Chiron · ~0°01′'],['Tight planet hard aspect','Venus □ Uranus · ~0°06′'],['Tight planet conjunction','Venus ☌ Mars · ~0°27′']].forEach(x=>{const d=document.createElement('div');d.className='metric';d.innerHTML=`<span>${x[0]}</span><span>${x[1]}</span>`;document.getElementById('metrics').appendChild(d)});
+</script>
+</body>
+</html>
