@@ -4,6 +4,7 @@ import {
 } from './noetic-kernel.mjs';
 
 export const INTEGRITY_VERSION='0.3.1';
+export const ANALYSIS_SCHEMA_VERSION='naf.analysis.v0.3.1';
 export const HERMETIC_LOT_IDS=new Set(['Fortune','Spirit','Eros','Necessity','Courage','Victory','Nemesis']);
 
 function signDegreeFromLongitude(longitude){
@@ -86,6 +87,40 @@ export function buildDerivationLedger({objects,angles,sect,lots,aspects,topology
   return entries;
 }
 
+export function buildDerivationTree(entries){
+  const byKind={};
+  for(const entry of entries){(byKind[entry.kind]??=[]).push(entry)}
+  const node=(id,label,kind,children=[],ledger_refs=[])=>({id,label,kind,children,ledger_refs});
+  const coordinates=node('input.coordinates','Coordinates','input/astronomy',[],(byKind.coordinate||[]).map(e=>`${e.kind}:${e.id}`));
+  const houses=node('rules.houses','Whole-sign houses','astrological-rule',[coordinates],(byKind.whole_sign_house||[]).map(e=>`${e.kind}:${e.id}`));
+  const sect=node('rules.sect','Sect','astrological-rule',[coordinates],(byKind.sect||[]).map(e=>`${e.kind}:${e.id}`));
+  const lots=node('rules.lots','Hermetic lots','astrological-rule',[coordinates,sect,houses],(byKind.lot||[]).map(e=>`${e.kind}:${e.id}`));
+  const aspects=node('rules.aspects','Major aspects','astrological-rule',[coordinates],(byKind.aspect||[]).map(e=>`${e.kind}:${e.id}`));
+  const dispositors=node('graph.dispositors','Dispositor graph','graph-derived',[coordinates,houses],(byKind.dispositor_edge||[]).map(e=>`${e.kind}:${e.id}`));
+  const topology=node('graph.topology','Strongly connected components','graph-derived',[dispositors],(byKind.topology||[]).map(e=>`${e.kind}:${e.id}`));
+  return node('analysis.root','NAF analysis derivation','analysis',[houses,sect,lots,aspects,topology]);
+}
+
+function versionManifest(base,orbPolicy,parsed){
+  const astronomy=parsed?.metadata?.astronomy_engine_version||parsed?.metadata?.provenance?.engine_version||null;
+  const timezone=parsed?.metadata?.timezone_resolution?.provider_version||parsed?.metadata?.timezone_lookup_version||null;
+  return {
+    schema:ANALYSIS_SCHEMA_VERSION,
+    kernel:INTEGRITY_VERSION,
+    house_model:'naf.house.whole_sign.v1',
+    aspect_model:'naf.aspect.major.v1',
+    orb_policy:orbPolicy.id||'custom-unversioned',
+    rulership_model:'naf.dispositor.traditional.v1',
+    graph_scc_model:'naf.graph.tarjan_scc.v1',
+    sect_model:'naf.sect.horizon.v1',
+    lot_family:'naf.lots.paulus_panaretus.v1',
+    astronomy_provider:astronomy?`Astronomy Engine ${astronomy}`:(base.source_format==='birth_data'?'unknown-birth-provider':'external/imported positions'),
+    timezone_provider:timezone||null,
+    condition_model:null,
+    temporal_model:null
+  };
+}
+
 export function analyzeChartWithIntegrity(parsed,options={}){
   const orbPolicy=options.orbPolicy||DEFAULT_ORB_POLICY;
   const suppliedLots=parsed.objects.filter(o=>HERMETIC_LOT_IDS.has(o.id));
@@ -96,11 +131,13 @@ export function analyzeChartWithIntegrity(parsed,options={}){
   const aspects=computeMajorAspects(aspectObjects,orbPolicy);
   const comparisons=compareSuppliedLots(parsed.objects,hermetic.lots);
   const ledger=buildDerivationLedger({objects:base.objects,angles:base.angles,sect:hermetic.sect,lots:hermetic.lots,aspects,topology:base.topology,orbPolicy});
-  return {...base,kernel_version:INTEGRITY_VERSION,aspects,lots:hermetic.lots,reference_lots:suppliedLots,sect:hermetic.sect,
+  const versions=versionManifest(base,orbPolicy,parsed);
+  return {...base,schema_version:ANALYSIS_SCHEMA_VERSION,kernel_version:INTEGRITY_VERSION,versions,aspects,lots:hermetic.lots,reference_lots:suppliedLots,sect:hermetic.sect,
     model:{...base.model,lot_model:'Paulus/Panaretus seven Hermetic lots; sect-reversing formulas'},
-    validation:{...base.validation,supplied_lot_comparisons:comparisons,lot_warnings:hermetic.warnings},derivation_ledger:ledger,
+    validation:{...base.validation,supplied_lot_comparisons:comparisons,lot_warnings:hermetic.warnings},derivation_ledger:ledger,derivation_tree:buildDerivationTree(ledger),
+    completeness:{condition_engine:'not_implemented',temporal_engine:'not_implemented',astronomy_extended_objects:'partial',derivation_ui:'data_ready_ui_incomplete'},
     integrity:{labels:['input','astronomical-computation','astrological-rule','graph-derived','research-exploratory','interpretive-inference'],
       principle:'Every displayed result must be reversible to inputs, formula/rule version, source tradition, and computational provenance.',
-      cautions:['Rounded degree-minute inputs can differ slightly from full-precision ephemeris calculations.','Sect near the horizon is historically and observationally ambiguous; NAF flags near-horizon cases.','Astrological interpretation is not treated as a measured physical quantity.']},
-    provenance:{...base.provenance,integrity_extension:'naf-hellenistic-integrity',integrity_version:INTEGRITY_VERSION,epistemic_contract:'Every derived field exposes its rule, numerical inputs, output and provenance in the derivation ledger.'}};
+      cautions:['Rounded degree-minute inputs can differ slightly from full-precision ephemeris calculations.','Sect near the horizon is historically and observationally ambiguous; NAF flags near-horizon cases.','Astrological interpretation is not treated as a measured physical quantity.','Condition and temporal engines are intentionally absent from this schema version and must not be inferred from research descriptors.']},
+    provenance:{...base.provenance,integrity_extension:'naf-hellenistic-integrity',integrity_version:INTEGRITY_VERSION,schema_version:ANALYSIS_SCHEMA_VERSION,epistemic_contract:'Every derived field exposes its rule, numerical inputs, output and provenance in the derivation ledger.'}};
 }
