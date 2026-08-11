@@ -6,21 +6,75 @@ This index is the recommended entry point for engineers, astrologers, researcher
 
 1. [`../README.md`](../README.md) — project overview and current public implementation state.
 2. [`CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md`](CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md) — what Noetic Atlas genuinely establishes, what is novel, what the technical literature justifies, and where the claims stop.
-3. [`THEORY_AND_PURPOSE.md`](THEORY_AND_PURPOSE.md) — philosophical and epistemic mission.
-4. [`DEVELOPER_GUIDE.md`](DEVELOPER_GUIDE.md) — repository invariants, tests, and extension rules.
-5. [`ARCHITECTURE.md`](ARCHITECTURE.md) — software boundaries and data flow.
-6. [`ASTROLOGICAL_MODEL.md`](ASTROLOGICAL_MODEL.md) — explicit rule assumptions and current astrological substrate.
-7. [`INTEGRITY_AND_PROVENANCE.md`](INTEGRITY_AND_PROVENANCE.md) — auditability and the Derivation Ledger.
+3. [`V041_GRAPH_ANALYTICS_AND_FINDINGS.md`](V041_GRAPH_ANALYTICS_AND_FINDINGS.md) — graph-analytics layer, Explainable Metric/Finding contracts, formulas, epistemic boundaries, and null-model gate.
+4. [`THEORY_AND_PURPOSE.md`](THEORY_AND_PURPOSE.md) — philosophical and epistemic mission.
+5. [`DEVELOPER_GUIDE.md`](DEVELOPER_GUIDE.md) — repository invariants, tests, and extension rules.
+6. [`ARCHITECTURE.md`](ARCHITECTURE.md) — software boundaries and data flow.
+7. [`ASTROLOGICAL_MODEL.md`](ASTROLOGICAL_MODEL.md) — explicit rule assumptions and current astrological substrate.
+8. [`INTEGRITY_AND_PROVENANCE.md`](INTEGRITY_AND_PROVENANCE.md) — auditability and the Derivation Ledger.
 
-## Current public testing line
+## Active development line
 
-- **v0.4.0b Primitive Condition Observatory** — v0.3.2 Visual Observatory plus synchronized primitive-condition dock.
-- **`naf.analysis.v0.3.1`** — current structural analysis envelope.
-- **`naf.condition.record.v0.4.0a`** — frozen condition-record schema.
-- **`naf.condition.primitive.hellenistic.v0.4.0b`** — executable primitive condition model.
-- **`main`** — deployed default branch after tested development changes are promoted.
+- **v0.4.1 Graph Analytics + Explainable Findings** — development candidate on `noetic-atlas-v0.4.1-graph-findings`.
+- **`naf.research.graph_analytics.v0.4.1`** — graph-analysis model.
+- **`naf.finding.explainable.v0.4.1`** — evidence-backed readable finding contract.
+- **`naf.condition.primitive.hellenistic.v0.4.0b`** — current primitive condition substrate used to qualify classical graph findings.
+- **`naf.analysis.v0.3.1`** — current deterministic structural analysis envelope.
 
-The graph-first v0.3.2 interface remains the structural core. v0.4.0b adds source-locked condition inspection without replacing that visual grammar.
+The v0.4.1 surface makes readable findings the primary analysis pane. Graphs remain evidence/interaction views rather than being treated as conclusions by themselves.
+
+### v0.4.1 implemented graph analytics
+
+Classical dispositor functional graph:
+
+```text
+SCC condensation graph
+terminal basin membership and basin fraction
+node route to terminal SCC
+route depth
+upstream route capture
+nonterminal path bottleneck
+```
+
+Aspect graph:
+
+```text
+connected components
+degree
+local / mean clustering
+normalized unweighted betweenness
+articulation points
+bridges
+typed three-node motifs
+Grand Trine / T-square / triple-conjunction templates
+```
+
+Cross-layer:
+
+```text
+aspect × dispositor pair overlap
+```
+
+Every promoted metric carries definition, formula, observation, graph-theory meaning, astrological rule context, explicitly unvalidated interpretive hypothesis, limitations, calculation inputs/result, and ledger references.
+
+Every promoted finding carries the same integrity chain plus participating nodes/edges and a full proof object.
+
+### v0.4.1 research gate
+
+The framework does **not** call a graph value high, low, rare, dominant, exceptional, or statistically enriched until an explicit comparison/null model exists.
+
+Next research work after the first findings release:
+
+```text
+geometric longitude null
+label-permutation null
+degree-preserving graph null where appropriate
+layer-overlap null
+```
+
+## Current deployed public line
+
+Until v0.4.1 is explicitly promoted to `main`, the public Pages build remains the latest merged `main` release.
 
 ## Condition development
 
@@ -34,36 +88,6 @@ Read in this order:
 6. [`../tests/fixtures/condition/v0.4.0a-fixture-spec.json`](../tests/fixtures/condition/v0.4.0a-fixture-spec.json) — synthetic edge-case specification.
 7. [`../tests/condition_registry_smoke.mjs`](../tests/condition_registry_smoke.mjs) — registry/schema/fixture contract tests.
 8. [`../tests/primitive_condition_smoke.mjs`](../tests/primitive_condition_smoke.mjs) — executable rule/boundary/canonical regression tests.
-
-### v0.4.0b implemented factors
-
-For the classical seven planets:
-
-```text
-domicile
-adversity / opposite domicile
-sign-level exaltation
-depression / fall
-standard triplicity
-Egyptian bound
-planetary sect family
-in-sect / out-of-sect condition
-Whole-Sign angular-triad class
-```
-
-Every factor produces an independent rule/source/provenance record. No scalar condition or strength score exists.
-
-### Still pending
-
-```text
-reception
-mutual reception / exchange
-overcoming
-bonification / maltreatment
-enclosure / mitigation
-quadrant degree-based dynamic strength
-Life Spectrum / temporal activation
-```
 
 ## v0.3 closeout
 
@@ -79,7 +103,8 @@ Life Spectrum / temporal activation
 ## Research program
 
 - [`RESEARCH_PROGRAM.md`](RESEARCH_PROGRAM.md) — research layers, HCI evaluation, null models, replication, and theory-promotion rules.
-- [`RESEARCH_DISCOVERY.md`](RESEARCH_DISCOVERY.md) — currently implemented exploratory descriptors and promotion hold.
+- [`RESEARCH_DISCOVERY.md`](RESEARCH_DISCOVERY.md) — exploratory descriptors and promotion rules.
+- [`V041_GRAPH_ANALYTICS_AND_FINDINGS.md`](V041_GRAPH_ANALYTICS_AND_FINDINGS.md) — current graph-analysis implementation and explainable finding contract.
 
 ## Product and interface
 
@@ -88,4 +113,4 @@ Life Spectrum / temporal activation
 
 ## Documentation rule
 
-When implementation and documentation disagree, that disagreement is a defect. A new rule, provider, schema, visualization claim, or research descriptor is not complete until its documentation, provenance identifier, epistemic status, and relevant tests are updated in the same development movement.
+When implementation and documentation disagree, that disagreement is a defect. A new rule, provider, schema, visualization claim, research descriptor, graph metric, or finding is not complete until its documentation, provenance identifier, epistemic status, and relevant tests are updated in the same development movement.
