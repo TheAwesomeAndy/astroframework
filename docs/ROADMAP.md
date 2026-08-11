@@ -9,22 +9,25 @@ The roadmap follows one principle:
 The current sequence is:
 
 ```text
-Structure
-→ Condition
+Geometry
+→ Topology
+→ Primitive Condition
+→ Graph Analytics
+→ Energetic / Explainable Synthesis
+→ Relational Condition
+→ Compound Condition
 → Time
 → Recurrence
 → Discovery
 ```
 
-This replaces a simpler “natal chart → transits” sequence. Time should activate a richly characterized natal state, not an incomplete geometry-only model.
+Time should activate a richly characterized natal state rather than an incomplete geometry-only chart.
 
 ---
 
 # v0.1 — Visual hypothesis
 
 **Status: complete historical milestone**
-
-Purpose: demonstrate that astrology can be represented as more than a horoscope wheel.
 
 Delivered:
 
@@ -36,7 +39,7 @@ Delivered:
 - explicit distinction between mathematical representation and physical claims;
 - product/framework identity.
 
-Lesson: the wheel contains structure that can become easier to inspect when aspect geometry and directed rulership are separated.
+Lesson: the wheel contains structure that can become easier to inspect when angular geometry and directed rulership are separated.
 
 ---
 
@@ -58,11 +61,9 @@ Lesson: visualization should expose calculable structure before generating inter
 
 ---
 
-# v0.3.0–v0.3.1 — Deterministic kernel + integrity foundation
+# v0.3.0–v0.3.2 — Deterministic kernel + Visual Observatory
 
 **Status: complete foundation milestone**
-
-Purpose: move from a specimen-driven prototype to a general deterministic instrument.
 
 Delivered:
 
@@ -74,8 +75,7 @@ Delivered:
 - ASC/MC calculation;
 - planetary velocities;
 - Whole Sign houses;
-- major aspects;
-- explicit orb policy;
+- major aspects and explicit orb policy;
 - applying/separating where velocity exists;
 - traditional domicile rulers;
 - generic dispositor graph;
@@ -89,92 +89,301 @@ Delivered:
 - canonical and synthetic/boundary tests;
 - GitHub Actions integrity workflow;
 - astronomy cross-provider validation plan;
-- formal v0.4 Condition Engine specification.
+- restored Natal Field / Aspect Matrix / Flow Map / Audit surfaces.
 
-Persistent limitations:
+Persistent limitations from this era:
 
-- traditional condition remains incomplete;
-- extended astronomical objects remain incomplete;
-- independent cross-provider validation remains unfinished;
-- research descriptors remain exploratory and promotion-gated.
+- no traditional condition;
+- no readable graph-analysis layer;
+- no integrated energetic interpretation;
+- no temporal Life Spectrum;
+- incomplete extended-body astronomy.
 
 ---
 
-# v0.3.2 — Visual Observatory restoration
+# v0.4.0a — Condition ontology + rule registry
 
-**Status: current public prototype**
-
-Purpose: restore the visual intelligence of v0.2 without giving up the deterministic v0.3 kernel.
+**Status: complete**
 
 Delivered:
 
-- interactive SVG Natal Field driven by computed analysis;
-- weighted aspect edges;
-- node selection and neighborhood isolation;
-- edge inspection with separation, orb, phase, and derivation context;
-- dynamic graph motifs rather than specimen-only hard-coded patterns;
-- computed Aspect Matrix linked to the same relationships;
-- directed Flow Map;
-- terminal-SCC highlighting;
-- clickable house-ruler routes;
-- element/modality composition;
-- Hermetic lots as graph-native objects;
-- graph-linked audit/provenance inspection;
-- public GitHub Pages deployment from `main`.
+- source-controlled Hellenistic condition registry;
+- condition record JSON schema;
+- object applicability model;
+- frozen domicile/adversity/exaltation/depression tables;
+- standard/Dorothean triplicity table;
+- Egyptian bound table with explicit `[start,end)` intervals;
+- planetary sect-family rules;
+- Whole-Sign angularity classes;
+- synthetic condition fixture specification;
+- contract tests;
+- explicit `not_implemented` slots for relational/compound condition.
 
-Current judgment:
-
-v0.3.2 is a **serious structural and educational instrument**, but not yet a condition-aware or temporal astrological system. Its strongest current value is formal inspection, teaching, verification, and research instrumentation.
-
-See [Current State and Scientific Rationale](CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md).
+Lesson: condition had to exist as an ontology before it could exist as calculations.
 
 ---
 
-# v0.4 — Astrological Condition Engine
+# v0.4.0b — Primitive Condition Engine
 
-**Next major milestone**
+**Status: complete**
 
-Purpose: represent not only where planets are connected, but their traditional condition under explicit source-controlled rules.
+Delivered for Sun through Saturn:
 
-Initial planned rule families:
+- domicile;
+- adversity/detriment;
+- sign-level exaltation;
+- depression/fall;
+- standard/Dorothean triplicity participation;
+- active sect triplicity ruler;
+- Egyptian bound ruler and interval;
+- planetary sect family;
+- in-sect/out-of-sect relation;
+- Whole-Sign angular-triad class;
+- independent ledger entry per factor;
+- minimal condition inspection surface;
+- synthetic boundary tests and canonical regressions.
 
-- domicile/exaltation;
-- adversity/depression where applicable;
-- sect-aware triplicity;
-- Egyptian bounds/terms;
-- angularity;
-- reception/exchange;
-- overcoming / superior-inferior geometry;
-- selected enclosure/engagement rules;
-- bonification/maltreatment;
-- mitigating conditions.
+No scalar planet-strength score is calculated.
 
-Engineering requirements:
+Lesson: topology tells where a dependency routes; condition tells what state the receiving planet is in.
 
-- separate source-controlled rule IDs;
-- no hidden tradition blending;
-- no single opaque “planet strength” score;
-- ledger entry for every condition;
-- explicit null/unsupported states;
-- canonical and synthetic boundary tests;
-- expert-verifiable condition table and graph-linked condition inspector.
+---
 
-Research requirements:
+# v0.4.1 — Graph Analytics + Explainable Findings
 
-- compare topology-only versus condition-only versus topology+condition models;
-- do not reinterpret graph centrality as traditional strength;
-- record variant sensitivity;
-- keep exploratory descriptors on promotion hold until the substrate is stable.
+**Status: complete**
+
+Purpose: make graph-derived structure explicit without pretending the graph statistic is already an astrological reading.
+
+Delivered:
+
+### Classical dispositor graph
+
+- SCC condensation;
+- terminal basin membership / fraction;
+- route depth;
+- upstream capture;
+- nonterminal path bottleneck.
+
+### Aspect graph
+
+- connected components;
+- degree;
+- clustering coefficient;
+- normalized unweighted betweenness;
+- articulation points;
+- bridges;
+- typed closed three-node motifs;
+- Grand Trine / T-square / triple-conjunction templates;
+- exact ≤1° subset.
+
+### Multiplex comparison
+
+- aspect × dispositor pair overlap.
+
+### Explainability
+
+- definition;
+- formula;
+- observed value;
+- graph-theory meaning;
+- astrological rule context;
+- interpretive hypothesis;
+- limitation;
+- proof/ledger links.
+
+Lesson: a graph metric can be mathematically exact and still be meaningless to a non-specialist until it is translated through the astrological model.
+
+---
+
+# v0.4.1.1 — Outer-planet interpretive restoration
+
+**Status: complete compatibility milestone**
+
+Delivered:
+
+- Uranus, Neptune, and Pluto preserved in interpretive analysis;
+- explicit separation between modern outer-planet interpretation and Hellenistic dignity rules;
+- legacy UI contract retained for regression.
+
+Lesson: restricting traditional condition to the classical planets must not silently erase modern interpretive objects from the chart.
+
+---
+
+# v0.4.1.2 — Energetic Whole-Chart Synthesis
+
+**Status: current public release**
+
+Purpose: translate the deterministic structural/graph substrate into a reading a non-specialist can understand without surrendering auditability.
+
+Delivered:
+
+- dedicated energetic synthesis engine;
+- dedicated display-normalization layer;
+- symbolic energy/current/field vocabulary with explicit non-physical epistemic label;
+- placement synthesis across archetype, sign, and actual Whole Sign house;
+- explicitly modern natural-house overlay;
+- house-ruler/dispositor routing inside interpretation;
+- aspect-energy translation;
+- terminal-basin translation into actual planet + house circuits;
+- preterminal bottleneck translation into recurring energetic gates;
+- balanced / depleted / excessive expressions;
+- material/livelihood examples;
+- soul/spirit inquiry prompts;
+- actionable embodiment experiments;
+- primitive traditional condition qualifiers folded into classical-planet readings;
+- Ceres recognized as a minor body when a coordinate is supplied;
+- custom/modern Ceres interpretation profile;
+- corrected browser analysis surface `prototype/v0412b.html`;
+- energetic synthesis smoke tests;
+- UI/browser contract tests;
+- documentation contract for future sample-analysis ingestion.
+
+Core reading sequence:
+
+```text
+archetypal current
+→ sign frequency
+→ actual Whole Sign house
+→ natural-house resonance (secondary)
+→ ruler/dispositor pathway
+→ aspect geometry
+→ graph architecture
+→ traditional condition
+→ balanced/depleted/excess expression
+→ material-life manifestation
+→ soul/spirit inquiry
+→ proof
+```
+
+Core design rule:
+
+> **The graph term is never the interpretation.**
+
+Scientific boundary:
+
+Energy/current/field language remains a symbolic interpretive model. It is not treated as evidence of measured astrological physics.
+
+Current Ceres boundary:
+
+Ceres can be interpreted from a supplied/precomputed coordinate, but the birth-time astronomy adapter does not yet automatically generate a validated Ceres position.
+
+---
+
+# v0.4.2 — Relational Condition
+
+**Next astrological-engine milestone**
+
+Purpose: qualify directed and angular relationships between planets rather than treating condition as node-local only.
+
+Planned components:
+
+```text
+G_reception
+→ exchange / mutual reception
+→ G_overcoming
+```
+
+Requirements:
+
+- explicit source/rule variant IDs;
+- no medieval/Hellenistic definition blending without a named variant;
+- relation-level ledger entries;
+- graph integration that preserves relation type;
+- readable energetic translation downstream from the rule calculation;
+- synthetic edge fixtures before promotion.
 
 Exit criterion:
 
-An expert can select any classical planet and independently reconstruct its major modeled Hellenistic condition factors, rule IDs, and source references from serialized output and UI.
+An expert can reconstruct every reception/exchange/overcoming relation from the serialized rule result and its source/model identity.
+
+---
+
+# v0.4.3 — Compound Condition
+
+Purpose: represent higher-order traditional conditions after primitive and relational facts are stable.
+
+Candidate components:
+
+- bonification;
+- maltreatment;
+- enclosure;
+- selected mitigation;
+- condition-aware topology experiments.
+
+Bonification/maltreatment must remain under a named reconstruction because the surviving source tradition is not a single unambiguous modern API.
+
+No scalar strength score.
+
+---
+
+# v0.4.x — Interpretation depth track
+
+This track can proceed alongside relational condition as long as deterministic facts remain authoritative.
+
+Planned components:
+
+### House-ruler synthesis
+
+- house lord condition;
+- house-to-terminal routing;
+- linked house circuits;
+- cross-house feedback patterns.
+
+### Whole-chart configuration synthesis
+
+- aspect motifs interpreted as multi-body systems rather than isolated pair paragraphs;
+- repeated axis analysis;
+- topology × condition × house synthesis;
+- selected outer-planet and minor-body profiles.
+
+### Curated interpretation profiles
+
+Long-form expert/user-supplied samples are decomposed into versioned fields:
+
+```text
+archetype definition
+healthy expression
+under-expression
+excess expression
+material domains
+skills/resources
+vocational possibilities
+embodiment practices
+warning patterns
+metaphors
+tradition / source profile
+```
+
+Samples may enrich interpretation. They may not alter coordinates, house assignment, aspect geometry, topology, condition, or provenance.
+
+### Practice layer
+
+- yogic embodiment suggestions;
+- Ayurvedic lifestyle correspondences;
+- contemplative practices;
+- explicitly labeled tradition/source posture;
+- no medical diagnosis or unsupported causal claims.
+
+### Interpretation postures
+
+Potential selectable lenses:
+
+```text
+Traditional
+Energetic
+Psychological
+Mystical
+Research
+```
+
+All postures consume the same deterministic state.
 
 ---
 
 # v0.5 — Life Spectrum v1
 
-Purpose: introduce time after the natal field is structurally and conditionally characterized.
+Purpose: introduce time after the natal field is structurally, conditionally, and interpretively characterized.
 
 Planned components:
 
@@ -184,6 +393,7 @@ Planned components:
 - applying/separating temporal evolution;
 - stable natal-target lanes;
 - house activation lanes;
+- activated ruler pathways;
 - explicit activation functions;
 - zoom from decades to days;
 - life-event annotations;
@@ -202,6 +412,8 @@ T(t) = temporal input
 X_i(t) = F(N_i, T(t), rule-set versions)
 ```
 
+Interpretive prose remains downstream and does not feed back into astronomy or rule calculations.
+
 Exit criterion:
 
 A user can inspect long temporal structure without a transit bi-wheel and reconstruct every displayed activation.
@@ -212,236 +424,107 @@ A user can inspect long temporal structure without a transit bi-wheel and recons
 
 Purpose: layer discrete/hierarchical timing regimes onto continuous transits.
 
+Candidate systems:
+
 ### Annual profections
 
 - age/year;
 - profected Whole Sign house;
 - lord of the year;
 - natal condition of lord;
-- ruler-route context;
-- transit interactions.
+- activated ruler path.
 
 ### Zodiacal releasing
 
-- selectable lot;
-- period lengths;
-- nested levels;
-- angular periods;
-- loosing of the bond;
-- provenance for every boundary.
+- Lot selection;
+- sign periods;
+- peak periods;
+- Loosing of the Bond;
+- angular transitions;
+- provenance for every period boundary.
 
-Additional timing methods require independent source/algorithm definitions before implementation.
+### Solar returns / related annual techniques
 
-Exit criterion:
-
-Life Spectrum can display continuous astronomical activation and discrete time-lord regimes without collapsing them into one opaque score.
+Only after provider/rule definitions are frozen.
 
 ---
 
-# v0.7 — Controlled HCI and structural research
+# v0.7 — Life Space / recurrence research
 
-Purpose: test whether Noetic Atlas is actually a better information instrument for defined tasks.
+Purpose: examine repeated structural states and trajectories rather than isolated transits.
 
-Primary control condition:
+Potential research objects:
 
-- conventional horoscope wheel.
+- state vectors across time;
+- recurring activation motifs;
+- condition-qualified ruler pathways;
+- event-annotation similarity;
+- temporal clustering;
+- state-space visualization.
 
-Candidate tasks:
-
-- trace a dispositor chain;
-- identify terminal routing;
-- locate exact pairwise relationships;
-- recognize aspect motifs;
-- distinguish computation from interpretation.
-
-Candidate outcomes:
-
-- task time;
-- error rate;
-- recall;
-- cognitive workload;
-- novice learning rate;
-- expert inter-rater agreement.
-
-The question is not “does the UI look sophisticated?”
-
-It is:
-
-> **Does this representation improve measurable structural comprehension for specific tasks?**
+Dimensionality reduction such as PCA/UMAP/MDS belongs here only after the semantic state vector is stable.
 
 ---
 
-# v0.8 — Conversational Observatory
+# Research track — null models and validation
 
-Purpose: use AI as an interface to deterministic structure rather than as a hidden calculator.
+This proceeds alongside product development.
 
-Planned actions:
+## Graph nulls
 
 ```text
-trace_house_ruler(house)
-show_derivation(object_or_edge)
-show_condition(planet)
-compare_periods(t1, t2)
-highlight_structure(pattern)
-show_lot_formula(lot)
-show_model_difference(model_a, model_b)
+geometric longitude randomization
+label permutation
+degree-preserving rewiring where valid
+layer-overlap nulls
 ```
 
-AI responsibilities:
+No `rare`, `high`, `exceptional`, or `enriched` language before comparison.
 
-- navigation;
-- explanation;
-- comparison;
-- source synthesis;
-- research-hypothesis generation.
+## HCI validation
 
-AI prohibitions:
+Compare wheel versus Atlas on tasks such as:
 
-- inventing astronomy;
-- silently changing rule variants;
-- hiding uncertainty;
-- presenting exploratory metrics as established meanings.
+- terminal dispositor identification;
+- ruler-chain recovery;
+- mutual-reception identification;
+- exact aspect lookup;
+- lot reconstruction;
+- activated ruler-path tracing.
 
----
+Measures:
 
-# v0.9 — Comparative tradition framework
+- error rate;
+- completion time;
+- inter-rater agreement;
+- cognitive load;
+- learning rate.
 
-Purpose: treat traditions as switchable models over a common astronomical substrate.
+This can validate representational utility without validating astrology itself.
 
-Potential model families:
+## Astrological empirical research
 
-- Hellenistic;
-- medieval/traditional;
-- modern/transpersonal;
-- Jyotish as an independently defined sidereal/graha/nakshatra/dasha system rather than a patch to the tropical model.
+Longer-term questions may test whether graph descriptors, condition-qualified topology, or timing structures correlate reproducibly with external/life phenomena.
 
-Exit criterion:
-
-The same birth event can be processed under multiple transparent rule systems without hidden mixing, and agreement/disagreement can be inspected directly.
+Null findings remain acceptable.
 
 ---
 
-# v1.0 — Product foundation
+# Current engineering priorities
 
-Consumer/professional requirements should include:
+The next sequence after v0.4.1.2 is:
 
-- reliable chart calculation;
-- Natal Field;
-- Flow Map;
-- condition inspector;
-- Life Spectrum;
-- explain-why/provenance interaction;
-- chart/account management;
-- privacy/deletion controls;
-- saved explorations;
-- export/report capabilities.
+```text
+1. reception / exchange
+2. overcoming
+3. condition-aware house-ruler synthesis
+4. selected compound condition
+5. graph null models
+6. curated interpretation-profile expansion
+7. validated extended-body astronomy where justified
+8. Life Spectrum
+```
 
-Commercial principle:
+The governing product standard remains:
 
-> **Sell resolution and better instrumentation, not artificial certainty.**
-
----
-
-# v1.x — Research Observatory and recurrence/state space
-
-Prerequisites:
-
-- stable structural semantics;
-- stable condition semantics;
-- stable temporal semantics.
-
-Planned:
-
-- descriptor registry;
-- null/randomized chart generators;
-- cross-chart batch analysis;
-- topology motif census;
-- condition-aware graph metrics;
-- birth-time sensitivity analysis;
-- reproducible research export;
-- explicit block-structured temporal state vectors;
-- recurrence plots;
-- state similarity search;
-- PCA baseline and later exploratory embeddings where justified.
-
-Every embedding must preserve feature definitions, preprocessing, random seeds, distance metrics, and model versions.
-
----
-
-# v2+ — Relationships, populations, and research scale
-
-Potential directions:
-
-- synastry as interacting graph systems;
-- family-system topology;
-- chart-neighborhood search;
-- historical-figure comparison;
-- longitudinal event studies;
-- preregistered hypothesis tests;
-- public research datasets where consent/licensing permit;
-- Observatory/Archive surfaces.
-
----
-
-# Cross-cutting workstreams
-
-## Integrity
-
-- derivation coverage;
-- cross-provider astronomy validation;
-- source-variant tracking;
-- ambiguity handling;
-- reproducibility metadata.
-
-## Testing
-
-- unit tests;
-- boundary/synthetic fixtures;
-- canonical regression;
-- provider cross-checks;
-- browser/UI integration tests;
-- research reproducibility tests.
-
-## Documentation
-
-Every new computed technique requires:
-
-- domain definition;
-- source/variant;
-- algorithm;
-- edge cases;
-- provenance;
-- tests;
-- epistemic status.
-
-## Research methodology
-
-- null models;
-- replication;
-- preregistration where feasible;
-- multiple-comparison awareness;
-- effect-size/uncertainty reporting;
-- negative-result retention;
-- explicit theory-promotion status.
-
-## Privacy
-
-- data minimization;
-- deletion;
-- encryption;
-- research consent;
-- identity/research separation.
-
----
-
-# Decision rule for sequencing
-
-Prefer work that increases at least one of:
-
-1. **derivability** — the framework can calculate more of the model itself;
-2. **auditability** — an expert can independently reconstruct more results;
-3. **structural visibility** — a difficult relation becomes inspectable;
-4. **research testability** — a claim can be compared with a null/control;
-5. **user comprehension** — a defined task becomes easier without adding false certainty.
-
-Features that mainly add aesthetic novelty without improving these dimensions should be deprioritized.
+> **If a feature merely makes astrology look interesting, it does not belong. If it exposes a structural or experiential question that is difficult to inspect, reproduce, compare, or test with the traditional representation, it may belong.**
