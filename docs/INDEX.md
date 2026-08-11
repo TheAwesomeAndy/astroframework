@@ -20,6 +20,7 @@ This index is the recommended entry point for engineers, astrologers, researcher
 ## Current release line
 
 - **v0.4.1.2 — Energetic Whole-Chart Synthesis**
+- **Promoted to `main`:** 2026-08-11.
 - **`naf.interpretation.energetic_synthesis.v0.4.1.2`** — energetic interpretation model.
 - **`naf.interpretation.natural_house_overlay.modern.v1`** — explicitly modern natural-house resonance layer.
 - **`naf.research.graph_analytics.v0.4.1`** — graph-analysis model.
