@@ -1,0 +1,62 @@
+{
+  "schema_version": "0.1",
+  "framework": "Noetic Atlas Framework",
+  "model": {
+    "zodiac": "tropical",
+    "houses": "whole_sign",
+    "rulership": "traditional_domicile",
+    "note": "Quantitative graph/topology values are properties of this explicit symbolic model, not measured physical energies."
+  },
+  "angles": {
+    "ASC": {"sign": "Leo", "degree": 11.633333},
+    "MC": {"sign": "Taurus", "degree": 0.733333}
+  },
+  "placements": [
+    {"id":"Sun","sign":"Libra","degree":10.95,"house":3},
+    {"id":"Moon","sign":"Gemini","degree":8.05,"house":11},
+    {"id":"Mercury","sign":"Libra","degree":19.5,"house":3},
+    {"id":"Venus","sign":"Virgo","degree":14.816667,"house":2},
+    {"id":"Mars","sign":"Virgo","degree":15.283333,"house":2},
+    {"id":"Jupiter","sign":"Aquarius","degree":7.116667,"house":7},
+    {"id":"Saturn","sign":"Scorpio","degree":25.15,"house":4},
+    {"id":"Uranus","sign":"Sagittarius","degree":14.7,"house":5},
+    {"id":"Neptune","sign":"Capricorn","degree":0.966667,"house":6},
+    {"id":"Pluto","sign":"Scorpio","degree":3.733333,"house":4},
+    {"id":"NorthNode","sign":"Taurus","degree":10.516667,"house":10,"retrograde":true},
+    {"id":"Lilith","sign":"Taurus","degree":13.783333,"house":10},
+    {"id":"Chiron","sign":"Gemini","degree":14.55,"house":11,"retrograde":true},
+    {"id":"Fortune","sign":"Sagittarius","degree":14.533333,"house":5},
+    {"id":"Vertex","sign":"Sagittarius","degree":28.383333,"house":5}
+  ],
+  "whole_sign_houses": {
+    "1":"Leo","2":"Virgo","3":"Libra","4":"Scorpio","5":"Sagittarius","6":"Capricorn",
+    "7":"Aquarius","8":"Pisces","9":"Aries","10":"Taurus","11":"Gemini","12":"Cancer"
+  },
+  "traditional_sign_rulers": {
+    "Aries":"Mars","Taurus":"Venus","Gemini":"Mercury","Cancer":"Moon","Leo":"Sun","Virgo":"Mercury",
+    "Libra":"Venus","Scorpio":"Mars","Sagittarius":"Jupiter","Capricorn":"Saturn","Aquarius":"Saturn","Pisces":"Jupiter"
+  },
+  "computed_topology": {
+    "terminal_strongly_connected_component": ["Mercury","Venus"],
+    "terminal_cycle_houses": [3,2],
+    "traditional_planets_reaching_terminal_scc": ["Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn"],
+    "modern_planets_reaching_terminal_scc_via_traditional_sign_rulers": ["Uranus","Neptune","Pluto"],
+    "interpretive_label": "2nd-3rd house terminal dispositor attractor"
+  },
+  "core_aspects_from_supplied_chart": [
+    {"a":"Sun","b":"Moon","aspect":"trine","orb_deg":2.90,"motion":"applying"},
+    {"a":"Moon","b":"Jupiter","aspect":"trine","orb_deg":0.92,"motion":"separating"},
+    {"a":"Sun","b":"Jupiter","aspect":"trine","orb_deg":3.82,"motion":"separating"},
+    {"a":"Venus","b":"Mars","aspect":"conjunction","orb_deg":0.45,"motion":"applying"},
+    {"a":"Venus","b":"Uranus","aspect":"square","orb_deg":0.10,"motion":"separating"},
+    {"a":"Mars","b":"Uranus","aspect":"square","orb_deg":0.57,"motion":"separating"},
+    {"a":"Chiron","b":"Venus","aspect":"square","orb_deg":0.25,"motion":"separating"},
+    {"a":"Chiron","b":"Mars","aspect":"square","orb_deg":0.72,"motion":"separating"},
+    {"a":"Chiron","b":"Uranus","aspect":"opposition","orb_deg":0.13,"motion":"separating"},
+    {"a":"Fortune","b":"Uranus","aspect":"conjunction","orb_deg":0.17,"motion":"applying"},
+    {"a":"Fortune","b":"Chiron","aspect":"opposition","orb_deg":0.02,"motion":"applying"},
+    {"a":"Fortune","b":"Venus","aspect":"square","orb_deg":0.27,"motion":"applying"},
+    {"a":"Fortune","b":"Mars","aspect":"square","orb_deg":0.73,"motion":"applying"},
+    {"a":"Jupiter","b":"Pluto","aspect":"square","orb_deg":3.38,"motion":"applying"}
+  ]
+}
