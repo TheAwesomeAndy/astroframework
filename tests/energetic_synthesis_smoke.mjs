@@ -54,7 +54,15 @@ assert.match(mercury.sections.energetic_synthesis,/Libra/i);
 assert.match(mercury.sections.energetic_synthesis,/3rd house/i);
 assert.match(mercury.sections.energetic_synthesis,/Gemini\/Mercury/i);
 assert.match(mercury.sections.rulership_and_routing,/Venus/i);
+assert.match(mercury.sections.graph_context,/Traditional condition qualifier/i);
+assert.match(mercury.sections.graph_context,/in sect/i);
+assert.match(mercury.sections.graph_context,/declining\/cadent/i);
 assert.doesNotMatch(mercury.sections.energetic_synthesis,/3th house/i);
+
+const venus=energy.placements.find(x=>x.objects.includes('Venus'));
+assert.ok(venus);
+assert.match(venus.sections.graph_context,/depression\/fall/i);
+assert.match(venus.sections.graph_context,/own Egyptian bound/i);
 
 for(const outer of ['Uranus','Neptune','Pluto']){
   const card=energy.outer_planets.find(x=>x.objects.includes(outer));
@@ -68,7 +76,11 @@ assert.ok(basin,'terminal basin must get a plain-language energetic translation'
 assert.match(basin.sections.plain_language,/Every classical planetary rulership pathway|classical planetary pathways/i);
 assert.match(basin.sections.plain_language,/Mercury.*Venus|Venus.*Mercury/i);
 assert.match(basin.sections.energetic_synthesis,/houses matter enormously/i);
-assert.match(basin.sections.material_expression,/feedback loop|terminal houses/i);
+assert.match(basin.sections.energetic_synthesis,/recursive/i);
+assert.match(basin.sections.energetic_synthesis,/2nd house|3rd house/i);
+assert.match(basin.sections.energetic_synthesis,/depression\/fall/i);
+assert.match(basin.sections.material_expression,/feedback loop/i);
+assert.match(basin.sections.material_expression,/2nd-house|3rd-house/i);
 assert.doesNotMatch(basin.sections.plain_language,/psychological dominance|causation/i);
 assert.ok(basin.sections.embodiment_practices.length>=3);
 
