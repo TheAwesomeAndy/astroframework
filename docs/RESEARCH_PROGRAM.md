@@ -4,23 +4,26 @@
 
 Noetic Atlas is intended to do more than digitize existing astrological practice.
 
-Its research purpose is to expose structures, recurrences, and cross-layer relationships that conventional chart interfaces may conceal, then evaluate whether those structures are consistently meaningful.
+Its research purpose is to expose structures, recurrences, and cross-layer relationships that conventional chart interfaces may conceal, then evaluate whether those structures are useful, reproducible, and—only where evidence supports it—astrologically meaningful.
 
-The project therefore distinguishes between:
+The project distinguishes:
 
-1. **implemented historical astrology**;
+1. **historical-rule reproduction**;
 2. **mathematical properties of the encoded model**;
-3. **new exploratory descriptors**;
-4. **empirical or phenomenological evidence**;
-5. **candidate interpretive theory**.
+3. **exploratory descriptors**;
+4. **visualization/HCI performance**;
+5. **empirical or phenomenological evidence**;
+6. **candidate interpretive theory**.
 
 These categories must not be collapsed.
+
+Current research promotion status for exploratory descriptors remains **hold** until the condition substrate and minimum temporal substrate are stable enough to support meaningful comparison.
 
 ---
 
 ## 2. Research posture
 
-Noetic Atlas is neither designed to prove astrology true nor to guarantee that every traditional technique survives scrutiny.
+Noetic Atlas is neither designed to prove astrology true nor to protect traditional techniques from scrutiny.
 
 The research posture is:
 
@@ -28,40 +31,96 @@ The research posture is:
 represent faithfully
 → derive transparently
 → visualize clearly
-→ detect patterns
-→ test against alternatives
-→ compare with experience/data
-→ refine or reject hypotheses
+→ formulate a question
+→ specify comparison/null
+→ measure
+→ replicate
+→ refine or reject
 ```
 
-The system should be capable of generating negative results.
+A negative result is useful.
 
-If a proposed descriptor performs no better than a randomized baseline, that is useful information.
-
----
-
-## 3. Why new structure may become visible
-
-Traditional practice is constrained by human perception and by the horoscope wheel as an interface.
-
-Humans are good at recognizing some structures visually but poor at simultaneously tracking:
-
-- dozens of directed ruler paths;
-- repeated graph motifs;
-- multiple lot/ruler interactions;
-- time-varying edge weights across decades;
-- nested timing systems;
-- high-order harmonic organization;
-- recurrence in a high-dimensional symbolic state;
-- cross-chart structural similarity.
-
-Computational representation makes these problems tractable.
-
-The goal is not to replace astrological judgment with metrics. It is to create new observables that an expert can inspect.
+A descriptor that performs no better than a plausible randomized baseline should not be promoted because it produces attractive charts.
 
 ---
 
-## 4. Research layers
+## 3. What can be scientifically studied now
+
+The current project contains several different kinds of research question.
+
+### 3.1 Purely mathematical questions
+
+These concern the formal model itself.
+
+Examples:
+
+- What SCCs exist in a selected rulership graph?
+- How many house routes terminate in each component?
+- What is the path-length distribution?
+- What is the aspect-degree distribution?
+- How does topology change when a rulership model changes?
+
+These questions do not require astrological validity. Once the graph is defined, the graph properties are deterministic.
+
+### 3.2 Visualization/HCI questions
+
+These ask whether Noetic Atlas is a better instrument for specific information tasks.
+
+Examples:
+
+- Does Flow Map reduce time to trace a dispositor chain?
+- Does Aspect Matrix improve pairwise relation accuracy?
+- Does coordinated highlighting reduce errors?
+- Does node isolation help novices learn rulership faster?
+- Do experts reach higher agreement about structural facts when provenance is visible?
+
+These can be tested even by researchers who make no assumption about astrological causation.
+
+### 3.3 Astrological-significance questions
+
+These ask whether a formal feature corresponds to expert judgments, autobiographical data, or future outcomes.
+
+Examples:
+
+- Is route convergence associated with independent expert judgments of chart centralization?
+- Do condition-aware topology measures add information beyond standard traditional delineation?
+- Do preregistered timing windows correspond to event density above time-shift nulls?
+
+These require stronger controls and cannot be answered from a canonical specimen.
+
+---
+
+## 4. Why the visualization strategy is testable rather than decorative
+
+The current interface deliberately combines node-link and matrix representations.
+
+Controlled information-visualization research has shown that node-link and matrix representations have different task strengths. Ghoniem, Fekete, and Castagliola (IEEE InfoVis 2004) found path-finding consistently favored node-link diagrams, while matrix representations performed better on many tasks as graphs became larger.
+
+That supports the current design hypothesis:
+
+```text
+Natal Field / Flow Map → paths, neighborhoods, topology
+Aspect Matrix           → pairwise lookup and dense comparison
+```
+
+It does **not** prove the current UI is optimal.
+
+The wheel should therefore remain a control condition in future HCI work rather than being framed as an obsolete visualization.
+
+Candidate outcomes:
+
+- completion time;
+- accuracy/error rate;
+- confidence calibration;
+- recall;
+- novice learning rate;
+- NASA-TLX or another validated workload measure where appropriate;
+- expert inter-rater agreement;
+- ability to correctly identify which claims are calculations versus interpretations.
+
+---
+
+## 5. Research layers
 
 ### R0 — Historical rule reproduction
 
@@ -71,13 +130,17 @@ Examples:
 
 - Lot of Fortune;
 - annual profection;
-- traditional domicile dispositors.
+- domicile dispositors;
+- bounds;
+- reception.
 
-Success criterion:
+Success criteria:
 
 - source identified;
+- variant named;
 - formula formalized;
-- calculation matches independent manual/reference examples.
+- boundary cases documented;
+- calculation matches independent reference/manual examples.
 
 ### R1 — Mathematical characterization
 
@@ -89,31 +152,35 @@ Examples:
 - route depth;
 - harmonic magnitude;
 - motif count;
-- network convergence.
+- route convergence;
+- cross-layer participation.
 
-Success criterion:
+Success criteria:
 
-- deterministic and reproducible;
-- mathematically well-defined;
-- invariant/sensitivity behavior known.
+- deterministic;
+- reproducible;
+- mathematically defined;
+- sensitivity behavior known;
+- implementation tested.
 
 ### R2 — Exploratory astrological hypothesis
 
-Goal: ask whether a mathematical property corresponds to a recognizable astrological or autobiographical phenomenon.
+Goal: ask whether a mathematical property corresponds to an independently measured astrological or autobiographical phenomenon.
 
 Example:
 
-> Do charts with unusually high ruler-route convergence tend to be independently described by experts as organized around fewer dominant topical basins?
+> Do charts with unusually high ruler-route convergence receive independently higher expert ratings for topical concentration?
 
-Success criterion:
+Success criteria:
 
-- hypothesis stated before outcome where feasible;
-- comparison group/null model specified;
-- outcome measurable.
+- operational definition before outcome inspection where feasible;
+- comparison group/null specified;
+- measurable endpoint;
+- analytic choices logged.
 
 ### R3 — Replication
 
-Goal: reproduce the relationship in independent charts, time periods, astrologers, or datasets.
+Goal: reproduce the relationship in independent charts, periods, astrologers, or datasets.
 
 ### R4 — Candidate theory
 
@@ -123,212 +190,183 @@ Even then, it remains versioned and challengeable.
 
 ---
 
-## 5. Initial exploratory descriptors
+## 6. Current exploratory descriptors
 
-Current `src/research/pattern-engine.mjs` contains deliberately limited experimental metrics.
+Current `src/research/pattern-engine.mjs` includes deliberately limited descriptors.
 
-### 5.1 Circular harmonic spectrum
+### 6.1 Circular harmonic spectrum
 
-For longitudes `θ_i`, define harmonic concentration:
+For longitudes `θ_i`:
 
 ```text
 R_n = |(1/N) Σ exp(i n θ_i)|
 ```
 
-Interpretation:
+This measures angular concentration at harmonic `n`.
 
-- this measures angular organization at harmonic `n`;
-- it does not assume that the harmonic is astrologically significant;
-- it can detect periodic structure without beginning from named aspect categories.
+It is a geometric descriptor. It does not assume the harmonic is astrologically meaningful.
 
 Research questions:
 
-- Which harmonics are unusually concentrated relative to randomized charts?
-- Do known traditional aspect configurations correspond to predictable harmonic signatures?
-- Are there stable high-order signatures not captured by standard named aspects?
+- Which harmonics are unusual relative to matched astronomical nulls?
+- Do named traditional configurations produce expected harmonic signatures?
+- Are high-order signatures stable under object-set and orb-policy changes?
 
-### 5.2 Ruler-route convergence
+### 6.2 Ruler-route convergence
 
-Given all house-ruler/dispositor routes, measure the degree to which routes converge on common nodes or terminal components.
+Given all house-ruler/dispositor routes, measure how strongly routes terminate on common nodes/components.
 
 Research questions:
 
-- Is high convergence associated with expert judgments of centralized chart organization?
-- Does convergence predict which planets/life domains recur in autobiographical narratives?
-- Does convergence change under different rulership traditions in informative ways?
+- Is convergence associated with independent expert structural judgments?
+- Does convergence remain stable across traditional rule variants?
+- Does condition-aware convergence outperform topology-only convergence for defined tasks?
 
-### 5.3 Multilayer participation
+### 6.3 Multilayer participation
 
-Count or weight the number of structural layers in which an object participates.
+Count or weight how many distinct structural layers include an object.
 
 Potential layers:
 
 - aspect graph;
 - house rulership;
-- dispositor routing;
+- dispositorship;
 - lot rulership;
 - angularity;
+- condition relations;
 - time-lord activation;
 - transit activation.
 
-Research question:
+This is **not** currently a planet-strength score.
 
-> Are objects with high cross-layer participation independently judged as more consequential than objects dominant in only one representation?
-
-This is not yet a “planet strength” score.
-
----
-
-## 6. Future research descriptors
-
-Candidate families include:
-
-### Topological descriptors
-
-- SCC size and depth;
-- terminal-basin count;
-- route entropy;
-- betweenness centrality;
-- graph modularity;
-- motif census;
-- hypergraph participation;
-- ruler-path asymmetry;
-- house-to-house coupling graphs.
-
-### Geometric descriptors
-
-- harmonic spectrum;
-- aspect phase concentration;
-- angular-axis coherence;
-- distribution of exactness;
-- multi-body geometric motifs;
-- antiscia-related symmetry if supported by a rule set.
-
-### Temporal descriptors
-
-- activation persistence;
-- recurrence interval;
-- temporal overlap among techniques;
-- topology-change events;
-- period similarity;
-- transit/time-lord coherence;
-- nested-regime transitions.
-
-### State-space descriptors
-
-- recurrence density;
-- transition distance;
-- local trajectory curvature;
-- cluster residence time;
-- nearest historical symbolic state;
-- chart-specific attractor-like regions as a visualization metaphor.
-
-### Cross-tradition descriptors
-
-- agreement score between rule systems;
-- disagreement localization;
-- shared timing windows;
-- ruler-model sensitivity;
-- tropical/sidereal structural correspondence where meaningful.
+The multilayer formulation is motivated by network science’s treatment of systems with multiple relation types, but astrological significance requires independent testing.
 
 ---
 
 ## 7. Null models are mandatory
 
-Pattern discovery is meaningless without comparison.
+Pattern discovery without comparison is not enough.
 
-Possible null/randomized models include:
+### Longitude randomization
 
-### Longitude permutation
+Randomize longitudes under a clearly defined distribution.
 
-Keep the same objects but randomize longitudes uniformly.
-
-Use when asking whether a geometric metric is unusually strong.
-
-### Rotation null
-
-Rotate the entire chart by a random angle while preserving internal angular relationships.
-
-Use when testing house/angle-dependent features separately from aspect geometry.
-
-### Object-label permutation
-
-Keep longitudes fixed but permute planet labels.
-
-Use when asking whether identity-specific structure matters beyond geometry.
-
-### Time-shift null
-
-For temporal studies, shift life-event dates or transit windows within a valid sampling range.
+Use for geometric descriptors when astronomical realism is not required.
 
 ### Matched astronomical null
 
-Generate charts from matched dates/latitudes/time distributions to preserve realistic astronomical constraints.
+Sample realistic birth instants/locations from a defined distribution so planetary dependencies are preserved.
 
-The selected null must preserve the aspects of the data that are irrelevant to the hypothesis while disrupting the relationship being tested.
+Prefer this when testing properties that could be distorted by impossible independent longitudes.
+
+### Rotation null
+
+Rotate an entire chart while preserving internal angular relations.
+
+Useful for separating angle/house dependence from aspect geometry.
+
+### Object-label permutation
+
+Preserve longitudes while permuting identities.
+
+Useful when asking whether object identity matters beyond geometry.
+
+### Time-shift null
+
+Shift event dates or timing windows within a valid observation interval.
+
+Useful for temporal/event analyses.
+
+The null must preserve what is irrelevant to the hypothesis while disrupting the relation under test.
 
 ---
 
-## 8. Avoiding canonical-chart overfitting
+## 8. Canonical-chart overfitting is prohibited
 
-The canonical specimen exists for regression testing.
+`NAF-CANON-0001` is a regression fixture.
 
-It must not become the design target for research metrics.
+It must not become the target the research metrics are tuned to make interesting.
 
 Rules:
 
-- do not tune thresholds to make NAF-CANON-0001 look interesting;
+- do not tune thresholds to optimize the canonical specimen;
 - use synthetic fixtures for mathematical edge cases;
-- use multiple independent charts before promoting a descriptor;
-- document when a metric was first proposed relative to the charts examined;
-- preserve failed/boring outputs where practical.
+- use independent charts before promoting descriptors;
+- record when a metric was proposed relative to the samples examined;
+- preserve boring and failed outputs where feasible.
 
-The canonical chart can prove that code remains stable. It cannot prove that a theory is valid.
+A regression fixture can prove code stability. It cannot validate theory.
 
 ---
 
-## 9. N-of-1 longitudinal research
+## 9. Condition-aware research is the next priority
 
-A deeply annotated single life can still be useful when treated carefully.
+Current graph structure is condition-blind.
+
+Before testing claims about “dominant,” “central,” or “consequential” planets, the framework should represent major traditional condition dimensions independently:
+
+```text
+domicile/exaltation/adversity
+sect
+triplicity
+bound
+angularity
+reception
+overcoming
+bonification/maltreatment
+mitigation
+```
+
+Research then becomes able to compare:
+
+```text
+topology only
+vs
+condition only
+vs
+condition + topology
+```
+
+This is a far stronger design than quietly turning graph centrality into a traditional strength surrogate.
+
+---
+
+## 10. N-of-1 longitudinal research
+
+A densely annotated single life can be useful if treated carefully.
 
 Potential workflow:
 
 ```text
-calculate full symbolic state through time
-→ predefine event categories or annotations
-→ compare event windows with non-event windows
-→ inspect recurrence and technique overlap
-→ use within-person randomization/time-shift baselines
+calculate symbolic state through time
+→ predefine event categories
+→ compare event and non-event windows
+→ inspect recurrence/technique overlap
+→ use time-shift baselines
 ```
-
-Benefits:
-
-- controls for between-person differences;
-- enables dense temporal analysis;
-- allows qualitative context.
 
 Risks:
 
 - retrospective selection;
 - memory distortion;
-- post-hoc reinterpretation;
-- too many possible astrological features.
+- post-hoc interpretation;
+- too many candidate astrological features.
 
-Therefore N-of-1 findings should be labeled exploratory unless preregistered/replicated.
+Therefore N-of-1 results should remain exploratory unless prospectively specified and replicated.
 
 ---
 
-## 10. Cohort research
+## 11. Cohort research
 
-With explicit consent, future research datasets may support questions such as:
+With explicit consent, future datasets may support questions such as:
 
-- Are certain structural descriptors associated with independently coded life-event domains?
-- Do expert astrologers agree more when using the new visualizations?
-- Do predicted salient periods show above-null autobiographical-event density?
-- Are charts judged similar by experts close in the computational manifold?
-- Which astrological techniques add unique information versus redundant information?
+- Are structural descriptors associated with independently coded event domains?
+- Do experts agree more when using Noetic Atlas views?
+- Do preregistered salient windows show above-null event density?
+- Are charts judged similar by experts close under a defined structural metric?
+- Which traditional techniques add unique versus redundant information?
 
-Cohort research must distinguish:
+Always distinguish:
 
 ```text
 mathematical chart similarity
@@ -336,103 +374,86 @@ from
 psychological/life-history similarity
 ```
 
-The first is computable by definition. The second is an empirical question.
+The first is defined by the model. The second is empirical.
 
 ---
 
-## 11. Human-computer interaction research
+## 12. Life-event annotation safeguards
 
-Noetic Atlas itself is a visualization hypothesis.
-
-The conventional wheel can serve as a control condition.
-
-Possible outcomes:
-
-- time required to trace a ruler chain;
-- accuracy identifying aspect motifs;
-- recall after viewing;
-- perceived cognitive load;
-- number/quality of insights generated;
-- agreement among experts;
-- novice learning rate;
-- ability to distinguish calculation from interpretation.
-
-A defensible independent research question is:
-
-> **Which visual representations best communicate the relational and temporal structure of astrological systems?**
-
-This question does not require accepting a causal astrological mechanism.
-
----
-
-## 12. Life-event annotations
-
-Event annotations are valuable but methodologically dangerous.
-
-Each annotation should separate:
+Future event records should separate:
 
 - date certainty;
 - event category;
-- user-generated description;
+- free-text description;
 - perceived importance;
-- whether the event was entered before or after viewing astrological results.
+- whether the event was entered before or after viewing astrological output;
+- whether the coding scheme was preregistered.
 
-A future research schema should include fields like:
-
-```json
-{
-  "event_date": "YYYY-MM-DD",
-  "date_uncertainty_days": 0,
-  "category": "career_transition",
-  "importance": 4,
-  "entered_blind_to_analysis": false,
-  "free_text": "..."
-}
-```
-
-Blind or pre-analysis entry is especially valuable for reducing retrospective fitting.
+Prospective or analysis-blind entry is especially valuable for reducing retrospective fitting.
 
 ---
 
-## 13. Cross-technique coherence
+## 13. Cross-technique temporal research
 
-One major future research direction is whether multiple independent astrological techniques identify the same periods.
+A future major question is whether independently defined timing techniques identify overlapping periods above chance.
 
-Examples:
+Potential channels:
 
 ```text
-transit activation
-+ annual profection
+transits
++ annual profections
 + zodiacal releasing
-+ eclipse/station proximity
++ stations/eclipses
 ```
 
-Rather than merging them into one opaque score, NAF should preserve each channel and then calculate overlap/coherence explicitly.
+Do not merge them into an opaque “activation score” first.
 
-Research questions:
-
-- Is convergence across techniques more informative than any technique alone?
-- Does convergence occur above a null expectation?
-- Which techniques contribute independent information?
+Preserve channels, calculate overlap explicitly, and compare with null expectations.
 
 ---
 
-## 14. Theory promotion rules
+## 14. Birth-time uncertainty
 
-A descriptor or relationship can move toward interpretive use only when documentation records:
+Birth time affects:
+
+- Ascendant;
+- houses;
+- MC;
+- lots;
+- Moon to a lesser degree;
+- timing-sensitive calculations.
+
+Future analyses should support sensitivity intervals or Monte Carlo resampling over plausible birth-time uncertainty.
+
+Useful output states include:
+
+```text
+stable under ±5 min
+changes under ±15 min
+undefined without reliable time
+```
+
+---
+
+## 15. Theory-promotion requirements
+
+A descriptor can move toward interpretive use only when documentation records:
 
 - formal definition;
 - implementation version;
 - datasets examined;
+- rule-set versions;
 - null models;
+- preregistration status where relevant;
 - replication attempts;
-- effect estimates where applicable;
+- effect estimates and uncertainty;
+- multiple-comparison handling;
 - known failures;
 - competing explanations;
 - domain-expert commentary;
-- current confidence status.
+- current confidence state.
 
-Suggested status labels:
+Suggested labels:
 
 ```text
 experimental
@@ -443,102 +464,48 @@ traditional-source-backed
 retired
 ```
 
-Traditional-source-backed and empirically replicated are different categories and should remain different.
+`traditional-source-backed` and `empirically replicated` are different epistemic statuses.
 
 ---
 
-## 15. Research integrity risks
+## 16. Reproducibility package
 
-Primary risks include:
-
-- confirmation bias;
-- researcher degrees of freedom;
-- multiple comparisons;
-- p-hacking;
-- autobiographical hindsight;
-- selection bias in astrology-interested populations;
-- birth-time uncertainty;
-- ephemeris/calculation discrepancies;
-- hidden rule-set variation;
-- overinterpreting dimensionality reduction;
-- treating graph metrics as meaningful because they sound sophisticated.
-
-Every research design should explicitly state which of these risks apply.
-
----
-
-## 16. Birth-time uncertainty
-
-Birth time affects:
-
-- Ascendant;
-- house assignment;
-- MC;
-- lots;
-- Moon position to a lesser degree;
-- timing-sensitive calculations.
-
-Future research should support uncertainty bands or Monte Carlo resampling over plausible birth-time intervals rather than treating uncertain times as exact.
-
-A chart-derived result should eventually carry sensitivity information:
-
-```text
-stable under ±5 min
-changes under ±15 min
-undefined without reliable time
-```
-
-This may itself become a valuable visualization.
-
----
-
-## 17. Reproducibility package
-
-Any publishable NAF research result should ideally include:
+Any publishable Noetic Atlas result should ideally include:
 
 - code commit SHA;
 - schema version;
 - astronomy provider/version;
-- rule-set IDs;
-- orb policies;
+- rule IDs;
+- orb policy;
 - feature definitions;
-- anonymized or synthetic data where shareable;
+- data provenance and consent state;
 - random seeds;
-- preprocessing steps;
+- preprocessing;
 - exact analysis command/notebook;
-- limitations.
+- limitations;
+- negative/failed analyses relevant to the same hypothesis.
 
 This is the research equivalent of the Derivation Ledger.
 
 ---
 
-## 18. Research and product separation
+## 17. External methodological anchors
 
-The consumer product may simplify the interface.
+The following references justify specific **technical** choices, not astrological validity:
 
-It must not simplify away the underlying methodology.
+- Tarjan (1972), *Depth-First Search and Linear Graph Algorithms*, DOI `10.1137/0201010` — SCC computation.
+- Ghoniem, Fekete & Castagliola (2004), *A Comparison of the Readability of Graphs Using Node-Link and Matrix-Based Representations*, DOI `10.1109/INFVIS.2004.1` — task-dependent node-link/matrix tradeoffs.
+- Kivelä et al. (2014), *Multilayer networks*, DOI `10.1093/comnet/cnu016` — preserving multiple relation types as distinct network layers.
+- W3C PROV-O (2013) — general provenance modeling.
+- Wilkinson et al. (2016), *The FAIR Guiding Principles for scientific data management and stewardship*, DOI `10.1038/sdata.2016.18` — detailed provenance and reusable research metadata.
 
-A consumer might see:
-
-> “Several house-ruler pathways converge strongly on Mercury and Venus.”
-
-The research system should still retain:
-
-- exact graph;
-- route table;
-- convergence metric;
-- normalization;
-- rule set;
-- provenance;
-- confidence/interpretive status.
-
-The public interface can reduce cognitive load without reducing epistemic integrity.
+See [Current State and Scientific Rationale](CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md) for the explicit boundary between what these sources justify and what remains unvalidated.
 
 ---
 
-## 19. Long-term objective
+## 18. Long-term objective
 
-The long-term objective is not a larger library of canned astrological meanings.
+The long-term objective is not a larger library of canned meanings.
 
 It is an observational environment in which a researcher or practitioner can ask:
 
@@ -546,15 +513,15 @@ It is an observational environment in which a researcher or practitioner can ask
 
 > How was it produced?
 
-> What else is connected to it?
+> What traditional condition qualifies it?
 
 > When does it recur?
 
-> Does another tradition see the same period differently?
+> Does another rule model produce the same structure?
 
-> Does this pattern repeat across other lives?
+> Does the visualization actually help users recover it?
 
-> Does it survive a null comparison?
+> Does a new descriptor survive a null comparison?
 
 > What would falsify the interpretation?
 
