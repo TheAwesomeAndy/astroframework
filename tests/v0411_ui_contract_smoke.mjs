@@ -19,8 +19,5 @@ assert.ok(moduleMatch,'module script exists');
 const syntaxOnly=moduleMatch[1].replace(/^import .*$/gm,'');
 new vm.Script(`(async()=>{${syntaxOnly}\n})`);
 
-const entry=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
-assert.match(entry,/prototype\/v0411\.html\?build=interpretive-outers-0411/);
-assert.match(entry,/Noetic Atlas v0\.4\.1\.1/);
-
-console.log('v0.4.1.1 UI contract smoke: ok');
+// Legacy surface remains regression-tested, but the current public root is owned by the newest release contract.
+console.log('v0.4.1.1 legacy UI contract smoke: ok');
