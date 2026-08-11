@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { calculateBirthChart, parseExplicitTimestamp, signedAngularDelta } from '../src/astronomy/astronomy-engine-core.mjs';
-import { analyzeChart } from '../src/kernel/noetic-kernel.mjs';
+import { analyzeChartWithIntegrity } from '../src/kernel/hellenistic-integrity.mjs';
 
 assert.throws(()=>parseExplicitTimestamp('1984-10-03T21:17:00'),/explicit UTC offset/);
 assert.equal(parseExplicitTimestamp('1984-10-03T21:17:00-04:00').toISOString(),'1984-10-04T01:17:00.000Z');
@@ -32,7 +32,8 @@ assert.ok(Number.isFinite(parsed.angles.MC.longitude));
 assert.ok(parsed.angles.ASC.provenance.proof.horizontal_vector.y<0);
 assert.ok(parsed.angles.MC.provenance.proof.horizontal_vector.z>0);
 assert.equal(parsed.metadata.sun_altitude_deg,-5);
-const analysis=analyzeChart(parsed);
+const analysis=analyzeChartWithIntegrity(parsed);
 assert.equal(analysis.sect.sect,'night');
 assert.equal(analysis.lots.length,7);
-console.log('PASS astronomy adapter contract: birth-data pipeline yields angles, velocities, sect, and seven lots.');
+assert.ok(analysis.derivation_ledger.some(x=>x.kind==='sect'));
+console.log('PASS astronomy adapter contract: birth-data pipeline yields angles, velocities, sect, seven lots, and an audit ledger.');
