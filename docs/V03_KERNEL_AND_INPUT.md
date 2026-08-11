@@ -2,45 +2,77 @@
 
 ## Release objective
 
-v0.3 removes the canonical specimen from the application code path. The chart is now an **input** to a deterministic analysis kernel.
+v0.3 removes the canonical specimen from the application code path. The chart is now an **input** to a deterministic analysis kernel, and the preferred consumer path begins one layer earlier with local birth date/time and coordinates.
 
 The release gate is:
 
-> Can Noetic Atlas derive the structure it displays from a chart supplied at runtime?
+> Can Noetic Atlas derive the structure it displays and show enough provenance for an expert to independently reconstruct the calculation?
 
-The answer in v0.3 is yes for charts that provide zodiacal positions and an Ascendant. Full birth-data-to-ephemeris calculation remains a subsequent astronomy adapter task.
+## Runtime pipelines
 
-## Runtime pipeline
+### Public birth-data path
 
 ```text
-supplied chart text / JSON
+local date/time + latitude + longitude
+        ↓
+coordinate → IANA time-zone resolution
+        ↓
+historical local-time → UTC conversion
+        ↓
+Astronomy Engine adapter
+        ↓
+planetary longitude + velocity + ASC + MC + solar altitude
+        ↓
+whole-sign houses + sect + Hermetic lots + aspects
+        ↓
+traditional domicile dispositor graph
+        ↓
+Tarjan SCCs + house routing
+        ↓
+canonical NAF analysis + derivation ledger
+        ↓
+visualization / exploratory research / later interpretation
+```
+
+### Calculated-chart path
+
+```text
+placement text / JSON
         ↓
 input parser
         ↓
 absolute ecliptic longitude
         ↓
-whole-sign house calculation
+whole-sign houses + chart-geometry sect fallback + Hermetic lots + aspects
         ↓
-major-aspect engine + explicit orb policy
-        ↓
-traditional domicile dispositor graph
-        ↓
-Tarjan strongly connected components
-        ↓
-house routing / composition / provenance
+topology + provenance
         ↓
 canonical NAF analysis object
-        ↓
-Natal Field / Aspect Matrix / Flow Map / Audit
 ```
 
 The visualization does not calculate astrology. It consumes the canonical analysis object.
 
 ## Input modes
 
-### 1. Placement text
+### 1. Local date/time + coordinates
 
-The browser accepts placement lines such as:
+Minimum public input:
+
+```json
+{
+  "local_datetime": "1984-10-03T21:17:00",
+  "latitude": 40.789,
+  "longitude": -73.135
+}
+```
+
+The system resolves an IANA zone from coordinates and applies historical civil-time rules. It records zone, UTC offset, resulting UTC instant and lookup provenance. A repeated local clock time during an autumn DST transition is not guessed; NAF returns the possible instants and requires an ambiguity choice. A nonexistent spring-forward time is rejected.
+
+An expert may provide `timezone_override` when the coordinate lookup is inappropriate or historically uncertain.
+
+### 2. Placement text
+
+The browser also accepts lines such as:
 
 ```text
 Sun in Libra 10°57′, in 3rd House
@@ -50,21 +82,13 @@ ASC in Leo 11°38′
 MC in Taurus 0°44′
 ```
 
-The Ascendant is mandatory because v0.3 recomputes whole-sign houses from the Ascendant sign.
+The Ascendant is mandatory because NAF recomputes whole-sign houses from the Ascendant sign. Source house numbers are retained as `supplied_house` for audit comparison only. Supplied aspect lines are ignored.
 
-House numbers in the source text are retained as `supplied_house` only for audit comparison. They do not control the computed house.
-
-Aspect lines may be pasted with the chart. The parser intentionally ignores them. The aspect graph is recomputed from longitude.
-
-### 2. Canonical JSON
-
-Minimum form:
+### 3. Canonical JSON
 
 ```json
 {
-  "angles": {
-    "ASC": {"sign":"Leo", "degree":"11°38′"}
-  },
+  "angles": {"ASC": {"sign":"Leo", "degree":"11°38′"}},
   "objects": [
     {"id":"Sun", "sign":"Libra", "degree":"10°57′"},
     {"id":"Moon", "sign":"Gemini", "degree":"8°03′"}
@@ -72,140 +96,100 @@ Minimum form:
 }
 ```
 
-For higher-precision work, objects may provide decimal absolute `longitude` instead of a display degree. If both are present, `longitude` is the computational coordinate.
-
-Optional `speed_deg_per_day` enables applying/separating classification. Without velocity the kernel reports `phase: "unknown"` rather than inferring motion from zodiacal order.
+For high-precision work, decimal `longitude` is preferred over display-rounded degree/minute strings. Optional `speed_deg_per_day` enables applying/separating classification.
 
 ## Coordinate primitive
 
-Every object is normalized to absolute tropical ecliptic longitude:
-
-```text
-0° Aries = 0°
-0° Taurus = 30°
-...
-0° Pisces = 330°
-```
-
-The internal primitive is decimal degrees in `[0, 360)`. Display formatting is downstream and may be rounded independently.
+Every object is normalized to absolute tropical ecliptic longitude in `[0°,360°)`. Display formatting is downstream and never used as a higher-precision substitute for the stored computational coordinate.
 
 ## Whole-sign places
 
-For object sign index `s` and Ascendant sign index `a`:
-
 ```text
-house = ((s - a + 12) mod 12) + 1
+house = ((objectSignIndex - ascSignIndex + 12) mod 12) + 1
 ```
 
-Supplied houses are therefore independently checkable against the active whole-sign model.
+This permits direct comparison of supplied versus computed places.
 
 ## Aspect engine
-
-For longitudes `λ_i` and `λ_j`:
 
 ```text
 δ = min(|λ_i - λ_j|, 360 - |λ_i - λ_j|)
 orb = |δ - exact_aspect_angle|
 ```
 
-v0.3 calculates conjunction, sextile, square, trine, and opposition. Orb policy is configuration, not an invisible constant. The browser exposes the active values and reruns the model when the chart is analyzed.
-
-Default research policy:
-
-```text
-conjunction 10°
-sextile      6°
-square      10°
-trine       10°
-opposition  10°
-```
-
-These values are a versioned exploratory policy, not a claim that one universal orb doctrine exists.
+v0.3 computes conjunction, sextile, square, trine and opposition under an explicit, versioned orb policy. Orb policy is configuration, not hidden doctrine.
 
 ## Motion and phase
 
-If both endpoints contain `speed_deg_per_day`, v0.3 advances them by a small deterministic step and compares distance from exact perfection.
+When velocities exist, the engine compares distance from exact perfection over a small deterministic future step and returns `applying`, `separating`, or `stationary/indeterminate`. Position-only chart imports return `unknown`.
 
-Outputs:
+## Sect
 
-- `applying`
-- `separating`
-- `stationary/indeterminate`
-- `unknown`
+With birth data, sect is determined from the Sun's geometric altitude relative to the observer's horizon, with refraction disabled. With placement-only imports, an explicitly labeled Sun/ASC ecliptic-horizon fallback is used. Near-horizon cases are flagged because historical doctrine and twilight introduce a genuine boundary question.
 
-The last state is essential. Position-only chart exports do not contain enough information for a defensible motion classification.
+## Hellenistic Hermetic lots
+
+The integrity layer implements the Paulus/Panaretus family described in Christopher Brennan, *Hellenistic Astrology*, Chapter 16.
+
+| Lot | Day directed arc | Night directed arc |
+|---|---|---|
+| Fortune | Sun → Moon | Moon → Sun |
+| Spirit | Moon → Sun | Sun → Moon |
+| Eros | Spirit → Venus | Venus → Spirit |
+| Necessity | Mercury → Fortune | Fortune → Mercury |
+| Courage | Mars → Fortune | Fortune → Mars |
+| Victory | Spirit → Jupiter | Jupiter → Spirit |
+| Nemesis | Saturn → Fortune | Fortune → Saturn |
+
+Every lot records the sect, formula family, directed arc, Ascendant longitude, unnormalized projection, normalized longitude, whole-sign house and domicile ruler. Eros and Necessity are explicitly marked as the Paulus variants because Brennan documents earlier Valens/Dorotheus variants.
+
+The canonical rounded specimen independently reproduces Fortune at 14°32′ Sagittarius and Spirit at 8°44′ Aries in a night chart.
 
 ## Rulership topology
 
-The v0.3 topology engine uses traditional domicile rulers as an explicit model. Planet-to-ruler edges are generated from sign occupancy rather than fixture assertions.
+Traditional domicile edges are generated from sign occupancy. Tarjan's algorithm discovers SCCs; terminal SCCs are derived from the condensed graph rather than fixture assertions. `NAF-CANON-0001` independently rediscovers Mercury ↔ Venus.
 
-Strongly connected components are found with Tarjan's algorithm. Terminal SCCs are determined from the condensed component graph.
+## Derivation Ledger
 
-For `NAF-CANON-0001-supplied`, the kernel independently rediscovers:
+`analysis.derivation_ledger` records major calculations as inspectable entries with:
 
-```text
-Mercury ↔ Venus
-```
+- epistemic layer;
+- object or relationship identifier;
+- formula/rule;
+- numerical inputs;
+- result;
+- calculation identifier;
+- source/provenance.
 
-as a terminal SCC.
+The design requirement is that a master astrologer or technical reviewer can reconstruct the result without trusting the interface.
 
-## Provenance
+## Astronomy adapter
 
-Derived aspect edges include:
+The open research adapter is pinned to Astronomy Engine 2.1.19. NAF uses it for astronomical primitives and independently performs astrological rule calculations. Unsupported astrology-specific objects are reported rather than fabricated. See `docs/ASTRONOMY_ADAPTERS.md`.
 
-```json
-{
-  "derived": true,
-  "calculation": "naf.aspect.major.v1",
-  "orb_policy": "naf.orbs.user.v1",
-  "position_source": "pasted_chart_text"
-}
-```
+## Exploratory research
 
-The Audit view exposes absolute longitude, computed versus supplied houses, aspect separation/orb, phase status, and calculation identifiers.
+`src/research/pattern-engine.mjs` begins the Observatory discovery layer with circular harmonic concentration, ruler-route convergence and multilayer participation. These are labeled **exploratory-not-interpretive**. See `docs/RESEARCH_DISCOVERY.md`.
 
-Future ephemeris adapters must extend provenance with ephemeris/version, Julian day, location, time standard, node model, and any sidereal ayanamsha.
+## Prototype
 
-## Browser prototype
+`prototype/index.html` is the current Observatory entry point. It supports local date/time + coordinates as well as calculated chart import, and exposes Natal Field, Sect & Lots, Flow, Research Lab and the Derivation Ledger.
 
-`prototype/noetic_atlas_v03.html` is intentionally standalone. It contains a bundled copy of the v0.3 kernel so it can be opened without a build step.
-
-It supports:
-
-- paste chart text;
-- paste JSON;
-- open `.txt` or `.json` input files;
-- load the canonical sample;
-- configurable major-aspect orbs;
-- recompute analysis;
-- generic Natal Field layout for the submitted chart;
-- computed Aspect Matrix;
-- computed all-house Flow Map;
-- topology summary;
-- coordinate/aspect Audit view;
-- export of the canonical analysis JSON.
+Because v0.3 is modular, serve the repository through a local/static web server rather than opening the HTML through `file://`.
 
 ## Tests
 
 Run:
 
 ```bash
+npm install
 npm test
 ```
 
-The zero-dependency smoke suite verifies:
+The test suite covers coordinate geometry, chart text/JSON input, whole-sign houses, major aspects, dispositors/SCCs, sect, the seven Hermetic lots, canonical lot verification, civil-time DST gaps/ambiguities, the astronomy provider contract and exploratory research output.
 
-- sign-to-absolute-longitude conversion;
-- 0°/360° separation behavior;
-- whole-sign houses;
-- recomputed canonical aspect families;
-- unknown phase without velocity;
-- elemental/modal composition;
-- text parser behavior;
-- discovery of the Mercury/Venus terminal SCC.
+## Remaining boundary
 
-## Known boundary
+The open astronomy adapter currently calculates Sun through Pluto plus ASC/MC and velocities. Chiron, lunar-node longitude, Lilith/lunar apogee and Vertex require separately sourced and tested astronomy/astrology algorithms. Their absence is explicit in provenance.
 
-v0.3 accepts a **calculated chart**. It does not yet accept birth date, exact time, and geographic coordinates and query an ephemeris. That should be the next astronomy sub-layer, because only an ephemeris can provide full-precision coordinates and velocities with proper provenance.
-
-This is an intentional boundary rather than a hidden omission.
+The next integrity target is cross-provider validation and fuller traditional condition analysis—not hiding unsupported points behind plausible-looking numbers.
