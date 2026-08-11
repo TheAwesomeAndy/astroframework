@@ -10,7 +10,8 @@ assert.match(html,/buildAstrologicalAnalysis/);
 for(const pane of ['analysisPane','findingsPane','metricsPane','conditionPane','integrityPane']) assert.match(html,new RegExp(`id="${pane}"`));
 for(const phrase of ['Outer planets','Configurations','Life \/ material expression','Why this analysis\?','interpretive-inference']) assert.match(html,new RegExp(phrase,'i'));
 for(const outer of ['Uranus','Neptune','Pluto']) assert.match(html,new RegExp(outer));
-assert.match(html,/outer planets are intentionally absent from Hellenistic dignity/i);
+assert.match(html,/do not inherit Hellenistic dignity/i);
+assert.match(html,/intentionally absent from Hellenistic dignity/i);
 assert.doesNotMatch(html,/v0\.3\.2/);
 
 const moduleMatch=html.match(/<script type="module">([\s\S]*?)<\/script>/);
