@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import { resolveLocalDateTime } from '../src/time/timezone-core.mjs';
+const ny=()=> 'America/New_York';
+const normal=resolveLocalDateTime({local_datetime:'1984-10-03T21:17:00',latitude:40.7,longitude:-73.9},ny);
+assert.equal(normal.timestamp,'1984-10-03T21:17:00-04:00');
+assert.equal(normal.timestamp_utc,'1984-10-04T01:17:00.000Z');
+assert.equal(normal.timezone,'America/New_York');
+assert.equal(normal.ambiguous,false);
+assert.throws(()=>resolveLocalDateTime({local_datetime:'2026-11-01T01:30:00',latitude:40.7,longitude:-73.9},ny),/ambiguous/);
+const first=resolveLocalDateTime({local_datetime:'2026-11-01T01:30:00',latitude:40.7,longitude:-73.9,ambiguity_index:0},ny);
+const second=resolveLocalDateTime({local_datetime:'2026-11-01T01:30:00',latitude:40.7,longitude:-73.9,ambiguity_index:1},ny);
+assert.equal(first.offset_minutes,-240);
+assert.equal(second.offset_minutes,-300);
+assert.notEqual(first.timestamp_utc,second.timestamp_utc);
+assert.throws(()=>resolveLocalDateTime({local_datetime:'2026-03-08T02:30:00',latitude:40.7,longitude:-73.9},ny),/does not exist/);
+console.log('PASS timezone core: ordinary, repeated-hour, and DST-gap civil times are distinguished without guessing.');
