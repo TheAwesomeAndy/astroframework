@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Noetic Atlas v0.4.0b — Condition Observatory</title>
+<style>
+:root{--bg:#080c10;--panel:#10171e;--panel2:#0b1117;--line:#293541;--text:#edf2f5;--muted:#91a0ad;--gold:#d8be73;--green:#83c39b;--red:#d28282;--blue:#82b2d7;--violet:#ac96d0}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font:13px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+#core{position:fixed;left:0;top:0;width:calc(100% - 410px);height:100%;border:0;background:#0a0e12}
+#dock{position:fixed;right:0;top:0;width:410px;height:100%;overflow:auto;background:var(--panel);border-left:1px solid var(--line);padding:14px;z-index:10}
+#dock h1{font-size:16px;margin:0 0 2px}#dock h2{font-size:14px;margin:15px 0 6px}#dock h3{font-size:12px;margin:13px 0 5px}.muted{color:var(--muted);font-size:10px}.model{font:9px/1.4 ui-monospace,monospace;color:#a8b3bc;word-break:break-all}.call{margin-top:9px;padding:9px;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:7px;background:var(--panel2);font-size:10px}.planets{display:flex;gap:5px;flex-wrap:wrap;margin:10px 0}.planets button,.tiny{background:var(--panel2);color:#c5cfd7;border:1px solid var(--line);border-radius:6px;padding:6px 8px;cursor:pointer;font:inherit}.planets button.active{background:var(--gold);color:#111;border-color:var(--gold)}.facts{border-top:1px solid var(--line)}.fact{display:grid;grid-template-columns:115px 1fr;gap:8px;padding:6px 0;border-bottom:1px solid #222d37;font-size:10px}.k{color:var(--muted)}.present{color:var(--gold);font-weight:700}.in_sect{color:var(--green);font-weight:700}.out_of_sect{color:#e3a1a1;font-weight:700}.pending{color:var(--violet)}.pill{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:1px 6px;margin:1px 3px 1px 0;font-size:9px;color:#c4cdd5}.pill.on{border-color:var(--gold);color:var(--gold)}details{border-top:1px solid #26313b;padding:7px 0}summary{cursor:pointer;color:#ced7de;font-size:10px}.ledger{font:9px/1.4 ui-monospace,monospace;color:#b7c1c9;white-space:pre-wrap;word-break:break-word;margin-top:6px}.source{font-size:9px;color:var(--muted);margin-top:4px}.warning{font-size:9px;color:#d8c798}.toggle{position:fixed;right:414px;top:8px;z-index:20;background:#111922;color:#d8be73;border:1px solid #485662;border-radius:7px;padding:7px 9px;cursor:pointer}.closed #dock{display:none}.closed #core{width:100%}.closed .toggle{right:8px}
+@media(max-width:900px){#core{width:100%;height:100%}#dock{width:min(94vw,410px);box-shadow:-8px 0 28px #0009}.toggle{right:min(calc(94vw + 4px),414px)}.closed .toggle{right:8px}}
+</style>
+</head>
+<body>
+<button class="toggle" id="toggle">Condition ▸</button>
+<iframe id="core" src="./index.html" title="Noetic Atlas Visual Observatory"></iframe>
+<aside id="dock">
+  <h1>Noetic Atlas <span style="color:var(--gold)">v0.4.0b</span></h1>
+  <div class="muted">PRIMITIVE CONDITION OBSERVATORY · source-locked Hellenistic reconstruction</div>
+  <div class="model">naf.condition.primitive.hellenistic.v0.4.0b</div>
+  <div class="call"><b>Condition is decomposed, not scored.</b><br>Domicile, adversity, exaltation/depression, triplicity, Egyptian bound, sect, and whole-sign angularity remain separate rule results. Reception, overcoming, bonification and maltreatment are deliberately not implemented yet.</div>
+  <div id="conditionBody"><p class="muted" style="margin-top:16px">Calculate or load a chart in the main observatory. Then click a classical planet, or choose one here.</p></div>
+</aside>
+<script type="module">
+import {computePrimitiveConditions,CLASSICAL_PLANETS,CONDITION_MODEL_ID} from '../src/conditions/primitive-condition-engine.mjs';
+const core=document.getElementById('core'),body=document.body,dockBody=document.getElementById('conditionBody'),toggle=document.getElementById('toggle');
+let analysis=null,conditions=null,chosen=null,observer=null;
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const cls=s=>['present','in_sect','out_of_sect'].includes(s)?s:'';
+toggle.onclick=()=>{body.classList.toggle('closed');toggle.textContent=body.classList.contains('closed')?'Condition ◂':'Condition ▸'};
+
+function selectedFromCore(){
+  try{
+    const doc=core.contentDocument,title=doc?.querySelector('#inspector h2')?.textContent?.trim();
+    return CLASSICAL_PLANETS.includes(title)?title:null;
+  }catch{return null}
+}
+function clickCorePlanet(planet){
+  chosen=planet;render();
+  try{
+    const doc=core.contentDocument;
+    const fieldTab=doc.querySelector('.tabs button[data-view="field"]'); if(fieldTab) fieldTab.click();
+    const groups=[...doc.querySelectorAll('#fieldSvg g')];
+    const g=groups.find(el=>[...el.querySelectorAll('text')].some(t=>t.textContent.trim()===planet));
+    if(g) g.dispatchEvent(new MouseEvent('click',{bubbles:true,view:core.contentWindow}));
+  }catch{}
+}
+function sync(){
+  try{
+    const doc=core.contentDocument,json=doc?.getElementById('json')?.textContent?.trim();
+    if(json&&json.startsWith('{')){
+      const next=JSON.parse(json);analysis=next;conditions=computePrimitiveConditions(next);
+      const selected=selectedFromCore();if(selected)chosen=selected;if(!chosen)chosen='Sun';render();
+    }
+  }catch(e){console.warn('condition overlay sync',e)}
+}
+function statusLine(f,label){
+  if(!f)return `<div class="fact"><span class="k">${esc(label)}</span><span>—</span></div>`;
+  const status=f.status||'—';return `<div class="fact"><span class="k">${esc(label)}</span><span class="${cls(status)}">${esc(status)}${f.present===true?' · yes':f.present===false?' · no':''}</span></div>`;
+}
+function ledgerBlock(e){return `<details><summary>${esc(e.kind.replace('condition_',''))} · ${esc(e.result?.status||e.result?.class||e.result?.family||'derived')}</summary><div class="ledger"><b>rule</b> ${esc(e.rule_id)}\n<b>inputs</b> ${esc(JSON.stringify(e.inputs,null,2))}\n<b>result</b> ${esc(JSON.stringify(e.result,null,2))}</div><div class="source">${esc(e.source_reference)}</div></details>`}
+function render(){
+  if(!analysis||!conditions){dockBody.innerHTML='<p class="muted" style="margin-top:16px">Calculate or load a chart in the main observatory. Then click a classical planet, or choose one here.</p>';return}
+  const rec=conditions.by_planet[chosen]||conditions.by_planet.Sun;if(!rec)return;
+  const e=rec.essential,s=rec.sect,p=rec.positional.angularity;
+  const roles=e.triplicity.planet_roles.length?e.triplicity.planet_roles.join(', '):'none';
+  const planetButtons=CLASSICAL_PLANETS.map(x=>`<button data-p="${x}" class="${x===rec.planet?'active':''}">${x}</button>`).join('');
+  dockBody.innerHTML=`
+    <div class="planets">${planetButtons}</div>
+    <h2>${esc(rec.planet)} <span class="muted">${esc(rec.identity.sign)} ${rec.identity.degree_in_sign.toFixed(3)}° · ${rec.identity.computed_house}H</span></h2>
+    <div class="facts">
+      ${statusLine(e.domicile,'Domicile')}
+      ${statusLine(e.adversity,'Adversity')}
+      ${statusLine(e.exaltation,'Exaltation')}
+      ${statusLine(e.depression,'Depression / fall')}
+      <div class="fact"><span class="k">Triplicity</span><span>${esc(e.triplicity.element)} · roles ${esc(roles)}${e.triplicity.active_for_chart?' <span class="present">· active sect ruler</span>':''}</span></div>
+      <div class="fact"><span class="k">Egyptian bound</span><span>${esc(e.bound.bound_ruler)} · [${e.bound.start_deg},${e.bound.end_deg})${e.bound.self_ruled?' <span class="present">· own bound</span>':''}</span></div>
+      <div class="fact"><span class="k">Chart sect</span><span>${esc(s.chart_sect)}</span></div>
+      <div class="fact"><span class="k">Planet sect family</span><span>${esc(s.planetary_family.family)}${s.planetary_family.phase?' · '+esc(s.planetary_family.phase):''}</span></div>
+      <div class="fact"><span class="k">Sect condition</span><span class="${cls(s.condition.status)}">${esc(s.condition.status)}</span></div>
+      <div class="fact"><span class="k">Angularity</span><span>${esc(p.class)} · ${p.house}H</span></div>
+    </div>
+    <h3>Rule state</h3>
+    <span class="pill on">primitive implemented</span><span class="pill">relational pending</span><span class="pill">compound pending</span>
+    <div class="warning" style="margin-top:6px">Whole-sign angular triads only. Degree-based quadrant dynamic strength is not yet part of this layer.</div>
+    <h3>Derivation ledger · ${rec.ledger_entries.length} independent entries</h3>
+    ${rec.ledger_entries.map(ledgerBlock).join('')}
+    <div class="call"><b>Model boundary</b><br>These are deterministic results inside the selected historical astrological rule model. No scalar “planet strength” is computed, and no psychological or physical meaning is inferred by this panel.</div>`;
+  dockBody.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>clickCorePlanet(b.dataset.p));
+}
+
+core.addEventListener('load',()=>{
+  try{
+    const doc=core.contentDocument,json=doc.getElementById('json'),ins=doc.getElementById('inspector'),status=doc.getElementById('status');
+    observer?.disconnect();observer=new MutationObserver(()=>sync());
+    if(json)observer.observe(json,{childList:true,characterData:true,subtree:true});
+    if(ins)observer.observe(ins,{childList:true,characterData:true,subtree:true});
+    if(status)observer.observe(status,{childList:true,characterData:true,subtree:true});
+    sync();
+  }catch(e){console.warn(e)}
+});
+</script>
+</body>
+</html>
