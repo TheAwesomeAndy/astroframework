@@ -3,7 +3,7 @@ import {parseChartInput} from '../src/kernel/noetic-kernel.mjs';
 import {analyzeChartWithIntegrity} from '../src/kernel/hellenistic-integrity.mjs';
 import {computePrimitiveConditions} from '../src/conditions/primitive-condition-engine.mjs';
 import {analyzeGraphArchitecture} from '../src/research/graph-analytics-engine.mjs';
-import {buildEnergeticSynthesis,NATURAL_HOUSE_MODEL} from '../src/interpretation/energetic-synthesis-engine.mjs';
+import {buildEnergeticSynthesis,NATURAL_HOUSE_MODEL} from '../src/interpretation/energetic-synthesis-display.mjs';
 
 const SAMPLE=`Sun in Libra 10°57′, in 3rd House
 Moon in Gemini 8°03′, in 11th House
@@ -42,6 +42,7 @@ assert.match(ceres.sections.core_energy,/nourishment-and-harvest current/i);
 assert.match(ceres.sections.energetic_synthesis,/modern natural-house correspondence/i);
 assert.match(ceres.sections.energetic_synthesis,/Leo/i);
 assert.match(ceres.sections.energetic_synthesis,/Aries\/Mars/i);
+assert.match(ceres.sections.energetic_synthesis,/1st house/i);
 assert.match(ceres.sections.material_expression,/identity choices|bodily presentation|personal autonomy/i);
 assert.ok(ceres.sections.embodiment_practices.length>=3);
 
@@ -53,11 +54,12 @@ assert.match(mercury.sections.energetic_synthesis,/Libra/i);
 assert.match(mercury.sections.energetic_synthesis,/3rd house/i);
 assert.match(mercury.sections.energetic_synthesis,/Gemini\/Mercury/i);
 assert.match(mercury.sections.rulership_and_routing,/Venus/i);
+assert.doesNotMatch(mercury.sections.energetic_synthesis,/3th house/i);
 
 for(const outer of ['Uranus','Neptune','Pluto']){
   const card=energy.outer_planets.find(x=>x.objects.includes(outer));
   assert.ok(card,`${outer} must remain in energetic analysis`);
-  assert.match(card.sections.core_energy,/Energetically|current|field|house/i);
+  assert.match(card.sections.core_energy,/current|field|house/i);
   assert.ok(card.sections.material_expression.length>80);
 }
 
