@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noetic-atlas.local/schemas/naf-analysis-v0.3.1.schema.json",
+  "title": "Noetic Atlas Analysis Envelope v0.3.1",
+  "description": "Frozen minimum serialization envelope for a Noetic Atlas integrity analysis. This schema stabilizes identity, version metadata, core calculated layers, audit surfaces, and explicit incompleteness while allowing inner structures to evolve under their own versioned rule IDs.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "framework",
+    "kernel_version",
+    "versions",
+    "model",
+    "angles",
+    "objects",
+    "aspects",
+    "topology",
+    "validation",
+    "completeness",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {"const": "naf.analysis.v0.3.1"},
+    "framework": {"const": "Noetic Atlas Framework"},
+    "kernel_version": {"type": "string"},
+    "source_format": {"type": "string"},
+    "versions": {
+      "type": "object",
+      "required": [
+        "schema",
+        "kernel",
+        "house_model",
+        "aspect_model",
+        "orb_policy",
+        "rulership_model",
+        "graph_scc_model",
+        "sect_model",
+        "lot_family",
+        "astronomy_provider",
+        "condition_model",
+        "temporal_model"
+      ],
+      "properties": {
+        "schema": {"const": "naf.analysis.v0.3.1"},
+        "kernel": {"type": "string"},
+        "house_model": {"type": "string"},
+        "aspect_model": {"type": "string"},
+        "orb_policy": {"type": "string"},
+        "rulership_model": {"type": "string"},
+        "graph_scc_model": {"type": "string"},
+        "sect_model": {"type": "string"},
+        "lot_family": {"type": "string"},
+        "astronomy_provider": {"type": ["string", "null"]},
+        "timezone_provider": {"type": ["string", "null"]},
+        "condition_model": {"type": ["string", "null"]},
+        "temporal_model": {"type": ["string", "null"]}
+      },
+      "additionalProperties": true
+    },
+    "model": {"type": "object"},
+    "angles": {
+      "type": "object",
+      "required": ["ASC"],
+      "properties": {"ASC": {"type": "object"}},
+      "additionalProperties": true
+    },
+    "objects": {"type": "array"},
+    "aspects": {"type": "array"},
+    "lots": {"type": "array"},
+    "sect": {"type": "object"},
+    "topology": {"type": "object"},
+    "derivation_ledger": {"type": "array"},
+    "derivation_tree": {"type": "object"},
+    "validation": {"type": "object"},
+    "completeness": {
+      "type": "object",
+      "required": ["condition_engine", "temporal_engine", "astronomy_extended_objects", "derivation_ui"],
+      "properties": {
+        "condition_engine": {"enum": ["not_implemented", "partial", "complete"]},
+        "temporal_engine": {"enum": ["not_implemented", "partial", "complete"]},
+        "astronomy_extended_objects": {"enum": ["unsupported", "partial", "complete"]},
+        "derivation_ui": {"enum": ["not_implemented", "data_ready_ui_incomplete", "complete"]}
+      },
+      "additionalProperties": true
+    },
+    "integrity": {"type": "object"},
+    "provenance": {"type": "object"}
+  },
+  "additionalProperties": true
+}
