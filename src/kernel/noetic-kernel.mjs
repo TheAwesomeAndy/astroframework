@@ -30,7 +30,7 @@ const BODY_ALIASES = {
   'South Node':'SouthNode', 'Black Moon Lilith':'Lilith', 'Ascendant':'ASC', 'Midheaven':'MC'
 };
 const TYPE_BY_ID = {
-  ASC:'angle', MC:'angle', DSC:'angle', IC:'angle', NorthNode:'node', SouthNode:'node', Lilith:'derived', Chiron:'minor_body',
+  ASC:'angle', MC:'angle', DSC:'angle', IC:'angle', NorthNode:'node', SouthNode:'node', Lilith:'derived', Chiron:'minor_body', Ceres:'minor_body',
   Fortune:'lot', Spirit:'lot', Vertex:'derived'
 };
 
@@ -208,6 +208,10 @@ export function analyzeChart(parsed, options={}){
 
 export function structuralReport(a){
   const t=a.topology.terminal_sccs.map(c=>c.join(' ↔ ')).join('; ')||'none';
-  const tight=a.aspects.slice(0,8).map(x=>`${x.a} ${x.aspect} ${x.b} (${x.orb_deg.toFixed(2)}°)`).join('\n');
-  return `NAF Structural Report\nKernel: ${a.kernel_version}\nInput: ${a.source_format}\nObjects: ${a.objects.length}\nComputed major aspects: ${a.aspects.length}\nTerminal SCC(s): ${t}\n\nElement composition: ${JSON.stringify(a.composition.elements)}\nMode composition: ${JSON.stringify(a.composition.modes)}\n\nTightest relationships:\n${tight}`;
+  return {
+    headline:`${a.model.house_system}; ${a.model.rulership}; terminal SCC: ${t}`,
+    aspect_count:a.aspects.length,
+    supplied_house_mismatches:a.validation.supplied_house_mismatches,
+    all_house_routes:a.topology.house_routes.map(x=>`${x.house}H ${x.entry_ruler}: ${x.route.join(' → ')}`)
+  };
 }
