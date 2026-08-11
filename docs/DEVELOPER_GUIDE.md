@@ -2,53 +2,49 @@
 
 ## 1. Read this first
 
-Noetic Atlas is not a horoscope text generator. It is an auditable computational framework for representing astrological structure, deriving rule-based relationships, visualizing hidden topology, and eventually studying temporal dynamics.
+Noetic Atlas is not a horoscope text generator. It is an auditable computational and visual-analytics framework for astrological structure, topology, condition, time, and research.
 
-The repository is intentionally organized so that a software engineer can work on the system without accepting any metaphysical claim about astrology.
+A software engineer should be able to work on the repository without accepting any metaphysical claim about astrology.
 
-The engineering contract is:
+Engineering contract:
 
 ```text
 input
 → civil-time resolution
 → astronomy
 → astrological rules
-→ structured model
+→ canonical model
 → mathematical derivation
 → research descriptors
 → visualization
 → interpretation / AI
 ```
 
-Each arrow is a boundary. Crossing a boundary must be explicit.
+Each arrow is a boundary.
 
-If you remember only one rule, remember this:
-
-> **No downstream layer is allowed to invent or silently alter an upstream fact.**
+> **No downstream layer may invent or silently alter an upstream fact.**
 
 ---
 
-## 2. Current development target
+## 2. Current target
 
-The current development line is the `noetic-atlas-v0.3` branch.
+Default/deployed branch: **`main`**.
 
-This branch establishes the first end-to-end deterministic foundation:
+Current public browser: **v0.3.2 — Visual Observatory**.
 
-- simple birth-data input;
-- time-zone resolution;
-- astronomical calculations;
-- whole-sign houses;
-- sect;
-- Hellenistic lots;
-- major aspects;
-- traditional domicile dispositors;
-- graph topology;
-- experimental research descriptors;
-- derivation/provenance records;
-- browser prototype;
-- automated tests.
+Current minimum deterministic envelope: **`naf.analysis.v0.3.1`**.
 
-It is still a research prototype. Do not treat the current API or schema as frozen.
+Next major implementation milestone: **v0.4 Condition Engine**.
+
+The current system already supports deterministic structure, graph topology, sect/lots, provenance, a graph-first browser interface, and exploratory research descriptors. It does not yet contain a complete traditional condition engine or Life Spectrum.
+
+Start with:
+
+1. `CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md`
+2. `THEORY_AND_PURPOSE.md`
+3. this guide
+4. `ARCHITECTURE.md`
+5. `CONDITION_ENGINE_SPEC.md`
 
 ---
 
@@ -57,643 +53,496 @@ It is still a research prototype. Do not treat the current API or schema as froz
 ```text
 astroframework/
 ├── README.md
+├── index.html                  # GitHub Pages entry redirect
 ├── package.json
-│
+├── schemas/
+│   └── naf-analysis-v0.3.1.schema.json
 ├── src/
 │   ├── astronomy/
-│   │   ├── astronomy-engine-core.mjs
-│   │   └── astronomy-engine-adapter.mjs
-│   │
 │   ├── time/
-│   │   ├── timezone-core.mjs
-│   │   └── timezone-adapter.mjs
-│   │
 │   ├── kernel/
-│   │   ├── noetic-kernel.mjs
-│   │   └── hellenistic-integrity.mjs
-│   │
 │   ├── pipeline/
-│   │   └── birth-chart.mjs
-│   │
 │   └── research/
-│       └── pattern-engine.mjs
-│
 ├── prototype/
-│   ├── index.html
-│   ├── noetic_atlas_v01.html
-│   ├── noetic_atlas_v02.html
-│   └── noetic_atlas_v03.html
-│
-├── data/
-│   └── canonical/
-│       ├── NAF-CANON-0001-input.txt
-│       ├── NAF-CANON-0001-supplied.json
-│       └── NAF-CANON-0001-lot-verification.json
-│
+│   ├── index.html              # v0.3.2 Visual Observatory
+│   └── historical prototypes
+├── data/canonical/
 ├── tests/
-│   ├── kernel_smoke.mjs
-│   ├── integrity_smoke.mjs
-│   ├── astronomy_contract_smoke.mjs
-│   └── timezone_smoke.mjs
-│
 ├── docs/
-│   ├── THEORY_AND_PURPOSE.md
-│   ├── DEVELOPER_GUIDE.md
-│   ├── ASTROLOGICAL_MODEL.md
-│   ├── RESEARCH_PROGRAM.md
-│   ├── ARCHITECTURE.md
-│   ├── INTEGRITY_AND_PROVENANCE.md
-│   ├── ASTRONOMY_ADAPTERS.md
-│   ├── RESEARCH_DISCOVERY.md
-│   ├── PRODUCT.md
-│   └── ROADMAP.md
-│
 └── .github/workflows/
-    └── kernel-tests.yml
+```
+
+Current important modules:
+
+```text
+src/time/timezone-core.mjs
+src/time/timezone-adapter.mjs
+src/astronomy/astronomy-engine-core.mjs
+src/astronomy/astronomy-engine-adapter.mjs
+src/kernel/noetic-kernel.mjs
+src/kernel/hellenistic-integrity.mjs
+src/pipeline/birth-chart.mjs
+src/research/pattern-engine.mjs
 ```
 
 ---
 
 ## 4. Runtime data flow
 
-There are two supported entry paths.
-
-### Path A — birth data
+### Birth-data path
 
 ```text
-local date/time + latitude + longitude
-        ↓
-time-zone lookup
-        ↓
-historical civil-time resolution
-        ↓
-UTC instant
-        ↓
-astronomy adapter
-        ↓
-planets + ASC + MC + velocities + solar altitude
-        ↓
-astrological integrity layer
-        ↓
-whole-sign houses + sect + lots + aspects + rulers
-        ↓
-graph topology
-        ↓
-research descriptors
-        ↓
-UI / exported analysis JSON
+local civil date/time + coordinates
+→ time-zone lookup/history
+→ unambiguous UTC instant
+→ astronomy adapter
+→ planets + velocities + ASC + MC + solar altitude
+→ astrological kernel
+→ Whole Sign houses + aspects + rulers
+→ Hellenistic integrity layer
+→ sect + lots + provenance
+→ graph topology
+→ exploratory descriptors
+→ Visual Observatory / export
 ```
 
-### Path B — already-calculated chart
+### Imported-chart path
 
 ```text
-pasted chart text or canonical JSON
-        ↓
-parser
-        ↓
-normalized longitudes
-        ↓
-whole-sign houses recomputed
-        ↓
-aspects recomputed
-        ↓
-sect fallback if possible
-        ↓
-lots if required inputs exist
-        ↓
-graph topology
-        ↓
-research descriptors
-        ↓
-UI / exported analysis JSON
+pasted placements or canonical JSON
+→ parser
+→ normalized longitudes
+→ supported houses/aspects/rulers recomputed
+→ sect/lots where required inputs exist
+→ topology/research
+→ Visual Observatory / export
 ```
 
-Imported aspect lists are not trusted as the source of truth. They may be retained as reference metadata, but the kernel derives aspects from longitude.
+Imported aspect lists or house numbers are reference data, not upstream truth when the kernel can recompute them.
 
 ---
 
-## 5. Module responsibilities
+## 5. Module ownership
 
 ### `src/time/`
 
-Responsible only for civil-time resolution.
-
-Key concerns:
+Owns civil-time resolution only:
 
 - local wall time;
-- IANA time zone;
+- IANA zone;
 - historical UTC offset;
 - DST ambiguity;
-- nonexistent local times;
-- expert time-zone override.
+- nonexistent times;
+- expert override.
 
-This layer must not calculate planets or astrological houses.
+It must not calculate planets or astrological rules.
 
 ### `src/astronomy/`
 
-Responsible only for astronomical quantities and observer geometry.
+Owns astronomical/observer geometry:
 
-Current outputs include:
-
-- geocentric longitudes for Sun through Pluto;
-- approximate longitudinal velocities;
+- Sun through Pluto in the current adapter;
+- longitude;
+- velocity/retrograde state;
 - ASC;
 - MC;
 - geometric solar altitude;
-- provenance describing provider/version/calculation path.
+- provider/convention provenance.
 
-This layer must not decide whether a planet is dignified, benefic, malefic, or ruler of a house.
+It must not decide dignity, rulership meaning, house topics, or interpretation.
 
 ### `src/kernel/noetic-kernel.mjs`
 
-Core general-purpose astrological geometry and topology.
+Owns reusable astrological geometry/topology:
 
-Responsibilities include:
-
-- zodiac normalization;
-- sign parsing;
-- whole-sign house assignment;
-- major aspect detection;
-- orb handling;
-- applying/separating when velocity is available;
+- normalization;
+- parsing;
+- Whole Sign houses;
+- major aspects;
+- orb policy;
+- phase from velocity;
 - traditional domicile rulers;
-- dispositor graphs;
-- Tarjan SCC detection;
-- terminal SCC derivation;
-- house routing;
-- elemental/modal composition;
-- chart parsing.
-
-This module should remain as tradition-neutral as practical. Tradition-specific logic belongs in dedicated rule modules.
+- dispositor graph;
+- Tarjan SCCs;
+- terminal SCCs;
+- house-ruler routes;
+- element/modality composition.
 
 ### `src/kernel/hellenistic-integrity.mjs`
 
-Hellenistic-specific deterministic rules that require explicit source/variant control.
+Currently owns source-controlled Hellenistic integrity logic:
 
-Current responsibilities:
+- sect;
+- seven Paulus/Panaretus Hermetic lots;
+- formula proof objects;
+- version manifest;
+- completeness state;
+- Derivation Ledger/tree.
 
-- sect classification;
-- seven Hermetic lots in the selected Paulus/Panaretus family;
-- step-by-step formula proofs;
-- derivation-ledger entries.
-
-Future responsibilities may include:
-
-- essential dignity;
-- triplicity rulers;
-- bounds/terms;
-- reception;
-- overcoming;
-- bonification/maltreatment;
-- annual profections;
-- zodiacal releasing.
-
-Do not silently add modern rulership to this module.
-
-### `src/pipeline/`
-
-Orchestration only.
-
-The pipeline should connect layers without reimplementing them.
-
-A pipeline function may:
-
-1. resolve birth time;
-2. call astronomy;
-3. call the kernel;
-4. call the Hellenistic integrity layer;
-5. attach research descriptors;
-6. return the canonical analysis object.
-
-A pipeline function should not contain a second copy of aspect calculation or lot formulas.
+v0.4 condition work should be modularized into explicit rule families rather than making this file a permanent monolith.
 
 ### `src/research/`
 
-Experimental descriptors live here.
+Owns experimental descriptors.
 
-Outputs from this directory are **not traditional astrological doctrine by default**.
+Current descriptors include:
 
-Current examples:
-
-- harmonic spectrum;
+- circular harmonic spectrum;
 - ruler-route convergence;
 - multilayer participation.
 
-Every descriptor must define:
+They are read-only consumers of canonical state and currently remain promotion-gated.
 
-- mathematical formula;
-- input layer;
-- normalization;
-- expected range;
-- provenance ID;
-- whether it has been validated;
-- what null/randomized comparison is appropriate.
+### `prototype/index.html`
+
+Owns presentation and interaction only.
+
+It currently renders:
+
+- Natal Field;
+- Aspect Matrix;
+- Flow Map;
+- Sect & Lots;
+- Research Lab;
+- Audit.
+
+The UI must never contain a second aspect calculator, lot formula, rulership table, or topology algorithm.
 
 ---
 
 ## 6. Running the project
 
-### Requirements
-
-- Node.js compatible with the repository workflow;
-- npm;
-- modern browser for prototype UI.
-
-### Install
+Install:
 
 ```bash
 npm install
 ```
 
-Use pinned dependency versions. Avoid unversioned CDN imports in production code.
-
-### Run tests
+Run deterministic tests:
 
 ```bash
 npm test
 ```
 
-The exact scripts in `package.json` are the source of truth.
-
-GitHub Actions also runs the integrity suite on repository pushes covered by the workflow.
-
-### Run the prototype locally
-
-Because the v0.3 prototype imports ES modules, use a local server instead of opening the file directly from `file://`.
-
-For example:
+Serve locally when needed:
 
 ```bash
 python -m http.server 8000
 ```
 
-Then open:
+Open:
 
 ```text
 http://localhost:8000/prototype/
 ```
 
+Ordinary visual testing can use the GitHub Pages deployment from `main`.
+
 ---
 
-## 7. Core data invariants
-
-The following should be treated as engineering invariants.
+## 7. Core invariants
 
 ### Longitude
 
-Internal longitude is decimal degrees in:
+Internal longitude is decimal degrees in `[0, 360)`.
 
-```text
-[0, 360)
-```
-
-Human-readable sign/degree strings are display representations, not calculation primitives.
+Human-readable sign-degree strings are display values.
 
 ### Time
 
 Astronomy receives an unambiguous UTC instant.
 
-A plain local timestamp is not an astronomical input until the civil-time layer resolves it.
-
 ### Houses
 
-Whole-sign house assignment is computed from sign displacement relative to the Ascendant sign.
-
-Imported house numbers are reference values only and may be compared against computed values.
+Whole Sign house assignment is computed from sign displacement relative to the Ascendant sign.
 
 ### Aspects
 
-An aspect edge must preserve:
+An aspect edge should preserve:
 
-- source and target;
-- exact aspect angle;
+- endpoints;
+- aspect family/angle;
 - measured separation;
 - orb;
-- orb policy ID;
-- phase if computable;
+- orb-policy ID;
+- phase when computable;
 - provenance.
 
 ### Lots
 
-A lot result must preserve:
+A lot result should preserve:
 
 - sect;
-- formula family/variant;
-- source point;
-- target point;
-- directed zodiacal distance;
-- Ascendant longitude;
-- unnormalized result;
-- normalized result;
-- whole-sign house;
-- domicile ruler;
-- source reference.
+- formula family;
+- source/target points;
+- directed zodiacal arc;
+- ASC;
+- raw/normalized result;
+- house;
+- ruler;
+- source/rule provenance.
 
-### Graph metrics
+### Topology
 
-A topology result must identify the graph definition that produced it.
+A graph result is incomplete unless the graph definition/rule model is identified.
 
-“Mercury–Venus is a terminal SCC” is incomplete unless the graph is identified as the traditional domicile dispositor graph under a specified rule set.
+“Mercury–Venus is a terminal SCC” must mean terminal SCC **of a specified dispositor graph**.
+
+### Completeness
+
+Use explicit states such as:
+
+```text
+valid
+ambiguous
+unsupported
+invalid
+not_implemented
+```
+
+Never encode unsupported as zero/false.
 
 ---
 
-## 8. Derivation Ledger requirements
+## 8. Derivation/provenance requirement
 
-Every important derived value should be reconstructable.
+Every important derived result should be reconstructable.
 
-A ledger entry should contain, where relevant:
+Typical ledger information:
 
 ```json
 {
-  "epistemic_layer": "astrological_rule",
-  "id": "lot.spirit",
-  "algorithm": "naf.hellenistic.lots.paulus.v1",
-  "rule_set": "hellenistic.paulus-panaretus",
+  "kind": "astrological_rule",
+  "id": "...",
+  "algorithm_or_rule": "...",
   "inputs": {},
   "intermediate": {},
-  "output": {},
-  "source_reference": {},
-  "uncertainty": null
+  "result": {},
+  "provenance": {},
+  "ambiguity": null
 }
 ```
 
-Do not store only the final number when intermediate values are necessary to reconstruct it.
+Store intermediate values when they are required to independently reproduce the output.
+
+The future ideal is click-any-result → dependency path → original input.
 
 ---
 
-## 9. How to add a new astrological rule
+## 9. Adding an astrological rule
 
-Before writing code, answer these questions in documentation or an ADR/issue:
+Before code, specify:
 
-1. Which tradition uses this rule?
-2. What historical/technical source defines it?
-3. Are there competing variants?
-4. What astronomical inputs are required?
-5. What exact mathematical transformation is performed?
-6. What edge cases exist?
-7. What provenance must be retained?
-8. What canonical test can verify the implementation?
+1. tradition;
+2. source;
+3. competing variants;
+4. required astronomical inputs;
+5. mathematical/logical transformation;
+6. boundary cases;
+7. provenance fields;
+8. test fixtures.
 
-Implementation sequence:
+Implementation order:
 
 ```text
 source definition
-→ formal mathematical definition
-→ pure function
-→ unit tests
-→ canonical fixture test
-→ derivation-ledger output
+→ formal rule
+→ pure deterministic function
+→ boundary tests
+→ independent/reference verification
+→ provenance output
 → UI exposure
-→ interpretation only afterward
+→ interpretation afterward
 ```
 
-If the source tradition is disputed, preserve the variants as separate rule IDs.
+Do not silently blend variants.
 
 ---
 
-## 10. How to add a research descriptor
+## 10. Adding a research descriptor
 
 A research descriptor is not an astrological rule.
 
-Before merging one, define:
+Define:
 
 ```text
-name
+name/version
 mathematical definition
-required input graph/state
+required substrate
 output range
 normalization
-expected null distribution
-known invariances
-known sensitivities
-interpretive status = exploratory
+invariances/sensitivities
+null model
+promotion status
 ```
 
-Then add:
+Add:
 
 - unit tests;
-- at least one synthetic sanity test;
-- canonical output for regression only;
-- a proposed null/randomization procedure.
+- synthetic sanity checks;
+- canonical regression output only for stability;
+- proposed null/randomization strategy.
 
-Never document a high descriptor value as psychologically meaningful until separate research supports that interpretation.
+Never infer psychological significance merely because a graph metric sounds important.
 
 ---
 
-## 11. How to add an astronomy provider
+## 11. v0.4 Condition Engine development contract
 
-The provider must be isolated behind an adapter.
+Condition should remain multidimensional.
 
-Required metadata:
+Initial families:
 
-- library/provider name;
-- version;
-- license;
-- coordinate frame;
-- apparent vs geometric conventions;
-- geocentric/heliocentric/topocentric choice;
-- ephemeris basis where known;
-- expected precision;
-- validation source;
-- supported bodies/points;
-- unsupported bodies/points.
+```text
+domicile/exaltation/adversity
+sect
+triplicity
+bounds
+angularity
+reception
+overcoming
+bonification/maltreatment
+mitigation
+```
 
-A new provider should be cross-validated against existing providers using a date/location corpus before becoming the default.
+Each condition result requires:
 
-Do not change providers without changing provenance/version identifiers.
+- rule ID;
+- tradition/variant;
+- source reference;
+- inputs;
+- result;
+- dependencies;
+- ambiguity/unsupported state.
+
+No single opaque “planet strength” number is allowed to replace these conditions.
+
+See `CONDITION_ENGINE_SPEC.md`.
 
 ---
 
 ## 12. Testing philosophy
 
-Tests should verify calculations, not desired interpretations.
+Tests verify calculations and contracts, not desired interpretations.
 
-### Unit tests
+### Unit/boundary tests
 
 Examples:
 
-- `normalize360(-1) == 359`;
-- 359° and 1° are 2° apart;
-- whole-sign house rollover works;
-- a square exactly at the configured orb boundary is included/excluded according to policy;
-- directed lot distance wraps correctly at 360°;
-- Tarjan SCC output is stable for known graphs;
-- ambiguous DST time returns two valid possibilities.
+- longitude wraparound;
+- sign boundaries;
+- exact aspect and orb cutoff ± epsilon;
+- applying/separating/stationary neighborhoods;
+- near-horizon sect;
+- directed lot wraparound;
+- known SCC graphs;
+- DST repeated/gap times.
 
-### Canonical regression tests
+### Canonical regression
 
-`NAF-CANON-0001` is a regression fixture, not proof of astrology.
+`NAF-CANON-0001` preserves known expected software structures.
 
-It is useful because it contains known structures including:
+It is not evidence for astrological validity.
 
-- Mercury ↔ Venus terminal dispositor SCC;
-- Fortune near Uranus;
-- a complete Sun–Moon–Jupiter air trine;
-- night-sect Fortune and Spirit formulas.
+### Synthetic fixtures
 
-### Synthetic tests
+Prefer synthetic values for exact boundaries.
 
-Prefer synthetic charts for edge cases whenever possible. A synthetic chart can place objects exactly on 0°, sign boundaries, aspect boundaries, or horizon conditions without relying on autobiographical interpretation.
+### Cross-provider validation
 
-### Cross-provider tests
+Required before stronger production astronomy claims.
 
-Eventually required for:
-
-- planetary longitude;
-- ASC/MC;
-- station/retrograde boundaries;
-- lunar nodes;
-- other derived astronomical points.
+See `ASTRONOMY_VALIDATION_PLAN.md`.
 
 ---
 
-## 13. Error and ambiguity policy
+## 13. Visual-development rules
 
-The preferred order is:
+The v0.3.2 restoration makes the visualization a serious application surface again.
 
-```text
-explicit result
-> explicit ambiguity
-> explicit unsupported state
-> silent guess
-```
+When changing it:
 
-The final option is prohibited.
-
-Examples:
-
-- DST repeated hour → return alternatives;
-- unsupported Chiron provider → report unsupported;
-- unknown applying/separating because velocity absent → return `unknown`;
-- disputed historical formula → expose variant;
-- near-horizon sect → flag ambiguity.
+- consume canonical computed objects;
+- preserve synchronized selection across views;
+- keep node-link and matrix views complementary;
+- preserve edge/node provenance access;
+- do not hard-code motifs specific to the canonical specimen;
+- distinguish graph-derived from research-exploratory overlays;
+- preserve the traditional wheel as a possible reference/control rather than claiming it is obsolete;
+- add browser/UI tests as the interface stabilizes.
 
 ---
 
 ## 14. AI integration rules
 
-AI belongs downstream of deterministic computation.
+AI is downstream.
 
-The model may receive:
+It may:
 
-- canonical analysis JSON;
-- selected tradition;
-- selected UI objects;
-- user question;
-- source snippets/provenance.
-
-AI may:
-
-- summarize;
+- navigate;
+- explain;
 - compare;
-- trace a dependency;
-- explain a derivation;
-- synthesize historical interpretations;
-- generate a research hypothesis.
+- trace provenance;
+- synthesize source-backed interpretations;
+- generate research hypotheses.
 
-AI may not:
+It may not:
 
-- invent a missing planetary coordinate;
-- silently select an astrological variant;
-- alter a computed house;
-- hide a provenance conflict;
-- promote an exploratory descriptor into fact.
+- invent astronomical values;
+- silently select rule variants;
+- alter computed houses/aspects;
+- hide provenance conflicts;
+- promote exploratory descriptors into established meaning.
 
 ---
 
-## 15. Privacy and research data
+## 15. Privacy
 
-Birth date/time/location is sensitive personal information in product practice.
+Birth data and life-event annotations are sensitive product data.
 
 Production requirements include:
 
-- collect the minimum necessary data;
-- explicit retention policy;
-- deletion controls;
-- encryption in transit and at rest;
-- separate identifying profile information from research feature data;
-- no model training on private charts without explicit consent;
-- separate consent for anonymized research contribution;
-- avoid irreversible identifiers derived directly from birth data.
-
-Life-event annotations require even stronger care because they may contain health, relationship, financial, religious, or family information.
+- data minimization;
+- explicit retention/deletion;
+- encryption;
+- separation of identity and research data;
+- explicit consent for research use;
+- no private chart/event-text training without permission;
+- avoid raw birth data in analytics logs.
 
 ---
 
-## 16. Performance priorities
+## 16. Definition of done
 
-Correctness and provenance outrank premature optimization.
-
-Likely future performance pressure points:
-
-- dense transit scans over decades;
-- many-chart cohort analysis;
-- graph motif enumeration;
-- state-vector generation;
-- interactive rendering of large time series.
-
-When optimizing:
-
-1. preserve deterministic equivalence;
-2. preserve provenance;
-3. add benchmark tests;
-4. document approximation if introduced.
-
----
-
-## 17. Coding conventions
-
-Prefer:
-
-- pure functions for calculations;
-- explicit data transformation stages;
-- immutable inputs when practical;
-- named/versioned rule policies;
-- small adapters around third-party libraries;
-- machine-readable provenance;
-- tests next to mathematical behavior;
-- comments explaining conventions and edge cases, not restating obvious syntax.
-
-Avoid:
-
-- hidden global rule settings;
-- duplicated formulas across UI and kernel;
-- magic orb numbers inside rendering code;
-- interpretation strings inside astronomy modules;
-- calculations inside React/UI event handlers when they belong in the kernel;
-- silent fallback across traditions.
-
----
-
-## 18. Definition of done for a new computed feature
-
-A computed feature is not complete until all of the following are true:
+A computed feature is not complete until:
 
 - [ ] formal definition exists;
 - [ ] source/variant is identified;
-- [ ] pure deterministic implementation exists;
+- [ ] deterministic implementation exists;
 - [ ] edge cases are tested;
 - [ ] provenance is emitted;
-- [ ] unsupported/ambiguous states are represented;
-- [ ] canonical regression behavior is recorded;
-- [ ] UI reads the computed output rather than reimplementing it;
+- [ ] ambiguity/unsupported states are represented;
+- [ ] regression behavior is recorded;
+- [ ] UI consumes the computed output;
 - [ ] documentation is updated;
-- [ ] interpretation, if any, is downstream and labeled.
+- [ ] interpretation remains downstream and labeled.
 
 ---
 
-## 19. Developer reading order
+## 17. Developer reading order
 
-A new engineer should read in this order:
+```text
+README
+→ CURRENT_STATE_AND_SCIENTIFIC_RATIONALE
+→ THEORY_AND_PURPOSE
+→ DEVELOPER_GUIDE
+→ ARCHITECTURE
+→ ASTROLOGICAL_MODEL
+→ INTEGRITY_AND_PROVENANCE
+→ V03_CLOSEOUT_AND_V04_ENTRY
+→ CONDITION_ENGINE_SPEC
+→ ROADMAP
+→ tests/
+```
 
-1. `README.md` — project orientation.
-2. `docs/THEORY_AND_PURPOSE.md` — why the architecture exists.
-3. `docs/DEVELOPER_GUIDE.md` — how to work in the repository.
-4. `docs/ARCHITECTURE.md` — system boundaries and data flow.
-5. `docs/ASTROLOGICAL_MODEL.md` — domain rules currently implemented.
-6. `docs/INTEGRITY_AND_PROVENANCE.md` — audit contract.
-7. `docs/RESEARCH_PROGRAM.md` — how novel patterns are investigated.
-8. `docs/ASTRONOMY_ADAPTERS.md` — astronomical provider details.
-9. `docs/ROADMAP.md` — planned expansion.
-
-A developer should be able to understand the technical project from these files without access to the original design conversation.
+When implementation and documentation disagree, treat the disagreement as a defect.

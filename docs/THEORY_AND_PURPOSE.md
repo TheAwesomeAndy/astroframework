@@ -6,18 +6,46 @@ Noetic Atlas is being built to investigate astrology as a structured symbolic sy
 
 The project has two simultaneous purposes:
 
-1. **Public utility** — give people a clearer, more inspectable way to understand astrological structure, timing, and competing interpretive traditions.
-2. **Research utility** — create computational instruments capable of exposing relational, topological, and temporal patterns that are difficult or impossible to perceive in a conventional horoscope wheel.
+1. **Public utility** — give people a clearer, more inspectable way to understand astrological structure, condition, timing, and competing interpretive traditions.
+2. **Research utility** — create computational instruments capable of exposing relational, topological, and temporal questions that are difficult to formulate or inspect in a conventional horoscope wheel.
 
-Commercial viability is important because a durable product can fund continued research and development. Revenue is not the epistemic objective. The objective is to build an instrument that can survive contact with evidence, disagreement, historical source variation, and its own failed hypotheses.
+Commercial viability matters because a durable product can fund continued research and development. Revenue is not the epistemic objective. The objective is to build an instrument that can survive contact with evidence, disagreement, source variation, and failed hypotheses.
 
 > **Noetic Atlas should not protect astrology from the truth. It should make astrology inspectable enough to pursue it.**
 
-This is the governing purpose of the framework.
+---
+
+## 2. Current epistemic status
+
+Noetic Atlas is currently strongest as an **instrumentation layer for astrology**, not yet as a superior interpretive theory.
+
+It has demonstrated:
+
+- deterministic computation of substantial natal structure;
+- graph-theoretic treatment of rulership/dispositorship;
+- explicit SCC and terminal-SCC derivation;
+- provenance-backed Hermetic lots;
+- coordinated visual representations of different relation types;
+- a reversible calculation/audit model;
+- a substrate for formal research questions.
+
+It has **not** demonstrated:
+
+- that its new graph descriptors predict life events;
+- that terminal SCCs reveal psychological or spiritual primacy;
+- that its visualizations generate superior self-knowledge for general users;
+- that astrological relations correspond to measured physical fields or forces;
+- that exploratory harmonic or convergence measures have established astrological meaning.
+
+This boundary is deliberate.
+
+A mathematically exact result inside a selected astrological model is not the same thing as empirical validation of that model’s interpretation.
+
+For the current implementation judgment and technical references, see [Current State and Scientific Rationale](CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md).
 
 ---
 
-## 2. The foundational representational claim
+## 3. The foundational representational claim
 
 The horoscope wheel is not astrology itself. It is one historical visualization of astrological information.
 
@@ -29,154 +57,160 @@ The wheel is exceptionally efficient at preserving:
 - angular separation;
 - major aspect geometry.
 
-But astrology contains several different kinds of structure that are not naturally represented by the same visual grammar:
+But astrology also contains:
 
-- circular angular coordinates;
 - categorical states such as sign, element, modality, sect, dignity, and phase;
 - pairwise aspect relations;
 - directed rulership and dispositor relations;
-- multi-object configurations;
 - lots and other derived coordinates;
+- reception and condition;
 - hierarchical timing regimes;
 - time-varying transit relations;
-- longitudinal recurrence across a life.
+- longitudinal recurrence.
 
-A single polar diagram must compress all of these at once. Noetic Atlas begins from the information-visualization premise that different mathematical structures should be represented by different coordinated views.
+These are not all the same mathematical object.
 
-The framework therefore treats astrology as a multilayer symbolic system:
+The current ontology is therefore better written as:
 
 ```text
-A = {P, H, S, E, R, L, T}
+A = {P, H, S, E, R, L, C, T}
 ```
 
 where:
 
-- `P` = planets, angles, nodes, and selected sensitive points;
+- `P` = planets, angles, nodes, lots, and selected points;
 - `H` = houses/places;
-- `S` = zodiacal and qualitative states;
-- `E` = aspect and other pairwise relations;
+- `S` = zodiacal and categorical states;
+- `E` = pairwise geometric relations;
 - `R` = rulership, dispositorship, reception, and directed dependencies;
-- `L` = lots and derived points;
+- `L` = lots and derived coordinates;
+- `C` = traditional planetary/relational condition;
 - `T` = time-dependent activation and timing regimes.
 
-The important point is not the notation itself. The important point is that these layers have different mathematical characters and should not be flattened into one structure merely for interface convenience.
+The formal benefit is decomposition. Each layer can be calculated, visualized, tested, and versioned independently.
 
 ---
 
-## 3. Structure → Flow → Time → State Space
+## 4. Structure → Condition → Time → Recurrence → Discovery
 
-The product and research architecture is organized around four complementary questions.
+The current development sequence is no longer simply “natal chart, then transits.”
 
-### 3.1 Structure — Natal Field
+### 4.1 Structure
 
-**Question:** What is the architecture of the chart?
+Current v0.3.x question:
 
-This layer represents objects and relationships without yet asking what they mean psychologically or predictively.
+> **What relations exist in the modeled chart, and how do they connect?**
 
-Examples:
+This includes:
 
-- aspect clusters;
-- oppositional axes;
-- complete trine subnetworks;
-- conjunction clusters;
-- isolated objects;
-- high-degree nodes;
-- multi-object motifs;
-- element/modality composition;
-- lot participation.
-
-The Natal Field is therefore a structural representation before it is an interpretive one.
-
-### 3.2 Flow — Rulership topology
-
-**Question:** Where do symbolic dependencies route?
-
-Traditional astrology contains directed structure:
-
-```text
-house → sign → ruler → occupied sign → dispositor → ...
-```
-
-The same is true for:
-
-- planet → domicile ruler;
-- lot → ruler;
-- activated house → lord of the year;
-- reception chains;
-- dispositors;
-- mutual reception;
-- terminal dispositors or cycles.
-
-These are graph problems, not merely drawing problems.
-
-A conventional horoscope can contain a terminal dispositor cycle while making it difficult to perceive. Noetic Atlas models such relationships explicitly as directed graphs and allows graph algorithms to discover their topology.
-
-### 3.3 Time — Life Spectrum
-
-**Question:** Which parts of the natal structure are activated, and when?
-
-The eventual Life Spectrum is intended to replace the idea that temporal astrology must be inspected one transit chart at a time.
-
-The conceptual representation is spectrogram-like:
-
-```text
-x-axis     = time
-y-axis     = natal targets / structures
-intensity  = explicitly defined activation under a selected rule set
-```
-
-Potential channels include:
-
-- natal planets;
-- houses;
-- angles;
+- aspects;
+- object neighborhoods;
+- ruler routes;
+- dispositor chains;
+- SCCs;
+- terminal SCCs;
+- house-route convergence;
 - lots;
-- ruler chains;
-- house axes;
-- time-lord regimes.
+- element/modality composition.
 
-Potential temporal sources include:
+### 4.2 Condition
 
-- transits;
-- annual profections;
-- zodiacal releasing;
-- stations;
-- eclipses;
-- later progressions/directions where supported.
+v0.4 question:
 
-The purpose is not to make prediction look scientific. It is to make the temporal structure of an astrological model visible and auditable.
+> **What is the traditional state of each node and relation under a named, source-controlled rule set?**
 
-### 3.4 State Space — Life Space
+This includes:
 
-**Question:** What does the total astrological configuration look like at time `t`, and how does it evolve?
+- domicile/exaltation/adversity;
+- sect condition;
+- triplicity;
+- bounds;
+- angularity;
+- reception;
+- overcoming;
+- bonification/maltreatment;
+- mitigating conditions.
 
-A future state representation may take the form:
+Topology without condition is incomplete traditional astrology. Two charts can share the same ruler graph while the planets in that graph have very different condition.
 
-```text
-x(t) = [x1(t), x2(t), ..., xn(t)]
-```
+### 4.3 Time
 
-where blocks might encode:
+Only after condition is stable should the framework ask:
 
-- transit-to-natal relations;
-- activated houses;
-- active rulers;
-- time-lord state;
-- planetary condition;
-- lot activation;
-- graph-topology descriptors.
+> **Which characterized natal structures are activated, and when?**
 
-Once the semantics of those features are stable, dimensionality reduction can be used to ask exploratory questions such as:
+Life Spectrum should activate a modeled natal state rather than merely animate angular distance.
 
-- Do structurally similar periods cluster?
-- Do major life transitions occupy unusual regions of astrological state space?
-- Do recurring autobiographical themes correspond to recurrent symbolic states?
+### 4.4 Recurrence
 
-These are research questions, not assumptions built into the answer.
+Once temporal state is explicit, the system can ask whether structurally similar periods recur within one life or across charts.
+
+### 4.5 Discovery
+
+Only after the substrate is stable should new graph, harmonic, state-space, or cross-layer descriptors be evaluated for possible astrological significance.
 
 ---
 
-## 4. What “energy” means in Noetic Atlas
+## 5. Why graph theory belongs here
+
+Traditional rulership contains directed dependency:
+
+```text
+house → ruler
+planet → domicile ruler
+lot → ruler
+ruler → dispositor → ...
+```
+
+These are graph relations whether or not software draws them.
+
+Noetic Atlas models a rulership graph:
+
+```text
+G_R = (V, E_R)
+```
+
+and uses graph algorithms to derive properties such as strongly connected components and terminal components.
+
+This is a legitimate mathematical transformation of the selected rule model.
+
+The important epistemic distinction is:
+
+```text
+“Mercury and Venus form a terminal SCC”
+```
+
+is a graph-derived statement, while:
+
+```text
+“Mercury and Venus therefore form the deepest circuit of the psyche”
+```
+
+is an interpretive hypothesis.
+
+The second cannot be smuggled into the first.
+
+---
+
+## 6. Why multiple coordinated visualizations belong here
+
+A single visualization does not optimize every task.
+
+The current v0.3.2 Visual Observatory therefore uses:
+
+- **Natal Field** for neighborhoods, paths, motifs, and overall relational architecture;
+- **Aspect Matrix** for exact pairwise relations and denser comparison;
+- **Flow Map** for directed rulership dependency;
+- **Sect & Lots** for derivation-sensitive calculated points;
+- **Audit** for provenance and complete model inspection.
+
+Controlled information-visualization research supports the general principle that node-link and matrix views have different task advantages. Noetic Atlas uses that literature as justification for **task-specific coordinated views**, not as proof that the present interface is already optimal.
+
+The interface itself remains a testable HCI hypothesis.
+
+---
+
+## 7. What “energy” means in Noetic Atlas
 
 The project may use language such as:
 
@@ -191,163 +225,87 @@ The project may use language such as:
 - field;
 - excitation.
 
-These terms are useful because the framework is influenced by network science, signal processing, dynamical systems, and field-style representations.
+These terms are influenced by network science, signal processing, dynamical systems, and field-style representations.
 
-However, Noetic Atlas does **not** currently claim that an astrological aspect corresponds to a measured physical force, electromagnetic field, energy density, voltage, or other established physical quantity.
+Noetic Atlas does **not** currently claim that an astrological aspect corresponds to a measured physical force, electromagnetic field, energy density, voltage, or other established physical quantity.
 
-If an aspect receives a numerical score, that score is a quantity defined **inside an explicit symbolic model**.
-
-For example:
+If an edge receives a numerical value such as:
 
 ```text
-w_ij = f(aspect type, orb, phase, planetary condition, context)
+w_ij = f(aspect type, orb, phase, condition, context)
 ```
 
-is legitimate if every term is defined and inspectable.
+that value is defined inside an explicit symbolic model.
 
-It is not legitimate to call `w_ij` a physical energy measurement merely because the visualization uses field language.
+It becomes a physical measurement only if an independent physical correspondence is established.
 
-The distinction is fundamental:
-
-> **The mathematics of the representation may be exact even when the metaphysical interpretation remains an open question.**
+> **The mathematics of the representation may be exact even when the metaphysical interpretation remains open.**
 
 ---
 
-## 5. Epistemic layers
+## 8. Epistemic layers
 
-Every result in Noetic Atlas belongs to one of six classes.
+Every result belongs to one of six classes.
 
 ### E0 — Input
 
-What the user supplied or what was imported.
-
-Examples:
-
-- local birth time;
-- latitude/longitude;
-- imported placement list;
-- life-event annotation.
+User-supplied or imported data.
 
 ### E1 — Astronomical computation
 
-Quantities produced by an astronomical engine or explicit geometry.
-
-Examples:
-
-- UTC instant;
-- geocentric planetary longitude;
-- velocity;
-- Ascendant;
-- Midheaven;
-- solar altitude.
+Longitude, velocity, angles, solar altitude, time conversion.
 
 ### E2 — Astrological rule
 
-Deterministic calculations conditional on a selected tradition/rule set.
-
-Examples:
-
-- whole-sign house;
-- sect classification;
-- domicile ruler;
-- aspect acceptance under a named orb policy;
-- Lot of Fortune formula;
-- annual profection.
+Whole Sign place, sect, accepted aspect under a named policy, domicile ruler, lot formula, later condition/timing rules.
 
 ### E3 — Mathematical derivation
 
-Properties of the encoded astrological structure.
-
-Examples:
-
-- strongly connected components;
-- terminal SCCs;
-- graph degree;
-- path depth;
-- harmonic concentration;
-- route convergence.
+SCC, terminal component, route depth, degree, path structure, deterministic composition metrics.
 
 ### E4 — Research-exploratory descriptor
 
-A reproducible numerical or structural pattern whose astrological significance has not been established.
-
-Examples:
-
-- a new multilayer centrality metric;
-- a harmonic signature not used in standard delineation;
-- recurrent state-space neighborhoods;
-- topology-transition measures.
+A reproducible mathematical pattern whose astrological significance has not been established.
 
 ### E5 — Interpretation
 
-Meaning assigned by a historical tradition, a contemporary school, an astrologer, or an AI synthesis layer.
+Historical delineation, contemporary psychological meaning, spiritual reading, or AI synthesis.
 
 Interpretation is downstream. It cannot rewrite E0–E4.
 
 ---
 
-## 6. The truth protocol
+## 9. Provenance is part of the theory
 
-Noetic Atlas is specifically designed to look for relationships that conventional interfaces may have hidden. That creates a serious risk of overfitting and pattern enthusiasm.
+Noetic Atlas assumes that a result is methodologically stronger when its lineage is explicit.
 
-Therefore a novel structure is not promoted into astrological theory simply because it appears striking in one chart.
+A user or researcher should be able to ask:
 
-The research promotion path is:
+> **Why is this here?**
 
-```text
-formal definition
-→ deterministic implementation
-→ unit tests
-→ cross-chart replication
-→ null/randomized comparison
-→ expert astrological inspection
-→ longitudinal/cohort validation where feasible
-→ interpretive hypothesis
-→ only later: candidate theory
-```
-
-The system is allowed to discover that a proposed metric is uninformative.
-
-A failed hypothesis is an informative result.
-
----
-
-## 7. Why provenance is part of the theory
-
-For Noetic Atlas, provenance is not merely software metadata.
-
-The entire research project depends on the ability to reconstruct a claim.
-
-A practitioner or researcher should be able to ask:
-
-> Why is this object here?
-
-and obtain:
+and recover:
 
 - original input;
-- astronomical provider and version;
-- coordinates used;
-- formula or algorithm;
-- rule-set identity;
-- intermediate numerical values;
-- final value;
-- uncertainty/ambiguity;
+- astronomy provider/version;
+- rule-set ID;
+- formula/algorithm;
+- intermediate values;
+- final result;
 - source tradition;
-- any interpretation applied afterward.
+- ambiguity/completeness state;
+- interpretation applied afterward.
 
-This is why the Derivation Ledger is a first-class framework object.
+This is why the Derivation Ledger and derivation tree are first-class framework objects.
 
-A black-box result is methodologically weaker even when it happens to be numerically correct.
+The design is consistent with general provenance practice such as W3C PROV and FAIR principles, while remaining specific to the needs of this framework.
 
 ---
 
-## 8. Relationship to astrological traditions
+## 10. Relationship to astrological traditions
 
-Noetic Atlas does not attempt to flatten Hellenistic, medieval, Jyotish, modern psychological, and transpersonal astrology into one supposedly universal system.
+Noetic Atlas should not flatten Hellenistic, medieval, Jyotish, modern psychological, and transpersonal astrology into one hidden hybrid.
 
-The same astronomical substrate may be processed through different rule sets.
-
-Conceptually:
+The same astronomical substrate can be processed by separate rule sets:
 
 ```text
 Astronomy
@@ -362,89 +320,100 @@ Astronomy
 Comparable structured outputs
 ```
 
-Agreement between traditions can then be observed rather than manufactured by silently mixing techniques.
+Agreement can then be observed.
 
 Disagreement is also data.
 
 ---
 
-## 9. Social purpose
+## 11. Research truth protocol
+
+A novel structure is not promoted merely because it is striking in one chart.
+
+Required progression:
+
+```text
+formal definition
+→ deterministic implementation
+→ unit/boundary tests
+→ cross-chart replication
+→ null/randomized comparison
+→ expert inspection
+→ blinded/preregistered testing where feasible
+→ independent replication
+→ only then candidate theory
+```
+
+The framework must be capable of discovering that a proposed descriptor is uninformative.
+
+A failed hypothesis is a valid outcome.
+
+---
+
+## 12. Social purpose
 
 Noetic Atlas should increase agency rather than dependence.
 
 The product should favor:
 
 - inspectability over pronouncement;
-- range of expression over deterministic fear;
 - education over mystification;
 - comparison over dogma;
 - source transparency over synthetic authority;
+- range of expression over deterministic fear;
 - inquiry over certainty theater.
 
-The consumer value proposition is not “the machine knows your fate.”
+The public value proposition is not “the machine knows your fate.”
 
 It is closer to:
 
-> **Here is the structure. Here is how it was calculated. Here is how different traditions understand it. Here is how it changes through time. Explore it.**
+> **Here is the structure. Here is how it was calculated. Here is what the selected model says. Here is what remains uncertain. Explore it.**
 
 ---
 
-## 10. Research ambition
-
-The long-term research ambition is larger than reproducing existing astrology software.
-
-Noetic Atlas should make it possible to investigate structures that have historically been difficult to observe, including:
-
-- multi-house ruler convergence;
-- topology of dispositor basins;
-- higher-order chart motifs;
-- lot/planet/ruler multilayer interactions;
-- harmonic organization beyond named major aspects;
-- repeated topology across life periods;
-- cross-technique temporal convergence;
-- recurrence of structurally similar states;
-- family and relationship graph interaction;
-- population-level chart neighborhoods;
-- agreement/disagreement between astrological traditions;
-- relationships between autobiographical annotations and calculated symbolic states.
-
-None of these is assumed to possess astrological significance merely because it can be calculated.
-
-The framework exists so that such questions can finally be formulated clearly enough to test.
-
----
-
-## 11. Non-goals
+## 13. Non-goals
 
 Noetic Atlas is not intended to:
 
 - disguise astrology as established physics;
 - generate planetary positions with an LLM;
 - invent missing astronomical quantities;
-- collapse all traditions into one interpretation;
-- produce fear-based deterministic health/death/relationship predictions;
-- assign opaque “cosmic alignment” scores;
-- treat one canonical chart as proof of a theory;
-- use dimensionality reduction before the underlying feature semantics are stable;
-- make aesthetically impressive visualizations whose quantities cannot be reconstructed.
+- collapse traditions into one interpretation;
+- assign opaque “cosmic alignment” or “planet power” scores;
+- treat one canonical chart as evidence for theory;
+- use dimensionality reduction before feature semantics are stable;
+- claim that graph metrics are meaningful because they sound sophisticated;
+- make visually impressive diagrams whose quantities cannot be reconstructed.
 
 ---
 
-## 12. The engineering consequence
+## 14. The engineering consequence
 
-The theory directly determines the software architecture.
-
-Because truth claims must be inspectable:
+Because truth claims must remain inspectable:
 
 - astronomy is isolated from astrological rules;
 - astrological rules are versioned;
-- graph derivations are separated from interpretations;
-- experimental research descriptors live in a separate module;
+- graph derivations are separated from interpretation;
+- experimental descriptors live in a separate research module;
 - AI consumes structured results rather than inventing them;
-- every important output can be written to a derivation ledger;
-- ambiguity is surfaced instead of hidden;
-- tests encode known mathematical invariants, not desired interpretations.
-
-This is why the project must remain modular even when a monolithic implementation would be faster.
+- important outputs enter a derivation ledger;
+- ambiguity is surfaced rather than hidden;
+- tests encode mathematical invariants rather than desired meanings.
 
 The architecture is the methodological commitment expressed in code.
+
+---
+
+## 15. Decision rule
+
+A future feature should answer at least one of these questions:
+
+- Does it expose a relation that is hard to inspect manually?
+- Does it make a calculation reproducible?
+- Does it reduce cognitive load for a defined task?
+- Does it make competing rule systems comparable?
+- Does it turn an interpretive intuition into a testable hypothesis?
+
+If a feature merely makes astrology look interesting, it does not belong.
+
+If it makes a structural question easier to formulate, inspect, reproduce, compare, or test, it may belong.

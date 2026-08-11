@@ -4,9 +4,19 @@
 
 The roadmap follows one principle:
 
-> **Do not visualize or interpret a layer that the framework cannot yet derive and audit.**
+> **Do not visualize, weight, or interpret a layer that the framework cannot derive and audit.**
 
-Development therefore proceeds from deterministic foundations toward richer astrological state, then time, then AI, then large-scale research.
+The current sequence is:
+
+```text
+Structure
+→ Condition
+→ Time
+→ Recurrence
+→ Discovery
+```
+
+This replaces a simpler “natal chart → transits” sequence. Time should activate a richly characterized natal state, not an incomplete geometry-only model.
 
 ---
 
@@ -14,9 +24,7 @@ Development therefore proceeds from deterministic foundations toward richer astr
 
 **Status: complete historical milestone**
 
-Purpose:
-
-Demonstrate that astrology can be represented as more than a horoscope wheel.
+Purpose: demonstrate that astrology can be represented as more than a horoscope wheel.
 
 Delivered:
 
@@ -28,19 +36,13 @@ Delivered:
 - explicit distinction between mathematical representation and physical claims;
 - product/framework identity.
 
-Lesson:
-
-The wheel contains structure that becomes easier to perceive when aspect geometry and rulership topology are separated.
+Lesson: the wheel contains structure that can become easier to inspect when aspect geometry and directed rulership are separated.
 
 ---
 
 # v0.2 — Natal Field instrument
 
 **Status: complete historical milestone**
-
-Purpose:
-
-Make the natal chart inspectable as structure before interpretation.
 
 Delivered:
 
@@ -50,54 +52,81 @@ Delivered:
 - all-house ruler routing;
 - elemental/modal composition;
 - model/method view;
-- clear “resolution over prophecy” principle.
+- “resolution over prophecy” principle.
 
-Lesson:
-
-The visualization should expose calculable topology before generating interpretive prose.
+Lesson: visualization should expose calculable structure before generating interpretation.
 
 ---
 
-# v0.3 — Noetic Kernel + integrity foundation
+# v0.3.0–v0.3.1 — Deterministic kernel + integrity foundation
 
-**Status: current development line**
+**Status: complete foundation milestone**
 
-Purpose:
+Purpose: move from a specimen-driven prototype to a general deterministic instrument.
 
-Turn the framework from a canonical-chart prototype into a general-purpose deterministic instrument.
-
-Delivered or in active v0.3 scope:
+Delivered:
 
 - runtime chart parsing;
-- public birth-data input;
+- birth-data input;
 - IANA time-zone resolution;
 - DST ambiguity/nonexistent-time handling;
-- astronomy adapter;
+- Astronomy Engine adapter;
 - ASC/MC calculation;
 - planetary velocities;
-- whole-sign houses;
+- Whole Sign houses;
 - major aspects;
-- explicit orb policies;
+- explicit orb policy;
 - applying/separating where velocity exists;
 - traditional domicile rulers;
 - generic dispositor graph;
-- Tarjan SCC/terminal SCC derivation;
+- Tarjan SCC and terminal-SCC derivation;
 - sect;
 - seven Paulus/Panaretus Hermetic lots;
-- lot formula proof objects;
-- derivation ledger;
+- lot proof objects;
+- derivation ledger and derivation tree;
 - experimental pattern engine;
-- canonical and synthetic regression tests;
+- version manifest and minimum analysis schema;
+- canonical and synthetic/boundary tests;
 - GitHub Actions integrity workflow;
-- comprehensive engineering/research documentation.
+- astronomy cross-provider validation plan;
+- formal v0.4 Condition Engine specification.
 
-Exit criteria:
+Persistent limitations:
 
-- a new chart can be generated from birth data without an external astrology site;
-- every supported displayed relationship can be traced to its calculation source;
-- imported charts and birth-generated charts converge on the same canonical downstream analysis model;
-- unsupported values are explicit rather than guessed;
-- current integrity tests pass automatically.
+- traditional condition remains incomplete;
+- extended astronomical objects remain incomplete;
+- independent cross-provider validation remains unfinished;
+- research descriptors remain exploratory and promotion-gated.
+
+---
+
+# v0.3.2 — Visual Observatory restoration
+
+**Status: current public prototype**
+
+Purpose: restore the visual intelligence of v0.2 without giving up the deterministic v0.3 kernel.
+
+Delivered:
+
+- interactive SVG Natal Field driven by computed analysis;
+- weighted aspect edges;
+- node selection and neighborhood isolation;
+- edge inspection with separation, orb, phase, and derivation context;
+- dynamic graph motifs rather than specimen-only hard-coded patterns;
+- computed Aspect Matrix linked to the same relationships;
+- directed Flow Map;
+- terminal-SCC highlighting;
+- clickable house-ruler routes;
+- element/modality composition;
+- Hermetic lots as graph-native objects;
+- graph-linked audit/provenance inspection;
+- public GitHub Pages deployment from `main`.
+
+Current judgment:
+
+v0.3.2 is a **serious structural and educational instrument**, but not yet a condition-aware or temporal astrological system. Its strongest current value is formal inspection, teaching, verification, and research instrumentation.
+
+See [Current State and Scientific Rationale](CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md).
 
 ---
 
@@ -105,121 +134,148 @@ Exit criteria:
 
 **Next major milestone**
 
-Purpose:
+Purpose: represent not only where planets are connected, but their traditional condition under explicit source-controlled rules.
 
-Represent not only where planets are connected, but the traditional quality and hierarchy of those conditions.
-
-Planned rule families:
+Initial planned rule families:
 
 - domicile/exaltation;
-- detriment/fall where selected rule set uses them;
-- triplicity rulers;
-- bounds/terms;
+- adversity/depression where applicable;
+- sect-aware triplicity;
+- Egyptian bounds/terms;
 - angularity;
-- sect membership/condition;
-- reception;
+- reception/exchange;
 - overcoming / superior-inferior geometry;
-- enclosure;
+- selected enclosure/engagement rules;
 - bonification/maltreatment;
-- selected solar-phase conditions;
-- configurable traditional variants.
+- mitigating conditions.
 
 Engineering requirements:
 
-- source-controlled rule IDs;
-- separate condition dimensions rather than one opaque strength number;
+- separate source-controlled rule IDs;
+- no hidden tradition blending;
+- no single opaque “planet strength” score;
 - ledger entry for every condition;
-- canonical and synthetic tests;
-- expert-verifiable condition table in UI.
+- explicit null/unsupported states;
+- canonical and synthetic boundary tests;
+- expert-verifiable condition table and graph-linked condition inspector.
 
-Research additions:
+Research requirements:
 
-- condition-aware graph edges;
-- multilayer planet participation;
-- compare graph topology with and without condition metadata;
-- test whether expert-identified “dominant” planets correspond to measurable cross-layer structure.
+- compare topology-only versus condition-only versus topology+condition models;
+- do not reinterpret graph centrality as traditional strength;
+- record variant sensitivity;
+- keep exploratory descriptors on promotion hold until the substrate is stable.
 
 Exit criterion:
 
-An expert astrologer can inspect a planet and reconstruct its major Hellenistic condition factors independently from the UI.
+An expert can select any classical planet and independently reconstruct its major modeled Hellenistic condition factors, rule IDs, and source references from serialized output and UI.
 
 ---
 
 # v0.5 — Life Spectrum v1
 
-Purpose:
-
-Introduce time only after the natal field is richly characterized and auditable.
+Purpose: introduce time after the natal field is structurally and conditionally characterized.
 
 Planned components:
 
 - transit ephemeris over arbitrary windows;
 - exact transit hits;
-- station events;
+- stations;
 - applying/separating temporal evolution;
+- stable natal-target lanes;
 - house activation lanes;
-- natal-target activation functions;
-- slow/fast planet scale handling;
+- explicit activation functions;
 - zoom from decades to days;
-- event annotations;
-- provenance for every rendered band/marker.
+- life-event annotations;
+- provenance for every band/marker;
+- uncertainty/sensitivity where birth time matters.
 
-Important design rule:
+Design rule:
 
-The visual system should preserve spatial/semantic stability across time. Natal targets should not randomly rearrange because a force-directed layout recalculated at each timestamp.
+A transit should activate a **characterized natal state**, not merely a longitude.
+
+Conceptually:
+
+```text
+N_i = geometry + topology + condition
+T(t) = temporal input
+X_i(t) = F(N_i, T(t), rule-set versions)
+```
 
 Exit criterion:
 
-A user can inspect 30+ years of transit structure without relying on a transit bi-wheel, and every activation is traceable.
+A user can inspect long temporal structure without a transit bi-wheel and reconstruct every displayed activation.
 
 ---
 
-# v0.6 — Hellenistic Timing Systems
+# v0.6 — Traditional timing systems
 
-Purpose:
-
-Layer discrete/hierarchical timing regimes onto the continuous transit model.
-
-Planned:
+Purpose: layer discrete/hierarchical timing regimes onto continuous transits.
 
 ### Annual profections
 
-- age/year calculation;
-- profected whole-sign house;
+- age/year;
+- profected Whole Sign house;
 - lord of the year;
 - natal condition of lord;
-- transit interactions with lord/house.
+- ruler-route context;
+- transit interactions.
 
 ### Zodiacal releasing
 
-- selectable releasing lot;
+- selectable lot;
 - period lengths;
 - nested levels;
 - angular periods;
 - loosing of the bond;
-- complete period-boundary provenance.
+- provenance for every boundary.
 
-### Additional timing methods
-
-Only after source/algorithm definition:
-
-- selected progressions;
-- directions;
-- other traditional period methods.
+Additional timing methods require independent source/algorithm definitions before implementation.
 
 Exit criterion:
 
-Life Spectrum can display continuous astronomical activation and discrete time-lord regimes simultaneously without conflating them.
+Life Spectrum can display continuous astronomical activation and discrete time-lord regimes without collapsing them into one opaque score.
 
 ---
 
-# v0.7 — Conversational Observatory
+# v0.7 — Controlled HCI and structural research
 
-Purpose:
+Purpose: test whether Noetic Atlas is actually a better information instrument for defined tasks.
 
-Use AI as an interface to deterministic structure rather than as a hidden astrologer/calculator.
+Primary control condition:
 
-Planned structured actions:
+- conventional horoscope wheel.
+
+Candidate tasks:
+
+- trace a dispositor chain;
+- identify terminal routing;
+- locate exact pairwise relationships;
+- recognize aspect motifs;
+- distinguish computation from interpretation.
+
+Candidate outcomes:
+
+- task time;
+- error rate;
+- recall;
+- cognitive workload;
+- novice learning rate;
+- expert inter-rater agreement.
+
+The question is not “does the UI look sophisticated?”
+
+It is:
+
+> **Does this representation improve measurable structural comprehension for specific tasks?**
+
+---
+
+# v0.8 — Conversational Observatory
+
+Purpose: use AI as an interface to deterministic structure rather than as a hidden calculator.
+
+Planned actions:
 
 ```text
 trace_house_ruler(house)
@@ -236,195 +292,114 @@ AI responsibilities:
 - navigation;
 - explanation;
 - comparison;
-- traditional source synthesis;
+- source synthesis;
 - research-hypothesis generation.
 
 AI prohibitions:
 
-- inventing ephemeris values;
+- inventing astronomy;
 - silently changing rule variants;
 - hiding uncertainty;
 - presenting exploratory metrics as established meanings.
 
-Exit criterion:
-
-A user can ask “why?” and receive both a visual path and an auditable derivation.
-
 ---
 
-# v0.8 — Comparative Tradition Framework
+# v0.9 — Comparative tradition framework
 
-Purpose:
+Purpose: treat traditions as switchable models over a common astronomical substrate.
 
-Treat traditions as switchable models over a common astronomical substrate.
+Potential model families:
 
-Planned adapters:
-
-### Hellenistic
-
-- current tropical/whole-sign foundation;
-- condition;
-- lots;
-- timing;
-- source variants.
-
-### Medieval/traditional
-
-- separate dignity/reception/timing variations where justified.
-
-### Modern/transpersonal
-
-- outer-planet archetypal interpretation;
-- optional modern rulership;
-- explicit psychological framing.
-
-### Jyotish
-
-Requires independent model definition:
-
-- sidereal zodiac;
-- ayanamsha;
-- graha model;
-- nakshatras;
-- drishti;
-- dashas;
-- divisional charts;
-- separate dignity logic.
+- Hellenistic;
+- medieval/traditional;
+- modern/transpersonal;
+- Jyotish as an independently defined sidereal/graha/nakshatra/dasha system rather than a patch to the tropical model.
 
 Exit criterion:
 
-The same birth event can be processed under multiple transparent rule systems without hidden mixing.
+The same birth event can be processed under multiple transparent rule systems without hidden mixing, and agreement/disagreement can be inspected directly.
 
 ---
 
-# v0.9 — Research Observatory
+# v1.0 — Product foundation
 
-Purpose:
+Consumer/professional requirements should include:
 
-Make experimental pattern discovery a first-class but epistemically isolated environment.
-
-Planned:
-
-- descriptor registry;
-- harmonic analyses;
-- route-convergence metrics;
-- topology motif census;
-- hypergraph motifs;
-- null/randomized chart generators;
-- cross-chart batch analysis;
-- statistical comparison tools;
-- birth-time sensitivity analysis;
-- reproducible research export.
-
-Exit criterion:
-
-A new structural hypothesis can be formally defined, tested against nulls, replicated across charts, and documented without contaminating the interpretation layer.
-
----
-
-# v1.0 — Consumer/Professional Product Foundation
-
-Purpose:
-
-Ship a durable product while preserving the research architecture.
-
-Consumer features:
-
-- account/chart management;
-- birth-data entry;
+- reliable chart calculation;
 - Natal Field;
 - Flow Map;
 - condition inspector;
 - Life Spectrum;
-- explain-why interaction;
+- explain-why/provenance interaction;
+- chart/account management;
+- privacy/deletion controls;
 - saved explorations;
-- privacy/deletion controls.
-
-Professional tier:
-
-- client workspace;
-- consultation mode;
-- multiple charts;
-- comparison views;
-- exportable reports;
-- configurable rule sets;
-- visible provenance;
-- education mode.
+- export/report capabilities.
 
 Commercial principle:
 
-> Sell resolution and better instrumentation, not artificial certainty.
+> **Sell resolution and better instrumentation, not artificial certainty.**
 
 ---
 
-# v1.x — Life Space and Longitudinal State Research
+# v1.x — Research Observatory and recurrence/state space
 
-Prerequisite:
+Prerequisites:
 
-The feature semantics entering the state vector must be stable.
+- stable structural semantics;
+- stable condition semantics;
+- stable temporal semantics.
 
 Planned:
 
-- explicit block-structured state vectors;
-- normalization policies;
-- PCA baseline;
-- UMAP exploratory embeddings;
+- descriptor registry;
+- null/randomized chart generators;
+- cross-chart batch analysis;
+- topology motif census;
+- condition-aware graph metrics;
+- birth-time sensitivity analysis;
+- reproducible research export;
+- explicit block-structured temporal state vectors;
 - recurrence plots;
 - state similarity search;
-- period clustering;
-- sensitivity to feature-model choices.
+- PCA baseline and later exploratory embeddings where justified.
 
-Every embedding must preserve:
-
-- feature definitions;
-- preprocessing;
-- random seeds;
-- model/library versions;
-- distance metric;
-- dimensionality-reduction parameters.
-
-Exit criterion:
-
-A “similar period” claim can be reconstructed from the feature space that produced it.
+Every embedding must preserve feature definitions, preprocessing, random seeds, distance metrics, and model versions.
 
 ---
 
-# v2+ — Population, Relationships, and Research Scale
+# v2+ — Relationships, populations, and research scale
 
 Potential directions:
 
 - synastry as interacting graph systems;
 - family-system topology;
 - chart-neighborhood search;
-- structural similarity across cohorts;
 - historical-figure comparison;
 - longitudinal event studies;
-- HCI expert-vs-novice experiments;
-- preregistered astrological hypothesis tests;
+- preregistered hypothesis tests;
 - public research datasets where consent/licensing permit;
-- Observatory/Archive product surfaces.
+- Observatory/Archive surfaces.
 
 ---
 
 # Cross-cutting workstreams
 
-These run throughout all versions.
-
 ## Integrity
 
-- derivation ledger coverage;
-- cross-provider validation;
-- source variant tracking;
+- derivation coverage;
+- cross-provider astronomy validation;
+- source-variant tracking;
 - ambiguity handling;
 - reproducibility metadata.
 
 ## Testing
 
 - unit tests;
-- synthetic boundaries;
-- canonical regression fixtures;
+- boundary/synthetic fixtures;
+- canonical regression;
 - provider cross-checks;
-- UI integration tests;
+- browser/UI integration tests;
 - research reproducibility tests.
 
 ## Documentation
@@ -437,15 +412,7 @@ Every new computed technique requires:
 - edge cases;
 - provenance;
 - tests;
-- current epistemic status.
-
-## Privacy
-
-- data minimization;
-- deletion;
-- encryption;
-- research consent;
-- separation of identity and research features.
+- epistemic status.
 
 ## Research methodology
 
@@ -453,19 +420,28 @@ Every new computed technique requires:
 - replication;
 - preregistration where feasible;
 - multiple-comparison awareness;
+- effect-size/uncertainty reporting;
 - negative-result retention;
-- explicit promotion status for new theory.
+- explicit theory-promotion status.
+
+## Privacy
+
+- data minimization;
+- deletion;
+- encryption;
+- research consent;
+- identity/research separation.
 
 ---
 
 # Decision rule for sequencing
 
-When deciding what to build next, prefer the feature that increases one of these:
+Prefer work that increases at least one of:
 
-1. **derivability** — can the framework calculate more of the chart itself?
-2. **auditability** — can an expert verify more of the result?
-3. **structural visibility** — can a previously hidden relationship be seen?
-4. **research testability** — can a hypothesis be compared against a null or independent sample?
-5. **user comprehension** — can the interface communicate more without adding false certainty?
+1. **derivability** — the framework can calculate more of the model itself;
+2. **auditability** — an expert can independently reconstruct more results;
+3. **structural visibility** — a difficult relation becomes inspectable;
+4. **research testability** — a claim can be compared with a null/control;
+5. **user comprehension** — a defined task becomes easier without adding false certainty.
 
 Features that mainly add aesthetic novelty without improving these dimensions should be deprioritized.
