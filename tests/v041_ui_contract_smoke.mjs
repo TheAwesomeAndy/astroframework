@@ -20,8 +20,6 @@ const tmp=path.join(os.tmpdir(),`naf-v041-${process.pid}.mjs`);
 fs.writeFileSync(tmp,moduleMatch[1]);
 try{execFileSync(process.execPath,['--check',tmp],{stdio:'pipe'})}finally{fs.rmSync(tmp,{force:true})}
 
-const entry=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
-assert.match(entry,/prototype\/v041\.html\?build=graph-findings-041/);
-assert.match(entry,/Noetic Atlas v0\.4\.1/);
-
-console.log('v0.4.1 UI contract smoke: ok');
+// v0.4.1 remains a preserved historical test surface. The repository root is
+// owned by the newest public UI contract and may advance independently.
+console.log('v0.4.1 legacy UI contract smoke: ok');
