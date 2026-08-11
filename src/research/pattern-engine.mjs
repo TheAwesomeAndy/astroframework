@@ -1,3 +1,5 @@
+import {analyzeGraphArchitecture} from './graph-analytics-engine.mjs';
+
 const TAU=2*Math.PI;
 
 export function harmonicSpectrum(analysis,maxHarmonic=12){
@@ -30,20 +32,23 @@ export function multilayerParticipation(analysis){
   return Object.values(scores).sort((a,b)=>b.total-a.total).map(x=>({...x,provenance:{calculation:'naf.research.multilayer_participation.v1',meaning:'unweighted participation count across selected symbolic layers; not a validated importance score'}}));
 }
 
-export function analyzeExploratoryPatterns(analysis){
-  const conditionReady=analysis?.completeness?.condition_engine==='complete';
+export function analyzeExploratoryPatterns(analysis,options={}){
+  const conditionReady=Boolean(options.conditions)||analysis?.completeness?.condition_engine==='complete';
   const temporalReady=analysis?.completeness?.temporal_engine==='complete';
+  const graphAnalytics=analyzeGraphArchitecture(analysis,options.conditions||null);
   return {
     status:'exploratory-not-interpretive',
     promotion_status:'hold',
-    substrate:{condition_engine_complete:conditionReady,temporal_engine_complete:temporalReady},
+    substrate:{condition_engine_complete:conditionReady,temporal_engine_complete:temporalReady,graph_analytics_model:graphAnalytics.model},
     restrictions:[
       'Do not expose these descriptors as validated natal strength, fate, prediction, or psychological meaning.',
       'Do not promote a descriptor into consumer interpretation until condition-aware replication and null-model testing are complete.',
-      'Current descriptors characterize only the currently implemented structural substrate.'
+      'Current descriptors characterize only the currently implemented structural substrate.',
+      'Graph-theory findings are exact properties of the encoded graph; their interpretive hypotheses remain unvalidated and separately labeled.'
     ],
     harmonic_spectrum:harmonicSpectrum(analysis),
     route_convergence:routeConvergence(analysis),
-    multilayer_participation:multilayerParticipation(analysis)
+    multilayer_participation:multilayerParticipation(analysis),
+    graph_analytics:graphAnalytics
   };
 }
