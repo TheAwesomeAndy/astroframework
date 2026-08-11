@@ -15,7 +15,7 @@
 </head>
 <body>
 <button class="toggle" id="toggle">Condition ▸</button>
-<iframe id="core" src="./index.html" title="Noetic Atlas Visual Observatory"></iframe>
+<iframe id="core" src="./index.html" title="Noetic Atlas v0.4.0b Visual Observatory"></iframe>
 <aside id="dock">
   <h1>Noetic Atlas <span style="color:var(--gold)">v0.4.0b</span></h1>
   <div class="muted">PRIMITIVE CONDITION OBSERVATORY · source-locked Hellenistic reconstruction</div>
@@ -24,13 +24,22 @@
   <div id="conditionBody"><p class="muted" style="margin-top:16px">Calculate or load a chart in the main observatory. Then click a classical planet, or choose one here.</p></div>
 </aside>
 <script type="module">
-import {computePrimitiveConditions,CLASSICAL_PLANETS,CONDITION_MODEL_ID} from '../src/conditions/primitive-condition-engine.mjs';
+import {computePrimitiveConditions,CLASSICAL_PLANETS} from '../src/conditions/primitive-condition-engine.mjs';
 const core=document.getElementById('core'),body=document.body,dockBody=document.getElementById('conditionBody'),toggle=document.getElementById('toggle');
 let analysis=null,conditions=null,chosen=null,observer=null;
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const cls=s=>['present','in_sect','out_of_sect'].includes(s)?s:'';
 toggle.onclick=()=>{body.classList.toggle('closed');toggle.textContent=body.classList.contains('closed')?'Condition ◂':'Condition ▸'};
 
+function patchCoreBrand(){
+  try{
+    const doc=core.contentDocument;
+    if(!doc)return;
+    doc.title='Noetic Atlas v0.4.0b — Condition Observatory';
+    const version=doc.querySelector('.brand h1 small');
+    if(version)version.textContent='v0.4.0b · CONDITION OBSERVATORY';
+  }catch(e){console.warn('brand sync',e)}
+}
 function selectedFromCore(){
   try{
     const doc=core.contentDocument,title=doc?.querySelector('#inspector h2')?.textContent?.trim();
@@ -48,6 +57,7 @@ function clickCorePlanet(planet){
   }catch{}
 }
 function sync(){
+  patchCoreBrand();
   try{
     const doc=core.contentDocument,json=doc?.getElementById('json')?.textContent?.trim();
     if(json&&json.startsWith('{')){
@@ -93,6 +103,7 @@ function render(){
 
 core.addEventListener('load',()=>{
   try{
+    patchCoreBrand();
     const doc=core.contentDocument,json=doc.getElementById('json'),ins=doc.getElementById('inspector'),status=doc.getElementById('status');
     observer?.disconnect();observer=new MutationObserver(()=>sync());
     if(json)observer.observe(json,{childList:true,characterData:true,subtree:true});
