@@ -31,5 +31,19 @@ export function multilayerParticipation(analysis){
 }
 
 export function analyzeExploratoryPatterns(analysis){
-  return {status:'exploratory-not-interpretive',harmonic_spectrum:harmonicSpectrum(analysis),route_convergence:routeConvergence(analysis),multilayer_participation:multilayerParticipation(analysis)};
+  const conditionReady=analysis?.completeness?.condition_engine==='complete';
+  const temporalReady=analysis?.completeness?.temporal_engine==='complete';
+  return {
+    status:'exploratory-not-interpretive',
+    promotion_status:'hold',
+    substrate:{condition_engine_complete:conditionReady,temporal_engine_complete:temporalReady},
+    restrictions:[
+      'Do not expose these descriptors as validated natal strength, fate, prediction, or psychological meaning.',
+      'Do not promote a descriptor into consumer interpretation until condition-aware replication and null-model testing are complete.',
+      'Current descriptors characterize only the currently implemented structural substrate.'
+    ],
+    harmonic_spectrum:harmonicSpectrum(analysis),
+    route_convergence:routeConvergence(analysis),
+    multilayer_participation:multilayerParticipation(analysis)
+  };
 }
