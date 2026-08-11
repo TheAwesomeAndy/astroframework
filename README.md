@@ -1,8 +1,8 @@
 # Noetic Atlas
 
-**An auditable visual-analytics framework for astrological structure, topology, condition, and time.**
+**An auditable visual-analytics framework for astrological structure, topology, condition, graph analysis, and time.**
 
-> **See the structure. Follow the flow. Watch it change. Show the work.**
+> **See the structure. Follow the flow. Explain the pattern. Show the work.**
 
 Noetic Atlas is an experimental computational framework for representing astrology as a multilayer symbolic system rather than forcing every relationship into a single horoscope wheel.
 
@@ -13,21 +13,41 @@ The project has two linked goals:
 
 The underlying research framework is the **Noetic Atlas Framework (NAF)**.
 
-## Current state
+## Current development state
 
-**Public testing surface:** v0.4.0b — Primitive Condition Observatory  
-**Structural analysis envelope:** `naf.analysis.v0.3.1`  
-**Condition record schema:** `naf.condition.record.v0.4.0a`  
+**Development candidate:** v0.4.1 — Graph Analytics + Explainable Findings  
+**Development branch:** `noetic-atlas-v0.4.1-graph-findings`  
+**Graph-analysis model:** `naf.research.graph_analytics.v0.4.1`  
+**Finding model:** `naf.finding.explainable.v0.4.1`  
 **Primitive condition model:** `naf.condition.primitive.hellenistic.v0.4.0b`  
+**Condition record schema:** `naf.condition.record.v0.4.0a`  
+**Structural analysis envelope:** `naf.analysis.v0.3.1`  
 **Default/deployed branch:** `main`
 
-Public build:
+The public Pages build follows `main`. Until v0.4.1 is explicitly promoted, the deployed site remains the latest tested `main` release.
 
-`https://theawesomeandy.github.io/astroframework/`
+Local v0.4.1 testing surface:
 
-The current site preserves the v0.3.2 graph-first Visual Observatory and adds a synchronized condition dock for the classical seven planets.
+```text
+prototype/v041.html
+```
 
-### Implemented structural substrate
+v0.4.1 changes the role of visualization in the product:
+
+```text
+graph ≠ conclusion
+
+graph
+→ derivation
+→ measurement
+→ readable finding
+→ explicitly labeled interpretive hypothesis
+→ proof
+```
+
+---
+
+## Implemented structural substrate
 
 - local birth date/time + latitude/longitude input;
 - historical civil-time/time-zone resolution with DST ambiguity handling;
@@ -44,14 +64,13 @@ The current site preserves the v0.3.2 graph-first Visual Observatory and adds a 
 - chart sect;
 - seven Paulus/Panaretus Hermetic lots with sect reversal;
 - derivation/provenance ledger and derivation tree;
-- experimental pattern engine;
 - interactive SVG Natal Field;
 - computed Aspect Matrix;
 - directed Flow Map with SCC highlighting and house-route tracing;
 - graph-linked node/edge inspection;
 - automated integrity/boundary tests in GitHub Actions.
 
-### Implemented primitive condition substrate — v0.4.0b
+## Primitive condition substrate
 
 For Sun, Moon, Mercury, Venus, Mars, Jupiter, and Saturn, the condition engine independently computes:
 
@@ -67,95 +86,324 @@ For Sun, Moon, Mercury, Venus, Mars, Jupiter, and Saturn, the condition engine i
 
 Every factor creates an independent source- and rule-versioned ledger entry. **No scalar planet-strength score is calculated.**
 
-Not yet implemented:
+See:
 
-- reception / mutual reception as a condition layer;
-- overcoming;
-- bonification / maltreatment;
-- enclosure / compound mitigation;
-- degree-based quadrant dynamic strength;
-- temporal Life Spectrum.
-
-See **[v0.4.0b Primitive Condition](docs/V040B_PRIMITIVE_CONDITION.md)** and **[Condition Engine Specification](docs/CONDITION_ENGINE_SPEC.md)**.
+- [`docs/V040A_CONDITION_ONTOLOGY.md`](docs/V040A_CONDITION_ONTOLOGY.md)
+- [`docs/V040B_PRIMITIVE_CONDITION.md`](docs/V040B_PRIMITIVE_CONDITION.md)
+- [`docs/CONDITION_ENGINE_SPEC.md`](docs/CONDITION_ENGINE_SPEC.md)
 
 ---
 
-## What is genuinely novel today
+# v0.4.1 — Graph Analytics + Explainable Findings
 
-### 1. Rulership topology is computed as a directed graph
+The earlier graph views exposed structure. v0.4.1 asks what additional structural facts can be **derived from the graph itself**, why those facts matter mathematically, and how any astrological interpretation should be separated from the derivation.
 
-Noetic Atlas constructs the dispositor graph, traces routes, computes strongly connected components with Tarjan's algorithm, and surfaces terminal SCCs as explicit mathematical objects.
-
-A terminal SCC is therefore a reproducible property of the selected rulership graph. Its psychological, spiritual, predictive, or metaphysical significance is a separate question.
-
-### 2. Condition is modeled as a structured state, not a score
-
-The project now separates:
+The implementation lives in:
 
 ```text
-position
-+ topology
-+ primitive condition
+src/research/graph-analytics-engine.mjs
 ```
 
-A planet can therefore be inspected not only for where it sits and where its rulership path leads, but for the independent traditional conditions assigned under a named historical model.
-
-This is the beginning of **qualified topology**: the graph can eventually know not merely that `A → B`, but what rule-defined state `B` is in and what relational conditions exist between them.
-
-### 3. Calculation and interpretation are separated by provenance
-
-The epistemic sequence is:
+and is integrated into:
 
 ```text
-Input
-→ Astronomy
-→ Astrological rule
-→ Mathematical derivation
-→ Exploratory research
-→ Interpretation
+src/research/pattern-engine.mjs
 ```
 
-Every important result is intended to remain reversible to its inputs, rule/formula, model version, intermediate values, output, and known uncertainty.
+## 1. Classical dispositor functional-graph analysis
 
-### 4. Different structures receive different visual representations
+The condition-qualified rulership analysis uses a classical-seven subgraph rather than silently mixing the condition system with modern outer-planet nodes.
 
-The wheel remains an excellent reference for angular geometry. Noetic Atlas uses coordinated views for other questions:
+Under traditional domicile rulership each classical planet has one outgoing ruler edge when the full classical set is present. v0.4.1 therefore treats this as a functional directed graph and computes:
 
-- **Natal Field** — relational aspect structure;
-- **Aspect Matrix** — exact pairwise lookup;
-- **Flow Map** — directed ruler/dispositor dependency;
-- **Condition dock** — decomposed rule-defined planetary state;
-- **Sect & Lots** — source-sensitive derived coordinates;
-- **Audit** — provenance and derivation;
-- later **Life Spectrum** — temporal activation.
+### SCC condensation
 
-For the detailed assessment and technical justification, see **[Current State and Scientific Rationale](docs/CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md)**.
+```text
+G_dispositor → G_SCC
+```
+
+Strongly connected components are collapsed into supernodes, producing an acyclic condensation graph.
+
+### Terminal basin capture
+
+For terminal SCC `C`:
+
+```text
+B(C) = {v : v reaches C}
+β(C) = |B(C)| / |V|
+```
+
+This measures routing concentration into a terminal component. It is **not** a strength score.
+
+### Route depth
+
+```text
+d(v,C) = number of ruler transitions before first entry into terminal SCC C
+```
+
+This distinguishes immediate terminal membership from multi-step dependency chains.
+
+### Upstream capture / preterminal bottleneck
+
+```text
+A(v) = {u : v occurs on route(u)}
+```
+
+The engine identifies the most traversed **nonterminal** node so that terminal-cycle members do not trivially dominate the measure.
+
+For the canonical regression specimen, the current expected classical structure is:
+
+```text
+terminal SCC: Mercury ↔ Venus
+terminal basin: 7 / 7
+Jupiter route depth: 3
+Saturn route depth: 2
+Mars route depth: 1
+largest nonterminal route bottleneck: Mars
+Mars upstream capture: 3 routes
+```
+
+These are graph-derived facts under the selected rulership model. Their life meaning remains a separate hypothesis.
+
+## 2. Aspect-network analysis
+
+The aspect layer is treated as a different graph object:
+
+```text
+G_aspect = (V, E_aspect)
+```
+
+v0.4.1 currently computes:
+
+- connected components;
+- degree;
+- local clustering coefficient;
+- mean clustering coefficient;
+- normalized unweighted betweenness centrality;
+- articulation points;
+- bridges;
+- closed three-node typed motifs;
+- exact ≤1° edge subset.
+
+### Typed motif detection
+
+Three-node cliques retain their edge types. Current named templates include:
+
+```text
+trine + trine + trine                    → Grand Trine
+square + square + opposition             → T-square
+conjunction + conjunction + conjunction  → triple conjunction
+```
+
+The engine does not infer motifs from visual proximity. It derives them from admitted aspect edges.
+
+The word **motif** is used cautiously. Network-science motif enrichment normally involves randomized comparison. v0.4.1 detects typed subgraphs but does not claim statistical enrichment until null models exist.
+
+## 3. Cross-layer overlap
+
+The first explicit multiplex comparison is:
+
+```text
+E_aspect ∩ E_dispositor
+```
+
+This asks which pairs are independently related by angular geometry and rulership dependency.
+
+The underlying edges remain separate. Noetic Atlas does not convert overlap into an additive “connection strength.”
+
+The intended future graph family is:
+
+```text
+G = {
+  G_aspect,
+  G_dispositor,
+  G_reception,
+  G_overcoming,
+  G_house,
+  G_lot,
+  G_temporal(t)
+}
+```
+
+---
+
+## Explainable metrics
+
+A naked metric is not considered a complete analytical result.
+
+Every v0.4.1 promoted metric carries:
+
+```text
+id
+label
+value
+unit
+scope
+definition
+formula
+observation
+graph_theory_meaning
+astrological_context
+interpretive_hypothesis
+limits
+calculation model
+inputs
+result
+ledger references
+```
+
+The interface therefore avoids statements such as:
+
+> clustering = 0.61
+
+without explaining what clustering is, which graph was measured, what generated that graph, and what cannot be inferred from the value.
+
+v0.4.1 also deliberately refuses labels such as:
+
+```text
+high
+low
+rare
+dominant
+exceptional
+```
+
+unless a comparison or null distribution exists.
+
+## Explainable findings
+
+A finding synthesizes one or more graph derivations into a readable evidence object.
+
+The required presentation order is:
+
+```text
+Observation / statement
+→ Measurement
+→ Graph-theory meaning
+→ Astrological rule context
+→ Interpretive hypothesis — not validated
+→ Limits
+→ Proof
+```
+
+Finding objects include participating nodes/edges and ledger references so the UI can connect readable analysis back to the structure that generated it.
+
+Examples currently generated include:
+
+- terminal rulership architecture;
+- preterminal ruler bottleneck;
+- typed aspect motifs;
+- aspect-network articulation structure;
+- repeated pair coupling across aspect and dispositor layers.
+
+When primitive condition is supplied, terminal-rulership findings can also carry the **separate condition records** of terminal SCC members without collapsing condition into topology.
+
+---
+
+## v0.4.1 interface
+
+The new testing surface makes readable analysis the default right-hand workspace.
+
+### Findings
+
+Evidence-backed structural synthesis. Each finding displays graph meaning, astrological context, an explicitly unvalidated interpretive hypothesis, limits, participating nodes, and proof.
+
+### Metrics
+
+Every metric is shown with definition, formula, observation, interpretation boundary, and integrity object.
+
+### Condition
+
+The primitive condition substrate remains available as a separate node-state layer.
+
+### Integrity
+
+Displays the complete selected finding/metric proof object, model IDs, restrictions, and ledger references.
+
+The visual graph remains interactive, but the governing product principle is now:
+
+> **The visualization should expose the analysis. The visualization is not the novelty by itself.**
 
 ---
 
 ## Scientific and epistemic status
 
-Noetic Atlas is justified today as a **formal, computational, and visual-analytics instrument**.
+Noetic Atlas is currently best described as an **auditable visual-analytics and research framework for a formalized astrological rule model**.
 
-Graph theory justifies SCCs and path calculations once a graph has been defined. Visualization research supports task-specific coordinated graph/matrix views. Multilayer-network formalism provides a language for preserving different relation types. Provenance standards support reconstructable calculation lineage.
+Graph theory establishes mathematical properties of a graph **after the graph has been defined**. It does not establish the empirical validity of the astrological rules used to construct that graph.
 
-Those facts do **not** establish astrological causation, predictive validity, psychological truth, or a physical energy mechanism.
-
-Similarly, v0.4.0b establishes that selected Hellenistic condition rules can be represented deterministically and audited. It does not establish that those rule-defined states correspond to measured physical quantities or validated psychological traits.
-
-The project therefore distinguishes:
+Similarly:
 
 ```text
-exact mathematics inside a selected symbolic model
-from
-empirical validity of the model's interpretation
+terminal SCC                 graph-derived fact
+basin fraction               graph-derived metric
+Venus in fall in Virgo       astrological-rule result
+“this circuit dominates life” interpretive claim, not established
 ```
+
+The framework maintains six epistemic categories:
+
+```text
+input
+astronomical-computation
+astrological-rule
+graph-derived
+research-exploratory
+interpretive-inference
+```
+
+Graph findings in v0.4.1 remain `research-exploratory` and their interpretive text remains `hypothesis-not-validated`.
+
+### Technical foundations
+
+The graph-analytics program is informed by established graph/network methods, including:
+
+- Robert Tarjan, “Depth-First Search and Linear Graph Algorithms,” *SIAM Journal on Computing* 1(2), 1972. DOI `10.1137/0201010` — strongly connected components and low-link graph structure.
+- Ulrik Brandes, “A Faster Algorithm for Betweenness Centrality,” *Journal of Mathematical Sociology* 25(2), 2001. DOI `10.1080/0022250X.2001.9990249` — betweenness computation.
+- Ron Milo et al., “Network Motifs: Simple Building Blocks of Complex Networks,” *Science* 298(5594), 2002. DOI `10.1126/science.298.5594.824` — motif analysis and the need for randomized comparison.
+- Mikko Kivelä et al., “Multilayer Networks,” *Journal of Complex Networks* 2(3), 2014. DOI `10.1093/comnet/cnu016` — preserving multiple relation types rather than collapsing them into one network.
+
+These references justify the mathematics and research design. They do not validate astrology as a causal physical theory.
+
+---
+
+## Null-model gate
+
+The next major **research** requirement is explicit graph baselines.
+
+Candidate nulls include:
+
+### Geometric null
+
+Randomize longitudes and recompute aspects.
+
+### Label null
+
+Keep geometry fixed while permuting body identities.
+
+### Degree-preserving graph null
+
+Rewire edges while preserving degree sequence where mathematically appropriate.
+
+### Layer-overlap null
+
+Preserve layer size/density while randomizing pair assignments.
+
+For graph descriptor `M`:
+
+```text
+M_observed
+vs
+{M_null^(1), ..., M_null^(N)}
+```
+
+Only after that comparison may the main interface make statistical claims about unusualness or enrichment.
 
 ---
 
 ## Formal ontology
 
-A current abstract representation is:
+The current abstract representation remains:
 
 ```text
 A = {P, H, S, E, R, L, C, T}
@@ -172,106 +420,67 @@ A = {P, H, S, E, R, L, C, T}
 | `C` | planetary/relational condition |
 | `T` | transits and timing regimes |
 
-Current development sequence:
+The development sequence is now more precisely:
 
 ```text
-Geometry → Topology → Condition → Activation → Recurrence → Discovery
+Geometry
+→ Topology
+→ Primitive Condition
+→ Graph Analytics / Explainable Findings
+→ Relational Condition
+→ Compound Condition
+→ Activation
+→ Recurrence / Discovery
 ```
 
-Geometry and topology are implemented. Primitive condition is now implemented for the classical seven. Relational/compound condition remains next. Activation/time follows only after the natal condition substrate is sufficiently complete.
+The analytics layer is inserted before additional astrological relation layers because adding more facts without improving synthesis would merely enlarge the dashboard.
 
 ---
 
-## Hellenistic baseline
+## Still not implemented
 
-Current deterministic baseline:
-
-```text
-Tropical zodiac
-Whole Sign houses
-Traditional domicile rulers
-Day/night sect
-Major aspects under named orb policy
-Paulus/Panaretus seven Hermetic lots
-Source-locked primitive condition for the classical seven
-```
-
-The condition layer currently uses separate versioned rules for domicile/adversity, sign-level exaltation/depression, standard triplicity, Egyptian bounds, planetary sect family, sect match, and Whole-Sign angular triads.
-
-Historical variants are never silently blended. Ptolemaic bounds, alternative triplicity schemes, later Medieval reception definitions, and modern outer-planet dignity systems require independent rule IDs.
+- reception / mutual reception graph;
+- overcoming graph;
+- bonification / maltreatment;
+- enclosure / compound mitigation;
+- degree-based quadrant dynamic strength;
+- graph null distributions;
+- statistical motif enrichment;
+- condition-weighted centrality;
+- temporal Life Spectrum;
+- validated interpretation model.
 
 ---
 
-## Research mission
-
-The framework is designed to make difficult structural questions inspectable and testable, including:
-
-- ruler-route convergence and terminal basins;
-- higher-order graph motifs;
-- lot/planet/ruler multilayer interaction;
-- condition-aware topology;
-- harmonic organization beyond named aspects;
-- temporal recurrence;
-- cross-technique timing convergence;
-- structurally similar life periods;
-- agreement/disagreement across traditions;
-- whether Noetic Atlas visualizations improve task accuracy, learning, or cognitive load relative to a traditional wheel.
-
-A mathematically interesting result is **not automatically an astrological discovery**.
-
-Promotion path:
-
-```text
-formal definition
-→ deterministic implementation
-→ tests
-→ cross-chart replication
-→ null/randomized comparison
-→ expert inspection
-→ blinded/preregistered evaluation where feasible
-→ independent replication
-→ candidate interpretive theory
-```
-
-Negative results are legitimate outcomes.
-
----
-
-## Documentation
-
-Recommended starting points:
-
-1. [Current State and Scientific Rationale](docs/CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md)
-2. [Theory & Purpose](docs/THEORY_AND_PURPOSE.md)
-3. [Developer Guide](docs/DEVELOPER_GUIDE.md)
-4. [Architecture](docs/ARCHITECTURE.md)
-5. [Astrological Model](docs/ASTROLOGICAL_MODEL.md)
-6. [v0.4.0a Condition Ontology](docs/V040A_CONDITION_ONTOLOGY.md)
-7. [v0.4.0b Primitive Condition](docs/V040B_PRIMITIVE_CONDITION.md)
-8. [Condition Engine Specification](docs/CONDITION_ENGINE_SPEC.md)
-9. [Research Program](docs/RESEARCH_PROGRAM.md)
-10. [Roadmap](docs/ROADMAP.md)
-
----
-
-## Run locally
+## Tests
 
 ```bash
 npm install
 npm test
+```
+
+The standard suite includes:
+
+- kernel regression;
+- integrity regression;
+- condition registry/schema tests;
+- primitive condition tests;
+- graph-analytics regression;
+- v0.4.1 UI contract and browser-module parse check;
+- geometry/boundary tests;
+- timezone tests;
+- astronomy adapter contract tests.
+
+Run locally:
+
+```bash
 python -m http.server 8000
 ```
 
-Open the current combined testing surface:
+Open:
 
 ```text
-http://localhost:8000/prototype/v040b.html
-```
-
-The underlying v0.3.2 Visual Observatory remains available at:
-
-```text
-http://localhost:8000/prototype/
+http://localhost:8000/prototype/v041.html
 ```
 
 ---
@@ -287,28 +496,57 @@ http://localhost:8000/prototype/
 7. Unsupported is better than guessed.
 8. Traditions are explicit rule models, not hidden mixtures.
 9. No opaque condition/strength score.
-10. Research descriptors are not interpretation by default.
-11. The wheel remains a reference, not an enemy.
-12. AI navigates deterministic state; it does not replace it.
-13. A failed hypothesis is an acceptable result.
-14. A feature that only makes astrology look interesting does not belong.
-15. A feature that makes a structural question easier to inspect, reproduce, compare, or test may belong.
+10. No naked graph metric.
+11. Graph fact and interpretive hypothesis must remain separately labeled.
+12. A graph is an encoded model, not evidence that astrology is a physical network.
+13. Do not call a graph feature unusual without a defined baseline.
+14. The wheel remains a reference, not an enemy.
+15. AI navigates deterministic state; it does not replace it.
+16. A failed hypothesis is an acceptable result.
+17. A feature that only makes astrology look interesting does not belong.
+18. A feature that exposes a structural question difficult to inspect, reproduce, compare, or test may belong.
 
 ---
 
-## Next engineering gate
+## Next engineering gates
 
-The next condition movement is **relational condition**:
+Two tracks now proceed in controlled sequence.
+
+### Graph research
+
+```text
+null models
+→ motif enrichment
+→ multilayer overlap baselines
+→ comparative chart architecture
+```
+
+### Astrological condition
 
 ```text
 G_reception
-G_exchange
-G_overcoming
+→ G_overcoming
+→ selected compound condition
 ```
 
-Reception and overcoming should become distinct relation layers rather than attributes silently folded into the dispositor graph. Compound techniques such as bonification, maltreatment, enclosure, and mitigation remain downstream pure functions over already-computed primitive and relational facts.
+The two tracks meet before Life Spectrum so that temporal activation operates on a natal architecture that is both semantically richer and analytically inspectable.
 
-Life Spectrum remains downstream of that work.
+---
+
+## Documentation
+
+Recommended starting points:
+
+1. [`docs/CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md`](docs/CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md)
+2. [`docs/V041_GRAPH_ANALYTICS_AND_FINDINGS.md`](docs/V041_GRAPH_ANALYTICS_AND_FINDINGS.md)
+3. [`docs/THEORY_AND_PURPOSE.md`](docs/THEORY_AND_PURPOSE.md)
+4. [`docs/DEVELOPER_GUIDE.md`](docs/DEVELOPER_GUIDE.md)
+5. [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
+6. [`docs/ASTROLOGICAL_MODEL.md`](docs/ASTROLOGICAL_MODEL.md)
+7. [`docs/V040A_CONDITION_ONTOLOGY.md`](docs/V040A_CONDITION_ONTOLOGY.md)
+8. [`docs/V040B_PRIMITIVE_CONDITION.md`](docs/V040B_PRIMITIVE_CONDITION.md)
+9. [`docs/RESEARCH_PROGRAM.md`](docs/RESEARCH_PROGRAM.md)
+10. [`docs/ROADMAP.md`](docs/ROADMAP.md)
 
 ---
 
@@ -316,8 +554,12 @@ Life Spectrum remains downstream of that work.
 
 The intended experience is not:
 
-> "Here is your horoscope."
+> “Here is your horoscope.”
+
+Nor is it merely:
+
+> “Here is your graph.”
 
 It is:
 
-> **Here is the structure. Here is how it was calculated. Here is how it is connected. Here is its rule-defined condition. Here is what remains unknown. Explore it.**
+> **Here is the structure. Here is what the structure implies mathematically. Here is the astrological rule that produced it. Here is one hypothesis worth investigating. Here is what remains unknown. Here is the proof.**
