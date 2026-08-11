@@ -1,173 +1,94 @@
 # Noetic Atlas
 
-**A visual analytics system for astrological structure and temporal dynamics.**
+**An auditable visual analytics framework for astrological structure, topology, and time.**
 
-> **See the structure. Follow the flow. Watch it change.**
+> **See the structure. Follow the flow. Watch it change. Show the work.**
 
-Noetic Atlas is an experimental computational framework for representing astrology as a **high-dimensional relational dynamical system** rather than forcing every astrological relationship into a conventional circular chart.
+Noetic Atlas is an experimental computational framework for representing astrology as a multilayer symbolic system rather than forcing every relationship into a single horoscope wheel.
 
-The repository begins with one canonical natal chart and one inspectable browser prototype. The purpose of v0.1 is not to replace the horoscope wheel, predict life events, or claim a physical mechanism for astrology. The purpose is to establish a rigorous data model and visual grammar that can make astrological structure easier to inspect, compare, teach, and eventually explore through time.
+The project has two linked goals:
+
+1. build a useful consumer/professional product for exploring natal and temporal astrology;
+2. build a research instrument capable of exposing and testing structural relationships that conventional astrological interfaces make difficult to observe.
 
 The underlying research framework is the **Noetic Atlas Framework (NAF)**.
 
----
-
-## 1. Product identity
-
-### Product
-
-**Noetic Atlas**
-
-### Framework
-
-**Noetic Atlas Framework (NAF)**
-
-### Category
-
-**Astrological visual analytics**
-
-### Positioning
-
-Noetic Atlas is not positioned as another AI horoscope generator. It is a computational interface for exploring the architecture of an astrological life.
-
-The product thesis is:
-
-> The natal chart is not astrology itself. It is one historical visualization of a multilayer symbolic system.
-
-The conventional wheel remains valuable because it preserves zodiacal longitude, house position, and angular geometry compactly. Its limitation is representational: it attempts to show too many different mathematical objects in one polar diagram.
-
-Noetic Atlas separates those objects and gives each one a visualization optimized for the question being asked.
+Current development branch: **`noetic-atlas-v0.3`**.
 
 ---
 
-## 2. The four core experiences
+## Current status
 
-NAF organizes the user experience around four coordinated views.
+v0.3 establishes the first end-to-end deterministic foundation.
 
-### 2.1 Natal Field — **Structure**
+Implemented now:
 
-**Question:** What is the natal architecture?
+- local birth date/time + latitude/longitude input;
+- historical civil-time/time-zone resolution with DST ambiguity handling;
+- astronomical adapter for Sun through Pluto;
+- independently calculated ASC and MC;
+- planetary longitudinal velocity / retrograde state;
+- whole-sign house calculation;
+- major aspect calculation under explicit orb policy;
+- applying/separating when motion data exist;
+- traditional domicile rulership;
+- generic dispositor graph;
+- Tarjan strongly connected components and terminal SCCs;
+- sect calculation;
+- seven Paulus/Panaretus Hermetic lots with sect reversal;
+- derivation/provenance ledger;
+- experimental pattern engine;
+- runtime chart import from pasted text or JSON;
+- interactive browser prototype;
+- automated integrity tests in GitHub Actions.
 
-Planets, lots, angles, and selected sensitive points become attributed nodes. Aspects become weighted edges. Sign, house, dignity, sect, speed, retrogradation, angularity, and other conditions become node or edge metadata.
+Current open-adapter limitations are documented explicitly; unsupported astronomical objects are not silently approximated.
 
-The goal is to expose:
+---
 
-- aspect clusters;
-- isolated nodes;
-- oppositional axes;
-- coherent triangles;
-- square complexes;
-- conjunction clusters;
-- structural bottlenecks;
-- derived-point relationships;
-- house concentration.
+# Start here
 
-The initial prototype uses a deterministic node-link representation with filtering for coherence, tension, derived points, and angles.
+A new software engineer should read the documentation in this order:
 
-### 2.2 Flow Map — **Rulership and dependency**
+1. **[Theory & Purpose](docs/THEORY_AND_PURPOSE.md)** — why Noetic Atlas exists and what claims it does and does not make.
+2. **[Developer Guide](docs/DEVELOPER_GUIDE.md)** — repository onboarding, module ownership, invariants, tests, and extension rules.
+3. **[Architecture](docs/ARCHITECTURE.md)** — actual v0.3 software boundaries and data flow.
+4. **[Astrological Model](docs/ASTROLOGICAL_MODEL.md)** — explicit rule assumptions: whole-sign houses, sect, aspects, rulers, lots, and planned condition engine.
+5. **[Integrity & Provenance](docs/INTEGRITY_AND_PROVENANCE.md)** — the audit contract and Derivation Ledger.
+6. **[Research Program](docs/RESEARCH_PROGRAM.md)** — how new patterns are discovered, tested, compared with null models, and promoted or rejected.
+7. **[Astronomy Adapters](docs/ASTRONOMY_ADAPTERS.md)** — provider choices, coordinate assumptions, precision, and licensing considerations.
+8. **[Roadmap](docs/ROADMAP.md)** — development sequence from the current kernel toward condition, time, AI navigation, and research scale.
 
-**Question:** Where does the structure route?
+The repository should be understandable from these files without access to the original design conversation.
 
-Astrology contains directional relationships that are difficult to perceive in a wheel:
+---
 
-- house -> sign -> ruler;
-- planet -> sign ruler;
-- ruler -> dispositor;
-- lots -> rulers;
-- activated house -> lord of the year;
-- reception and mutual reception;
-- terminal dispositors and cycles.
+# Core idea
 
-These relationships are modeled as a directed graph.
+The horoscope wheel is not astrology itself. It is one historical encoding of astrological information.
 
-The canonical specimen immediately produces a terminal two-node strongly connected component:
+The wheel is excellent at preserving:
 
-```text
-Mercury <-> Venus
-```
+- zodiacal longitude;
+- sign placement;
+- house placement;
+- angular relationships.
 
-Mercury is in Libra and therefore disposited by Venus. Venus is in Virgo and therefore disposited by Mercury. Under traditional domicile rulership, every classical planet in the specimen eventually reaches this cycle.
+But astrology also contains:
 
-This yields a measurable topological fact of the selected symbolic model:
-
-```text
-Terminal SCC: {Mercury, Venus}
-Associated houses: {3rd, 2nd}
-```
-
-The astrological meaning of that fact is interpretive. The existence of the graph cycle is computational.
-
-### 2.3 Life Spectrum — **Time**
-
-**Question:** Which parts of the natal architecture are activated, and when?
-
-The long-term design replaces the transit bi-wheel as the primary temporal interface with a spectrogram-like representation.
-
-- horizontal axis: time;
-- vertical axis: natal architecture;
-- intensity: explicitly defined symbolic activation.
-
-Potential channels include:
-
-- planets;
-- houses;
-- angles;
+- directed rulership;
+- dispositors;
+- sect;
+- dignity/condition;
 - lots;
-- ruler chains;
-- house axes;
-- time-lord periods.
+- multi-object configurations;
+- hierarchical timing systems;
+- continuously changing transits;
+- recurrence across time.
 
-Potential activation sources include:
+These are not all the same mathematical object.
 
-- transits;
-- annual profections;
-- zodiacal releasing;
-- progressions;
-- directions;
-- eclipses;
-- stations;
-- ingress events.
-
-**Important:** v0.1 does not fabricate temporal data. The Life Spectrum pane is deliberately marked as incomplete until an ephemeris-backed calculation layer exists.
-
-### 2.4 Life Space — **State space**
-
-**Question:** Where is the system within its larger evolution?
-
-At time `t`, the full symbolic condition may be encoded as a high-dimensional state vector:
-
-```text
-x(t) = [x1(t), x2(t), ..., xn(t)]
-```
-
-Candidate components include:
-
-- transit-to-natal aspect strengths;
-- house activation;
-- ruler activation;
-- time-lord state;
-- elemental/modal composition;
-- planetary condition;
-- lot activation;
-- selected graph-topology features.
-
-Dimensionality reduction may then be used for exploratory representation:
-
-- PCA;
-- UMAP;
-- multidimensional scaling;
-- graph embeddings;
-- later, learned latent models if justified by sufficient data.
-
-The result is a trajectory through symbolic state space rather than a sequence of isolated transit charts.
-
-State-space work is intentionally deferred until the deterministic temporal model is stable.
-
----
-
-## 3. Core computational model
-
-NAF represents an astrological system as:
+Noetic Atlas therefore represents an astrological system as a set of coordinated layers:
 
 ```text
 A = {P, H, S, E, R, L, T}
@@ -175,630 +96,418 @@ A = {P, H, S, E, R, L, T}
 
 where:
 
-| Symbol | Layer | Description |
+| Symbol | Meaning |
+|---|---|
+| `P` | planets, angles, nodes, selected points |
+| `H` | houses/places |
+| `S` | sign and qualitative states |
+| `E` | aspects and other relations |
+| `R` | rulers, dispositors, reception, dependencies |
+| `L` | lots and derived coordinates |
+| `T` | transits and timing regimes |
+
+Different layers receive different visual representations.
+
+---
+
+# The four visual questions
+
+## 1. Natal Field — Structure
+
+**What is the natal architecture?**
+
+The Natal Field exposes:
+
+- clusters;
+- oppositional axes;
+- trine subnetworks;
+- square complexes;
+- conjunction structures;
+- derived-point participation;
+- angular concentration;
+- later, higher-order motifs and condition.
+
+## 2. Flow Map — Directed dependency
+
+**Where does the chart route?**
+
+The Flow Map represents relationships such as:
+
+```text
+house → sign → ruler → occupied sign → dispositor → ...
+```
+
+It makes visible:
+
+- ruler pathways;
+- mutual dispositions;
+- terminal dispositors;
+- strongly connected components;
+- route convergence;
+- house-to-house dependency.
+
+## 3. Life Spectrum — Time
+
+**Which parts of the natal architecture are activated, and when?**
+
+Planned temporal representation:
+
+```text
+x-axis    = time
+y-axis    = natal structures
+intensity = explicit activation model
+```
+
+Channels may include transits, profections, zodiacal releasing, stations, eclipses, and other documented timing systems.
+
+No temporal band should exist without a traceable calculation.
+
+## 4. Life Space — State Space
+
+**How does the complete symbolic configuration evolve?**
+
+A future state vector may represent the chart at time `t`:
+
+```text
+x(t) = [x1(t), x2(t), ..., xn(t)]
+```
+
+Only after feature semantics are stable will dimensionality reduction, recurrence analysis, or chart manifolds be treated as legitimate research objects.
+
+---
+
+# Epistemic contract
+
+Noetic Atlas distinguishes six statement classes.
+
+| Layer | Type | Example |
 |---|---|---|
-| `P` | Planets / points | Planets, angles, nodes, lots, selected sensitive points |
-| `H` | Houses | Places/domains and their rulers |
-| `S` | States | Sign, element, modality, dignity, sect, speed, direction |
-| `E` | Edges | Aspects and other pairwise relationships |
-| `R` | Rulership | Directed rulers, dispositors, reception, dependency paths |
-| `L` | Lots | Derived lots and related rulership structure |
-| `T` | Time | Transits and timing systems |
+| E0 | Input | birth time, location, imported placement |
+| E1 | Astronomy | longitude, speed, ASC, MC, solar altitude |
+| E2 | Astrological rule | whole-sign house, aspect, sect, lot, ruler |
+| E3 | Mathematical derivation | SCC, route depth, centrality, motif |
+| E4 | Research exploratory | harmonic concentration, convergence metric |
+| E5 | Interpretation | Hellenistic delineation, modern archetype, AI synthesis |
 
-These layers are intentionally not collapsed into one mathematical representation.
+A downstream layer cannot alter an upstream result.
 
-- longitude is circular/angular data;
-- aspects are pairwise relations;
-- rulership is directed topology;
-- element/modality are categorical summaries;
-- time-lord methods are hierarchical regimes;
-- transits are time-varying inputs.
-
-The framework uses coordinated views because different data structures deserve different visual encodings.
+AI belongs at E5 and as a navigator over E0–E4; it is not an ephemeris or hidden rule engine.
 
 ---
 
-## 4. Epistemic contract
+# Truth and provenance
 
-This repository must maintain a strict separation between four layers of output.
+The central engineering principle is:
 
-### Layer A — Astronomical fact
+> **Every displayed result should be reversible to its input, formula/rule, model version, intermediate values, output, and known uncertainty.**
 
-Examples:
+The framework therefore maintains a **Derivation Ledger**.
 
-- planetary longitude;
-- angular separation;
-- station or retrograde state;
-- ephemeris-derived time.
-
-These should come from deterministic astronomical calculations.
-
-### Layer B — Astrological calculation
-
-Examples:
-
-- whole-sign house placement;
-- sign ruler;
-- dispositor chain;
-- aspect type and orb;
-- lot calculation;
-- profection lord;
-- graph centrality within an explicitly defined astrological network.
-
-These are deterministic outputs **conditional on a selected astrological rule set**.
-
-### Layer C — Traditional interpretation
-
-Examples:
-
-- Hellenistic delineation;
-- Jyotish interpretation;
-- medieval/traditional interpretation;
-- transpersonal interpretation.
-
-These are claims made inside historical or contemporary astrological traditions and must be labeled accordingly.
-
-### Layer D — AI synthesis
-
-AI may:
-
-- navigate views;
-- compare computed states;
-- summarize salient topology;
-- explain a ruler path;
-- synthesize traditions;
-- generate interpretive hypotheses.
-
-AI must not silently invent astronomical positions, aspects, houses, or timing periods.
-
-The intended pipeline is:
+A future UI should allow a user to click any result and ask:
 
 ```text
-Ephemeris
-   -> Astrological Rule Engine
-   -> Structured Model
-   -> Visualization
-   -> AI Navigation / Interpretation
+Why is this here?
 ```
 
----
-
-## 5. Quantitative discipline
-
-NAF deliberately uses ideas from network science, signal processing, dynamical systems, and information visualization. These mathematical tools are used to characterize the **formal astrological model**, not to imply a presently established physical mechanism.
-
-For example, an aspect coupling weight may be defined as:
+and trace backward:
 
 ```text
-w_ij = f(aspect_type, orb, applying_state, condition, context)
+interpretation
+→ structural finding
+→ astrological rule
+→ mathematical derivation
+→ astronomical coordinate
+→ civil-time resolution
+→ original input
 ```
 
-That number is a model-relative score.
-
-It is **not** a measured number of joules, volts, tesla, or another physical unit.
-
-Likewise, terms such as:
-
-- coupling;
-- resonance;
-- excitation;
-- stability;
-- attractor;
-- interference;
-- activation;
-
-may be used as computational or visual-analytic concepts only when their definitions are explicit. They must not be allowed to drift into unsupported claims of physical measurement.
+This is the architectural definition of Noetic Atlas integrity.
 
 ---
 
-## 6. Canonical specimen: v0.1
+# Birth-data pipeline
 
-The initial development chart is intentionally fixed so that visualization behavior can be tested against a stable reference.
+The public input is intentionally simple:
 
-### Core placements
+```json
+{
+  "local_datetime": "1984-10-03T21:17:00",
+  "latitude": 40.789,
+  "longitude": -73.135,
+  "elevation_m": 0
+}
+```
 
-| Object | Position | Whole-sign house |
-|---|---:|---:|
-| ASC | Leo 11°38′ | 1 |
-| Sun | Libra 10°57′ | 3 |
-| Moon | Gemini 8°03′ | 11 |
-| Mercury | Libra 19°30′ | 3 |
-| Venus | Virgo 14°49′ | 2 |
-| Mars | Virgo 15°17′ | 2 |
-| Jupiter | Aquarius 7°07′ | 7 |
-| Saturn | Scorpio 25°09′ | 4 |
-| Uranus | Sagittarius 14°42′ | 5 |
-| Neptune | Capricorn 0°58′ | 6 |
-| Pluto | Scorpio 3°44′ | 4 |
-| North Node | Taurus 10°31′ Rx | 10 |
-| Lilith | Taurus 13°47′ | 10 |
-| Chiron | Gemini 14°33′ Rx | 11 |
-| Fortune | Sagittarius 14°32′ | 5 |
-| Vertex | Sagittarius 28°23′ | 5 |
-| MC | Taurus 0°44′ | 10 sign |
+Pipeline:
 
-### High-value test structures
+```text
+local date/time + lat/lon
+        ↓
+IANA time-zone resolution
+        ↓
+historical UTC conversion
+        ↓
+astronomy provider
+        ↓
+planets + velocities + ASC + MC + solar altitude
+        ↓
+whole-sign houses + aspects + sect + lots
+        ↓
+rulership/topology
+        ↓
+research descriptors
+        ↓
+visualization/export/interpretation
+```
 
-The chart was selected because it contains several visually useful structures:
-
-1. **Venus-Mars conjunction** in Virgo, separated by approximately 0°27′.
-2. **Mercury-Venus terminal dispositor cycle** under traditional rulership.
-3. **Sun-Moon-Jupiter air trine network**.
-4. **Fortune-Uranus conjunction** near 14° Sagittarius.
-5. **Fortune-Chiron opposition** that is effectively exact in the supplied data.
-6. **Venus/Mars-Uranus/Chiron mutable tension complex**.
-7. **Saturn-Pluto concentration** in the 4th whole-sign house.
-8. Multiple angular connections to the Leo Ascendant.
-
-These structures allow the same specimen to test cluster recognition, topology, derived-point overlays, ruler chains, and later temporal activation.
+Repeated DST times are treated as ambiguous rather than guessed. Nonexistent local times are rejected.
 
 ---
 
-## 7. Repository layout
+# Hellenistic baseline
+
+The current baseline rule model uses:
+
+```text
+Tropical zodiac
+Whole Sign houses
+Traditional domicile rulers
+Day/night sect
+Major aspects under named orb policy
+Paulus/Panaretus seven Hermetic lots
+```
+
+Implemented lots:
+
+- Fortune;
+- Spirit;
+- Eros;
+- Necessity;
+- Courage;
+- Victory;
+- Nemesis.
+
+The lot calculation stores the complete directed-distance proof and sect-specific formula direction.
+
+Historical variants are to be implemented as separate rule IDs rather than silently blended.
+
+See [Astrological Model](docs/ASTROLOGICAL_MODEL.md).
+
+---
+
+# Research mission
+
+Noetic Atlas is not limited to reproducing mainstream astrology software.
+
+The framework is deliberately designed to investigate structures that may be difficult to perceive manually, including:
+
+- ruler-route convergence;
+- terminal dispositor basins;
+- higher-order graph motifs;
+- harmonic organization beyond named aspects;
+- lot/planet/ruler multilayer interaction;
+- temporal recurrence;
+- cross-technique timing convergence;
+- structurally similar life periods;
+- family/relationship graph interaction;
+- population-level chart neighborhoods;
+- agreement/disagreement across astrological traditions.
+
+A mathematically interesting result is **not automatically an astrological discovery**.
+
+Promotion path:
+
+```text
+formal definition
+→ deterministic implementation
+→ tests
+→ cross-chart replication
+→ null/randomized comparison
+→ expert inspection
+→ longitudinal/cohort validation
+→ interpretive hypothesis
+```
+
+See [Research Program](docs/RESEARCH_PROGRAM.md).
+
+---
+
+# Repository structure
 
 ```text
 astroframework/
 ├── README.md
+├── package.json
+├── src/
+│   ├── astronomy/
+│   ├── time/
+│   ├── kernel/
+│   ├── pipeline/
+│   └── research/
 ├── prototype/
-│   └── noetic_atlas_v01.html
-├── data/
-│   └── canonical_specimen_v01.json
-└── docs/
-    ├── ARCHITECTURE.md
-    ├── PRODUCT.md
-    └── ROADMAP.md
+├── data/canonical/
+├── tests/
+├── docs/
+└── .github/workflows/
 ```
 
-The initial prototype is dependency-free HTML/CSS/JavaScript so the core visual ideas remain inspectable.
-
-The production architecture will later separate calculation, state, rendering, and AI orchestration.
+Detailed ownership is documented in [Developer Guide](docs/DEVELOPER_GUIDE.md) and [Architecture](docs/ARCHITECTURE.md).
 
 ---
 
-## 8. Running the v0.1 prototype
+# Run locally
 
-No build system is required.
+Install dependencies:
 
-### Option A — open directly
-
-Open:
-
-```text
-prototype/noetic_atlas_v01.html
+```bash
+npm install
 ```
 
-in a modern browser.
+Run the deterministic test suite:
 
-### Option B — serve locally
+```bash
+npm test
+```
 
-From the repository root:
+Serve the browser prototype:
 
 ```bash
 python -m http.server 8000
 ```
 
-Then navigate to:
+Then open:
 
 ```text
-http://localhost:8000/prototype/noetic_atlas_v01.html
+http://localhost:8000/prototype/
 ```
+
+The current prototype supports birth-data input and imported-chart input and renders computed analysis from the framework.
 
 ---
 
-## 9. Target production architecture
+# Canonical regression fixture
 
-The production system should be split into five layers.
+`NAF-CANON-0001` is the permanent first regression specimen.
 
-### 9.1 Astronomy adapter
+It is useful because the chart contains known structural invariants that exercise multiple parts of the framework.
 
-Responsibilities:
+Examples include:
 
-- ephemeris queries;
-- longitude/latitude/speed;
-- station state;
-- time-zone normalization;
-- house-angle inputs.
+- Mercury ↔ Venus terminal dispositor SCC;
+- complete Sun–Moon–Jupiter air trine under the current major-aspect policy;
+- Fortune near Uranus;
+- night-sect Fortune/Spirit calculations;
+- multiple house routes converging on the same terminal structure.
 
-Candidate implementation:
+The fixture verifies software behavior.
 
-- Swiss Ephemeris or another validated astronomical source;
-- server-side wrapper where licensing or native dependencies require it.
+It is **not evidence that a new astrological theory is correct**.
 
-### 9.2 Rule engine
-
-Responsibilities:
-
-- house assignment;
-- aspects;
-- orbs;
-- sect;
-- dignity;
-- rulers;
-- dispositors;
-- lots;
-- profections;
-- zodiacal releasing;
-- tradition-specific configuration.
-
-Rules must be data-driven where possible. A Hellenistic rule set must not be silently mixed with a modern/transpersonal rule set.
-
-### 9.3 Structured chart model
-
-Responsibilities:
-
-- canonical schema;
-- graph construction;
-- time-state representation;
-- provenance metadata;
-- reproducible serialization;
-- versioning.
-
-### 9.4 Visualization layer
-
-Candidate technologies:
-
-- D3.js for custom network, matrix, and timeline work;
-- Observable Plot for rapid analytical views;
-- Cytoscape.js or Graphology for topology and layouts;
-- Three.js only when 3-D materially improves comprehension.
-
-3-D is not a goal by itself. If two dimensions communicate the structure more clearly, use two dimensions.
-
-### 9.5 AI orchestration layer
-
-AI should consume computed JSON rather than raw birth data alone.
-
-Example tool actions:
-
-```text
-trace_house_ruler(11)
-show_aspects("Saturn", applying_only=true)
-compare_states("2019-01-01", "2026-08-11")
-highlight_scc("Mercury", "Venus")
-explain_provenance(edge_id)
-```
-
-The interface should allow the model to manipulate the visual state as part of its answer.
+Synthetic fixtures should be preferred for boundary-condition testing.
 
 ---
 
-## 10. Proposed data contracts
+# Current research descriptors
 
-### Placement
+Experimental descriptors currently include:
 
-```json
-{
-  "id": "Venus",
-  "longitude": 164.816667,
-  "sign": "Virgo",
-  "sign_degree": 14.816667,
-  "house": 2,
-  "retrograde": false
-}
-```
+- circular harmonic spectrum;
+- ruler-route convergence;
+- multilayer participation.
 
-### Aspect
+These outputs are explicitly labeled exploratory.
 
-```json
-{
-  "source": "Venus",
-  "target": "Mars",
-  "type": "conjunction",
-  "orb_deg": 0.45,
-  "phase": "applying",
-  "rule_set": "natal_core_v0.1"
-}
-```
-
-### Rulership edge
-
-```json
-{
-  "source": "Mercury",
-  "target": "Venus",
-  "relation": "disposited_by",
-  "basis": "traditional_domicile",
-  "source_sign": "Libra"
-}
-```
-
-### Temporal activation
-
-```json
-{
-  "timestamp": "2026-08-11T00:00:00-04:00",
-  "target": "Sun",
-  "activation_type": "transit_aspect",
-  "source": "Saturn",
-  "score": 0.82,
-  "score_model": "orb_weight_v0.1",
-  "provenance": {}
-}
-```
-
-Every score must identify the scoring model that produced it.
+Do not interpret them as new astrological doctrine without separate research.
 
 ---
 
-## 11. Tradition adapters
-
-A long-term objective is to treat traditions as switchable rule systems rather than flattening them into one synthetic astrology.
-
-Initial adapters envisioned:
-
-### Hellenistic
-
-- tropical zodiac;
-- whole-sign places;
-- traditional rulers;
-- sect;
-- dignities;
-- lots;
-- annual profections;
-- zodiacal releasing;
-- bonification/maltreatment.
-
-### Jyotish
-
-A separate sidereal adapter with explicit ayanamsha and its own rule definitions. It should not reuse western dignity logic by accident.
-
-### Transpersonal / modern
-
-- Uranus, Neptune, Pluto;
-- Chiron when selected;
-- psychological/archetypal interpretation;
-- configurable modern rulership.
-
-The user should always know which model generated a visual or interpretation.
-
----
-
-## 12. Development roadmap
-
-### v0.1 — canonical static specimen
-
-**Status: current**
-
-- [x] Canonical natal data fixture
-- [x] Aspect node-link prototype
-- [x] Coherence/tension filters
-- [x] Directed house-ruler chains
-- [x] Terminal Mercury-Venus SCC identified
-- [x] Life Spectrum placeholder that explicitly refuses fake transit data
-- [x] State-space placeholder that explicitly refuses fake trajectories
-- [ ] Automated tests for current fixture
-
-### v0.2 — deterministic graph kernel
-
-- [ ] Convert prototype data into reusable modules
-- [ ] Calculate aspects from longitude rather than hard-code them
-- [ ] Build generic dispositor graph
-- [ ] Tarjan/Kosaraju SCC detection
-- [ ] centrality and dependency depth
-- [ ] aspect matrix
-- [ ] provenance inspector
-- [ ] JSON schema validation
-
-### v0.3 — ephemeris-backed time
-
-- [ ] integrate validated ephemeris
-- [ ] calculate transits over arbitrary date windows
-- [ ] applying/separating logic through time
-- [ ] configurable orb functions
-- [ ] Life Spectrum heat map
-- [ ] exact-hit and station markers
-- [ ] event annotations
-
-### v0.4 — Hellenistic timing layer
-
-- [ ] annual profections
-- [ ] lots and rulers
-- [ ] zodiacal releasing
-- [ ] nested timing regimes
-- [ ] synchronized timeline overlays
-
-### v0.5 — AI navigation
-
-- [ ] structured query API
-- [ ] natural-language view manipulation
-- [ ] source/provenance display
-- [ ] compare two periods
-- [ ] explain graph routes
-- [ ] interpretation layer labels
-
-### v0.6+ — research and scale
-
-- [ ] multiple chart import
-- [ ] synastry/relationship topology
-- [ ] family-system maps
-- [ ] population-level embeddings
-- [ ] recurrence analysis
-- [ ] HCI user studies
-- [ ] expert vs novice comprehension studies
-
----
-
-## 13. Testing strategy
-
-### Unit tests
-
-Test deterministic functions independently:
-
-- longitude normalization;
-- sign assignment;
-- whole-sign house assignment;
-- aspect detection;
-- orb calculation;
-- applying/separating state;
-- ruler lookup;
-- dispositor chains;
-- SCC detection;
-- lot formulas;
-- profections.
-
-### Golden-fixture tests
-
-The canonical v0.1 chart should remain a permanent fixture.
-
-Expected facts include:
-
-```text
-Venus -> Mercury
-Mercury -> Venus
-terminal SCC == {Mercury, Venus}
-Sun -> Venus
-Moon -> Mercury
-Mars -> Mercury
-Jupiter -> Saturn -> Mars -> Mercury
-Saturn -> Mars -> Mercury
-```
-
-### Visualization tests
-
-- deterministic node identity;
-- no hidden relationships after filtering;
-- selected-node state synchronized across views;
-- readable labels at supported breakpoints;
-- accessibility descriptions for nonvisual navigation.
-
-### Scientific/HCI evaluation
-
-The traditional chart can serve as a control condition.
-
-Candidate metrics:
-
-- time to trace a house ruler;
-- aspect-pattern identification accuracy;
-- recall;
-- subjective cognitive load;
-- insight generation;
-- expert/novice differences.
-
-A defensible research question is:
-
-> What visualization methods most effectively communicate the relational and temporal structure of astrological systems?
-
-This question can be studied independently of claims about astrology's causal mechanism.
-
----
-
-## 14. Design principles
+# Design principles
 
 1. **Calculation before narration.**
-2. **Show the structure, not only the conclusion.**
-3. **Never manufacture precision.**
-4. **Every quantitative score must have a definition.**
-5. **Traditions are explicit models, not hidden mixtures.**
-6. **2-D before 3-D unless 3-D clearly improves comprehension.**
-7. **The wheel remains available as a reference, not as the only interface.**
-8. **AI navigates deterministic data; it does not replace deterministic data.**
-9. **A user should be able to inspect why every displayed relationship exists.**
-10. **The framework should be useful to skeptics, practitioners, students, and researchers as an information-visualization system even when they disagree about metaphysics.**
+2. **Resolution over prophecy.**
+3. **Show the structure before telling the story.**
+4. **Show the work.**
+5. **Never manufacture precision.**
+6. **Ambiguity is data.**
+7. **Unsupported is better than guessed.**
+8. **Traditions are explicit rule models, not hidden mixtures.**
+9. **Every quantitative score needs a definition.**
+10. **Research descriptors are not interpretation by default.**
+11. **The wheel remains a reference, not the sole visual grammar.**
+12. **AI navigates and explains deterministic state; it does not replace it.**
+13. **A failed hypothesis is an acceptable research result.**
+14. **The consumer interface may be simple; the underlying methodology must remain inspectable.**
 
 ---
 
-## 15. Product language
+# Product direction
 
-Preferred public language:
+The commercial moat is not generative horoscope prose.
 
-- **Natal Field** — See your architecture.
-- **Flow Map** — See where it leads.
-- **Life Spectrum** — See when it activates.
-- **Life Space** — See where you are in the larger pattern.
-
-Preferred technical language:
-
-- Structure
-- Rulership topology
-- Temporal activation
-- State-space representation
-- Symbolic coupling
-- Provenance
-- Rule set
-- Model-relative score
-
-Avoid unsupported physical claims such as measured astrological force or energy unless a future empirical model establishes those quantities independently.
-
----
-
-## 16. Product direction and monetization
-
-The defensible moat is not LLM-generated horoscope text. It is the combination of:
+It is the combination:
 
 ```text
 Astrological Data Model
-+ Deterministic Rule Engine
++ Deterministic Calculation Kernel
++ Provenance / Derivation Ledger
 + Visual Grammar
 + Longitudinal Life Map
++ Research Observatory
 + Explainable AI
 ```
 
-Potential product tiers:
+Potential surfaces include:
 
-### Free
+- individual self-exploration;
+- professional astrologer workspaces;
+- astrological education;
+- anonymized/consented research tooling;
+- future comparative-tradition analysis.
 
-- canonical natal field;
-- basic ruler flow;
-- limited explanatory AI.
-
-### Individual
-
-- full Life Spectrum;
-- event annotation;
-- historical comparison;
-- future activation windows;
-- multiple timing systems;
-- saved explorations.
-
-### Professional astrologer
-
-- client charts;
-- consultation workspace;
-- comparison views;
-- exportable visual reports;
-- configurable traditions;
-- research-grade provenance.
-
-### Education
-
-- guided ruler tracing;
-- aspect-pattern lessons;
-- traditional model toggles;
-- explainable step-by-step calculations.
-
-### Research
-
-- anonymized structural datasets;
-- chart similarity;
-- longitudinal annotation;
-- reproducible model definitions;
-- statistical and HCI study tooling.
+The product should increase agency rather than dependence.
 
 ---
 
-## 17. Immediate engineering priorities
+# What the project does not claim
 
-The next development work should be narrow and unforgiving:
+Noetic Atlas does not currently claim that astrological relationships are measured physical forces or fields.
 
-1. extract hard-coded prototype data into a schema-validated fixture;
-2. implement deterministic aspect calculation from absolute longitude;
-3. implement generic traditional dispositor graphs;
-4. automatically identify SCCs and terminal cycles;
-5. render an aspect matrix alongside the node-link view;
-6. add provenance panels for every edge;
-7. integrate a validated ephemeris;
-8. only then activate the Life Spectrum.
+Network science, signal-processing, state-space, phase, resonance, coupling, and field language are used as **formal representations and analytical metaphors unless independent evidence establishes a literal physical counterpart**.
 
-State-space embeddings and machine learning should wait until the underlying feature representation is stable enough that the embedding has a defensible meaning.
+The mathematics of the representation can be exact while the metaphysical interpretation remains open.
 
 ---
 
-## 18. Current repository status
+# Next engineering movement
 
-This repository is an **early research and product prototype**.
+The next major framework layer is the **Astrological Condition Engine**.
 
-Current visual outputs should be interpreted as interfaces over explicit astrological rules, not as validation that astrological symbolism corresponds to a measured causal field.
+Before building Life Spectrum at scale, the natal model should gain a richer traditional condition representation, including source-controlled versions of:
 
-The goal of the framework is more fundamental:
+- dignity;
+- triplicity;
+- bounds/terms;
+- angularity;
+- sect condition;
+- reception;
+- overcoming;
+- bonification/maltreatment;
+- other documented Hellenistic condition techniques.
 
-> **Here is the structure. Here is how it is connected. Here is how it changes. Explore it.**
+The goal is not an opaque “strength score.”
+
+The goal is a richer, inspectable field in which each condition remains independently traceable.
+
+See [Roadmap](docs/ROADMAP.md).
+
+---
+
+# North star
+
+The intended experience is no longer:
+
+> “Here is your horoscope.”
+
+It is:
+
+> **Here is the structure. Here is how it was calculated. Here is how it is connected. Here is how it changes. Here is what different models say about it. Explore it.**
