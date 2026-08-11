@@ -10,6 +10,23 @@ A useful distinction is:
 pattern detected ≠ astrological significance established
 ```
 
+## Current promotion status
+
+v0.3 research outputs are deliberately marked:
+
+```text
+status = exploratory-not-interpretive
+promotion_status = hold
+condition_engine_complete = false
+temporal_engine_complete = false
+```
+
+This means the descriptors may be inspected, compared, visualized, and used to generate research questions, but they are **not eligible to become consumer-facing natal strength, fate, prediction, psychological, spiritual, or causal claims**.
+
+The hold remains in force until the v0.4 condition substrate is stable and the relevant descriptor has survived replication and null-model testing. Temporal claims additionally require a stable temporal engine.
+
+The reason is methodological: a descriptor built on an incomplete natal substrate may be mathematically correct while omitting traditional variables that materially change the chart model. Interesting numbers should not acquire interpretive authority merely because they are reproducible.
+
 ## Initial descriptors
 
 ### Circular harmonic spectrum
@@ -57,12 +74,30 @@ Candidate new structures should pass through:
 7. Longitudinal/event comparison where ethically and methodologically appropriate.
 8. Only then, interpretive hypotheses.
 
+## Promotion gates
+
+A descriptor may move from exploratory output to a candidate astrological technique only when all applicable gates are documented:
+
+```text
+structural substrate complete for the variables being claimed
+→ condition sensitivity evaluated
+→ cross-chart replication
+→ null/randomized baseline
+→ parameter sensitivity analysis
+→ expert review
+→ longitudinal or cohort evidence when the claim is temporal or experiential
+→ explicit interpretive hypothesis
+```
+
+A descriptor can fail any gate and remain useful as a mathematical diagnostic. Failure to acquire astrological meaning does not invalidate the computation itself.
+
 ## Future directions
 
 Candidate families include:
 
 - cross-layer motif discovery involving planets, houses, lots and rulers simultaneously;
 - graph bottleneck and bridge analysis;
+- condition-aware graph motifs once v0.4 exists;
 - recurrent activation motifs over time;
 - similarity of life periods in a high-dimensional activation space;
 - agreement/disagreement among Hellenistic, medieval, transpersonal and Jyotish rule sets;
