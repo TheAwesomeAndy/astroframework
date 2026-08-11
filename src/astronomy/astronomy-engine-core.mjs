@@ -1,4 +1,4 @@
-import { normalize360, signDegreeFromLongitude } from '../kernel/noetic-kernel.mjs';
+import { normalize360, SIGN_ORDER } from '../kernel/noetic-kernel.mjs';
 
 export const ASTRONOMY_ENGINE_VERSION = '2.1.19';
 export const ASTRONOMY_ENGINE_CDN = `https://cdn.jsdelivr.net/npm/astronomy-engine@${ASTRONOMY_ENGINE_VERSION}/esm/astronomy.js`;
@@ -6,6 +6,10 @@ export const CORE_BODIES = ['Sun','Moon','Mercury','Venus','Mars','Jupiter','Sat
 
 function assertFinite(name,x,min=-Infinity,max=Infinity){
   x=Number(x); if(!Number.isFinite(x)||x<min||x>max) throw new Error(`${name} must be a finite number in [${min}, ${max}].`); return x;
+}
+function signDegreeFromLongitude(longitude){
+  const x=normalize360(longitude), si=Math.floor(x/30);
+  return {sign:SIGN_ORDER[si],degree:x-si*30,longitude:x};
 }
 export function parseExplicitTimestamp(timestamp){
   const s=String(timestamp||'').trim();
@@ -27,7 +31,7 @@ function eclipticUnitToHorizontal(A,rotation,date,lambda){
   const ect=A.VectorFromSphere({lat:0,lon:normalize360(lambda),dist:1},date);
   return A.RotateVector(rotation,ect);
 }
-function solveLinearCircleRoot(A0,B90){ return normalize360(Math.atan2(-A0,B90)*180/Math.PI); }
+function solveLinearCircleRoot(a0,b90){ return normalize360(Math.atan2(-a0,b90)*180/Math.PI); }
 
 export function calculateAngles(A,date,observer){
   const rot=A.CombineRotation(A.Rotation_ECT_EQD(date),A.Rotation_EQD_HOR(date,observer));
