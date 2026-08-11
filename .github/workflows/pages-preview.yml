@@ -3,7 +3,7 @@ name: Deploy Noetic Atlas preview
 on:
   push:
     branches:
-      - noetic-atlas-v0.3
+      - main
     paths:
       - 'prototype/**'
       - 'src/**'
@@ -26,10 +26,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Configure and enable GitHub Pages
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
-        with:
-          enablement: true
 
       - name: Build static preview bundle
         run: |
