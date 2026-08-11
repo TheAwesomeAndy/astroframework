@@ -1,49 +1,56 @@
 # Noetic Atlas
 
-**An auditable visual-analytics framework for astrological structure, topology, condition, graph analysis, and time.**
+**An auditable visual-analytics framework for astrological structure, topology, condition, energetic synthesis, graph analysis, and time.**
 
-> **See the structure. Follow the flow. Explain the pattern. Show the work.**
+> **See the structure. Follow the flow. Understand the pattern. Show the work.**
 
 Noetic Atlas is an experimental computational framework for representing astrology as a multilayer symbolic system rather than forcing every relationship into a single horoscope wheel.
 
 The project has two linked goals:
 
-1. build a useful public/professional instrument for exploring astrological structure and timing;
-2. build a research environment in which structural and temporal claims can be formulated, reproduced, compared with alternatives, and rejected when they fail.
+1. build a useful public/professional instrument for exploring astrological structure, condition, interpretation, and timing;
+2. build a research environment in which structural, interpretive, and temporal claims can be formulated, reproduced, compared with alternatives, and rejected when they fail.
 
 The underlying research framework is the **Noetic Atlas Framework (NAF)**.
 
-## Current development state
+## Current release
 
-**Development candidate:** v0.4.1 — Graph Analytics + Explainable Findings  
-**Development branch:** `noetic-atlas-v0.4.1-graph-findings`  
+**Current public release:** v0.4.1.2 — Energetic Whole-Chart Synthesis  
+**Energetic interpretation model:** `naf.interpretation.energetic_synthesis.v0.4.1.2`  
+**Natural-house overlay:** `naf.interpretation.natural_house_overlay.modern.v1`  
 **Graph-analysis model:** `naf.research.graph_analytics.v0.4.1`  
-**Finding model:** `naf.finding.explainable.v0.4.1`  
 **Primitive condition model:** `naf.condition.primitive.hellenistic.v0.4.0b`  
 **Condition record schema:** `naf.condition.record.v0.4.0a`  
 **Structural analysis envelope:** `naf.analysis.v0.3.1`  
 **Default/deployed branch:** `main`
 
-The public Pages build follows `main`. Until v0.4.1 is explicitly promoted, the deployed site remains the latest tested `main` release.
+The public Pages build follows `main`.
 
-Local v0.4.1 testing surface:
+Current browser surface:
 
 ```text
-prototype/v041.html
+prototype/v0412b.html
 ```
 
-v0.4.1 changes the role of visualization in the product:
+v0.4.1.2 changes the role of the interpretation layer:
 
 ```text
-graph ≠ conclusion
+graph ≠ reading
+metric ≠ meaning
 
-graph
-→ derivation
-→ measurement
-→ readable finding
-→ explicitly labeled interpretive hypothesis
+coordinate / rule / graph fact
+→ energetic translation
+→ actual sign + actual Whole Sign house
+→ ruler/dispositor routing
+→ aspect geometry
+→ traditional condition where applicable
+→ balanced / depleted / excessive expression
+→ material-life manifestation
+→ soul/spirit inquiry
 → proof
 ```
+
+The interface uses energy/current/field language as a **symbolic interpretive model**, not as a claim that astrology has been experimentally demonstrated to operate through measurable physical forces.
 
 ---
 
@@ -96,7 +103,7 @@ See:
 
 # v0.4.1 — Graph Analytics + Explainable Findings
 
-The earlier graph views exposed structure. v0.4.1 asks what additional structural facts can be **derived from the graph itself**, why those facts matter mathematically, and how any astrological interpretation should be separated from the derivation.
+The graph layer asks what additional structural facts can be **derived from the graph itself**, why those facts matter mathematically, and how any astrological interpretation should remain downstream from the derivation.
 
 The implementation lives in:
 
@@ -110,48 +117,17 @@ and is integrated into:
 src/research/pattern-engine.mjs
 ```
 
-## 1. Classical dispositor functional-graph analysis
+## Classical dispositor functional graph
 
-The condition-qualified rulership analysis uses a classical-seven subgraph rather than silently mixing the condition system with modern outer-planet nodes.
+Under traditional domicile rulership the classical-seven network is treated as a functional directed graph. Current derivations include:
 
-Under traditional domicile rulership each classical planet has one outgoing ruler edge when the full classical set is present. v0.4.1 therefore treats this as a functional directed graph and computes:
+- SCC condensation;
+- terminal basin membership and basin fraction;
+- route depth to terminal SCC;
+- upstream route capture;
+- largest nonterminal path bottleneck.
 
-### SCC condensation
-
-```text
-G_dispositor → G_SCC
-```
-
-Strongly connected components are collapsed into supernodes, producing an acyclic condensation graph.
-
-### Terminal basin capture
-
-For terminal SCC `C`:
-
-```text
-B(C) = {v : v reaches C}
-β(C) = |B(C)| / |V|
-```
-
-This measures routing concentration into a terminal component. It is **not** a strength score.
-
-### Route depth
-
-```text
-d(v,C) = number of ruler transitions before first entry into terminal SCC C
-```
-
-This distinguishes immediate terminal membership from multi-step dependency chains.
-
-### Upstream capture / preterminal bottleneck
-
-```text
-A(v) = {u : v occurs on route(u)}
-```
-
-The engine identifies the most traversed **nonterminal** node so that terminal-cycle members do not trivially dominate the measure.
-
-For the canonical regression specimen, the current expected classical structure is:
+For the canonical regression specimen:
 
 ```text
 terminal SCC: Mercury ↔ Venus
@@ -163,43 +139,31 @@ largest nonterminal route bottleneck: Mars
 Mars upstream capture: 3 routes
 ```
 
-These are graph-derived facts under the selected rulership model. Their life meaning remains a separate hypothesis.
+Those are graph-derived facts under the selected rulership model. They are not, by themselves, claims of psychological dominance, destiny, causation, or spiritual superiority.
 
-## 2. Aspect-network analysis
+## Aspect-network analysis
 
-The aspect layer is treated as a different graph object:
+The aspect layer is treated as a separate graph:
 
 ```text
 G_aspect = (V, E_aspect)
 ```
 
-v0.4.1 currently computes:
+Current calculations include:
 
 - connected components;
 - degree;
-- local clustering coefficient;
-- mean clustering coefficient;
+- local and mean clustering coefficient;
 - normalized unweighted betweenness centrality;
 - articulation points;
 - bridges;
 - closed three-node typed motifs;
-- exact ≤1° edge subset.
+- exact ≤1° edge subset;
+- Grand Trine, T-square, and triple-conjunction templates.
 
-### Typed motif detection
+The word **motif** is used cautiously. The engine detects typed subgraphs but does not claim statistical motif enrichment until explicit null models exist.
 
-Three-node cliques retain their edge types. Current named templates include:
-
-```text
-trine + trine + trine                    → Grand Trine
-square + square + opposition             → T-square
-conjunction + conjunction + conjunction  → triple conjunction
-```
-
-The engine does not infer motifs from visual proximity. It derives them from admitted aspect edges.
-
-The word **motif** is used cautiously. Network-science motif enrichment normally involves randomized comparison. v0.4.1 detects typed subgraphs but does not claim statistical enrichment until null models exist.
-
-## 3. Cross-layer overlap
+## Cross-layer overlap
 
 The first explicit multiplex comparison is:
 
@@ -207,11 +171,9 @@ The first explicit multiplex comparison is:
 E_aspect ∩ E_dispositor
 ```
 
-This asks which pairs are independently related by angular geometry and rulership dependency.
+The relation layers remain separate. Noetic Atlas does not collapse overlap into a single opaque connection-strength score.
 
-The underlying edges remain separate. Noetic Atlas does not convert overlap into an additive “connection strength.”
-
-The intended future graph family is:
+The intended graph family is:
 
 ```text
 G = {
@@ -227,119 +189,162 @@ G = {
 
 ---
 
-## Explainable metrics
+# v0.4.1.2 — Energetic Whole-Chart Synthesis
 
-A naked metric is not considered a complete analytical result.
-
-Every v0.4.1 promoted metric carries:
+v0.4.1.2 introduces a dedicated interpretation layer:
 
 ```text
-id
-label
-value
-unit
-scope
-definition
-formula
-observation
-graph_theory_meaning
-astrological_context
-interpretive_hypothesis
-limits
-calculation model
-inputs
-result
-ledger references
+src/interpretation/energetic-synthesis-engine.mjs
+src/interpretation/energetic-synthesis-display.mjs
 ```
 
-The interface therefore avoids statements such as:
+The core requirement is:
 
-> clustering = 0.61
+> **The graph term is never the interpretation.**
 
-without explaining what clustering is, which graph was measured, what generated that graph, and what cannot be inferred from the value.
+A technical statement such as `terminal basin = 7/7` remains available in the proof layer. The public reading must translate it into the planetary functions, signs, houses, ruler pathways, aspect geometry, and condition states that make the structure meaningful inside the selected astrological model.
 
-v0.4.1 also deliberately refuses labels such as:
+## Placement synthesis
+
+For a placement `P` in sign `S` and Whole Sign house `H`, the reading separates:
 
 ```text
-high
-low
-rare
-dominant
-exceptional
+P = what archetypal current is being described?
+S = how does that current move or organize itself?
+H = where does that current repeatedly become lived?
 ```
 
-unless a comparison or null distribution exists.
+The actual sign and actual Whole Sign house remain primary.
 
-## Explainable findings
-
-A finding synthesizes one or more graph derivations into a readable evidence object.
-
-The required presentation order is:
+A secondary **modern natural-house overlay** may add:
 
 ```text
-Observation / statement
-→ Measurement
-→ Graph-theory meaning
-→ Astrological rule context
-→ Interpretive hypothesis — not validated
-→ Limits
-→ Proof
+1H  ↔ Aries / Mars
+2H  ↔ Taurus / Venus
+3H  ↔ Gemini / Mercury
+4H  ↔ Cancer / Moon
+5H  ↔ Leo / Sun
+6H  ↔ Virgo / Mercury
+7H  ↔ Libra / Venus
+8H  ↔ Scorpio / Mars (+ Pluto in modern rulership)
+9H  ↔ Sagittarius / Jupiter
+10H ↔ Capricorn / Saturn
+11H ↔ Aquarius / Saturn (+ Uranus in modern rulership)
+12H ↔ Pisces / Jupiter (+ Neptune in modern rulership)
 ```
 
-Finding objects include participating nodes/edges and ledger references so the UI can connect readable analysis back to the structure that generated it.
+This overlay is explicitly versioned as a modern correspondence model. It does **not** replace the actual house sign and is not presented as a universal Hellenistic doctrine.
 
-Examples currently generated include:
+Example:
 
-- terminal rulership architecture;
-- preterminal ruler bottleneck;
-- typed aspect motifs;
-- aspect-network articulation structure;
-- repeated pair coupling across aspect and dispositor layers.
+```text
+Mercury in Libra in 3H
+```
 
-When primitive condition is supplied, terminal-rulership findings can also carry the **separate condition records** of terminal SCC members without collapsing condition into topology.
+is interpreted as:
+
+```text
+Mercury current
+carried through Libra
+operating in the concrete 3H field
+with a secondary Gemini/Mercury natural-house resonance
+then routed through Libra's ruler Venus
+```
+
+## Houses and ruler routing
+
+Every placement is treated as part of a dependency system rather than as a sealed paragraph.
+
+```text
+placement
+→ sign ruler
+→ ruler of that ruler
+→ ...
+→ terminal circuit
+```
+
+The houses occupied by routed planets convert abstract topology into linked life fields.
+
+For the canonical specimen:
+
+```text
+Mercury in Libra, 3H
+↔
+Venus in Virgo, 2H
+```
+
+The Mercury–Venus terminal SCC is therefore also a recurring **3H ↔ 2H house circuit**. The graph proves the routing structure conditional on traditional domicile rulers; the downstream energetic interpretation asks how communication/knowledge and value/resources repeatedly feed one another in lived experience.
+
+## Condition-aware interpretation
+
+Primitive traditional condition is no longer only a separate inspector. Classical-planet energetic readings now receive explicit qualifiers from:
+
+- domicile/adversity;
+- exaltation/depression;
+- triplicity role;
+- Egyptian bound;
+- chart sect relation;
+- Whole-Sign angular-triad class.
+
+These factors qualify how a planetary function is situated in the selected traditional model without collapsing the chart into a scalar `strength` score.
+
+## Balanced, depleted, and excessive expression
+
+Major placement analyses distinguish:
+
+```text
+balanced / proportionate expression
+under-expression / depletion
+over-driven / excessive expression
+```
+
+This prevents an archetype from being turned into a command to express more of itself. The purpose is regulation and intelligibility, not moral ranking.
+
+## Material and soul-level translation
+
+The reading layer now explicitly asks:
+
+- Where could this energy become visible in ordinary life?
+- Which skills/resources may be available through the configuration?
+- What does depletion look like?
+- What does excess look like?
+- What is the house-level material field involved?
+- What soul/spirit-level question may be worth investigating?
+- What small experiment could let the user test the interpretation against lived experience?
+
+Material examples are downstream manifestations of the symbolic model; they are not the definition of the placement.
 
 ---
 
-## v0.4.1 interface
+## Ceres
 
-The new testing surface makes readable analysis the default right-hand workspace.
+v0.4.1.2 recognizes Ceres as a `minor_body` when a coordinate is supplied and includes a dedicated custom/modern interpretation profile centered on:
 
-### Findings
+- nourishment;
+- harvest;
+- enoughness;
+- being resourced;
+- receiving support;
+- embodied pleasure;
+- conditions that allow life to grow.
 
-Evidence-backed structural synthesis. Each finding displays graph meaning, astrological context, an explicitly unvalidated interpretive hypothesis, limits, participating nodes, and proof.
+This profile is explicitly identified as a modern/custom interpretive model rather than a consensus Hellenistic doctrine.
 
-### Metrics
+### Current astronomy limitation
 
-Every metric is shown with definition, formula, observation, interpretation boundary, and integrity object.
+The birth-time astronomy adapter currently generates the major planetary bodies through Pluto. It does **not** yet emit a validated Ceres coordinate automatically.
 
-### Condition
+Noetic Atlas therefore supports Ceres through precomputed or user-supplied coordinates until a separately validated small-body astronomy adapter is added. Unsupported coordinates are not invented.
 
-The primitive condition substrate remains available as a separate node-state layer.
-
-### Integrity
-
-Displays the complete selected finding/metric proof object, model IDs, restrictions, and ledger references.
-
-The visual graph remains interactive, but the governing product principle is now:
-
-> **The visualization should expose the analysis. The visualization is not the novelty by itself.**
+See [`docs/V0412_ENERGETIC_SYNTHESIS.md`](docs/V0412_ENERGETIC_SYNTHESIS.md).
 
 ---
 
-## Scientific and epistemic status
+## Explainability and epistemic status
 
-Noetic Atlas is currently best described as an **auditable visual-analytics and research framework for a formalized astrological rule model**.
+Noetic Atlas is currently best described as an **auditable visual-analytics and interpretation framework for a formalized astrological rule model**.
 
 Graph theory establishes mathematical properties of a graph **after the graph has been defined**. It does not establish the empirical validity of the astrological rules used to construct that graph.
-
-Similarly:
-
-```text
-terminal SCC                 graph-derived fact
-basin fraction               graph-derived metric
-Venus in fall in Virgo       astrological-rule result
-“this circuit dominates life” interpretive claim, not established
-```
 
 The framework maintains six epistemic categories:
 
@@ -352,26 +357,31 @@ research-exploratory
 interpretive-inference
 ```
 
-Graph findings in v0.4.1 remain `research-exploratory` and their interpretive text remains `hypothesis-not-validated`.
+Energetic interpretation is downstream `interpretive-inference`. The system deliberately preserves the evidence chain beneath the reading.
 
-### Technical foundations
+The core pipeline is:
 
-The graph-analytics program is informed by established graph/network methods, including:
+```text
+Astrological model
+→ formal structures
+→ observable representations
+→ readable synthesis
+→ testable questions
+```
 
-- Robert Tarjan, “Depth-First Search and Linear Graph Algorithms,” *SIAM Journal on Computing* 1(2), 1972. DOI `10.1137/0201010` — strongly connected components and low-link graph structure.
-- Ulrik Brandes, “A Faster Algorithm for Betweenness Centrality,” *Journal of Mathematical Sociology* 25(2), 2001. DOI `10.1080/0022250X.2001.9990249` — betweenness computation.
-- Ron Milo et al., “Network Motifs: Simple Building Blocks of Complex Networks,” *Science* 298(5594), 2002. DOI `10.1126/science.298.5594.824` — motif analysis and the need for randomized comparison.
-- Mikko Kivelä et al., “Multilayer Networks,” *Journal of Complex Networks* 2(3), 2014. DOI `10.1093/comnet/cnu016` — preserving multiple relation types rather than collapsing them into one network.
+not:
 
-These references justify the mathematics and research design. They do not validate astrology as a causal physical theory.
+```text
+birth data → proven mystical truth
+```
+
+The energetic vocabulary is phenomenological/symbolic language for interacting astrological functions, not a claim of established physical field mechanics.
 
 ---
 
 ## Null-model gate
 
-The next major **research** requirement is explicit graph baselines.
-
-Candidate nulls include:
+The next major graph-research requirement remains explicit baselines:
 
 ### Geometric null
 
@@ -389,15 +399,7 @@ Rewire edges while preserving degree sequence where mathematically appropriate.
 
 Preserve layer size/density while randomizing pair assignments.
 
-For graph descriptor `M`:
-
-```text
-M_observed
-vs
-{M_null^(1), ..., M_null^(N)}
-```
-
-Only after that comparison may the main interface make statistical claims about unusualness or enrichment.
+Only after comparison may the interface make statistical claims about unusualness or enrichment.
 
 ---
 
@@ -420,25 +422,25 @@ A = {P, H, S, E, R, L, C, T}
 | `C` | planetary/relational condition |
 | `T` | transits and timing regimes |
 
-The development sequence is now more precisely:
+Current development sequence:
 
 ```text
 Geometry
 → Topology
 → Primitive Condition
-→ Graph Analytics / Explainable Findings
+→ Graph Analytics
+→ Energetic / Explainable Synthesis
 → Relational Condition
 → Compound Condition
 → Activation
 → Recurrence / Discovery
 ```
 
-The analytics layer is inserted before additional astrological relation layers because adding more facts without improving synthesis would merely enlarge the dashboard.
-
 ---
 
 ## Still not implemented
 
+- automatic validated Ceres/small-body astronomy;
 - reception / mutual reception graph;
 - overcoming graph;
 - bonification / maltreatment;
@@ -446,9 +448,9 @@ The analytics layer is inserted before additional astrological relation layers b
 - degree-based quadrant dynamic strength;
 - graph null distributions;
 - statistical motif enrichment;
-- condition-weighted centrality;
+- condition-weighted graph experiments;
 - temporal Life Spectrum;
-- validated interpretation model.
+- externally validated predictive interpretation model.
 
 ---
 
@@ -466,7 +468,10 @@ The standard suite includes:
 - condition registry/schema tests;
 - primitive condition tests;
 - graph-analytics regression;
-- v0.4.1 UI contract and browser-module parse check;
+- astrological-analysis regression;
+- energetic-synthesis regression, including Ceres and house-overlay fixtures;
+- v0.4.1 / v0.4.1.1 legacy UI contracts;
+- v0.4.1.2 UI contract and browser-module parse check;
 - geometry/boundary tests;
 - timezone tests;
 - astronomy adapter contract tests.
@@ -480,7 +485,7 @@ python -m http.server 8000
 Open:
 
 ```text
-http://localhost:8000/prototype/v041.html
+http://localhost:8000/prototype/v0412b.html
 ```
 
 ---
@@ -490,27 +495,49 @@ http://localhost:8000/prototype/v041.html
 1. Calculation before narration.
 2. Resolution over prophecy.
 3. Structure before meaning.
-4. Show the work.
-5. Never manufacture precision.
-6. Ambiguity is data.
-7. Unsupported is better than guessed.
-8. Traditions are explicit rule models, not hidden mixtures.
-9. No opaque condition/strength score.
-10. No naked graph metric.
-11. Graph fact and interpretive hypothesis must remain separately labeled.
-12. A graph is an encoded model, not evidence that astrology is a physical network.
-13. Do not call a graph feature unusual without a defined baseline.
-14. The wheel remains a reference, not an enemy.
-15. AI navigates deterministic state; it does not replace it.
-16. A failed hypothesis is an acceptable result.
-17. A feature that only makes astrology look interesting does not belong.
-18. A feature that exposes a structural question difficult to inspect, reproduce, compare, or test may belong.
+4. A graph term is never the final interpretation.
+5. Houses must remain first-class astrological fields.
+6. Ruler/dispositor pathways must remain visible in interpretation.
+7. Show the work.
+8. Never manufacture precision.
+9. Ambiguity is data.
+10. Unsupported is better than guessed.
+11. Traditions are explicit rule models, not hidden mixtures.
+12. The modern natural-house correspondence is a labeled overlay, not a historical universal.
+13. No opaque condition/strength score.
+14. No naked graph metric.
+15. Graph fact and interpretation must remain separately labeled.
+16. A graph is an encoded model, not evidence that astrology is a physical network.
+17. Do not call a graph feature unusual without a defined baseline.
+18. The wheel remains a reference, not an enemy.
+19. AI navigates deterministic state; it does not replace it.
+20. A failed hypothesis is an acceptable result.
+21. A feature that only makes astrology look interesting does not belong.
+22. A feature that exposes a structural question difficult to inspect, reproduce, compare, or test may belong.
+23. Energetic language may be spiritually and phenomenologically useful without being mislabeled as experimental physics.
 
 ---
 
 ## Next engineering gates
 
-Two tracks now proceed in controlled sequence.
+### Astrological condition
+
+```text
+G_reception
+→ exchange / mutual reception
+→ G_overcoming
+→ selected compound condition
+```
+
+### Interpretive depth
+
+```text
+house-ruler synthesis
+→ condition-aware whole-chart motifs
+→ curated interpretation profiles
+→ yoga/Ayurvedic practice layer
+→ selectable interpretive postures
+```
 
 ### Graph research
 
@@ -521,15 +548,7 @@ null models
 → comparative chart architecture
 ```
 
-### Astrological condition
-
-```text
-G_reception
-→ G_overcoming
-→ selected compound condition
-```
-
-The two tracks meet before Life Spectrum so that temporal activation operates on a natal architecture that is both semantically richer and analytically inspectable.
+These tracks meet before Life Spectrum so that temporal activation operates on a natal architecture that is mathematically inspectable, traditionally characterized, and humanly intelligible.
 
 ---
 
@@ -538,15 +557,16 @@ The two tracks meet before Life Spectrum so that temporal activation operates on
 Recommended starting points:
 
 1. [`docs/CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md`](docs/CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md)
-2. [`docs/V041_GRAPH_ANALYTICS_AND_FINDINGS.md`](docs/V041_GRAPH_ANALYTICS_AND_FINDINGS.md)
-3. [`docs/THEORY_AND_PURPOSE.md`](docs/THEORY_AND_PURPOSE.md)
-4. [`docs/DEVELOPER_GUIDE.md`](docs/DEVELOPER_GUIDE.md)
-5. [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
-6. [`docs/ASTROLOGICAL_MODEL.md`](docs/ASTROLOGICAL_MODEL.md)
-7. [`docs/V040A_CONDITION_ONTOLOGY.md`](docs/V040A_CONDITION_ONTOLOGY.md)
-8. [`docs/V040B_PRIMITIVE_CONDITION.md`](docs/V040B_PRIMITIVE_CONDITION.md)
-9. [`docs/RESEARCH_PROGRAM.md`](docs/RESEARCH_PROGRAM.md)
-10. [`docs/ROADMAP.md`](docs/ROADMAP.md)
+2. [`docs/V0412_ENERGETIC_SYNTHESIS.md`](docs/V0412_ENERGETIC_SYNTHESIS.md)
+3. [`docs/V041_GRAPH_ANALYTICS_AND_FINDINGS.md`](docs/V041_GRAPH_ANALYTICS_AND_FINDINGS.md)
+4. [`docs/V040B_PRIMITIVE_CONDITION.md`](docs/V040B_PRIMITIVE_CONDITION.md)
+5. [`docs/V040A_CONDITION_ONTOLOGY.md`](docs/V040A_CONDITION_ONTOLOGY.md)
+6. [`docs/THEORY_AND_PURPOSE.md`](docs/THEORY_AND_PURPOSE.md)
+7. [`docs/DEVELOPER_GUIDE.md`](docs/DEVELOPER_GUIDE.md)
+8. [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
+9. [`docs/ASTROLOGICAL_MODEL.md`](docs/ASTROLOGICAL_MODEL.md)
+10. [`docs/RESEARCH_PROGRAM.md`](docs/RESEARCH_PROGRAM.md)
+11. [`docs/ROADMAP.md`](docs/ROADMAP.md)
 
 ---
 
@@ -562,4 +582,4 @@ Nor is it merely:
 
 It is:
 
-> **Here is the structure. Here is what the structure implies mathematically. Here is the astrological rule that produced it. Here is one hypothesis worth investigating. Here is what remains unknown. Here is the proof.**
+> **Here is the architecture. Here is how the energy is modeled. Here is where it lives in the houses. Here is how the rulers route it. Here is what the mathematics establishes. Here is the traditional condition that qualifies it. Here is what may be worth investigating in lived experience. Here is the proof.**
