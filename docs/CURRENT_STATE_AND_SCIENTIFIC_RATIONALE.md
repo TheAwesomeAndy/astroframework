@@ -2,33 +2,38 @@
 
 ## Status
 
-**Current public prototype:** v0.3.2 — Visual Observatory  
+**Current public release:** v0.4.1.2 — Energetic Whole-Chart Synthesis  
+**Current energetic interpretation model:** `naf.interpretation.energetic_synthesis.v0.4.1.2`  
+**Current graph model:** `naf.research.graph_analytics.v0.4.1`  
+**Current primitive condition model:** `naf.condition.primitive.hellenistic.v0.4.0b`  
 **Current deterministic analysis envelope:** `naf.analysis.v0.3.1`  
-**Default branch:** `main`  
-**Development sequence:** Structure → Condition → Time → Recurrence → Discovery
+**Default branch:** `main`
 
-Noetic Atlas is currently best described as an **auditable visual-analytics and research framework for astrological structure**. It is not yet a validated predictive theory, a replacement for expert astrological judgment, or evidence that astrological relations are physical forces.
+Noetic Atlas is currently best described as an **auditable visual-analytics, interpretation, and research framework for a formalized astrological rule model**.
 
-The project has crossed an important boundary: it no longer consists only of a hand-designed visualization of one specimen chart. It now calculates a substantial part of the underlying symbolic model deterministically and exposes several graph-theoretic and provenance objects that a conventional wheel does not normally make explicit.
+It is not a validated predictive theory, evidence that astrology operates through measured physical forces, or a replacement for expert judgment. Its current strength is that it converts relationships that are often implicit, hand-traced, or visually buried into explicit computational objects and then translates those objects into readable astrological hypotheses without discarding provenance.
 
-This document states what is genuinely novel, what is currently useful, what mathematics and visualization science justify the design, what the system does **not** establish, and what must be built next.
+The current architectural sequence is:
+
+```text
+Geometry
+→ Topology
+→ Primitive Condition
+→ Graph Analytics
+→ Energetic / Explainable Synthesis
+→ Relational Condition
+→ Compound Condition
+→ Activation
+→ Recurrence / Discovery
+```
 
 ---
 
 ## 1. The core claim
 
-The horoscope wheel is a powerful historical encoding of astrological information. It is especially efficient for:
+The horoscope wheel remains an excellent encoding for angular geometry, zodiacal longitude, sign placement, and rapid visual aspect recognition.
 
-- zodiacal longitude;
-- sign and house placement;
-- angular geometry;
-- rapid perception of conjunctions, oppositions, trines, squares, and other familiar aspects.
-
-Noetic Atlas does not treat the wheel as obsolete. It treats the wheel as **one view of a larger formal system**.
-
-Astrology also contains directed dependencies, derived coordinates, categorical conditions, source-dependent rule variants, and temporal regimes. Those are not all the same mathematical object and need not be forced into one polar diagram.
-
-The current framework therefore separates the model into coordinated layers. A useful abstract form is:
+Noetic Atlas does not treat the wheel as obsolete. It treats the wheel as one projection of a larger formal model:
 
 ```text
 A = {P, H, S, E, R, L, C, T}
@@ -36,49 +41,84 @@ A = {P, H, S, E, R, L, C, T}
 
 where:
 
-- `P` — planets, angles, nodes, lots, and selected points;
+- `P` — planets, angles, nodes, lots, selected points;
 - `H` — houses/places;
 - `S` — zodiacal and categorical state;
-- `E` — pairwise geometric relations such as aspects;
-- `R` — directed rulership/dispositor/dependency relations;
+- `E` — aspects and pairwise geometric relations;
+- `R` — rulers, dispositors, reception, and dependency relations;
 - `L` — lots and other derived coordinates;
 - `C` — planetary and relational condition;
 - `T` — time-dependent activation and timing regimes.
 
-`C` and `T` are intentionally included in the ontology even though the full condition and temporal engines are not yet implemented. Their absence is represented as an explicit completeness state rather than being silently ignored.
+Different questions require different representations.
+
+```text
+Natal Field     → geometry / relational architecture
+Flow Map        → dependency / rulership
+Condition       → traditional planetary state
+Energetic layer → readable synthesis across sign, house, routing and condition
+Life Spectrum   → future temporal activation
+Integrity       → provenance and derivation
+```
+
+The project therefore aims to formalize the model underneath the representations rather than merely redesign the wheel.
 
 ---
 
 ## 2. What is genuinely novel today
 
-### 2.1 Rulership is treated as a directed graph
+### 2.1 Rulership is a directed graph with explicit terminal structure
 
-Traditional rulership and dispositorship can be represented as a directed graph:
+Traditional domicile rulership is represented as a directed graph:
 
 ```text
 G_R = (V, E_R)
 ```
 
-with planets/objects as vertices and rulership dependencies as directed edges.
+Noetic Atlas traces planetary and house-ruler paths, computes Tarjan strongly connected components, identifies terminal SCCs, and derives routing basins and path depth.
 
-Noetic Atlas does not merely draw arrows. It constructs the graph algorithmically, traces house-ruler routes, computes strongly connected components, and identifies terminal SCCs.
+For the canonical specimen, the classical-seven graph produces:
 
-A strongly connected component is a maximal set of vertices in which every member is reachable from every other member. Tarjan’s depth-first-search algorithm computes SCCs in linear time with respect to vertices and edges, `O(|V| + |E|)`.
+```text
+terminal SCC: Mercury ↔ Venus
+terminal basin: 7 / 7
+Jupiter route depth: 3
+Saturn route depth: 2
+Mars route depth: 1
+largest nonterminal path bottleneck: Mars
+```
 
-This matters because mutual-disposition cycles and terminal routing basins become **first-class computational objects** rather than impressions formed by manually chasing rulers.
+Those are deterministic graph properties **conditional on the selected traditional-rulership model**.
 
-In the canonical regression specimen, the traditional domicile-rulership graph yields a terminal SCC containing Mercury and Venus. Under the current model, all seven classical planetary dispositor routes ultimately enter that cycle. The software can therefore report:
+The graph does not prove that Mercury or Venus dominates the psyche, causes life events, or possesses a measurable physical field. It proves that the encoded ruler pathways terminate in the same recursive component.
 
-- component membership;
-- whether the component is terminal;
-- house-to-terminal paths;
-- route lengths;
-- how many houses or planets drain into the component;
-- differences produced by changing the rulership rule set later.
+### 2.2 Houses are preserved as first-class life fields
 
-The graph-theoretic fact is exact **conditional on the selected astrological rule model**. Its psychological, spiritual, predictive, or metaphysical significance is not established by the graph algorithm.
+v0.4.1.2 corrects an important interpretive weakness in earlier graph-first interfaces: topology is no longer allowed to erase the houses.
 
-### 2.2 The framework maintains epistemic layering and derivation provenance
+For each placement the interpretation distinguishes:
+
+```text
+planet / point = what symbolic current?
+sign           = how does the current move?
+house          = where does it become lived?
+```
+
+The house is not a decorative label appended after graph analysis. It is a primary astrological field that converts a network relation into a concrete domain of lived experience.
+
+For the canonical Mercury–Venus terminal SCC:
+
+```text
+Mercury in Libra, 3H
+↔
+Venus in Virgo, 2H
+```
+
+The terminal graph structure can therefore be interpreted as a recurring **3H ↔ 2H circuit** inside the selected model: communication/knowledge and value/resources repeatedly route into one another.
+
+The graph-derived fact and the house-level interpretation remain separately labeled.
+
+### 2.3 The framework maintains epistemic layering and derivation provenance
 
 Noetic Atlas separates:
 
@@ -87,40 +127,221 @@ Input
 → Astronomy
 → Astrological rule
 → Mathematical derivation
-→ Exploratory research
-→ Interpretation
+→ Research-exploratory result
+→ Interpretive inference
 ```
 
-Every important result is intended to be reversible to its source inputs, formulas/rules, versions, intermediate values, and assumptions.
+Every important result is intended to remain reversible to source input, rule/model version, intermediate calculation, and assumptions.
 
-This is implemented through the Derivation Ledger and derivation-tree structures.
+This is implemented through derivation ledgers, proof objects, and integrity metadata.
 
-The design is consistent with established data-provenance practice. The W3C PROV family defines a general model for representing how entities are generated by activities and associated with responsible agents. FAIR data principles likewise emphasize rich metadata and detailed provenance as part of making scientific data reusable.
+The methodological principle is compatible with broader provenance practice such as W3C PROV and FAIR-style emphasis on machine-readable lineage, while not claiming full formal compliance with those standards.
 
-Noetic Atlas is not claiming compliance with every PROV-O or FAIR requirement. The relevant engineering principle is the same: a result is methodologically stronger when its lineage is explicit and machine-readable.
+### 2.4 Graph analytics are explicit mathematical objects
 
-### 2.3 Different relations receive different visual encodings
+v0.4.1 adds graph-derived objects that are rarely first-class in conventional astrology software:
 
-The current Visual Observatory restores coordinated views rather than using a single universal graph:
+- SCC condensation;
+- terminal basin capture;
+- route depth;
+- upstream route capture;
+- nonterminal path bottlenecks;
+- aspect connected components;
+- clustering coefficient;
+- betweenness centrality;
+- articulation points;
+- bridges;
+- typed three-node motifs;
+- aspect/dispositor overlap.
 
-- **Natal Field:** node-link view for relational architecture and path inspection;
-- **Aspect Matrix:** pairwise table for exact relation lookup and dense comparison;
-- **Flow Map:** directed dependency/rulership topology;
-- **Sect & Lots:** derivation-oriented view of sect-sensitive calculated points;
-- **Research Lab:** explicitly exploratory descriptors;
-- **Audit:** provenance and complete serialized model.
+These are mathematically real properties of the encoded graph. Their astrological/life significance remains a research and interpretation question.
 
-This design has a basis in information-visualization research. Controlled graph-visualization experiments have found that node-link and matrix representations are good at different tasks. In particular, path-finding tends to favor node-link diagrams, while matrix representations become advantageous for many tasks as graphs become larger or denser. Noetic Atlas therefore treats the node-link field and aspect matrix as complementary rather than competing interfaces.
+### 2.5 v0.4.1.2 adds a dedicated energetic interpretation layer
 
-The design principle is:
+Earlier versions could display a graph result such as:
 
-> **Choose a representation for the question being asked, then coordinate the views around one shared data model.**
+```text
+terminal basin = 7/7
+```
+
+but a non-specialist still had to understand graph theory before the result meant anything.
+
+v0.4.1.2 introduces a downstream synthesis model:
+
+```text
+archetypal current
+→ actual sign
+→ actual Whole Sign house
+→ natural-house resonance where selected
+→ traditional sign ruler / dispositor route
+→ aspect geometry
+→ graph architecture
+→ traditional condition where available
+→ balanced / depleted / excessive expression
+→ material-life examples
+→ soul/spirit inquiry
+→ proof
+```
+
+The governing design rule is:
+
+> **The graph term is never the interpretation.**
 
 ---
 
-## 3. What the current system actually computes
+## 3. Energy language: useful model, not measured physics
 
-### 3.1 Civil time and astronomy
+The current interpretation layer deliberately uses terms such as:
+
+```text
+energy
+current
+field
+resonance
+compression
+expansion
+permeability
+friction
+coherence
+standing-wave polarity
+quadrature torque
+```
+
+These terms provide an intuitive phenomenological vocabulary for relationships among astrological functions.
+
+They are **symbolic/metaphorical interpretive language**. Noetic Atlas does not currently claim that zodiacal placements or aspects have been demonstrated to produce measurable physical energies, frequencies, or forces.
+
+The integrity state therefore records the energetic language as interpretive rather than astronomical or physical measurement.
+
+This distinction allows spiritually meaningful exploration without misclassifying the epistemic status of the claim.
+
+---
+
+## 4. Actual house versus natural-house overlay
+
+v0.4.1.2 supports an explicitly modern natural-house correspondence model:
+
+```text
+1H  ↔ Aries / Mars
+2H  ↔ Taurus / Venus
+3H  ↔ Gemini / Mercury
+4H  ↔ Cancer / Moon
+5H  ↔ Leo / Sun
+6H  ↔ Virgo / Mercury
+7H  ↔ Libra / Venus
+8H  ↔ Scorpio / Mars (+ Pluto in modern rulership)
+9H  ↔ Sagittarius / Jupiter
+10H ↔ Capricorn / Saturn
+11H ↔ Aquarius / Saturn (+ Uranus in modern rulership)
+12H ↔ Pisces / Jupiter (+ Neptune in modern rulership)
+```
+
+Model ID:
+
+```text
+naf.interpretation.natural_house_overlay.modern.v1
+```
+
+This layer is secondary.
+
+It does **not** mean that the 3rd house literally becomes Gemini or that every historical tradition used the twelve-letter alphabet.
+
+The interpretive sequence for a hypothetical Ceres in Libra in the 3rd house is therefore:
+
+```text
+Ceres = nourishment / resourcing current
+Libra = actual zodiacal style/frequency
+3H    = actual lived field
+Gemini/Mercury = secondary modern natural-house resonance
+Venus = actual traditional ruler of Libra
+```
+
+That is a layered synthesis rather than a sign-house conflation.
+
+---
+
+## 5. Traditional condition substrate
+
+The primitive condition engine is now implemented for the seven classical planets.
+
+It computes:
+
+- domicile;
+- adversity;
+- sign-level exaltation;
+- sign-level depression/fall;
+- standard/Dorothean triplicity role;
+- Egyptian bound;
+- planetary sect family;
+- in-sect/out-of-sect relation;
+- Whole-Sign angular-triad class.
+
+Each factor has its own rule/source identity and ledger entry.
+
+No single scalar `planet strength` value is produced.
+
+v0.4.1.2 begins integrating these condition facts into the energetic reading itself so condition no longer sits only in a separate inspector.
+
+Example distinction:
+
+```text
+Mercury ↔ Venus terminal SCC = topology
+Venus in depression/fall in Virgo = astrological-rule condition
+Mercury/Venus 3H↔2H exchange = house/ruler interpretation
+“this is the dominant psychological circuit” = not established
+```
+
+---
+
+## 6. Aspect geometry and energetic translation
+
+The framework retains exact major-aspect geometry as deterministic structure.
+
+The interpretive layer may describe major aspects through symbolic field mechanics:
+
+```text
+0°   conjunction → phase fusion / superposition
+60°  sextile     → catalytic channel
+90°  square      → quadrature torque / orthogonal interference
+120° trine       → low-impedance phase coherence
+180° opposition  → standing-wave polarity
+```
+
+These phrases are interpretive models downstream from the actual measured angular separation.
+
+The angle itself is astronomical/computational. The energetic description is interpretive.
+
+---
+
+## 7. Ceres support
+
+v0.4.1.2 recognizes Ceres as a `minor_body` when its coordinate is present in chart input.
+
+The current Ceres interpretation profile is custom/modern and emphasizes:
+
+- nourishment;
+- harvest;
+- enoughness;
+- receiving support;
+- being resourced;
+- embodied pleasure;
+- conditions under which life can grow.
+
+The profile is not presented as a consensus Hellenistic doctrine.
+
+### Astronomy limitation
+
+The current birth-time astronomy adapter generates the major planetary bodies through Pluto but does not yet output a validated Ceres coordinate automatically.
+
+Noetic Atlas therefore accepts Ceres through precomputed/user-supplied coordinates until a separately validated small-body adapter is implemented.
+
+Unsupported coordinates remain unsupported rather than being guessed.
+
+---
+
+## 8. What the current system actually computes
+
+### Civil time and astronomy
 
 Current birth-data flow supports:
 
@@ -128,430 +349,239 @@ Current birth-data flow supports:
 - latitude/longitude;
 - elevation;
 - approximate IANA time-zone lookup with expert override;
-- historical offset resolution through the host platform’s time-zone data;
+- historical offset resolution;
 - rejection of nonexistent local times;
 - explicit handling of repeated DST times;
 - Sun through Pluto through the current Astronomy Engine adapter;
 - geocentric ecliptic longitude;
-- longitudinal velocity / retrograde state;
+- longitudinal velocity/retrograde state;
 - independently solved ASC and MC;
 - geometric solar altitude for sect.
 
 Current astronomy limitations remain explicit:
 
-- Chiron is not generated by the open adapter;
-- lunar-node variants are not yet generated;
-- Black Moon Lilith/apogee variants are not yet generated;
-- Vertex is not yet generated;
-- fixed stars are not yet implemented;
-- the angle/object calculations have not yet completed the planned large independent cross-provider validation corpus.
+- automatic Ceres calculation not yet validated;
+- Chiron not generated by the current birth-time adapter;
+- lunar-node variants not yet generated;
+- Black Moon Lilith/apogee variants not yet generated;
+- Vertex not yet generated;
+- fixed stars not yet implemented;
+- large independent cross-provider validation remains incomplete.
 
-Unsupported objects must remain unsupported until a provider/definition is selected and documented.
-
-### 3.2 Astrological rule layer
+### Astrological rule layer
 
 Current deterministic baseline includes:
 
 - tropical zodiac;
 - Whole Sign houses;
 - traditional domicile rulers;
-- named major-aspect policy;
-- aspect orb calculation;
-- applying/separating phase where sufficient velocity information exists;
+- explicit major-aspect/orb policy;
+- applying/separating where motion data exist;
 - day/night sect;
 - seven Paulus/Panaretus Hermetic lots with sect reversal;
-- explicit historical formula-family identity.
+- primitive classical condition;
+- explicit rule/source identities.
 
-The current condition model is incomplete. Dignity, triplicity, bounds, reception, overcoming, bonification/maltreatment, and other traditional condition factors belong to v0.4.
+### Graph/mathematical layer
 
-### 3.3 Mathematical/topological layer
+Current outputs include:
 
-Current graph/mathematical outputs include:
-
-- directed dispositor graph;
-- Tarjan SCCs;
-- terminal SCCs;
+- dispositor graph;
+- SCCs and terminal SCCs;
 - all-house ruler routes;
-- route convergence descriptors;
+- terminal basin statistics;
+- route depth;
+- upstream capture;
 - aspect degree;
-- elemental composition;
-- modal composition;
+- clustering;
+- betweenness;
+- articulation points;
+- bridges;
+- typed motifs;
+- cross-layer edge overlap;
+- elemental/modal composition;
 - circular harmonic spectrum;
-- multilayer participation counts.
-
-The final three research families are descriptive/exploratory. They are not consumer-facing astrological doctrines.
+- exploratory multilayer participation counts.
 
 ---
 
-## 4. What the visual restoration in v0.3.2 adds
+## 9. What is useful today
 
-v0.3.2 restores the visual-analytics capabilities that existed conceptually in v0.2 while keeping the v0.3 deterministic kernel underneath them.
+Noetic Atlas is already stronger than a conventional wheel for some narrow tasks:
 
-The current browser prototype includes:
+- tracing long dispositor chains;
+- identifying terminal ruler cycles;
+- counting which planets/houses feed a terminal component;
+- distinguishing topology from traditional condition;
+- reconstructing Hermetic lot calculations;
+- auditing Whole Sign house assignment;
+- inspecting aspect edges numerically;
+- translating graph structures back into linked house fields;
+- preserving provenance across all of the above.
 
-- interactive SVG Natal Field;
-- weighted aspect edges derived from the computed analysis;
-- object-layer controls for planets, lots, and the full supported object set;
-- clickable nodes with neighborhood isolation;
-- clickable edges with separation, orb, phase, and derivation context;
-- dynamically detected graph motifs rather than specimen-only hard-coded buttons;
-- interactive Aspect Matrix linked back to the same computed edge objects;
-- directed rulership Flow Map;
-- visible terminal SCC highlighting;
-- clickable house-ruler routes;
-- element/modality composition displays;
-- first-class Hermetic-lot nodes;
-- graph-linked provenance/audit inspection;
-- explicitly labeled experimental research views.
+The wheel remains faster for many trained astrologers when the task is immediate angular-pattern recognition.
 
-This is an important distinction:
+The current claim is therefore not:
 
-> v0.3.2 is not a return to the old hard-coded prototype. It is the old visual intelligence reattached to the general deterministic kernel.
+> Noetic Atlas replaces the wheel.
+
+It is:
+
+> Noetic Atlas exposes some structural questions that the wheel does not make easy to inspect, reproduce, compare, or audit.
 
 ---
 
-## 5. Where the scientific justification is strong
+## 10. What is not established
 
-### 5.1 Strongly connected components are a legitimate graph object
+The current framework does **not** establish that:
 
-The mathematics of SCCs does not depend on astrology. Once a directed graph is defined, its SCC decomposition is a deterministic property of that graph.
+- topology predicts life events better than traditional chart reading;
+- SCC concentration has validated psychological meaning;
+- graph centrality equals planetary importance;
+- energetic language describes measured physical forces;
+- Ceres necessarily governs abundance;
+- natural-house correspondence is historically universal;
+- visualization itself produces transformational insight;
+- current interpretation profiles predict external outcomes;
+- astrology as a whole is empirically validated by the mathematics used to represent it.
 
-Reference:
+These distinctions are not rhetorical disclaimers. They define the research boundary.
 
-- Robert Tarjan, “Depth-First Search and Linear Graph Algorithms,” *SIAM Journal on Computing* 1(2), 1972. DOI: `10.1137/0201010`.
+---
 
-What the reference justifies:
+## 11. Scientific justification by layer
 
-- SCC computation;
-- deterministic component structure;
-- the use of a linear-time graph algorithm.
+### Graph theory
 
-What it does **not** justify:
+Tarjan SCC decomposition, path analysis, clustering, betweenness, articulation structure, and related measures are legitimate mathematical operations on encoded graphs.
 
-- calling a terminal SCC a psychological attractor;
-- assigning spiritual primacy to the component;
-- predicting events from SCC structure.
+They validate statements about the graph, not about astrology's causal truth.
 
-The term “attractor” should therefore be treated as a visual/structural metaphor unless a genuine dynamical model is later defined.
+### Information visualization
 
-### 5.2 Coordinated node-link and matrix representations are defensible
+Graph/matrix research supports the use of coordinated representations for different tasks. This motivates Natal Field + Aspect Matrix + Flow Map rather than a claim that any one representation is universally superior.
 
-Graph-visualization research demonstrates task-dependent tradeoffs between node-link diagrams and adjacency/matrix representations.
+### Multilayer networks
 
-Reference:
+Network-science literature supports keeping relation layers separate rather than indiscriminately collapsing aspects, dispositors, reception, houses, lots, and time into one edge soup.
 
-- Mohammad Ghoniem, Jean-Daniel Fekete, Philippe Castagliola, “A Comparison of the Readability of Graphs Using Node-Link and Matrix-Based Representations,” IEEE Symposium on Information Visualization, 2004. DOI: `10.1109/INFVIS.2004.1`.
+### Provenance
 
-The study found that path-finding consistently favored node-link diagrams, while matrix views performed better on many tasks for larger graphs.
+W3C PROV and FAIR-style principles motivate reversible derivation lineage, explicit model identifiers, and machine-readable metadata.
 
-Noetic Atlas therefore uses:
+None of these fields independently validates astrological interpretation.
+
+---
+
+## 12. Research gates
+
+### HCI / information-design validation
+
+The first relatively tractable validation question is:
+
+> Does Noetic Atlas allow astrologers or users to recover structural astrological information more reliably, quickly, or consistently than a conventional wheel?
+
+Candidate tasks:
+
+- identify terminal dispositors;
+- trace ruler chains;
+- identify mutual receptions;
+- reconstruct exact aspects;
+- reproduce lot calculations;
+- follow activated ruler paths.
+
+Candidate measures:
+
+- error rate;
+- completion time;
+- inter-rater agreement;
+- cognitive load;
+- learning rate.
+
+This can test representational value without validating astrology itself.
+
+### Graph null models
+
+Claims such as `rare`, `high`, `unusual`, or `enriched` remain blocked until explicit baselines exist.
+
+Candidate nulls:
 
 ```text
-Natal Field / Flow Map → topology, neighborhoods, pathways
-Aspect Matrix           → pairwise lookup, dense relation inspection
+randomized longitudes
+label permutation
+appropriate degree-preserving rewiring
+layer-overlap randomization
 ```
 
-This does not prove that the current UI is optimal. It gives a scientific reason to test **coordinated multiple views** instead of forcing all tasks into either a wheel or a node-link diagram.
+### Interpretation research
 
-### 5.3 Multilayer representation is a legitimate formal strategy
+Later work may ask whether new descriptors or condition-qualified patterns correlate reproducibly with external life phenomena.
 
-Many systems contain multiple relation types that should not be collapsed into a single undifferentiated edge set. Network science formalizes such cases using multilayer or multiplex representations.
+Null findings must remain acceptable outcomes.
 
-Reference:
+---
 
-- Mikko Kivelä et al., “Multilayer networks,” *Journal of Complex Networks* 2(3), 2014, 203–271. DOI: `10.1093/comnet/cnu016`.
+## 13. Current engineering priorities
 
-Noetic Atlas applies that formal idea cautiously:
+### Relational condition
 
 ```text
-G = {
-  G_aspect,
-  G_rulership,
-  G_house,
-  G_lot,
-  later G_condition,
-  later G_temporal
-}
+reception / exchange
+→ overcoming
+→ selected compound condition
 ```
 
-The analogy justifies preserving distinct relation types and studying cross-layer participation. It does not establish that astrological layers correspond to physical network processes.
-
-### 5.4 Provenance is a legitimate scientific-computing requirement
-
-References:
-
-- W3C, **PROV-O: The PROV Ontology**, W3C Recommendation, 2013.
-- Mark D. Wilkinson et al., “The FAIR Guiding Principles for scientific data management and stewardship,” *Scientific Data* 3, 160018 (2016). DOI: `10.1038/sdata.2016.18`.
-
-Noetic Atlas adopts the methodological principle that a research artifact should retain enough metadata and provenance to be reconstructed and challenged.
-
-This supports:
-
-- rule IDs;
-- provider versions;
-- formula families;
-- input/output lineage;
-- schema versions;
-- explicit completeness states;
-- audit export.
-
-### 5.5 The visualization itself can be tested independently of astrology
-
-Noetic Atlas makes an HCI claim that is empirically testable without assuming that astrology predicts human lives:
-
-> Do alternative coordinated visualizations help users recover the formal structure of an astrological model more accurately, rapidly, or consistently than a traditional wheel alone?
-
-Possible controlled outcomes include:
-
-- time to identify a terminal dispositor chain;
-- error rate tracing house-ruler paths;
-- accuracy identifying specific aspect motifs;
-- time to locate an exact pairwise relation;
-- novice learning rate;
-- retention/recall;
-- subjective cognitive load;
-- expert inter-rater agreement;
-- ability to distinguish calculation from interpretation.
-
-This is one of the strongest near-term research programs because it evaluates Noetic Atlas as an **information instrument** rather than trying to prove astrological causation.
-
----
-
-## 6. Where the scientific justification is intentionally incomplete
-
-The following claims are **not** established by current code or by the technical literature above:
-
-- that astrological configurations cause psychological or material events;
-- that terminal SCCs reveal the deepest layer of personality;
-- that ruler-route convergence predicts life outcomes;
-- that harmonic concentration has astrological significance beyond being a circular geometric descriptor;
-- that graph centrality is equivalent to traditional planetary strength;
-- that more visually connected objects are more important in a person’s life;
-- that a Life Spectrum will predict events once implemented;
-- that field, resonance, voltage, phase, or attractor language refers to measured physical quantities.
-
-A mathematical representation can be exact while the domain interpretation remains uncertain.
-
-That distinction is a core design feature, not a disclaimer added after the fact.
-
----
-
-## 7. Current usefulness versus the traditional wheel
-
-### The wheel remains superior for
-
-- immediate circular/angular geometry;
-- familiar expert scanning;
-- visual recognition by practitioners trained for years in the traditional grammar;
-- compact representation of sign/house/aspect position.
-
-### Noetic Atlas is already superior for
-
-- long dispositor-chain tracing;
-- detecting and proving SCCs/cycles;
-- measuring route convergence and path depth;
-- exact pairwise aspect inspection through a matrix;
-- auditing house reassignment under a named house model;
-- reconstructing Hermetic-lot formulas and directed arcs;
-- preserving rule/provider/version provenance;
-- comparing the same symbolic system through several coordinated structures.
-
-### Noetic Atlas is not yet clearly superior for
-
-- psychological interpretation for a general consumer;
-- traditional planetary-condition judgment;
-- longitudinal timing;
-- practical forecasting;
-- demonstrating previously inaccessible truths about a life.
-
-The current value is therefore strongest for:
-
-- study;
-- teaching;
-- formal chart inspection;
-- software verification;
-- traditional-rule research;
-- HCI/visualization research;
-- hypothesis generation.
-
----
-
-## 8. Why the Condition Engine is the next ontological layer
-
-The current system knows a great deal about **connectivity** but comparatively little about **qualified state**.
-
-A simplified current node can be represented as:
+### Interpretive depth
 
 ```text
-P_i = (longitude, sign, house, aspects, ruler relations)
+house-ruler synthesis
+→ whole-chart motif synthesis
+→ curated interpretation profiles
+→ yoga/Ayurvedic practice layer
+→ selectable interpretive postures
 ```
 
-The intended v0.4 state is closer to:
+### Graph research
 
 ```text
-P_i = (
-  longitude,
-  sign,
-  house,
-  sect,
-  domicile/exaltation/adversity,
-  triplicity,
-  bound,
-  angularity,
-  reception,
-  overcoming,
-  bonification/maltreatment,
-  rulership topology
-)
+null models
+→ motif enrichment
+→ multilayer overlap baselines
+→ comparative chart architecture
 ```
 
-Two charts can have the same dispositor graph while the planets occupying that graph have very different traditional condition. Therefore topology alone is not a sufficient traditional astrological state model.
+### Time
 
-This is why v0.4 must not collapse condition into one opaque score.
-
-Every condition should remain independently inspectable and source-controlled.
-
----
-
-## 9. Why time must come after condition
-
-Life Spectrum should not merely animate changing angular distances.
-
-The intended temporal logic is:
+Only after the natal state is structurally and semantically characterized should Life Spectrum activate it:
 
 ```text
-Natal state N_i
-= geometry + topology + condition
-
-Temporal input T(t)
-= transits + time-lord regimes + other explicit techniques
-
-Activated state X_i(t)
-= F(N_i, T(t), rule-set versions)
+N_i = geometry + topology + condition + interpretation metadata
+T(t) = temporal input
+X_i(t) = F(N_i, T(t), rule-set versions)
 ```
 
-For example, an annual profection can be represented as a formal chain:
+The interpretation itself must not become an input that silently changes deterministic astronomy or rule calculations.
+
+---
+
+## 14. Current product thesis
+
+The strongest current description is:
+
+> **Noetic Atlas is an instrumentation layer for astrology that is becoming an explainable interpretive system.**
+
+Its strongest accomplishment is not that it has discovered a new theory of the psyche.
+
+It is that it can turn implicit relations into explicit objects, keep the mathematics/rules auditable, and then translate those structures into readable house-aware hypotheses without pretending the interpretation has the same epistemic status as the calculation.
+
+The conceptual pipeline is:
 
 ```text
-activated house
-→ ruler of activated house
-→ natal condition of that ruler
-→ dispositor route
-→ relevant transit/time-lord contacts
+Astrological model
+→ formal structures
+→ observable representations
+→ readable synthesis
+→ testable questions
 ```
 
-The value of the graph foundation becomes greater once time can activate **richly characterized natal structures** instead of unqualified points.
-
----
-
-## 10. Research program required before interpretive promotion
-
-A new metric or pattern should move through a promotion protocol:
-
-```text
-formal definition
-→ deterministic implementation
-→ unit/boundary tests
-→ cross-chart replication
-→ null/randomized comparison
-→ expert inspection
-→ preregistered or blinded testing where feasible
-→ independent replication
-→ only then candidate interpretive theory
-```
-
-Important safeguards include:
-
-- preserve negative findings;
-- state hypotheses before inspecting outcomes where feasible;
-- record researcher degrees of freedom;
-- account for multiple comparisons;
-- distinguish canonical regression fixtures from research samples;
-- use realistic astronomical nulls when geometry is being tested;
-- quantify birth-time sensitivity;
-- separate retrospective autobiographical annotation from prospectively entered events;
-- report effect sizes and uncertainty rather than only significance labels.
-
----
-
-## 11. Concrete falsifiable research questions
-
-### Visualization/HCI
-
-- Does the Flow Map reduce ruler-chain tracing time versus a wheel?
-- Does the Aspect Matrix improve pairwise relation accuracy?
-- Do linked views reduce errors without increasing cognitive load?
-- Do novices learn dispositorship faster with path isolation?
-
-### Structural astrology
-
-- Are terminal-SCC or route-convergence measures associated with independent expert judgments of chart organization?
-- Are those associations stable across traditions/rulership variants?
-- Do topology measures add information after conventional condition factors are included?
-
-### Temporal astrology
-
-- Do preregistered event windows show more technique convergence than time-shift nulls?
-- Do independent timing systems identify overlapping periods above chance expectation?
-- Are repeated autobiographical domains associated with recurrent calculated states?
-
-### Robustness
-
-- Which findings survive birth-time uncertainty?
-- Which findings disappear when the rulership scheme changes?
-- Which are artifacts of the selected orb policy?
-- Which persist across astronomy providers?
-
----
-
-## 12. Current bottom-line judgment
-
-Noetic Atlas is **not meaningless visualization** and it is **not yet a validated superior astrology**.
-
-Its present contribution is narrower and more defensible:
-
-1. It formalizes parts of astrological structure that are usually implicit.
-2. It computes directed rulership topology rather than leaving it to manual inspection.
-3. It gives different mathematical relation types different visual representations.
-4. It preserves derivation provenance and completeness state.
-5. It creates a substrate on which traditional condition, temporal activation, HCI evaluation, and empirical research can be built without confusing calculation with interpretation.
-
-The project should therefore be judged by a demanding rule:
-
-> **If a feature merely makes astrology look interesting, it does not belong. If it makes a structural question easier to formulate, inspect, reproduce, compare, or test, it may belong.**
-
-That is the current scientific and engineering north star.
-
----
-
-## 13. Immediate sequence
-
-```text
-v0.3.2  Visual Observatory + deterministic structure
-   ↓
-v0.4    source-controlled Condition Engine
-   ↓
-v0.5    minimal provenance-backed Life Spectrum
-   ↓
-traditional timing layers
-   ↓
-controlled HCI + structural research
-   ↓
-validated/retired exploratory descriptors
-   ↓
-comparative traditions + longitudinal state research
-```
-
-The condition engine remains the next major implementation milestone.
-
----
-
-## References
-
-1. Tarjan, R. E. (1972). Depth-First Search and Linear Graph Algorithms. *SIAM Journal on Computing*, 1(2), 146–160. DOI: `10.1137/0201010`.
-2. Ghoniem, M., Fekete, J.-D., & Castagliola, P. (2004). A Comparison of the Readability of Graphs Using Node-Link and Matrix-Based Representations. *IEEE Symposium on Information Visualization*. DOI: `10.1109/INFVIS.2004.1`.
-3. Kivelä, M., Arenas, A., Barthelemy, M., Gleeson, J. P., Moreno, Y., & Porter, M. A. (2014). Multilayer networks. *Journal of Complex Networks*, 2(3), 203–271. DOI: `10.1093/comnet/cnu016`.
-4. W3C (2013). *PROV-O: The PROV Ontology*. W3C Recommendation.
-5. Wilkinson, M. D., et al. (2016). The FAIR Guiding Principles for scientific data management and stewardship. *Scientific Data*, 3, 160018. DOI: `10.1038/sdata.2016.18`.
-
-These references justify specific graph, visualization, multilayer-modeling, and provenance design choices. They do **not** constitute evidence for astrological causation or predictive validity.
+That is the standard against which future features should be judged.
