@@ -1,0 +1,70 @@
+name: Deploy Noetic Atlas preview
+
+on:
+  push:
+    branches:
+      - noetic-atlas-v0.3
+    paths:
+      - 'prototype/**'
+      - 'src/**'
+      - '.github/workflows/pages-preview.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: noetic-atlas-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Configure and enable GitHub Pages
+        uses: actions/configure-pages@v6
+        with:
+          enablement: true
+
+      - name: Build static preview bundle
+        run: |
+          set -euxo pipefail
+          rm -rf _site
+          mkdir -p _site/prototype _site/src
+          cp prototype/index.html _site/prototype/index.html
+          cp -R src/. _site/src/
+          cat > _site/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta http-equiv="refresh" content="0; url=./prototype/">
+            <title>Noetic Atlas Preview</title>
+          </head>
+          <body>
+            <p><a href="./prototype/">Open Noetic Atlas</a></p>
+          </body>
+          </html>
+          HTML
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

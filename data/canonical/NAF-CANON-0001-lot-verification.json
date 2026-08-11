@@ -1,0 +1,16 @@
+{
+  "specimen_id": "NAF-CANON-0001",
+  "source_precision": "degree-minute supplied positions",
+  "sect_expected": "night",
+  "formula_family": "Paulus/Panaretus seven Hermetic lots",
+  "expected_from_rounded_input": {
+    "Fortune": {"longitude_deg": 254.5333333333333, "display": "14°32′ Sagittarius", "house": 5, "ruler": "Jupiter"},
+    "Spirit": {"longitude_deg": 8.733333333333348, "display": "8°44′ Aries", "house": 9, "ruler": "Mars"},
+    "Eros": {"longitude_deg": 335.55, "display": "5°33′ Pisces", "house": 8, "ruler": "Jupiter"},
+    "Necessity": {"longitude_deg": 76.60000000000002, "display": "16°36′ Gemini", "house": 11, "ruler": "Mercury"},
+    "Courage": {"longitude_deg": 42.383333333333326, "display": "12°23′ Taurus", "house": 10, "ruler": "Venus"},
+    "Victory": {"longitude_deg": 193.25, "display": "13°15′ Libra", "house": 3, "ruler": "Venus"},
+    "Nemesis": {"longitude_deg": 112.25, "display": "22°15′ Cancer", "house": 12, "ruler": "Moon"}
+  },
+  "note": "Regression expectations from the rounded input fixture, not ephemeris-grade coordinates. A future regenerated fixture must preserve full-precision astronomical positions."
+}

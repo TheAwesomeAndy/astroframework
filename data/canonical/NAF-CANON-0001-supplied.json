@@ -1,0 +1,27 @@
+{
+  "framework": "Noetic Atlas Framework",
+  "version": "0.3",
+  "specimen_id": "NAF-CANON-0001-supplied",
+  "epistemic_status": "Reference fixture transcribed from supplied degree-minute chart. Aspects are intentionally omitted and must be recomputed by the kernel.",
+  "angles": {
+    "ASC": {"sign":"Leo","degree":"11°38′"},
+    "MC": {"sign":"Taurus","degree":"0°44′"}
+  },
+  "objects": [
+    {"id":"Sun","sign":"Libra","degree":"10°57′","supplied_house":3},
+    {"id":"Moon","sign":"Gemini","degree":"8°03′","supplied_house":11},
+    {"id":"Mercury","sign":"Libra","degree":"19°30′","supplied_house":3},
+    {"id":"Venus","sign":"Virgo","degree":"14°49′","supplied_house":2},
+    {"id":"Mars","sign":"Virgo","degree":"15°17′","supplied_house":2},
+    {"id":"Jupiter","sign":"Aquarius","degree":"7°07′","supplied_house":7},
+    {"id":"Saturn","sign":"Scorpio","degree":"25°09′","supplied_house":4},
+    {"id":"Uranus","sign":"Sagittarius","degree":"14°42′","supplied_house":5},
+    {"id":"Neptune","sign":"Capricorn","degree":"0°58′","supplied_house":6},
+    {"id":"Pluto","sign":"Scorpio","degree":"3°44′","supplied_house":4},
+    {"id":"NorthNode","sign":"Taurus","degree":"10°31′","supplied_house":10,"retrograde":true},
+    {"id":"Lilith","sign":"Taurus","degree":"13°47′","supplied_house":10},
+    {"id":"Chiron","sign":"Gemini","degree":"14°33′","supplied_house":11,"retrograde":true},
+    {"id":"Fortune","sign":"Sagittarius","degree":"14°32′","supplied_house":5},
+    {"id":"Vertex","sign":"Sagittarius","degree":"28°23′","supplied_house":5}
+  ]
+}
