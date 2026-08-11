@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noetic-atlas.local/schemas/naf-condition-record-v0.4.0a.schema.json",
+  "title": "Noetic Atlas Condition Record v0.4.0a",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","object_id","object_class","applicability","model_bundle","identity","essential","sect","positional","relational","compound","completeness","ledger_refs"],
+  "properties": {
+    "schema_version": {"const": "naf.condition.record.v0.4.0a"},
+    "object_id": {"type": "string", "minLength": 1},
+    "object_class": {"enum": ["classical_planet","outer_planet","lot","angle","node","other_point"]},
+    "applicability": {"enum": ["full","derived_point_only","positional_only","tradition_dependent","not_applicable"]},
+    "model_bundle": {"type": "string", "minLength": 1},
+    "identity": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["longitude_deg","sign","whole_sign_house"],
+      "properties": {
+        "longitude_deg": {"type": "number", "minimum": 0, "exclusiveMaximum": 360},
+        "sign": {"type": "string"},
+        "whole_sign_house": {"type": ["integer","null"], "minimum": 1, "maximum": 12}
+      }
+    },
+    "essential": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domicile","adversity","exaltation","depression","triplicity","bound"],
+      "properties": {
+        "domicile": {"$ref": "#/$defs/factor"},
+        "adversity": {"$ref": "#/$defs/factor"},
+        "exaltation": {"$ref": "#/$defs/factor"},
+        "depression": {"$ref": "#/$defs/factor"},
+        "triplicity": {"$ref": "#/$defs/factor"},
+        "bound": {"$ref": "#/$defs/factor"}
+      }
+    },
+    "sect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["chart_sect","planetary_sect_family","sect_condition"],
+      "properties": {
+        "chart_sect": {"$ref": "#/$defs/factor"},
+        "planetary_sect_family": {"$ref": "#/$defs/factor"},
+        "sect_condition": {"$ref": "#/$defs/factor"}
+      }
+    },
+    "positional": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["whole_sign_angularity","quadrant_dynamic_strength"],
+      "properties": {
+        "whole_sign_angularity": {"$ref": "#/$defs/factor"},
+        "quadrant_dynamic_strength": {"$ref": "#/$defs/factor"}
+      }
+    },
+    "relational": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["receptions","exchanges","overcoming"],
+      "properties": {
+        "receptions": {"type": "array", "items": {"$ref": "#/$defs/relation"}},
+        "exchanges": {"type": "array", "items": {"$ref": "#/$defs/relation"}},
+        "overcoming": {"type": "array", "items": {"$ref": "#/$defs/relation"}}
+      }
+    },
+    "compound": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bonifications","maltreatments","enclosures","mitigations"],
+      "properties": {
+        "bonifications": {"type": "array", "items": {"$ref": "#/$defs/relation"}},
+        "maltreatments": {"type": "array", "items": {"$ref": "#/$defs/relation"}},
+        "enclosures": {"type": "array", "items": {"$ref": "#/$defs/relation"}},
+        "mitigations": {"type": "array", "items": {"$ref": "#/$defs/relation"}}
+      }
+    },
+    "completeness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primitive_condition","relational_condition","compound_condition"],
+      "properties": {
+        "primitive_condition": {"enum": ["complete","partial","not_implemented"]},
+        "relational_condition": {"enum": ["complete","partial","not_implemented"]},
+        "compound_condition": {"enum": ["complete","partial","not_implemented"]}
+      }
+    },
+    "ledger_refs": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "factor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status","rule_id","source_ids","inputs","result","ledger_ref"],
+      "properties": {
+        "status": {"enum": ["present","absent","not_applicable","unsupported","indeterminate","not_implemented"]},
+        "rule_id": {"type": ["string","null"]},
+        "source_ids": {"type": "array", "items": {"type": "string"}},
+        "inputs": {"type": "object"},
+        "result": {},
+        "caveat": {"type": ["string","null"]},
+        "ledger_ref": {"type": ["string","null"]}
+      }
+    },
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relation_id","relation_type","status","rule_id","source_ids","source","target","proof","ledger_ref"],
+      "properties": {
+        "relation_id": {"type": "string"},
+        "relation_type": {"enum": ["reception","exchange","overcoming","bonification","maltreatment","enclosure","mitigation","other"]},
+        "status": {"enum": ["present","absent","not_applicable","unsupported","indeterminate","not_implemented"]},
+        "rule_id": {"type": ["string","null"]},
+        "source_ids": {"type": "array", "items": {"type": "string"}},
+        "source": {"type": ["string","null"]},
+        "target": {"type": ["string","null"]},
+        "proof": {"type": "object"},
+        "caveat": {"type": ["string","null"]},
+        "ledger_ref": {"type": ["string","null"]}
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "fixture_spec_id": "naf.condition.synthetic.v0.4.0a",
+  "status": "specification_only_no_engine_assertions",
+  "schema_version": "v0.4.0a",
+  "purpose": "Predeclare edge cases before calculation code so implementation is constrained by fixtures rather than tuned to the canonical specimen.",
+  "numeric_convention": {"sign_degree":"[0,30)","bounds":"[start,end)","boundary_epsilon_deg":1e-9},
+  "required_families": ["domicile_adversity","exaltation_depression","triplicity_day_night","egyptian_bound_boundaries","sect_family_and_condition","whole_sign_angularity","reception","exchange","overcoming","compound_placeholders"],
+  "cases": [
+    {"id":"domicile.sun.leo","phase":"v0.4.0b","inputs":{"planet":"Sun","sign":"Leo","degree":15},"expect":{"domicile":"present","adversity":"absent"}},
+    {"id":"adversity.sun.aquarius","phase":"v0.4.0b","inputs":{"planet":"Sun","sign":"Aquarius","degree":15},"expect":{"domicile":"absent","adversity":"present"}},
+    {"id":"exaltation.venus.pisces","phase":"v0.4.0b","inputs":{"planet":"Venus","sign":"Pisces","degree":10},"expect":{"exaltation":"present","depression":"absent"}},
+    {"id":"depression.venus.virgo","phase":"v0.4.0b","inputs":{"planet":"Venus","sign":"Virgo","degree":10},"expect":{"exaltation":"absent","depression":"present"}},
+    {"id":"triplicity.fire.day","phase":"v0.4.0b","inputs":{"element":"Fire","chart_sect":"day"},"expect":{"rulers":["Sun","Jupiter","Saturn"],"active_primary":"Sun"}},
+    {"id":"triplicity.fire.night","phase":"v0.4.0b","inputs":{"element":"Fire","chart_sect":"night"},"expect":{"rulers":["Jupiter","Sun","Saturn"],"active_primary":"Jupiter"}},
+    {"id":"triplicity.air.day","phase":"v0.4.0b","inputs":{"element":"Air","chart_sect":"day"},"expect":{"rulers":["Saturn","Mercury","Jupiter"],"active_primary":"Saturn"}},
+    {"id":"triplicity.air.night","phase":"v0.4.0b","inputs":{"element":"Air","chart_sect":"night"},"expect":{"rulers":["Mercury","Saturn","Jupiter"],"active_primary":"Mercury"}},
+    {"id":"bounds.aries.before_6","phase":"v0.4.0b","inputs":{"sign":"Aries","degree":5.999999999},"expect":{"ruler":"Jupiter","interval":[0,6]}},
+    {"id":"bounds.aries.exact_6","phase":"v0.4.0b","inputs":{"sign":"Aries","degree":6.0},"expect":{"ruler":"Venus","interval":[6,12]}},
+    {"id":"bounds.aries.before_30","phase":"v0.4.0b","inputs":{"sign":"Aries","degree":29.999999999},"expect":{"ruler":"Saturn","interval":[25,30]}},
+    {"id":"bounds.wrap_30_to_taurus_0","phase":"v0.4.0b","inputs":{"absolute_longitude":30.0},"expect":{"normalized_sign":"Taurus","normalized_degree":0.0,"ruler":"Venus"}},
+    {"id":"bounds.virgo.exact_17","phase":"v0.4.0b","inputs":{"sign":"Virgo","degree":17.0},"expect":{"ruler":"Jupiter","interval":[17,21]}},
+    {"id":"bounds.pisces.exact_28","phase":"v0.4.0b","inputs":{"sign":"Pisces","degree":28.0},"expect":{"ruler":"Saturn","interval":[28,30]}},
+    {"id":"sect.jupiter.day","phase":"v0.4.0b","inputs":{"planet":"Jupiter","chart_sect":"day"},"expect":{"planetary_sect_family":"diurnal","sect_condition":"in_sect"}},
+    {"id":"sect.jupiter.night","phase":"v0.4.0b","inputs":{"planet":"Jupiter","chart_sect":"night"},"expect":{"planetary_sect_family":"diurnal","sect_condition":"out_of_sect"}},
+    {"id":"sect.mars.night","phase":"v0.4.0b","inputs":{"planet":"Mars","chart_sect":"night"},"expect":{"planetary_sect_family":"nocturnal","sect_condition":"in_sect"}},
+    {"id":"sect.mercury.morning.day","phase":"v0.4.0b","inputs":{"planet":"Mercury","solar_phase":"morning_star","chart_sect":"day"},"expect":{"planetary_sect_family":"diurnal","sect_condition":"in_sect"}},
+    {"id":"sect.mercury.evening.day","phase":"v0.4.0b","inputs":{"planet":"Mercury","solar_phase":"evening_star","chart_sect":"day"},"expect":{"planetary_sect_family":"nocturnal","sect_condition":"out_of_sect"}},
+    {"id":"sect.mercury.unknown","phase":"v0.4.0b","inputs":{"planet":"Mercury","solar_phase":"unknown","chart_sect":"night"},"expect":{"planetary_sect_family":"indeterminate","sect_condition":"indeterminate"}},
+    {"id":"angularity.house1","phase":"v0.4.0b","inputs":{"whole_sign_house":1},"expect":{"classification":"angular"}},
+    {"id":"angularity.house11","phase":"v0.4.0b","inputs":{"whole_sign_house":11},"expect":{"classification":"succedent"}},
+    {"id":"angularity.house9","phase":"v0.4.0b","inputs":{"whole_sign_house":9},"expect":{"classification":"cadent"}},
+    {"id":"reception.one_way_domicile_configured","phase":"v0.4.0c","inputs":{"a":{"planet":"Moon","sign":"Sagittarius"},"b":{"planet":"Jupiter","sign":"Libra"},"configured":true},"expect":{"relation_type":"reception","status":"to_be_locked_by_relational_tests"}},
+    {"id":"exchange.simple_domicile","phase":"v0.4.0c","inputs":{"a":{"planet":"Mercury","sign":"Libra"},"b":{"planet":"Venus","sign":"Virgo"}},"expect":{"relation_type":"exchange","status":"present_under_planned_hellenistic_exchange_rule"}},
+    {"id":"overcoming.superior_square","phase":"v0.4.0c","inputs":{"source_sign":"Aries","target_sign":"Cancer"},"expect":{"relation_type":"overcoming","configuration":"square","status":"implementation_fixture_to_verify_orientation"}},
+    {"id":"compound.empty_slots","phase":"v0.4.0a","inputs":{"object_class":"classical_planet"},"expect":{"compound_keys":["bonifications","maltreatments","enclosures","mitigations"],"initial_values":"empty_arrays_or_explicit_not_implemented_relations"}}
+  ],
+  "golden_fixture_policy": {
+    "canonical_specimen": "Regression only; never used to choose rule boundaries.",
+    "synthetic_cases": "Must be expanded before each new rule family moves from planned to implementation_ready.",
+    "boundary_rule": "Every discrete degree table requires just-below, exact-boundary, and just-above tests."
+  }
+}

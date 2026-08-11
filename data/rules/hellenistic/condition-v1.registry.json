@@ -1,0 +1,157 @@
+{
+  "registry_id": "naf.condition.registry.hellenistic.v1",
+  "milestone": "v0.4.0a",
+  "status": "schema_frozen_no_calculations",
+  "model_bundle": "naf.condition.hellenistic.brennan-reconstruction.v1",
+  "epistemic_scope": "Astrological rule definitions and implementation contracts. These rules are historical/model conventions, not physical measurements or empirical validation of astrology.",
+  "object_scope": {
+    "classical_planet": {
+      "applicability": "full",
+      "objects": ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"]
+    },
+    "outer_planet": {
+      "applicability": "not_applicable",
+      "objects": ["Uranus", "Neptune", "Pluto"],
+      "note": "No Hellenistic essential-dignity inheritance. A later modern/hybrid model requires its own rule-set ID."
+    },
+    "lot": {
+      "applicability": "derived_point_only",
+      "note": "Lots may have rulers, houses, aspects, and timing relations, but do not silently inherit planetary essential dignity."
+    },
+    "angle": {
+      "applicability": "positional_only",
+      "objects": ["ASC", "MC", "DSC", "IC"],
+      "note": "Angles are geometric/positional points, not planets."
+    },
+    "node": {
+      "applicability": "tradition_dependent",
+      "note": "No planetary dignity logic is inherited by default."
+    }
+  },
+  "status_vocabulary": ["present", "absent", "not_applicable", "unsupported", "indeterminate", "not_implemented"],
+  "interval_convention": {
+    "longitude_domain_deg": "[0,360)",
+    "sign_local_degree_domain": "[0,30)",
+    "bound_intervals": "[start_deg,end_deg)",
+    "exact_30_deg": "Normalize to 0 degrees of the following sign before bound lookup.",
+    "historical_translation_note": "Historical degree counts are represented computationally as half-open zero-based intervals. Thus a six-degree first bound is [0,6), and an exact boundary at 6.000... belongs to the following bound.",
+    "tolerance_policy": "No epsilon is embedded in the rule table. Numeric tolerance belongs to implementation/test policy and must be versioned separately if introduced."
+  },
+  "sources": [
+    {
+      "id": "brennan.2017.ch7.sect",
+      "type": "modern_reconstruction",
+      "citation": "Christopher Brennan, Hellenistic Astrology: The Study of Fate and Fortune (2017), Chapter 7, Sect, pp. 190-196.",
+      "supports": ["planetary_sect", "sect_condition"],
+      "notes": "Brennan presents Sun/Jupiter/Saturn as diurnal; Moon/Venus/Mars as nocturnal; Mercury as common/variable, with Ptolemy and Porphyry assigning morning-star Mercury to diurnal sect and evening-star Mercury to nocturnal sect."
+    },
+    {
+      "id": "brennan.2017.ch8.domicile",
+      "type": "modern_reconstruction",
+      "citation": "Brennan (2017), Chapter 8, Domicile Rulership, pp. 232ff.",
+      "supports": ["domicile", "adversity"]
+    },
+    {
+      "id": "brennan.2017.ch8.exaltation",
+      "type": "modern_reconstruction",
+      "citation": "Brennan (2017), Chapter 8, Exaltations and Depressions, pp. 242ff.",
+      "supports": ["exaltation", "depression"]
+    },
+    {
+      "id": "brennan.2017.table8.1.triplicity",
+      "type": "modern_reconstruction",
+      "citation": "Brennan (2017), Table 8.1, Standard Triplicity Rulership Scheme, p. 267.",
+      "supports": ["triplicity"],
+      "primary_witnesses": ["Dorotheus, Carmen Astrologicum 1.1:2-4", "Vettius Valens, Anthology 2.1"],
+      "notes": "Ptolemy's alternate triplicity scheme is explicitly excluded from v1."
+    },
+    {
+      "id": "brennan.2017.table8.3.egyptian_bounds",
+      "type": "modern_reconstruction",
+      "citation": "Brennan (2017), Table 8.3, The Egyptian Bounds, p. 277.",
+      "supports": ["egyptian_bounds"],
+      "primary_witnesses": ["Dorotheus, original verse via Hephaestio, Apotelesmatika 1.1", "Vettius Valens, Anthology 1.3"],
+      "notes": "Ptolemaic and Chaldean bounds are explicitly excluded from v1."
+    },
+    {
+      "id": "brennan.2017.ch10.angular_places",
+      "type": "modern_reconstruction",
+      "citation": "Brennan (2017), Chapter 10, The Angles or Pivots and Angular Triads, pp. 325-331.",
+      "supports": ["whole_sign_place_angularity"],
+      "notes": "This initial classifier is distinct from quadrant-house dynamic strength in Chapter 11."
+    },
+    {
+      "id": "brennan.2017.ch9.overcoming",
+      "type": "modern_reconstruction",
+      "citation": "Brennan (2017), Chapter 9, Overcoming, pp. 311-315.",
+      "supports": ["overcoming"],
+      "primary_witnesses": ["Porphyry, Introduction 20", "Antiochus, Summary 10"],
+      "notes": "Implementation deferred to relational-condition phase."
+    },
+    {
+      "id": "brennan.2017.ch14.reception",
+      "type": "modern_reconstruction",
+      "citation": "Brennan (2017), Chapter 14, Mitigating Conditions: Reception, pp. 491-494.",
+      "supports": ["reception", "exchange"],
+      "primary_witnesses": ["Porphyry, Introduction 22", "Antiochus, Summary 11", "Rhetorius, Compendium 40"],
+      "notes": "Hellenistic reception/exchange must not be silently replaced by later Medieval mutual-reception definitions."
+    },
+    {
+      "id": "brennan.2017.ch14.bonification_maltreatment",
+      "type": "modern_reconstruction",
+      "citation": "Brennan (2017), Chapter 14, Conditions of Bonification and Maltreatment, pp. 461-494.",
+      "supports": ["bonification", "maltreatment", "mitigation"],
+      "notes": "Brennan explicitly describes this chapter as a reconstruction from divergent Antiochus-derived definitions; compound rules are therefore source-sensitive and not implementation-ready in v0.4.0a."
+    }
+  ],
+  "tables": {
+    "domiciles": {
+      "Sun": ["Leo"], "Moon": ["Cancer"], "Mercury": ["Gemini", "Virgo"], "Venus": ["Taurus", "Libra"], "Mars": ["Aries", "Scorpio"], "Jupiter": ["Sagittarius", "Pisces"], "Saturn": ["Capricorn", "Aquarius"]
+    },
+    "adversities": {
+      "Sun": ["Aquarius"], "Moon": ["Capricorn"], "Mercury": ["Sagittarius", "Pisces"], "Venus": ["Scorpio", "Aries"], "Mars": ["Libra", "Taurus"], "Jupiter": ["Gemini", "Virgo"], "Saturn": ["Cancer", "Leo"]
+    },
+    "exaltations": {"Sun":"Aries","Moon":"Taurus","Mercury":"Virgo","Venus":"Pisces","Mars":"Capricorn","Jupiter":"Cancer","Saturn":"Libra"},
+    "depressions": {"Sun":"Libra","Moon":"Scorpio","Mercury":"Pisces","Venus":"Virgo","Mars":"Cancer","Jupiter":"Capricorn","Saturn":"Aries"},
+    "planetary_sect": {
+      "Sun":{"family":"diurnal","rule":"fixed"}, "Moon":{"family":"nocturnal","rule":"fixed"}, "Jupiter":{"family":"diurnal","rule":"fixed"}, "Saturn":{"family":"diurnal","rule":"fixed"}, "Venus":{"family":"nocturnal","rule":"fixed"}, "Mars":{"family":"nocturnal","rule":"fixed"}, "Mercury":{"family":"variable","rule":"morning_star_diurnal_evening_star_nocturnal","unresolved_state":"indeterminate"}
+    },
+    "triplicity_standard": {
+      "Fire":{"day":["Sun","Jupiter","Saturn"],"night":["Jupiter","Sun","Saturn"]},
+      "Earth":{"day":["Venus","Moon","Mars"],"night":["Moon","Venus","Mars"]},
+      "Air":{"day":["Saturn","Mercury","Jupiter"],"night":["Mercury","Saturn","Jupiter"]},
+      "Water":{"day":["Venus","Mars","Moon"],"night":["Mars","Venus","Moon"]}
+    },
+    "egyptian_bounds": {
+      "Aries":[["Jupiter",0,6],["Venus",6,12],["Mercury",12,20],["Mars",20,25],["Saturn",25,30]],
+      "Taurus":[["Venus",0,8],["Mercury",8,14],["Jupiter",14,22],["Saturn",22,27],["Mars",27,30]],
+      "Gemini":[["Mercury",0,6],["Jupiter",6,12],["Venus",12,17],["Mars",17,24],["Saturn",24,30]],
+      "Cancer":[["Mars",0,7],["Venus",7,13],["Mercury",13,19],["Jupiter",19,26],["Saturn",26,30]],
+      "Leo":[["Jupiter",0,6],["Venus",6,11],["Saturn",11,18],["Mercury",18,24],["Mars",24,30]],
+      "Virgo":[["Mercury",0,7],["Venus",7,17],["Jupiter",17,21],["Mars",21,28],["Saturn",28,30]],
+      "Libra":[["Saturn",0,6],["Mercury",6,14],["Jupiter",14,21],["Venus",21,28],["Mars",28,30]],
+      "Scorpio":[["Mars",0,7],["Venus",7,11],["Mercury",11,19],["Jupiter",19,24],["Saturn",24,30]],
+      "Sagittarius":[["Jupiter",0,12],["Venus",12,17],["Mercury",17,21],["Saturn",21,26],["Mars",26,30]],
+      "Capricorn":[["Mercury",0,7],["Jupiter",7,14],["Venus",14,22],["Saturn",22,26],["Mars",26,30]],
+      "Aquarius":[["Mercury",0,7],["Venus",7,13],["Jupiter",13,20],["Mars",20,25],["Saturn",25,30]],
+      "Pisces":[["Venus",0,12],["Jupiter",12,16],["Mercury",16,19],["Mars",19,28],["Saturn",28,30]]
+    },
+    "whole_sign_place_angularity": {"angular":[1,4,7,10],"succedent":[2,5,8,11],"cadent":[3,6,9,12]}
+  },
+  "rules": [
+    {"id":"naf.condition.domicile.hellenistic.v1","family":"essential","implementation_status":"implementation_ready","applies_to":["classical_planet"],"source_ids":["brennan.2017.ch8.domicile"],"inputs":["planet_id","sign"],"output":"present|absent","variant_decisions":["classical seven only"],"variants_not_implemented":["modern co-rulership"]},
+    {"id":"naf.condition.adversity.hellenistic.v1","family":"essential","implementation_status":"implementation_ready","applies_to":["classical_planet"],"source_ids":["brennan.2017.ch8.domicile"],"inputs":["planet_id","sign"],"output":"present|absent","terminology_note":"Registry uses Brennan's adversity; UI may additionally display later term detriment without changing the rule ID."},
+    {"id":"naf.condition.exaltation.sign.hellenistic.v1","family":"essential","implementation_status":"implementation_ready","applies_to":["classical_planet"],"source_ids":["brennan.2017.ch8.exaltation"],"inputs":["planet_id","sign"],"output":"present|absent","variants_not_implemented":["degree-specific exaltation scoring"]},
+    {"id":"naf.condition.depression.sign.hellenistic.v1","family":"essential","implementation_status":"implementation_ready","applies_to":["classical_planet"],"source_ids":["brennan.2017.ch8.exaltation"],"inputs":["planet_id","sign"],"output":"present|absent","terminology_note":"UI may show later synonym fall."},
+    {"id":"naf.condition.triplicity.standard_dorothean.v1","family":"essential","implementation_status":"implementation_ready","applies_to":["classical_planet"],"source_ids":["brennan.2017.table8.1.triplicity"],"inputs":["planet_id","sign_element","chart_sect"],"output":"day_ruler,night_ruler,cooperating_ruler,active_primary,planet_is_any_triplicity_ruler","variants_not_implemented":["Ptolemaic triplicity"],"notes":"This rule determines triplicity rulership of the occupied sign; triplicity rulers of the sect light remain a separate higher-order technique."},
+    {"id":"naf.condition.bounds.egyptian.v1","family":"essential","implementation_status":"implementation_ready","applies_to":["classical_planet"],"source_ids":["brennan.2017.table8.3.egyptian_bounds"],"inputs":["sign","sign_local_degree"],"output":"bound_ruler,start_deg,end_deg,planet_in_own_bound","boundary_policy":"half_open_[start,end)","variants_not_implemented":["Ptolemaic bounds","Chaldean bounds"]},
+    {"id":"naf.condition.sect.planet_family.ptolemy_porphyry.v1","family":"sect","implementation_status":"implementation_ready","applies_to":["classical_planet"],"source_ids":["brennan.2017.ch7.sect"],"inputs":["planet_id","mercury_solar_phase_if_mercury"],"output":"diurnal|nocturnal|indeterminate","variants_not_implemented":["Valens alternative Mercury association rule"]},
+    {"id":"naf.condition.sect.in_or_out.v1","family":"sect","implementation_status":"implementation_ready","applies_to":["classical_planet"],"source_ids":["brennan.2017.ch7.sect"],"inputs":["chart_sect","planetary_sect_family"],"output":"in_sect|out_of_sect|indeterminate","notes":"Chart sect, planetary sect family, and resulting condition are separate facts."},
+    {"id":"naf.condition.angularity.whole_sign_place.v1","family":"positional","implementation_status":"implementation_ready","applies_to":["classical_planet"],"source_ids":["brennan.2017.ch10.angular_places"],"inputs":["whole_sign_house"],"output":"angular|succedent|cadent","variants_not_implemented":["quadrant dynamic-strength measurement"],"notes":"This is a place-classification rule, not a degree-based strength score."},
+    {"id":"naf.condition.reception.domicile.hellenistic.v1","family":"relational","implementation_status":"planned_source_locked","applies_to":["classical_planet"],"source_ids":["brennan.2017.ch14.reception"],"inputs":["source_planet","target_planet","configuration","domicile_ownership"],"output":"directed reception relation","variants_not_implemented":["Medieval dignity-stacking mutual reception"],"notes":"Exact configuration policy must be unit-tested before implementation."},
+    {"id":"naf.condition.exchange.domicile.hellenistic.v1","family":"relational","implementation_status":"planned_source_locked","applies_to":["classical_planet"],"source_ids":["brennan.2017.ch14.reception"],"inputs":["planet_a","planet_b","occupied_signs","domicile_ownership"],"output":"exchange relation","notes":"Hellenistic exchange is reserved separately from later Medieval mutual reception."},
+    {"id":"naf.condition.overcoming.sign_based.v1","family":"relational","implementation_status":"planned_source_locked","applies_to":["classical_planet"],"source_ids":["brennan.2017.ch9.overcoming"],"inputs":["source_sign","target_sign","configuration"],"output":"directed overcoming relation","notes":"Purely sign-based superior/inferior orientation; exact phase/degree refinements are separate metadata."},
+    {"id":"naf.condition.bonification.antiochus_reconstruction.v1","family":"compound","implementation_status":"research_required","applies_to":["classical_planet"],"source_ids":["brennan.2017.ch14.bonification_maltreatment"],"inputs":["primitive_condition_facts","relational_condition_facts"],"output":"bonification testimonies","notes":"Must be decomposed into source-defined pure functions before implementation."},
+    {"id":"naf.condition.maltreatment.antiochus_reconstruction.v1","family":"compound","implementation_status":"research_required","applies_to":["classical_planet"],"source_ids":["brennan.2017.ch14.bonification_maltreatment"],"inputs":["primitive_condition_facts","relational_condition_facts"],"output":"maltreatment testimonies","notes":"Must be decomposed into source-defined pure functions before implementation."}
+  ]
+}

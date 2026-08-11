@@ -1,10 +1,10 @@
 {
   "name": "noetic-atlas-framework",
-  "version": "0.3.1",
+  "version": "0.4.0-alpha.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tests/kernel_smoke.mjs && node tests/integrity_smoke.mjs && node tests/boundary_smoke.mjs && node tests/timezone_smoke.mjs && node tests/astronomy_contract_smoke.mjs"
+    "test": "node tests/kernel_smoke.mjs && node tests/integrity_smoke.mjs && node tests/condition_registry_smoke.mjs && node tests/boundary_smoke.mjs && node tests/timezone_smoke.mjs && node tests/astronomy_contract_smoke.mjs"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19",
