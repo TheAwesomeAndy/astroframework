@@ -4,89 +4,66 @@
 
 The architecture of Noetic Atlas is a methodological constraint, not merely code organization.
 
-The system is designed so that a user, astrologer, researcher, or engineer can trace a displayed conclusion backward through every layer that produced it.
+The system is designed so that a user, astrologer, researcher, or engineer can trace a displayed result backward through every layer that produced it.
 
-The core rule is:
+Core rule:
 
-> **Astronomy, astrological rules, mathematical derivation, exploratory research, visualization, and interpretation are separate layers with explicit interfaces.**
+> **Civil time, astronomy, astrological rules, mathematical derivation, research descriptors, visualization, and interpretation are separate layers with explicit interfaces.**
 
 No downstream layer may silently modify an upstream result.
+
+Current public interface: **v0.3.2 Visual Observatory**.  
+Current minimum analysis envelope: **`naf.analysis.v0.3.1`**.
 
 ---
 
 ## 2. End-to-end system
 
 ```text
-┌────────────────────────────────────┐
-│ USER INPUT                         │
-│ local date/time + lat/lon          │
-│ OR imported calculated chart       │
-└─────────────────┬──────────────────┘
-                  │
-                  v
-┌────────────────────────────────────┐
-│ CIVIL TIME                         │
-│ IANA zone + DST/history            │
-│ src/time/                          │
-└─────────────────┬──────────────────┘
-                  │
-                  v
-┌────────────────────────────────────┐
-│ ASTRONOMY                          │
-│ longitudes, velocities, ASC, MC,   │
-│ solar altitude                     │
-│ src/astronomy/                     │
-└─────────────────┬──────────────────┘
-                  │
-                  v
-┌────────────────────────────────────┐
-│ ASTROLOGICAL KERNEL                │
-│ houses, aspects, rulers, geometry  │
-│ src/kernel/noetic-kernel.mjs       │
-└─────────────────┬──────────────────┘
-                  │
-                  v
-┌────────────────────────────────────┐
-│ TRADITION-SPECIFIC RULES           │
-│ sect, lots, later dignity/timing   │
-│ src/kernel/hellenistic-integrity   │
-└─────────────────┬──────────────────┘
-                  │
-        ┌─────────┴───────────┐
-        v                     v
-┌───────────────────┐  ┌─────────────────────┐
-│ GRAPH / TOPOLOGY  │  │ DERIVATION LEDGER   │
-│ routes, SCCs      │  │ formulas/provenance │
-└─────────┬─────────┘  └──────────┬──────────┘
-          │                       │
-          └──────────┬────────────┘
-                     v
-┌────────────────────────────────────┐
-│ CANONICAL ANALYSIS MODEL           │
-└──────────────┬─────────────────────┘
-               │
-      ┌────────┼───────────┐
-      v        v           v
-┌──────────┐ ┌──────────┐ ┌──────────────┐
-│ RESEARCH │ │ VISUAL   │ │ EXPORT / API │
-│ metrics  │ │ STATE    │ │ structured   │
-└────┬─────┘ └────┬─────┘ └──────────────┘
-     │            │
-     └──────┬─────┘
-            v
-┌────────────────────────────────────┐
-│ AI / HUMAN INTERPRETATION          │
-│ strictly downstream                │
-└────────────────────────────────────┘
+USER INPUT
+local date/time + latitude/longitude
+OR imported calculated placements
+        ↓
+CIVIL TIME
+IANA zone + DST/history
+src/time/
+        ↓
+ASTRONOMY
+longitudes, velocities, ASC, MC, solar altitude
+src/astronomy/
+        ↓
+GENERAL ASTROLOGICAL KERNEL
+houses, aspects, rulers, geometry, topology
+src/kernel/noetic-kernel.mjs
+        ↓
+TRADITION-SPECIFIC RULES / INTEGRITY
+sect, lots, provenance; later condition/timing
+src/kernel/hellenistic-integrity.mjs
+        ↓
+CANONICAL ANALYSIS MODEL
+        ├── graph/topology
+        ├── derivation ledger/tree
+        ├── validation/completeness
+        └── version manifest
+        ↓
++----------------------+----------------------+------------------+
+| VISUAL OBSERVATORY   | RESEARCH LAB         | EXPORT / API     |
+| Natal Field          | exploratory metrics  | structured JSON  |
+| Aspect Matrix        | promotion-gated      | audit package    |
+| Flow Map             |                      |                  |
+| Sect & Lots          |                      |                  |
+| Audit                |                      |                  |
++----------------------+----------------------+------------------+
+        ↓
+AI / HUMAN INTERPRETATION
+strictly downstream
 ```
 
 ---
 
 ## 3. Dependency direction
 
-Dependencies should flow downward through the architecture.
-
-Allowed examples:
+Allowed:
 
 ```text
 pipeline → time
@@ -98,90 +75,51 @@ visualization → canonical analysis
 AI → canonical analysis + provenance
 ```
 
-Disallowed examples:
+Disallowed:
 
 ```text
 astronomy → interpretation
 kernel → UI DOM
 UI → reimplemented aspect formula
 research metric → rewrite natal longitude
-AI → provide missing ephemeris value
+visual style → change rule acceptance
+AI → invent missing ephemeris values
 ```
 
-Circular architectural dependencies should be treated as defects unless explicitly justified.
+A graph edge shown in the browser must be the same relationship object calculated by the kernel, not a visually convenient reimplementation.
 
 ---
 
-## 4. Input architecture
+## 4. Input and civil-time architecture
 
-### 4.1 Public birth-data input
-
-Canonical public contract:
+Canonical public birth input:
 
 ```json
 {
-  "local_datetime": "1984-10-03T21:17:00",
-  "latitude": 40.789,
-  "longitude": -73.135,
+  "local_datetime": "YYYY-MM-DDTHH:MM:SS",
+  "latitude": 0.0,
+  "longitude": 0.0,
   "elevation_m": 0,
   "timezone_override": null,
   "ambiguity_index": null
 }
 ```
 
-The public layer intentionally accepts local civil time because that is what users normally know.
+Responsibilities of `src/time/`:
 
-It does **not** send local wall time directly to astronomy.
-
-### 4.2 Calculated-chart input
-
-Supported transitional formats:
-
-- pasted placement text;
-- canonical JSON.
-
-The parser normalizes coordinates and treats imported aspects/houses as reference information where appropriate.
-
-The kernel recomputes the structures it is capable of deriving.
-
----
-
-## 5. Civil-time layer
-
-Directory:
-
-```text
-src/time/
-```
-
-Responsibilities:
-
-- map latitude/longitude to IANA zone;
-- allow expert zone override;
+- map coordinates to an approximate IANA time zone;
+- allow expert override;
 - resolve historical UTC offset;
 - detect repeated DST times;
-- reject nonexistent civil times;
-- return an unambiguous UTC timestamp or explicit ambiguity.
+- reject nonexistent local times;
+- return an unambiguous UTC instant or explicit ambiguity;
+- preserve time-resolution provenance.
 
-Output should include provenance such as:
-
-```json
-{
-  "timezone": "America/New_York",
-  "local_datetime": "...",
-  "utc_datetime": "...Z",
-  "offset_minutes": -240,
-  "lookup_provider": "...",
-  "lookup_version": "...",
-  "ambiguity": null
-}
-```
-
-Astronomy must consume the resolved instant, not the unresolved local time.
+Astronomy consumes the resolved instant, not unresolved wall time.
 
 ---
 
-## 6. Astronomy adapter layer
+## 5. Astronomy adapter layer
 
 Directory:
 
@@ -189,47 +127,45 @@ Directory:
 src/astronomy/
 ```
 
-The current research adapter is Astronomy Engine–based.
+Current research adapter: Astronomy Engine.
 
-### Provider interface responsibilities
-
-Return only astronomical/observer quantities:
+Responsibilities:
 
 - geocentric ecliptic longitude;
-- velocity / retrograde state;
+- longitudinal velocity / retrograde state;
 - ASC;
 - MC;
 - geometric solar altitude;
-- provider metadata.
+- provider/convention metadata.
 
-A provider should not know about:
+Current unsupported or incomplete areas remain explicit:
 
-- domicile rulership;
-- sect interpretation;
-- lots;
-- dignity;
-- house topics;
-- AI text.
+- Chiron;
+- true/mean node variants;
+- Black Moon Lilith/apogee variants;
+- Vertex;
+- fixed stars;
+- completed independent cross-provider validation corpus.
 
-### Required provider provenance
+A provider must not know about domicile rulership, lots, condition, house topics, or interpretation.
+
+Required provider metadata should include:
 
 ```text
-provider name
-provider version
+provider/version
 license
 coordinate frame
-apparent/geometric convention
 geocentric/topocentric convention
-supported objects
-unsupported objects
+apparent/geometric convention
+supported object definitions
 precision/validation notes
 ```
 
-The adapter boundary exists so another provider, including a commercial Swiss Ephemeris implementation, can later be cross-validated without rewriting the astrological kernel.
+See `ASTRONOMY_VALIDATION_PLAN.md`.
 
 ---
 
-## 7. General astrological kernel
+## 6. General astrological kernel
 
 File:
 
@@ -240,30 +176,26 @@ src/kernel/noetic-kernel.mjs
 Current responsibilities:
 
 - coordinate normalization;
-- sign conversion;
+- zodiac/sign conversion;
 - chart-text/JSON parsing;
-- whole-sign house assignment;
-- major aspect calculation;
-- orb policy application;
-- phase calculation from velocities;
-- traditional ruler map;
+- Whole Sign house assignment;
+- major-aspect calculation;
+- orb-policy application;
+- applying/separating phase from velocities;
+- traditional domicile-ruler map;
 - dispositor graph construction;
 - Tarjan SCC detection;
-- terminal SCC detection;
+- terminal-SCC detection;
 - house-ruler routing;
 - element/modality composition.
 
-### Design constraint
-
-Keep this module focused on reusable geometry/topology.
-
-A historical technique with multiple source variants should normally live in a tradition-specific module rather than being buried in general helpers.
+This module owns reusable geometry/topology, not historical interpretive prose.
 
 ---
 
-## 8. Hellenistic integrity/rule layer
+## 7. Hellenistic integrity/rule layer
 
-File:
+Current file:
 
 ```text
 src/kernel/hellenistic-integrity.mjs
@@ -272,94 +204,85 @@ src/kernel/hellenistic-integrity.mjs
 Current responsibilities:
 
 - sect;
-- Paulus/Panaretus Hermetic lots;
-- detailed formula proof objects;
-- derivation-ledger enrichment.
+- seven Paulus/Panaretus Hermetic lots;
+- formula proof objects;
+- source/rule provenance;
+- version manifest;
+- completeness flags;
+- derivation ledger/tree enrichment.
 
-Expected future expansion:
-
-```text
-sect membership/condition
-essential dignity
-triplicity rulers
-bounds/terms
-reception
-overcoming
-bonification/maltreatment
-annual profections
-zodiacal releasing
-```
-
-Each technique should have its own rule/version identifiers even if implemented in the same physical module initially.
-
-As complexity grows, split this into:
+Planned v0.4 evolution should move condition rules toward source-controlled modules such as:
 
 ```text
 src/rules/hellenistic/
-  sect.mjs
-  lots.mjs
   dignity.mjs
+  triplicity.mjs
+  bounds.mjs
+  angularity.mjs
   reception.mjs
-  condition.mjs
-  profections.mjs
-  zodiacal-releasing.mjs
+  overcoming.mjs
+  bonification.mjs
 ```
+
+Physical file organization may evolve, but rule IDs and provenance must remain stable enough for reconstruction.
 
 ---
 
-## 9. Graph architecture
+## 8. Graph architecture
 
-Noetic Atlas should not use one undifferentiated “astrology graph.”
+Noetic Atlas does not define one undifferentiated “astrology graph.”
 
-Different semantics require distinct graph layers.
+Different semantics belong to distinct graph layers.
 
-### 9.1 Aspect graph
+### Aspect graph
 
 ```text
-nodes = selected astrological objects
-edges = aspects admitted by selected aspect/orb policy
+G_aspect = (objects, admitted aspects)
 ```
 
-Usually geometrically undirected, with directional metadata when a tradition supplies it.
+Primarily geometrically undirected, with phase/directional metadata where defined.
 
-### 9.2 Dispositor graph
+### Dispositor graph
 
 ```text
-planet → ruler of occupied sign
+planet → traditional domicile ruler of occupied sign
 ```
 
 Directed.
 
-### 9.3 House dependency graph
+### House dependency graph
 
 ```text
-house → sign ruler → planet → dispositor route
+house → house ruler → ruler's dispositor → ...
 ```
 
 Directed and useful for topical routing.
 
-### 9.4 Lot graph
+### Lot layer
 
-A lot can connect to:
+A lot participates through:
 
-- source formula points;
-- its sign ruler;
-- aspects;
-- timing regimes.
+- source formula objects;
+- calculated longitude/house;
+- ruler;
+- accepted aspects;
+- later timing relations.
 
-### 9.5 Future temporal graph
+### Future condition layer
 
-Time-varying graph:
+Condition is not simply another edge weight. It includes node and relational state such as dignity, sect, angularity, reception, overcoming, and bonification/maltreatment.
+
+### Future temporal layer
 
 ```text
-G(t)
+G_temporal(t)
 ```
 
-where edge/node activation can vary with transits and timing systems.
+or equivalent activation structures where node/edge state changes through time.
 
-### 9.6 Future multiplex model
+### Multiplex view
 
-A more complete representation may be a multiplex graph:
+Conceptually:
 
 ```text
 G = {
@@ -372,115 +295,192 @@ G = {
 }
 ```
 
-Do not collapse layers until an analysis explicitly requires a combined representation.
+Do not collapse layers unless an analysis explicitly defines why and how.
+
+The multilayer formulation is a formal modeling strategy, not a claim that astrology is a physical network.
 
 ---
 
-## 10. Hypergraph/motif architecture
+## 9. Graph algorithms and interpretation boundary
 
-Some astrological structures are inherently multi-node.
+SCCs, path lengths, graph degree, component membership, and route convergence are mathematical properties of the selected encoded graph.
 
-Examples:
+For example:
 
-- grand trine;
-- T-square;
-- grand cross;
-- yod;
-- multi-planet stellium structures.
+```text
+Mercury ↔ Venus is a terminal SCC
+```
 
-Representing them only as independent edges can lose configuration identity.
+can be a deterministic E3 graph result.
 
-Future architecture may use:
+Statements such as:
 
-- motif objects;
-- hyperedges;
-- graph pattern instances.
+```text
+therefore this is the soul's primary processing circuit
+```
 
-A motif object should preserve the edge policy that caused it to be detected.
+belong downstream as interpretive hypotheses.
+
+The code and UI must preserve this boundary.
 
 ---
 
-## 11. Canonical analysis model
+## 10. Canonical analysis model
 
-The exact JSON schema is still evolving, but conceptually the analysis object should separate raw, derived, and interpretive layers.
+The current minimum envelope is defined by:
 
-Suggested target:
+```text
+schemas/naf-analysis-v0.3.1.schema.json
+```
+
+Major families include:
 
 ```json
 {
-  "schema_version": "...",
-  "framework_version": "...",
-  "input": {},
-  "civil_time": {},
-  "astronomy": {
-    "provider": {},
-    "objects": [],
-    "angles": {}
-  },
-  "models": {
-    "zodiac": "tropical",
-    "houses": "whole_sign",
-    "rulership": "traditional_domicile",
-    "sect": "...",
-    "lots": "...",
-    "aspects": "...",
-    "orb_policy": "..."
-  },
-  "placements": [],
+  "schema_version": "naf.analysis.v0.3.1",
+  "framework": {},
+  "versions": {},
+  "model": {},
+  "angles": {},
+  "objects": [],
   "aspects": [],
-  "lots": [],
   "topology": {},
-  "condition": {},
-  "research": {},
-  "derivation_ledger": [],
   "validation": {},
-  "interpretation": null
+  "derivation_ledger": [],
+  "derivation_tree": {},
+  "completeness": {},
+  "provenance": {}
 }
 ```
 
-Interpretation should remain optional and downstream.
+Future condition/time blocks should be additive and explicitly versioned.
+
+The interface version can advance independently of this minimum schema when presentation changes without altering the serialized contract.
 
 ---
 
-## 12. Derivation Ledger architecture
+## 11. Derivation architecture
 
-The Derivation Ledger is a parallel audit graph over the calculation pipeline.
+The Derivation Ledger is a parallel audit structure over the calculation pipeline.
 
 Conceptually:
 
 ```text
-input facts
-   ↓
-derivation node
-   ↓
-derived fact
-   ↓
-derivation node
-   ↓
-further derived fact
+input fact
+→ calculation/rule activity
+→ derived fact
+→ graph/research derivation
+→ displayed result
 ```
 
-A future implementation may explicitly represent dependencies between ledger entries so the UI can show a calculation tree.
+The `derivation_tree` organizes dependencies for navigability.
 
-Example:
+Example lot chain:
 
 ```text
 birth local time
-→ UTC conversion
-→ Sun longitude
-→ sect determination
-→ Spirit formula direction
+→ UTC instant
+→ Sun/Moon/ASC longitudes
+→ sect
+→ sect-specific lot formula direction
 → directed arc
-→ Spirit longitude
-→ Spirit whole-sign house
-→ Spirit ruler
+→ lot longitude
+→ Whole Sign house
+→ lot ruler
 ```
 
-A master astrologer should be able to inspect this path without reading source code.
+Example topology chain:
+
+```text
+planet longitude
+→ occupied sign
+→ domicile ruler
+→ dispositor edge
+→ SCC algorithm
+→ terminal-component classification
+```
+
+v0.3.2 begins linking selected graph objects back to audit context. Full click-through dependency navigation remains future UI work.
 
 ---
 
-## 13. Research module architecture
+## 12. Visual Observatory architecture
+
+Current browser entry point:
+
+```text
+prototype/index.html
+```
+
+v0.3.2 restores a graph-first UI while preserving the canonical analysis object as the only computational source.
+
+Current coordinated views:
+
+### Natal Field
+
+- SVG node-link graph;
+- computed aspect edges;
+- edge width/opacity driven by explicit geometric values;
+- selectable object layers;
+- node-neighborhood isolation;
+- dynamic motif controls;
+- node/edge inspector;
+- graph-linked audit context.
+
+### Aspect Matrix
+
+- exact pairwise relation inspection;
+- synchronized selection with graph edges;
+- complementary view for denser relation lookup.
+
+### Flow Map
+
+- directed dispositor topology;
+- SCC/terminal-SCC highlighting;
+- clickable house-ruler routes;
+- route inspection.
+
+### Sect & Lots
+
+- sect state;
+- Hermetic-lot formulas/proofs;
+- lot nodes linked back to graph structure.
+
+### Research Lab
+
+- explicitly exploratory descriptors;
+- no promotion into interpretation.
+
+### Audit
+
+- Derivation Ledger;
+- serialized analysis model;
+- version/completeness context.
+
+Shared selection state should continue evolving so brushing/selection stays synchronized across views.
+
+The UI must never contain a second calculation engine.
+
+---
+
+## 13. Why multiple visual representations are architectural
+
+The multi-view design is not cosmetic.
+
+Different graph tasks favor different representations. The project therefore keeps:
+
+```text
+node-link view → paths, neighborhoods, topology
+matrix view    → pairwise lookup and dense comparison
+```
+
+The traditional wheel remains useful for angular geometry and should remain available as a reference/control view in later HCI evaluation.
+
+See `CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md` for supporting visualization literature and claim boundaries.
+
+---
+
+## 14. Research module architecture
 
 Directory:
 
@@ -490,113 +490,71 @@ src/research/
 
 Research descriptors are read-only consumers of canonical analysis state.
 
-They may compute:
+Current examples:
 
-- graph metrics;
-- harmonics;
-- recurrence;
-- similarity;
-- feature vectors;
-- null-model comparisons.
+- circular harmonic spectrum;
+- ruler-route convergence;
+- multilayer participation.
 
-They may not mutate natal calculations.
-
-Recommended future descriptor interface:
-
-```js
-{
-  id,
-  version,
-  status: 'experimental',
-  required_inputs,
-  compute(analysis, options),
-  null_model,
-  provenance
-}
-```
-
-This makes research features discoverable and testable without mixing them into traditional rules.
-
----
-
-## 14. Visualization architecture
-
-Current prototypes are intentionally simple.
-
-The production visualization layer should consume the canonical model and shared UI selection state.
-
-Shared selection example:
-
-```json
-{
-  "selected_objects": [],
-  "selected_houses": [],
-  "selected_lots": [],
-  "aspect_filter": {},
-  "tradition": "hellenistic",
-  "time_window": null,
-  "focus_path": []
-}
-```
-
-Views:
-
-- Natal Field;
-- Aspect Matrix;
-- Flow Map;
-- Derivation/Audit view;
-- future Life Spectrum;
-- future Life Space.
-
-Brushing/selection should synchronize across views.
-
-The UI should never contain a second implementation of a calculation.
-
----
-
-## 15. AI architecture
-
-AI is a consumer of canonical structured state.
-
-Input to AI should include:
-
-- user question;
-- selected chart/period;
-- computed objects/relations;
-- provenance entries;
-- selected tradition(s);
-- allowed interpretation sources.
-
-AI output can include:
+Required descriptor behavior:
 
 ```text
-view action
-calculation explanation
-traditional interpretation
-cross-model comparison
-research hypothesis
+formal definition
+version
+required inputs
+completeness dependencies
+status = exploratory unless promoted
+null-model plan
+provenance
 ```
 
-The response should be capable of identifying which statements are calculation versus interpretation.
+The research layer may not mutate natal facts.
 
-The LLM must not be responsible for ephemeris or rule calculations that already have deterministic implementations.
+---
+
+## 15. Condition architecture — next
+
+v0.4 should represent condition as structured dimensions rather than one scalar.
+
+Candidate node/relational state:
+
+```text
+domicile/exaltation/adversity
+sect
+triplicity
+bound
+angularity
+reception
+overcoming
+bonification/maltreatment
+mitigation
+```
+
+Each output requires:
+
+- rule ID;
+- tradition/variant;
+- source reference;
+- inputs;
+- result;
+- dependencies;
+- ambiguity/unsupported state.
+
+Only after this state stabilizes should the temporal layer use condition-sensitive activation logic.
 
 ---
 
 ## 16. Temporal architecture — planned
 
-Future temporal state:
+Conceptually:
 
 ```text
-N = natal structural kernel
-u(t) = astronomical/transit environment
-τ(t) = timing-system state
-X(t) = F(N, u(t), τ(t))
+N_i = natal geometry + topology + condition
+T(t) = transit/time-lord input
+X_i(t) = F(N_i, T(t), versions)
 ```
 
-This is a computational representation, not an assertion of physical causality.
-
-Potential temporal outputs:
+Potential outputs:
 
 ```text
 transit_events[]
@@ -606,117 +564,118 @@ releasing_periods[]
 activation_series[target][t]
 ```
 
-Every Life Spectrum pixel/band must be traceable to source events or a named continuous scoring function.
+Every Life Spectrum marker/band must be traceable to source events or a named continuous function.
+
+Natal targets should maintain stable visual identity through time; layouts should not randomly rearrange at each timestamp.
 
 ---
 
-## 17. State-space architecture — planned
+## 17. AI architecture
 
-Do not build a state-space embedding until feature semantics are stable.
+AI is a consumer of structured state and provenance.
 
-Candidate block structure:
+It may provide:
 
-```text
-x(t) = [
-  geometry_block,
-  aspect_activation_block,
-  house_activation_block,
-  ruler_block,
-  condition_block,
-  lot_block,
-  timing_block
-]
-```
+- navigation;
+- explanation;
+- comparison;
+- source synthesis;
+- interpretive options;
+- research-hypothesis generation.
 
-Each block requires its own normalization policy.
+It must not:
 
-Dimensionality reduction parameters, random seeds, preprocessing, and model versions must be preserved in provenance.
+- invent ephemeris values;
+- silently alter rule variants;
+- hide unsupported states;
+- promote exploratory metrics into established meaning;
+- overwrite upstream calculations.
 
 ---
 
 ## 18. Versioning
 
-Version independently:
+Version independently where appropriate:
 
 - framework;
-- canonical schema;
+- public UI;
+- analysis schema;
 - time-zone provider/data;
 - astronomy provider;
 - coordinate conventions;
 - house model;
 - aspect family;
 - orb policy;
-- tradition rules;
-- lots variant;
-- condition model;
-- research descriptor;
-- temporal activation model;
-- visualization grammar;
-- interpretation prompts/models.
+- rulership model;
+- lot formula family;
+- condition rules;
+- temporal model;
+- research descriptors;
+- interpretation model/prompt.
 
-A conclusion should eventually be reproducible from stored version metadata alone.
-
----
-
-## 19. Privacy architecture
-
-Birth data and life-event annotations must be treated as sensitive product data.
-
-Production design should separate:
-
-```text
-identity/profile database
-from
-chart computational data
-from
-consented research features
-```
-
-Recommended principles:
-
-- minimum retention;
-- explicit user deletion;
-- encryption;
-- separate research consent;
-- pseudonymous research IDs;
-- no training on private chart text without explicit permission;
-- avoid exposing raw birth data in analytics logs.
+A stored analysis should contain enough version metadata to reconstruct its supported claims.
 
 ---
 
-## 20. Error handling
+## 19. Error and completeness states
 
-Every layer should distinguish:
+Every layer should distinguish at least:
 
 ```text
 valid
 ambiguous
 unsupported
 invalid
+not_implemented
 ```
 
 Examples:
 
-- repeated local DST time → ambiguous;
-- missing provider support for Chiron → unsupported;
+- repeated DST time → ambiguous;
+- unsupported Chiron provider → unsupported;
 - malformed latitude → invalid;
-- sect near exact horizon → valid calculation + ambiguity warning.
+- condition engine before v0.4 → not_implemented.
 
-Do not represent unsupported as zero or false.
+Never encode unsupported as numeric zero or Boolean false.
+
+---
+
+## 20. Privacy architecture
+
+Birth data and life-event annotations are sensitive.
+
+Production should separate:
+
+```text
+identity/profile
+chart computational data
+consented research features
+```
+
+Principles:
+
+- data minimization;
+- explicit deletion;
+- encryption;
+- separate research consent;
+- pseudonymous research IDs;
+- avoid raw birth data in analytics logs;
+- no training on private chart/event text without explicit permission.
 
 ---
 
 ## 21. Extension policy
 
-When adding a feature, ask which architectural layer owns it.
+When adding a feature, identify its owner layer first.
 
 Examples:
 
-- lunar node longitude → astronomy;
-- node domicile ruler (if a model defines one) → rule layer;
-- node betweenness centrality → graph/research layer;
-- “what does this mean?” → interpretation layer;
-- transit heat-map color → visualization layer.
+- lunar-node longitude → astronomy;
+- domicile ruler → astrological rule;
+- SCC membership → graph derivation;
+- reception → condition rule;
+- transit heat-map color → visualization;
+- “what does this mean?” → interpretation.
 
 If ownership is unclear, document the decision before implementation.
 
@@ -724,16 +683,19 @@ If ownership is unclear, document the decision before implementation.
 
 ## 22. Architectural north star
 
-The system should eventually allow a user to click any claim and move backward:
+The system should eventually allow a user to click any displayed claim and move backward:
 
 ```text
 interpretation
-→ structural finding
+→ visualization selection
+→ structural/temporal finding
 → astrological rule
-→ mathematical calculation
+→ mathematical derivation
 → astronomical coordinate
 → civil-time resolution
 → original input
 ```
 
-That reverse path is the architectural definition of Noetic Atlas integrity.
+and forward again into alternative visualizations or rule models without changing the underlying facts.
+
+That reversible path is the architectural definition of Noetic Atlas integrity.
