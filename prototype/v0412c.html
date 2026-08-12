@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Noetic Atlas v0.4.1.2 — Energetic Analysis Observatory</title>
+<style>
+:root{--bg:#080c10;--panel:#10171e;--panel2:#0b1117;--line:#293541;--text:#edf2f5;--muted:#91a0ad;--gold:#d8be73;--green:#83c39b;--violet:#ac96d0;--cyan:#70b8ba;--red:#d89292}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font:13px/1.58 system-ui,-apple-system,Segoe UI,sans-serif}
+#core{position:fixed;left:0;top:0;width:calc(100% - 640px);height:100%;border:0;background:#0a0e12}
+#dock{position:fixed;right:0;top:0;width:640px;height:100%;overflow:auto;background:var(--panel);border-left:1px solid var(--line);z-index:20}
+header{position:sticky;top:0;background:#10171efa;border-bottom:1px solid var(--line);padding:14px;z-index:5}header h1{font-size:17px;margin:0}.eyebrow{font:9px/1.4 ui-monospace,monospace;color:var(--gold);letter-spacing:.08em}.tabs,.filters,.condBtns{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}.tabs button,.filters button,.condBtns button,.proofBtn{background:var(--panel2);color:#c5cfd7;border:1px solid var(--line);border-radius:6px;padding:6px 8px;cursor:pointer;font:inherit}.tabs button.active,.filters button.active,.condBtns button.active{background:var(--gold);color:#111;border-color:var(--gold)}
+.pane{display:none;padding:14px}.pane.active{display:block}.call,.card{background:var(--panel2);border:1px solid var(--line);border-radius:9px}.call{padding:10px;border-left:3px solid var(--gold);font-size:10.5px;margin-bottom:10px}.call.error{border-left-color:var(--red)}.call.success{border-left-color:var(--green)}.card{margin:11px 0;overflow:hidden}.head{padding:10px;border-bottom:1px solid var(--line)}.head h2{font-size:14px;margin:4px 0}.tag{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:1px 6px;font-size:8px;color:var(--muted);margin-right:4px}.tag.energy{border-color:var(--gold);color:var(--gold)}.tag.interp{border-color:var(--cyan);color:var(--cyan)}.body{padding:10px}.section{border-top:1px solid #24303a;padding:8px 0}.section:first-child{border-top:0}.section h3{font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 4px}.section p{font-size:10.5px;margin:0}.life,.soul{padding:9px;margin:8px 0;background:#111820;font-size:10.5px}.life{border-left:3px solid var(--gold)}.soul{border-left:3px solid var(--violet)}.practice{font-size:10px;margin:5px 0 0 19px;padding:0}.proof{font:9px/1.45 ui-monospace,monospace;white-space:pre-wrap;word-break:break-word;background:#080d12;border:1px solid #222c36;border-radius:6px;padding:7px}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:10px 0}.summary div{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px}.summary b{display:block;color:var(--gold);font-size:16px}.summary span{font-size:9px;color:var(--muted)}.fact{display:grid;grid-template-columns:135px 1fr;gap:8px;padding:6px 0;border-bottom:1px solid #222d37;font-size:10px}.k{color:var(--muted)}.toggle{position:fixed;right:644px;top:8px;z-index:30;background:#111922;color:var(--gold);border:1px solid #485662;border-radius:7px;padding:7px 9px;cursor:pointer}.closed #dock{display:none}.closed #core{width:100%}.closed .toggle{right:8px}
+@media(max-width:1050px){#core{width:100%}#dock{width:min(98vw,640px);box-shadow:-8px 0 28px #000b}.toggle{right:min(calc(98vw + 4px),644px)}.closed .toggle{right:8px}.summary{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<button class="toggle" id="toggle">Analysis ▸</button>
+<iframe id="core" src="./index.html?build=v0412c-core" title="Noetic Atlas core"></iframe>
+<aside id="dock">
+<header><h1>Noetic Atlas <span style="color:var(--gold)">v0.4.1.2</span></h1><div class="eyebrow">ENERGETIC WHOLE-CHART SYNTHESIS · HOUSES + RULERS + GRAPH THEORY</div><div class="tabs"><button class="active" data-pane="analysis">Energetic Analysis</button><button data-pane="findings">Graph Findings</button><button data-pane="metrics">Metrics</button><button data-pane="condition">Condition</button><button data-pane="integrity">Integrity</button></div></header>
+<section id="analysis" class="pane active"><div class="call" id="bootState"><b>Loading analysis…</b><br>The canonical specimen is loading automatically. You can replace it with your own birth data or pasted chart on the left.</div></section>
+<section id="findings" class="pane"><div class="call">Graph findings will appear after the chart state is ready.</div></section>
+<section id="metrics" class="pane"><div class="call">Graph metrics will appear after the chart state is ready.</div></section>
+<section id="condition" class="pane"><div class="call">Traditional condition will appear after the chart state is ready.</div></section>
+<section id="integrity" class="pane"><div class="call">Integrity evidence will appear after the chart state is ready.</div></section>
+</aside>
+<script type="module">
+import {computePrimitiveConditions,CLASSICAL_PLANETS} from '../src/conditions/primitive-condition-engine.mjs';
+import {analyzeGraphArchitecture} from '../src/research/graph-analytics-engine.mjs';
+import {buildEnergeticSynthesis} from '../src/interpretation/energetic-synthesis-display.mjs';
+
+const core=document.getElementById('core'),toggle=document.getElementById('toggle');
+let analysis=null,conditions=null,graph=null,energy=null,filter='featured',chosen='Sun',selected=null,observer=null,lastRaw='';
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pretty=x=>JSON.stringify(x,null,2);
+
+toggle.onclick=()=>{document.body.classList.toggle('closed');toggle.textContent=document.body.classList.contains('closed')?'Analysis ◂':'Analysis ▸'};
+document.querySelectorAll('[data-pane]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-pane]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.pane').forEach(x=>x.classList.toggle('active',x.id===b.dataset.pane));if(b.dataset.pane==='integrity')renderIntegrity()});
+
+function boot(message,kind=''){
+  const box=document.getElementById('analysis');
+  if(energy)return;
+  box.innerHTML=`<div class="call ${kind}">${message}</div>`;
+}
+function brand(){try{const d=core.contentDocument;d.title='Noetic Atlas v0.4.1.2 — Energetic Analysis Observatory';const x=d.querySelector('.brand h1 small');if(x)x.textContent='v0.4.1.2 · ENERGETIC ANALYSIS'}catch{}}
+function readCoreState(){
+  try{
+    const raw=core.contentDocument?.getElementById('json')?.textContent?.trim();
+    if(!raw||!raw.startsWith('{'))return null;
+    if(raw===lastRaw&&analysis)return analysis;
+    lastRaw=raw;
+    return JSON.parse(raw);
+  }catch(e){throw new Error(`Could not read chart state from the visual core: ${e.message}`)}
+}
+function sync(){
+  brand();
+  try{
+    const next=readCoreState();
+    if(!next)return false;
+    analysis=next;
+    conditions=computePrimitiveConditions(analysis);
+    graph=analyzeGraphArchitecture(analysis,conditions);
+    energy=buildEnergeticSynthesis(analysis,graph,conditions);
+    if(!energy?.placements?.length)throw new Error('Energetic synthesis returned no placement analyses.');
+    renderAll();
+    return true;
+  }catch(e){
+    console.error('Noetic Atlas analysis bootstrap failed',e);
+    boot(`<b>Analysis could not initialize.</b><br>${esc(e.message)}<br><span class="k">The chart core is still available on the left; this error is in the synthesis bridge, not your birth data.</span>`,'error');
+    return false;
+  }
+}
+function bootstrapCanonical(){
+  boot('<b>Loading canonical specimen…</b><br>This demo loads automatically so the Analysis tab is never blank. Replace it with your own chart at any time.');
+  let tries=0;
+  const timer=setInterval(()=>{
+    tries++;
+    if(sync()){clearInterval(timer);return}
+    try{
+      const d=core.contentDocument;
+      const sample=d?.getElementById('sample');
+      if(sample&&tries===1)sample.click();
+    }catch{}
+    if(tries>=30){clearInterval(timer);if(!energy)boot('<b>Analysis did not receive a chart state.</b><br>Use “Load canonical specimen” or calculate a chart in the left panel. If this remains visible after doing so, the synthesis bridge has failed.','error')}
+  },150);
+}
+function current(){if(!energy)return[];if(filter==='graph')return energy.graph_cards||[];if(filter==='ceres')return energy.ceres||[];if(filter==='outer')return energy.outer_planets||[];if(filter==='placements')return energy.placements||[];if(filter==='aspects')return energy.aspects||[];return energy.featured||[]}
+function section(name,text){return text?`<div class="section"><h3>${esc(name)}</h3><p>${esc(text)}</p></div>`:''}
+function card(a,i){const s=a.sections||{};return`<article class="card"><div class="head"><span class="tag interp">interpretive-inference</span><span class="tag energy">symbolic energy</span><h2>${esc(a.title)}</h2></div><div class="body">${section('Core energy',s.core_energy||s.plain_language)}${section('How the energy moves',s.energetic_synthesis)}${section('House ruler + dispositor routing',s.rulership_and_routing)}${section('Aspect modulation',s.aspect_modulation)}${section('Graph context + traditional condition',s.graph_context||s.traditional_condition)}${section('Balanced expression',s.balanced_expression)}${section('Under-expression / depletion',s.under_expression)}${section('Over-expression / excess',s.over_expression)}${s.material_expression?`<div class="life"><b>Material / lived expression</b><br>${esc(s.material_expression)}</div>`:''}${s.soul_question?`<div class="soul"><b>Soul / spirit inquiry</b><br>${esc(s.soul_question)}</div>`:''}${s.embodiment_practices?.length?`<div class="section"><h3>Ways to work with it</h3><ol class="practice">${s.embodiment_practices.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>`:''}<details><summary>Evidence used</summary><div class="proof">${esc(pretty(a.evidence))}</div></details><button class="proofBtn" data-proof="${i}">Why this analysis?</button></div></article>`}
+function renderAnalysis(){
+  const box=document.getElementById('analysis');
+  if(!energy){boot('<b>Waiting for chart state…</b><br>Load or calculate a chart on the left.');return}
+  const list=current();
+  box.innerHTML=`<div class="call success"><b>Analysis loaded.</b><br>The canonical specimen is shown initially. Any chart you calculate or paste on the left automatically replaces this reading.</div><div class="call"><b>This is the reading layer.</b><br>Archetypal current → sign frequency → actual Whole Sign house → natural-house resonance → ruler/dispositor handoff → aspect geometry → graph structure → traditional condition → lived materialization → soul-level inquiry. “Energy” is symbolic field language, not a measured physical force.</div><div class="summary"><div><b>${energy.placements.length}</b><span>placement profiles</span></div><div><b>${energy.graph_cards?.length||0}</b><span>graph structures translated</span></div><div><b>${energy.aspects?.length||0}</b><span>tight aspect currents</span></div></div><div class="filters">${[['featured','Featured synthesis'],['graph','Graph → meaning'],['ceres','Ceres'],['outer','Outer planets'],['placements','All placements'],['aspects','Tight aspects']].map(([k,l])=>`<button data-filter="${k}" class="${filter===k?'active':''}">${l}</button>`).join('')}</div>${filter==='ceres'&&!energy.ceres?.length?`<div class="call"><b>Ceres interpretive support is ready, but no Ceres coordinate exists in this chart state.</b><br>${esc(energy.applicability?.ceres||'Supply a validated Ceres coordinate to activate the Ceres reading.')}</div>`:''}${list.map(card).join('')||'<div class="call">No analyses exist in this category for the current chart.</div>'}`;
+  box.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;renderAnalysis()});
+  box.querySelectorAll('[data-proof]').forEach(b=>b.onclick=()=>{selected=current()[Number(b.dataset.proof)];document.querySelector('[data-pane="integrity"]').click()});
+}
+function renderFindings(){const box=document.getElementById('findings');if(!graph){box.innerHTML='<div class="call">No graph state yet.</div>';return}box.innerHTML=`<div class="call"><b>The graph term is never the interpretation.</b><br>Technical facts remain auditable; readable energetic meaning belongs in the Analysis tab.</div>${(graph.findings||[]).map(f=>`<article class="card"><div class="head"><h2>${esc(f.title)}</h2></div><div class="body">${section('Graph statement',f.statement)}<details><summary>Measurement + proof</summary><div class="proof">${esc(pretty(f.measurement))}</div></details></div></article>`).join('')}`}
+function renderMetrics(){const box=document.getElementById('metrics');if(!graph){box.innerHTML='<div class="call">No metrics yet.</div>';return}box.innerHTML=`<div class="call"><b>Metrics are evidence, not the reading.</b><br>Use these quantities to audit the structural claims rather than treating them as destiny scores.</div>${(graph.metrics||[]).map(m=>`<article class="card"><div class="head"><h2>${esc(m.label)}</h2><b style="color:var(--gold);font-size:18px">${esc(m.value)}</b> ${esc(m.unit||'')}</div><div class="body">${section('What was measured',m.definition)}${section('Observed in this chart',m.readable_analysis?.observation)}<details><summary>Formula + integrity</summary><div class="proof">${esc(m.formula||'')}\n${esc(pretty(m.integrity))}</div></details></div></article>`).join('')}`}
+function renderCondition(){const box=document.getElementById('condition');if(!conditions){box.innerHTML='<div class="call">No classical condition yet.</div>';return}const r=conditions.by_planet[chosen]||conditions.by_planet.Sun,e=r.essential,s=r.sect,p=r.positional.angularity;box.innerHTML=`<div class="call">Traditional condition remains separate evidence and is also folded into the energetic reading for classical planets.</div><div class="condBtns">${CLASSICAL_PLANETS.map(x=>`<button data-cp="${x}" class="${x===r.planet?'active':''}">${x}</button>`).join('')}</div><h2>${esc(r.planet)} · ${esc(r.identity.sign)} · ${r.identity.computed_house}H</h2><div class="fact"><span class="k">Domicile</span><span>${esc(e.domicile.status)}</span></div><div class="fact"><span class="k">Adversity</span><span>${esc(e.adversity.status)}</span></div><div class="fact"><span class="k">Exaltation</span><span>${esc(e.exaltation.status)}</span></div><div class="fact"><span class="k">Depression / fall</span><span>${esc(e.depression.status)}</span></div><div class="fact"><span class="k">Bound ruler</span><span>${esc(e.bound.bound_ruler)}</span></div><div class="fact"><span class="k">Sect</span><span>${esc(s.condition.status)}</span></div><div class="fact"><span class="k">Angularity</span><span>${esc(p.class)}</span></div>`;box.querySelectorAll('[data-cp]').forEach(b=>b.onclick=()=>{chosen=b.dataset.cp;renderCondition()})}
+function renderIntegrity(){const box=document.getElementById('integrity');if(!energy){box.innerHTML='<div class="call">No integrity state yet.</div>';return}box.innerHTML=`<div class="call"><b>Integrity stack</b><br>Coordinates → sign/house → astrological rules → graph derivation → energetic interpretation.</div><div class="proof">${esc(pretty(selected||energy.integrity||graph?.integrity||{}))}</div><details><summary>Full energetic state</summary><div class="proof">${esc(pretty(energy))}</div></details>`}
+function renderAll(){renderAnalysis();renderFindings();renderMetrics();renderCondition();renderIntegrity()}
+
+core.addEventListener('load',()=>{
+  brand();
+  try{
+    const d=core.contentDocument,j=d?.getElementById('json'),status=d?.getElementById('status');
+    observer?.disconnect();observer=new MutationObserver(()=>sync());
+    if(j)observer.observe(j,{childList:true,characterData:true,subtree:true});
+    if(status)observer.observe(status,{childList:true,characterData:true,subtree:true});
+  }catch(e){boot(`<b>Could not attach to chart core.</b><br>${esc(e.message)}`,'error')}
+  bootstrapCanonical();
+});
+
+// Never leave the default tab visually empty, even before the iframe finishes loading.
+boot('<b>Loading analysis…</b><br>The canonical specimen is loading automatically. You can replace it with your own chart on the left.');
+</script>
+</body>
+</html>
