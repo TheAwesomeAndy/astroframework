@@ -4,14 +4,12 @@ This file is the canonical human-readable contract for the living release. Histo
 
 ## Public release
 
-- **Release:** v0.4.3 — Compound Condition
+- **Release:** v0.4.3 — Compound Condition, unified application shell
 - **Deployed branch:** `main`
 - **Public Pages entry:** repository root `index.html`
-- **Current browser surface:** `prototype/v043.html`
-- **Preserved relational Atlas:** `prototype/v042.html`
-- **Preserved resonance Atlas:** `prototype/v0413.html`
-- **Preserved Structure & Analysis workspace:** `prototype/v0412c.html`
-- **Visual core:** `prototype/index.html`
+- **Current browser surface:** `prototype/app.html`
+- **Deterministic visual core / single chart authority:** `prototype/index.html`
+- **Historical release surfaces retained for regression only:** `prototype/v0412c.html`, `prototype/v0413.html`, `prototype/v042.html`, `prototype/v043.html`
 - **Condition system:** `naf.condition.system.v0.4.3`
 - **Compound condition model:** `naf.condition.compound.hellenistic.v0.4.3`
 - **Compound rule registry:** `naf.rules.compound_condition.hellenistic.v0.4.3`
@@ -37,29 +35,31 @@ one chart state
 
 No public view may independently recalculate astronomy, houses, aspects, lots, or the kernel substrate.
 
-Preservation chain:
+The current UI adds a second invariant:
 
 ```text
-v043 public shell
-└── v042 relational Atlas
-    └── v0413 resonance Atlas
-        └── v0412c Structure & Analysis
-            └── prototype/index.html deterministic visual core
+one current application shell
+→ one direct deterministic-core iframe
+→ sibling projection views
 ```
 
-Nothing delivered in v0.4.1.x or v0.4.2 is removed by v0.4.3.
+Historical release wrappers remain in the repository for regression and documentation history. They are **not** recursively embedded in the public app.
 
-## Public v0.4.3 projections
+## Current public application
+
+`prototype/app.html` exposes one current navigation system:
 
 ```text
-Existing Atlas        → complete preserved v0.4.2 interface
-Compound Condition    → independent bonification/maltreatment/enclosure testimonies
-Compound Map          → condition-qualified relational projection
-Proof Walker          → reversible compound derivation traversal
-Source Boundary       → implemented vs deferred historical reconstruction states
+Chart       → deterministic birth/chart workspace, Natal Field, Aspect Matrix, Flow Map, Lots & Sect, Research Lab, Audit
+Reading     → energetic whole-chart synthesis
+Resonance   → sign/house natural-resonance comparison + ruler continuation + condition signatures
+Network     → graph findings/metrics + dispositor/reception/exchange/overcoming qualified flow
+House Flow  → House River and all-house ruler routing
+Condition   → primitive + relational + compound testimonies and compound map
+Proof       → Derivation Walker + integrity/completeness state
 ```
 
-Within the preserved v0.4.2 Atlas, Qualified Resonance, Relations, Qualified Flow, House River, and Proof Walker remain available.
+There are no visible historical version shells stacked inside one another. The current app contains exactly one iframe and that iframe points directly to `prototype/index.html`, the deterministic chart authority.
 
 ## Deterministic substrate
 
@@ -149,7 +149,7 @@ The current registry explicitly defers historically ambiguous or not-yet-frozen 
 
 Sect qualifies an acting benefic or malefic without producing a numeric multiplier. Reception is consumed as a relational fact and may qualify the effect of a compound testimony. Neither rewrites the underlying geometric or relational fact.
 
-## House River and relational views remain preserved
+## House River and relational views
 
 House River continues to use:
 
@@ -157,11 +157,11 @@ House River continues to use:
 w(e) = number of Whole Sign house-ruler paths traversing dispositor edge e
 ```
 
-Band width is routing evidence only. Relational graphs qualify the route but do not replace dispositorship.
+Band width is routing evidence only. Relational graphs qualify the route but do not replace dispositorship. In the unified app these capabilities are rendered directly from the shared state instead of by embedding the historical v0.4.2 shell.
 
 ## Derivation Walker
 
-The shared walker is now versioned as:
+The shared walker is versioned as:
 
 ```text
 naf.integrity.derivation_walker.v0.4.3
@@ -173,9 +173,22 @@ Missing legacy dependencies remain explicit rather than invented.
 
 ## Resonance and energetic synthesis
 
-The v0.4.1.3 Resonance Field and v0.4.1.2 energetic synthesis remain preserved and downstream. Natural-house correspondence remains an explicitly modern secondary comparison and never replaces the actual Whole Sign or actual ruler.
+The v0.4.1.3 Resonance Field model and v0.4.1.2 energetic synthesis models remain active computational capabilities. Their historical HTML wrappers are no longer part of the public composition. Natural-house correspondence remains an explicitly modern secondary comparison and never replaces the actual Whole Sign or actual ruler.
 
 Energy/current/field language remains symbolic and phenomenological rather than a claim of measured physical force.
+
+## UI preservation rule
+
+Preserving functionality means preserving capabilities, calculations, rule models, provenance, and regression coverage. It does **not** mean recursively embedding every historical release interface.
+
+The current UI contract requires:
+
+- exactly one iframe in `prototype/app.html`;
+- that iframe must point directly to `prototype/index.html`;
+- no current-app iframe may point to `v0412c`, `v0413`, `v042`, or `v043`;
+- historical UI files remain independently testable;
+- current non-chart views must be independently scrollable;
+- chart-state changes must synchronize through `MutationObserver` without creating another calculator.
 
 ## Current limitations
 
