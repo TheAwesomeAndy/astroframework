@@ -1,27 +1,41 @@
-# Astronomy adapters
+# Astronomy Adapters
 
-Noetic Atlas separates astronomical calculation from astrological rule systems. This is both an engineering boundary and an integrity boundary.
+Noetic Atlas separates astronomical calculation from astrological rule systems. This is both an engineering and integrity boundary.
 
-## Open research adapter: Astronomy Engine 2.1.19
+Current release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
 
-The current open adapter is pinned to `astronomy-engine@2.1.19`.
+## Current open adapter
 
-Its upstream project documents:
+Pinned provider:
 
-- browser and Node.js support;
-- Sun, Moon and planetary positions through Pluto;
-- geocentric vectors;
-- true ecliptic-of-date coordinate transforms;
-- observer/horizon calculations;
-- rotation matrices between true ecliptic, equatorial and horizontal frames;
-- a design target of approximately ±1 arcminute, with validation against NOVAS and JPL Horizons;
-- MIT licensing.
+```text
+astronomy-engine@2.1.19
+```
 
-NAF uses the provider only for astronomical numerical primitives. It independently derives the astrological model.
+Current automatic birth-time support:
 
-### Planet longitude
+```text
+Sun
+Moon
+Mercury
+Venus
+Mars
+Jupiter
+Saturn
+Uranus
+Neptune
+Pluto
+ASC
+MC
+longitudinal velocity / retrograde state
+geometric solar altitude
+```
 
-For each supported body:
+NAF uses the provider only for astronomical numerical primitives and independently derives the astrological model.
+
+## Planet longitude
+
+Current path:
 
 ```text
 GeoVector(body, timestamp, aberration=true)
@@ -29,59 +43,87 @@ GeoVector(body, timestamp, aberration=true)
 → geocentric true-ecliptic-of-date longitude
 ```
 
-Longitudinal speed is currently estimated by centered numerical differentiation around the birth timestamp. The step size and calculation identifier are provenance-bearing and can be revised later.
+Longitudinal speed is estimated by centered numerical differentiation around the birth timestamp. Step size/calculation identity belongs in provenance.
 
-### Angles
+## Angles
 
-NAF composes:
+NAF composes coordinate transforms and solves ecliptic intersections with the observer horizon/meridian. The selection logic is inspectable and the analysis preserves enough information to audit candidate intersections.
+
+## Sect geometry
+
+The adapter calculates geometric solar altitude with atmospheric refraction disabled. The astrological layer then classifies day/night/indeterminate sect.
+
+## Extended objects — current boundary
+
+The current birth-time astronomy adapter does **not** automatically generate validated coordinates for:
+
+- Ceres;
+- Chiron;
+- true/mean lunar node variants;
+- Black Moon Lilith/lunar-apogee variants;
+- Vertex;
+- fixed stars.
+
+These are not interchangeable limitations:
+
+### Ceres
+
+The **interpretation layer can already consume Ceres** when a coordinate is explicitly supplied. The astronomy layer cannot yet generate that coordinate automatically.
+
+Therefore:
 
 ```text
-ECT → EQD
-EQD → HOR
+Ceres interpretation capability = implemented for supplied coordinate
+Ceres automatic astronomy = unsupported/not implemented
 ```
 
-and solves the intersections of the ecliptic plane with the observer's horizon and meridian.
+### Chiron / nodes / Lilith / Vertex
 
-This keeps the angle calculation inspectable. NAF records candidate intersections and the horizontal vector used to select the eastern-horizon Ascendant and above-horizon Midheaven.
+These require explicit object definitions, algorithms/providers, validation, and provenance before automatic generation.
 
-### Sect
+Imported/precomputed values may be consumed only through an explicit supported input path. Noetic Atlas never invents missing coordinates.
 
-The observer-based adapter calculates the Sun's geometric altitude with refraction disabled. This is passed into the astrological Kernel, where sect is classified and the underlying altitude remains inspectable.
+## Independent-provider target
 
-## Unsupported objects in the open adapter
+A second high-precision provider remains desirable for cross-validation and expanded object coverage.
 
-Astronomy Engine is an astronomy library, not an astrology chart library. The initial adapter does not invent positions for:
+Swiss Ephemeris is a natural candidate, but licensing is dual AGPL/Professional License. Any commercial/public integration must make the licensing decision explicitly.
 
-- Chiron;
-- lunar node longitude;
-- Lilith / lunar apogee;
-- Vertex.
-
-Those points require a separately sourced and tested algorithm/provider. Their absence is explicit in output metadata.
-
-## Swiss Ephemeris adapter target
-
-A second provider is desirable for cross-validation and for astrology-specific objects. Swiss Ephemeris is a natural candidate, but its official licensing is dual AGPL / Professional License. Because Noetic Atlas is intended to become a commercial service, the licensing decision must be made deliberately before any public service embeds Swiss Ephemeris.
-
-The target architecture is therefore:
+Target architecture:
 
 ```text
 AstronomyProvider
-├── AstronomyEngineAdapter
-├── SwissEphemerisAdapter   (future, licensing-gated)
-└── CrossValidationAdapter  (future)
+├── AstronomyEngineAdapter          current open adapter
+├── SwissEphemerisAdapter           future / licensing-gated
+└── CrossValidationAdapter          future
 ```
 
 ## Cross-engine truth checks
 
-A mature Observatory mode should be able to compute the same chart using multiple astronomy providers and report differences in:
+A mature Observatory mode should compare independent providers for:
 
 - planetary longitude;
 - velocity;
 - ASC;
 - MC;
-- solar altitude / sect boundary;
-- derived lots;
-- exact aspect orbs.
+- solar altitude;
+- derived sign/house changes near boundaries;
+- lot propagation;
+- aspect-orb changes.
 
-The product should never hide provider disagreement. It should quantify it.
+Provider disagreement should be quantified, not hidden.
+
+## Provider contract
+
+Every provider should disclose:
+
+- provider/version;
+- license;
+- supported objects and object variants;
+- coordinate frame;
+- geocentric/topocentric convention;
+- apparent/geometric policy;
+- precision/validation notes;
+- observation instant/location.
+
+Astrological rules do not belong inside the astronomy provider.

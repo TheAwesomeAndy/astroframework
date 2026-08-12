@@ -1,136 +1,313 @@
-# Noetic Atlas Integrity & Provenance Protocol
+# Noetic Atlas — Integrity and Provenance Protocol
 
-## Purpose
+## 1. Purpose
 
-Noetic Atlas is being built as an inspectable research instrument, not a black-box horoscope generator. The product may eventually offer interpretation, but no interpretation is allowed to obscure the calculations it depends on.
+Noetic Atlas is built as an inspectable research instrument, not a black-box horoscope generator.
 
-> Every displayed result must be reversible to its input, formula or rule, versioned model, source tradition, numerical output, and known uncertainty.
+> **Every displayed claim should be reversible to its input, formula/rule, model version, source tradition, mathematical derivation, applicability, and known limitation.**
 
-## Epistemic labels
+Current release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
 
-NAF distinguishes six classes of statements:
+## 2. Epistemic classes
 
-1. **Input** — values supplied by the user or imported from a source.
-2. **Astronomical computation** — ephemeris positions, observer geometry, angles, velocities.
-3. **Astrological rule** — whole-sign house assignment, sect-reversing lots, domicile rulership, aspect-orb policy.
-4. **Graph-derived** — SCCs, routes, centrality, motifs and other mathematical properties of the symbolic graph.
-5. **Research-exploratory** — new numerical descriptors whose astrological significance has not been established.
-6. **Interpretive inference** — traditional, transpersonal, Jyotish or AI-generated meaning. Interpretation never retroactively changes the calculation layer.
+Noetic Atlas distinguishes six primary statement classes:
 
-## Public birth input
+1. **Input** — values supplied by the user or imported from an explicit source.
+2. **Astronomical computation** — ephemeris positions, observer geometry, angles, velocities, civil-time resolution.
+3. **Astrological rule** — Whole Sign assignment, aspect admission, domicile rulership, sect, lots, primitive condition, and later relational/compound rules.
+4. **Graph-derived / mathematical derivation** — SCCs, terminal basins, route depth, centrality, motifs, overlap, and related exact properties of the encoded graph.
+5. **Research-exploratory** — descriptors or comparisons whose astrological significance has not been established.
+6. **Interpretive inference** — traditional, modern, transpersonal, energetic, spiritual, psychological, or AI-assisted meaning.
 
-The public contract is intentionally simple:
+Interpretation never retroactively changes classes 1–5.
 
-```json
-{
-  "local_datetime": "YYYY-MM-DDTHH:MM:SS",
-  "latitude": 40.789,
-  "longitude": -73.135,
-  "elevation_m": 0
-}
-```
+## 3. Current release evidence chain
 
-Latitude is north-positive. Longitude is east-positive; western longitudes are negative.
-
-Civil time cannot be inferred from longitude alone because legal time zones and daylight-saving rules are historical human conventions. NAF therefore resolves an IANA time-zone name from latitude/longitude using a pinned coordinate lookup dataset and then converts the local wall time under the historical IANA zone rules exposed by JavaScript `Intl`.
-
-The resolved zone, UTC offset, UTC instant, lookup version and conversion method are retained in provenance. An advanced `timezone_override` is available so an expert can replace the coordinate-derived zone when historical or boundary circumstances require it.
-
-Repeated local times during an autumn DST transition can correspond to two distinct UTC instants. NAF does not guess; it reports the alternatives and requires `ambiguity_index`. Local times that never occurred because the clock jumped forward are rejected as nonexistent civil times.
-
-The lower-level astronomy adapter still requires an explicit ISO timestamp with offset or `Z`. The public pipeline resolves that timestamp before astronomy begins.
-
-## Open astronomy adapter
-
-The research prototype pins Astronomy Engine 2.1.19. The upstream library documents geocentric Sun/Moon/planet calculations, observer/horizon coordinates, coordinate rotations, a target accuracy of approximately one arcminute, validation against NOVAS/JPL Horizons, browser/Node support, and MIT licensing.
-
-NAF records the library name, version, observation timestamp, geographic coordinates, coordinate convention and calculation path in the resulting model.
-
-The open adapter currently calculates the ten major bodies from Sun through Pluto. Chiron, a full astrology-oriented lunar-node implementation, Lilith/lunar apogee and Vertex are not silently approximated. They remain unsupported in this adapter until a separately documented algorithm/provider is added.
-
-## Angles
-
-NAF does not ask an LLM for the Ascendant or Midheaven. With date, time and observer coordinates it constructs a transformation from true ecliptic of date (ECT) to true equator of date (EQD) to the observer's horizontal frame (HOR).
-
-The Ascendant is selected as the intersection of the ecliptic with the **eastern geometric horizon**. In Astronomy Engine's horizontal-vector convention, x points north, y west and z zenith, so the eastern horizon candidate has `z = 0` and `y < 0`.
-
-The Midheaven is the ecliptic intersection with the local meridian above the horizon: `y = 0`, selecting the candidate with `z > 0`.
-
-The analysis object preserves the candidate longitudes and selected horizontal vector so an expert can audit the selection.
-
-## Sect
-
-Brennan's treatment of sect describes the fundamental distinction as the Sun above the exact Ascendant–Descendant horizon for a day chart and below it for a night chart, while noting ambiguity around twilight and the exact horizon.
-
-When birth data are available, NAF calculates the Sun's geometric altitude with no atmospheric refraction:
-
-- altitude > 0° → day
-- altitude < 0° → night
-- altitude = 0° → horizon/indeterminate
-
-A near-horizon flag is retained rather than pretending twilight ambiguity does not exist.
-
-When only a calculated chart is pasted, NAF derives the ecliptic horizon semicircle from Sun and Ascendant longitudes but records that this is a chart-geometry fallback rather than a fresh observer-altitude computation.
-
-## Hermetic lots
-
-NAF v0.3.1 implements the seven Hermetic lots in the Paulus/Panaretus family described in Brennan, Chapter 16. The formula family is recorded on every lot. All distances are **directed zodiacal distances** projected from the Ascendant.
-
-| Lot | Day | Night |
-|---|---|---|
-| Fortune | Sun → Moon | Moon → Sun |
-| Spirit | Moon → Sun | Sun → Moon |
-| Eros | Spirit → Venus | Venus → Spirit |
-| Necessity | Mercury → Fortune | Fortune → Mercury |
-| Courage | Mars → Fortune | Fortune → Mars |
-| Victory | Spirit → Jupiter | Jupiter → Spirit |
-| Nemesis | Saturn → Fortune | Fortune → Saturn |
-
-Brennan explicitly notes that the earlier Valens/Dorotheus calculations for Eros and Necessity differ from the Paulus family. NAF labels the selected variant instead of combining traditions silently. Future rule sets may calculate the variants side by side.
-
-Every computed lot records the Ascendant, source and target longitudes, directed arc, unnormalized projected result, normalized result, zodiacal display, whole-sign house, domicile ruler, sect, formula family and source reference.
-
-For the canonical degree-minute specimen, the night formulas independently reproduce Fortune at 14°32′ Sagittarius and Spirit at 8°44′ Aries. Agreement with any supplied lot is stored as a validation result rather than assumed.
-
-## Aspects
-
-For two longitudes `a` and `b`:
+The v0.4.1.2/v0412c public reading is conceptually reversible through:
 
 ```text
-δ = min(|a-b|, 360-|a-b|)
-orb = |δ-exact_aspect_angle|
+interpretive statement
+→ interpretation model/profile
+→ placement / house / aspect / graph / condition evidence
+→ graph finding or rule result
+→ deterministic ledger object(s)
+→ astronomical/chart coordinate(s)
+→ civil-time resolution where applicable
+→ original input
 ```
 
-An aspect is accepted only if its orb is within the active named orb policy. Rounded display coordinates may differ slightly from full-precision ephemeris coordinates; NAF exposes this rather than forcing exact equality.
+A user should be able to understand the reading without opening all proof, but the proof must remain available.
 
-Applying/separating is calculated only when longitudinal velocities exist. Position-only inputs return `unknown`.
+## 4. Civil-time provenance
 
-## Rulership and topology
+The public birth-input contract includes local date/time and observer coordinates, with optional expert time-zone override/ambiguity selection.
 
-Traditional domicile rulers create directed planet → ruler edges. Strongly connected components are discovered using Tarjan's algorithm. Terminal components are derived from the condensed graph. A terminal cycle is never stored merely because an astrologer already knows it exists; it must be rediscovered from the submitted chart.
+Noetic Atlas retains:
 
-## Derivation Ledger
+- resolved IANA zone;
+- historical UTC offset;
+- UTC instant;
+- lookup/conversion method;
+- ambiguity alternatives when present;
+- expert override if used.
 
-`analysis.derivation_ledger` is the machine-readable audit trail. Entries include coordinates, whole-sign places, sect, lots, aspects, dispositor edges and graph topology.
+Repeated DST times are not guessed. Nonexistent local times are rejected.
 
-## Exploratory discovery layer
+## 5. Astronomy provenance
 
-Noetic Atlas is intended to reveal structures difficult to notice with conventional charts. v0.3.1 introduces a separate research module whose outputs are labeled **exploratory-not-interpretive**. Initial descriptors include circular harmonic spectrum, ruler-route convergence and multilayer participation.
+Current open adapter: Astronomy Engine 2.1.19.
 
-These are reproducible mathematical descriptions of the encoded chart. They are not automatically claims that a high score has psychological, causal or predictive meaning.
+Noetic Atlas records provider/version and coordinate/convention metadata for supported numerical primitives.
 
-## Truth protocol
+Current automatic birth-time astronomy supports Sun through Pluto, ASC, MC, longitudinal motion, and solar altitude.
 
-A new technique is not promoted into the interpretive layer merely because it looks interesting on the canonical specimen.
+It does **not** invent coordinates for Ceres, Chiron, lunar-node variants, Lilith/apogee variants, Vertex, or fixed stars.
+
+## 6. Angles and sect
+
+ASC/MC are computed from observer geometry, not supplied by an LLM.
+
+Sect uses geometric solar altitude when birth-data astronomy is available:
+
+```text
+altitude > 0° → day
+altitude < 0° → night
+altitude = 0° → indeterminate/horizon
+```
+
+Fallback chart-geometry sect methods must identify themselves as fallback.
+
+## 7. Hermetic lots
+
+Current lot family: seven Paulus/Panaretus Hermetic lots with sect reversal and directed zodiacal arcs.
+
+Each lot retains:
+
+- sect;
+- formula family;
+- source/target points and longitudes;
+- directed arc;
+- ASC;
+- raw/normalized result;
+- Whole Sign house;
+- ruler;
+- source/rule identity;
+- validation/completeness state.
+
+Historical variants are not silently merged.
+
+## 8. Aspects
+
+Each admitted aspect preserves:
+
+- endpoints;
+- exact family/angle;
+- measured separation;
+- orb;
+- active orb policy;
+- applying/separating phase when motion exists;
+- provenance.
+
+Rounded display coordinates never override full-precision calculations.
+
+## 9. Rulership/topology provenance
+
+Traditional domicile rulers create directed dispositor edges. SCCs are rediscovered algorithmically from submitted chart state.
+
+Current graph proof must identify graph scope/model before reporting:
+
+- SCC/terminal SCC;
+- terminal basin;
+- route depth;
+- upstream capture;
+- nonterminal path bottleneck.
+
+For example, `Mercury ↔ Venus is a terminal SCC` is incomplete unless it means the selected traditional-domicile classical dispositor graph.
+
+## 10. Primitive condition provenance
+
+Current model:
+
+```text
+naf.condition.primitive.hellenistic.v0.4.0b
+```
+
+Every classical planet receives independent factor records for:
+
+- domicile;
+- adversity;
+- exaltation;
+- depression/fall;
+- triplicity;
+- Egyptian bound;
+- planetary sect family;
+- in/out-of-sect relation;
+- Whole-Sign angular-triad class.
+
+Each factor has its own rule/source identity and ledger reference. There is no opaque condition total.
+
+## 11. Graph metric integrity
+
+A complete metric object should retain:
+
+```text
+id
+label
+value / unit
+scope
+definition
+formula
+observation
+graph-theory meaning
+astrological-rule context
+interpretive status
+limits
+integrity.inputs
+integrity.calculation
+integrity.result
+ledger references
+```
+
+A naked number is not a complete finding.
+
+## 12. Explainable Finding integrity
+
+A current graph finding should retain:
+
+```text
+finding id
+title/category
+statement
+measurement
+graph scope: nodes/edges
+mathematical meaning
+astrological context
+interpretive hypothesis, if any
+limits
+proof formula
+proof inputs/result
+ledger refs
+```
+
+The UI should preserve the order:
+
+```text
+observation
+→ measurement
+→ mathematical meaning
+→ astrological context
+→ interpretive hypothesis
+→ limits
+→ proof
+```
+
+## 13. Energetic interpretation provenance
+
+Current interpretation model:
+
+```text
+naf.interpretation.energetic_synthesis.v0.4.1.2
+```
+
+Current optional natural-house overlay:
+
+```text
+naf.interpretation.natural_house_overlay.modern.v1
+```
+
+Interpretive cards may consume actual sign, actual Whole Sign house, ruler/dispositor route, aspect geometry, graph findings, and primitive condition.
+
+Energy/current/field language is explicitly classified as symbolic/phenomenological `interpretive-inference`, not measured physics.
+
+A current card can include:
+
+- core energy/archetype;
+- sign/house synthesis;
+- ruler routing;
+- aspect modulation;
+- graph/condition context;
+- balanced expression;
+- depletion/under-expression;
+- excess/over-expression;
+- material-life examples;
+- soul/spirit inquiry;
+- embodiment experiment;
+- evidence object.
+
+## 14. Outer planets and applicability
+
+Uranus, Neptune, and Pluto can be valid modern/transpersonal interpretation objects while Hellenistic essential dignity remains `not_applicable`.
+
+Noetic Atlas must never coerce `not_applicable` into neutral/zero condition.
+
+## 15. Ceres provenance
+
+Ceres can participate in interpretation only when a coordinate is supplied through an explicit input path.
+
+Current Ceres profile is custom/modern and must be identified as such.
+
+Automatic Ceres astronomy is not implemented. A supplied coordinate and an automatically calculated coordinate are distinct provenance states.
+
+## 16. v0412c operational integrity
+
+The current browser wrapper adds integrity at the application boundary:
+
+- displays loading state before chart synchronization;
+- attempts automatic canonical bootstrap;
+- reads existing core JSON state;
+- observes core JSON/status mutations;
+- reports downstream synthesis failures explicitly;
+- preserves access to the core if analysis initialization fails.
+
+A blank panel is not an acceptable representation of an error state.
+
+## 17. Research-exploratory integrity
+
+Graph descriptors are reproducible mathematical descriptions of encoded charts. They are not automatically astrological claims.
+
+Noetic Atlas blocks prevalence language such as `rare`, `high`, `exceptional`, `dominant`, or `enriched` until an explicit comparison/null model exists.
+
+Planned null families include geometric longitude randomization, label permutation, appropriate degree-preserving rewiring, and layer-overlap randomization.
+
+## 18. Truth protocol
+
+A new technique is not promoted because it looks compelling in the canonical specimen.
 
 ```text
 formal definition
-→ unit tests
+→ deterministic implementation
+→ tests
 → cross-chart replication
-→ null/randomized baselines
+→ null/comparison
+→ sensitivity analysis
 → expert inspection
-→ longitudinal/cohort validation where feasible
+→ empirical/phenomenological testing where relevant
 → interpretive hypothesis
+→ independent replication
 ```
 
-The research tool is allowed to falsify its own assumptions.
+A negative result is acceptable.
+
+## 19. Completeness states
+
+Use explicit states:
+
+```text
+valid
+ambiguous
+unsupported
+invalid
+not_implemented
+not_applicable
+indeterminate
+```
+
+Never encode unsupported or nonapplicable as `0` or `false` merely to simplify a UI.
+
+## 20. Documentation provenance
+
+Living documentation is itself part of integrity.
+
+`CURRENT_RELEASE.md` is the canonical human-readable release contract. README, INDEX, architecture, developer, product, astrological-model, research, and integrity docs must agree with it and with implementation.
+
+Historical milestone docs remain historical and should be labeled by their release context rather than rewritten as present-tense truth.

@@ -1,56 +1,75 @@
-# Noetic Atlas Astronomy Validation Plan
+# Noetic Atlas — Astronomy Validation Plan
 
 ## Purpose
 
-The open astronomy adapter is useful only if its outputs are independently testable. This document defines how Noetic Atlas will validate astronomical results without allowing a single provider to become an unquestioned oracle.
+The astronomy layer is useful only if its outputs are independently testable. This plan defines how Noetic Atlas should validate numerical astronomy without turning one provider into an unquestioned oracle.
 
-The goal is not to prove astrology. The goal is much narrower:
+Current release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
 
-> Given the same civil instant, observer coordinates, coordinate conventions, and requested object definition, independent astronomy implementations should agree within an explicitly declared tolerance.
+The goal is narrow:
+
+> Given the same civil instant, observer coordinates, coordinate conventions, and object definition, independent astronomy implementations should agree within an explicitly declared tolerance.
+
+This is not a test of whether astrology is true.
 
 ## Current state
 
-The open adapter currently uses Astronomy Engine 2.1.19 for the ten major bodies and for coordinate transformations used by the NAF angle solver.
-
-The current coverage is intentionally partial:
+Current open provider:
 
 ```text
-Supported now:
-Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, ASC, MC, longitudinal speed
-
-Not yet supported by the open adapter:
-true node, mean node, Chiron, Black Moon Lilith/lunar apogee, Vertex, fixed stars
+Astronomy Engine 2.1.19
 ```
 
-Missing objects must remain user-visible as unsupported until their definitions and providers are explicit.
+Current automatic coverage:
+
+```text
+Sun through Pluto
+ASC
+MC
+longitudinal speed / retrograde state
+geometric solar altitude
+```
+
+Current automatic exclusions:
+
+```text
+Ceres
+Chiron
+true/mean node variants
+Black Moon Lilith / lunar-apogee variants
+Vertex
+fixed stars
+```
+
+Ceres has a special split capability: supplied/precomputed Ceres coordinates can be interpreted by the v0.4.1.2 interpretation layer, but automatic Ceres astronomy remains unsupported.
 
 ## Validation principle
 
 Provider comparison is meaningful only after conventions are aligned.
 
-Before comparing two values, record:
+Record before comparison:
 
 - UTC instant;
 - latitude/longitude/elevation;
-- tropical vs sidereal frame;
+- tropical/sidereal frame;
 - equinox/ecliptic convention;
-- geocentric vs topocentric;
-- apparent vs geometric position;
+- geocentric/topocentric convention;
+- apparent/geometric policy;
 - aberration/light-time policy;
-- node model (true vs mean);
-- lunar-apogee model if used;
-- object identifier/provider ephemeris;
-- house/angle algorithm if angles are compared.
+- object/variant identity;
+- node/apogee model when relevant;
+- angle algorithm;
+- provider/version.
 
-A numerical disagreement is not automatically an error until these conventions are matched.
+A numerical disagreement is not automatically an implementation error until these conventions match.
 
-## Independent provider target
+## Independent-provider target
 
-At least one independent high-precision provider should be added as a validation reference before Noetic Atlas claims professional-grade astronomical reproducibility.
+At least one independent high-precision provider should be added before Noetic Atlas claims professional-grade astronomical reproducibility.
 
-Swiss Ephemeris is a natural candidate because of its astrological coverage, but implementation must respect its licensing model. The commercial product must not silently introduce a dependency whose license conflicts with the intended distribution model.
+Swiss Ephemeris remains a candidate but its licensing must be resolved explicitly before production/commercial embedding.
 
-The provider boundary should therefore remain adapter-based:
+Target architecture:
 
 ```text
 AstronomyProvider
@@ -59,130 +78,138 @@ AstronomyProvider
 └── future independent reference
 ```
 
-No provider-specific fields should leak into the canonical chart model except through provenance.
+Provider-specific fields should remain in provenance rather than leaking into general chart semantics.
 
 ## Validation corpus
 
-The validation battery should not consist only of ordinary contemporary mid-latitude charts.
-
-Minimum corpus classes:
-
 ### Temporal range
 
-- modern contemporary dates;
+Include:
+
+- contemporary dates;
 - 20th century;
 - 19th century;
-- earlier historical dates within the supported ephemeris range;
-- dates near calendar or time-zone-rule changes where civil-time conversion is independently verified.
+- earlier dates within supported ephemeris range;
+- civil-time edge cases near historical rule changes.
 
 ### Geographic range
 
-- equatorial;
-- northern mid-latitude;
-- southern mid-latitude;
+Include:
+
+- equatorial locations;
+- northern/southern mid-latitudes;
 - high latitude;
 - longitudes near ±180°;
-- locations close to time-zone boundaries.
+- time-zone boundary cases.
 
 ### Astronomical edge cases
 
-- planet near 0° Aries / 360° wrap;
-- planet near sign ingress;
-- retrograde station neighborhood;
+Include:
+
+- 0° Aries / 360° wrap;
+- sign ingress boundaries;
+- retrograde stations;
 - Mercury/Venus elongation extremes;
-- Moon moving rapidly across a sign boundary;
-- Sun near horizon for sect validation;
-- ASC/MC near sign boundaries;
+- rapidly moving Moon at sign boundaries;
+- Sun near horizon for sect;
+- ASC/MC sign boundaries;
 - high-latitude angle geometry.
 
 ## Outputs to compare
 
-For each case, compare independently:
+For each case compare:
 
-1. UTC resolution from civil input;
+1. civil-time → UTC resolution;
 2. planetary ecliptic longitude;
-3. longitudinal velocity and retrograde/direct sign;
+3. longitudinal velocity/direct-retrograde sign;
 4. ASC longitude;
 5. MC longitude;
 6. geometric solar altitude;
-7. derived sign and whole-sign place;
+7. downstream sign/Whole Sign place when relevant;
 8. sect classification;
-9. lots derived from the agreed inputs.
+9. derived lots from agreed inputs.
 
-The last three are not astronomy-provider comparisons themselves; they test whether small astronomical differences propagate correctly through deterministic astrological rules.
+The final three are propagation tests, not independent astronomy-provider quantities.
 
 ## Tolerance policy
 
-Tolerances must be declared per quantity and provider pair. They must not be invented after seeing discrepancies.
+Tolerances must be declared per quantity/provider pair and never invented after seeing discrepancies.
 
-The initial research process should record raw differences first and only then establish acceptance thresholds based on provider precision claims and the requirements of the downstream technique.
-
-Important distinction:
+Critical distinction:
 
 ```text
-numerically close enough for display
+close enough for display
 ≠
 close enough for a rule boundary
 ```
 
-A 30-arcsecond difference may be visually irrelevant while still changing a bound/term ruler, exact ingress classification, or an extremely tight aspect. Rule-boundary sensitivity must therefore be tested separately.
+Tiny numerical differences can change sign, bound, exact-aspect, or sect classifications near boundaries. Boundary sensitivity must be tested separately.
 
 ## Angle validation
 
-ASC and MC deserve their own validation suite because they are derived from observer geometry rather than direct planet ephemerides.
+ASC/MC deserve dedicated validation because they are observer-dependent geometry.
 
-For every angle test store:
+Retain for each case:
 
-- both candidate horizon/meridian intersections;
+- candidate intersections;
 - selected candidate;
-- horizontal vector;
-- provider reference longitude;
-- difference;
-- latitude/longitude/time;
-- coordinate transformation version.
+- horizontal-vector information;
+- provider/reference longitude;
+- angular difference;
+- observer/time input;
+- transform/version metadata.
 
-Noetic Atlas should not claim that the custom angle solver is production-grade until it has passed this battery against independent references.
+Do not call the custom solver production-grade before independent validation passes.
 
-## Extended-object policy
+## Extended-object admission policy
 
-Each additional object must enter through a separate capability record.
-
-Example:
+Every new object enters through a capability record, e.g.:
 
 ```json
 {
-  "object": "NorthNode",
-  "variant": "true",
+  "object": "Ceres",
+  "variant": "osculating-or-provider-defined",
   "provider": "...",
-  "rule_id": "naf.astronomy.node.true.v1",
+  "rule_id": "naf.astronomy.ceres....v1",
   "validated_against": "...",
   "status": "experimental|validated|unsupported"
 }
 ```
 
+### Ceres
+
+Automatic Ceres support requires:
+
+- explicit object/provider definition;
+- independent comparison;
+- boundary/regression fixtures;
+- provenance fields;
+- licensing review where relevant;
+- interpretation/input path integration without silently changing existing supplied-coordinate behavior.
+
 ### Nodes
 
-True and mean nodes are distinct objects/configurations. Never label a value simply `NorthNode` without retaining the variant.
+True and mean nodes are distinct. Never serialize an ambiguous `NorthNode` without variant metadata.
 
 ### Chiron
 
-Treat Chiron as a minor body with its own ephemeris provenance, not as a planet silently assumed to have the same support path.
+Treat as a minor body with explicit ephemeris provenance.
 
 ### Black Moon Lilith
 
-The term is ambiguous across software because it can refer to different lunar-apogee constructions. A `Lilith` value is prohibited in the canonical provider output until the exact astronomical definition is encoded in the object ID or variant metadata.
+`Lilith` is too ambiguous as a provider identifier. The exact apogee construction must be encoded.
 
 ### Vertex
 
-Vertex calculation requires an explicit geometric definition and independent validation. Do not import it as a mysterious scalar from another astrology program while claiming the chart is internally generated.
+Requires explicit geometric definition and independent validation.
 
 ### Fixed stars
 
-Fixed-star support requires catalog identity, epoch/proper-motion handling where relevant, coordinate transformation details, and an explicit star list. It is a later capability rather than a side effect of adding an ephemeris.
+Require catalog identity, epoch/proper-motion handling where relevant, coordinate transforms, and explicit star list.
 
-## Validation artifact format
+## Validation artifact
 
-Every comparison case should serialize approximately:
+Each case should serialize approximately:
 
 ```json
 {
@@ -202,19 +229,19 @@ Every comparison case should serialize approximately:
 }
 ```
 
-Validation fixtures should be retained in the repository so future provider upgrades can be regression-tested.
+Validation fixtures should be committed so provider upgrades become regression-testable.
 
 ## Release gate
 
-Before a production/professional astronomy label is used, require:
+Before using a production/professional astronomy label require:
 
 - independent provider implemented;
-- convention-matched test corpus completed;
+- convention-matched corpus completed;
 - angle validation completed;
 - boundary-sensitive discrepancies reviewed;
-- provider/library versions pinned;
+- versions pinned;
 - licensing reviewed;
 - validation report committed;
-- CI regression tests protecting accepted cases.
+- CI regression protection.
 
-Until then, the open adapter remains correctly labeled as a transparent research-grade calculation path.
+Until then the current adapter is correctly described as a transparent research-grade calculation path.

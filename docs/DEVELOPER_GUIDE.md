@@ -1,230 +1,188 @@
-# Noetic Atlas — Software Engineer Developer Guide
+# Noetic Atlas — Developer Guide
 
-## 1. Read this first
+## 1. Current target
 
-Noetic Atlas is not a horoscope text generator. It is an auditable computational and visual-analytics framework for astrological structure, topology, condition, time, and research.
+See [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md) first.
 
-A software engineer should be able to work on the repository without accepting any metaphysical claim about astrology.
+Current deployed branch: **`main`**.  
+Current public release: **v0.4.1.2**.  
+Current browser surface: **`prototype/v0412c.html`**.  
+Current minimum deterministic envelope: **`naf.analysis.v0.3.1`**.
 
-Engineering contract:
+Current next astrological-engine milestone: **v0.4.2 relational condition**.
+
+The present system already includes deterministic chart structure, primitive classical condition, graph analytics/findings, outer-planet interpretation, energetic whole-chart synthesis, and the v0412c resilient analysis bootstrap. Life Spectrum is not implemented yet.
+
+## 2. Engineering contract
 
 ```text
 input
 → civil-time resolution
 → astronomy
-→ astrological rules
-→ canonical model
-→ mathematical derivation
-→ research descriptors
+→ deterministic astrological rules
+→ canonical analysis
+→ primitive condition
+→ graph derivation / research
+→ interpretation
 → visualization
-→ interpretation / AI
+→ proof / provenance
 ```
 
-Each arrow is a boundary.
-
 > **No downstream layer may invent or silently alter an upstream fact.**
-
----
-
-## 2. Current target
-
-Default/deployed branch: **`main`**.
-
-Current public browser: **v0.3.2 — Visual Observatory**.
-
-Current minimum deterministic envelope: **`naf.analysis.v0.3.1`**.
-
-Next major implementation milestone: **v0.4 Condition Engine**.
-
-The current system already supports deterministic structure, graph topology, sect/lots, provenance, a graph-first browser interface, and exploratory research descriptors. It does not yet contain a complete traditional condition engine or Life Spectrum.
-
-Start with:
-
-1. `CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md`
-2. `THEORY_AND_PURPOSE.md`
-3. this guide
-4. `ARCHITECTURE.md`
-5. `CONDITION_ENGINE_SPEC.md`
-
----
 
 ## 3. Repository map
 
 ```text
 astroframework/
 ├── README.md
-├── index.html                  # GitHub Pages entry redirect
+├── index.html                         # public redirect → prototype/v0412c.html
 ├── package.json
 ├── schemas/
-│   └── naf-analysis-v0.3.1.schema.json
+├── data/
+│   ├── canonical/
+│   └── rules/hellenistic/
 ├── src/
 │   ├── astronomy/
 │   ├── time/
 │   ├── kernel/
 │   ├── pipeline/
-│   └── research/
+│   ├── conditions/
+│   │   └── primitive-condition-engine.mjs
+│   ├── research/
+│   │   ├── graph-analytics-engine.mjs
+│   │   └── pattern-engine.mjs
+│   └── interpretation/
+│       ├── astrological-analysis-engine.mjs
+│       ├── energetic-synthesis-engine.mjs
+│       └── energetic-synthesis-display.mjs
 ├── prototype/
-│   ├── index.html              # v0.3.2 Visual Observatory
-│   └── historical prototypes
-├── data/canonical/
+│   ├── index.html                     # graph-first visual core
+│   ├── v040b.html                     # historical condition wrapper
+│   ├── v041.html                      # historical graph/findings wrapper
+│   ├── v0411.html                     # historical interpretation wrapper
+│   ├── v0412.html / v0412b.html       # superseded v0.4.1.2 surfaces
+│   └── v0412c.html                    # CURRENT public wrapper
 ├── tests/
 ├── docs/
 └── .github/workflows/
 ```
 
-Current important modules:
+## 4. Current browser data flow
 
 ```text
-src/time/timezone-core.mjs
-src/time/timezone-adapter.mjs
-src/astronomy/astronomy-engine-core.mjs
-src/astronomy/astronomy-engine-adapter.mjs
-src/kernel/noetic-kernel.mjs
-src/kernel/hellenistic-integrity.mjs
-src/pipeline/birth-chart.mjs
-src/research/pattern-engine.mjs
+prototype/index.html computes / serializes chart state
+        ↓
+prototype/v0412c.html reads the state
+        ↓
+computePrimitiveConditions(...)
+analyzeGraphArchitecture(...)
+buildEnergeticSynthesis(...)
+        ↓
+Analysis / Findings / Metrics / Condition / Integrity
 ```
 
----
+The wrapper must never become a second chart kernel.
 
-## 4. Runtime data flow
+v0412c startup contract:
 
-### Birth-data path
-
-```text
-local civil date/time + coordinates
-→ time-zone lookup/history
-→ unambiguous UTC instant
-→ astronomy adapter
-→ planets + velocities + ASC + MC + solar altitude
-→ astrological kernel
-→ Whole Sign houses + aspects + rulers
-→ Hellenistic integrity layer
-→ sect + lots + provenance
-→ graph topology
-→ exploratory descriptors
-→ Visual Observatory / export
-```
-
-### Imported-chart path
-
-```text
-pasted placements or canonical JSON
-→ parser
-→ normalized longitudes
-→ supported houses/aspects/rulers recomputed
-→ sect/lots where required inputs exist
-→ topology/research
-→ Visual Observatory / export
-```
-
-Imported aspect lists or house numbers are reference data, not upstream truth when the kernel can recompute them.
-
----
+- Analysis pane is visibly nonblank before iframe completion;
+- canonical specimen loads automatically for the demo;
+- chart JSON/status changes trigger resynchronization;
+- synthesis failure produces an explicit error message;
+- visual core remains usable independently.
 
 ## 5. Module ownership
 
 ### `src/time/`
 
-Owns civil-time resolution only:
-
-- local wall time;
-- IANA zone;
-- historical UTC offset;
-- DST ambiguity;
-- nonexistent times;
-- expert override.
-
-It must not calculate planets or astrological rules.
+Owns local civil time, IANA zone lookup/override, historical offsets, DST ambiguity/nonexistence, and UTC resolution.
 
 ### `src/astronomy/`
 
-Owns astronomical/observer geometry:
+Owns Sun through Pluto astronomy, longitude, motion, ASC, MC, solar altitude, and provider/convention provenance.
 
-- Sun through Pluto in the current adapter;
-- longitude;
-- velocity/retrograde state;
-- ASC;
-- MC;
-- geometric solar altitude;
-- provider/convention provenance.
-
-It must not decide dignity, rulership meaning, house topics, or interpretation.
+Current automatic exclusions include Ceres, Chiron, node variants, Lilith/apogee variants, Vertex, and fixed stars.
 
 ### `src/kernel/noetic-kernel.mjs`
 
-Owns reusable astrological geometry/topology:
+Owns reusable chart geometry/topology:
 
-- normalization;
-- parsing;
+- normalization and parsing;
+- sign conversion;
 - Whole Sign houses;
-- major aspects;
-- orb policy;
-- phase from velocity;
-- traditional domicile rulers;
+- major aspects/orbs;
+- applying/separating;
+- traditional domicile rulership;
 - dispositor graph;
-- Tarjan SCCs;
-- terminal SCCs;
+- Tarjan SCC/terminal SCC;
 - house-ruler routes;
 - element/modality composition.
 
 ### `src/kernel/hellenistic-integrity.mjs`
 
-Currently owns source-controlled Hellenistic integrity logic:
+Owns current Hellenistic integrity work such as sect, seven Hermetic lots, formula proof, version/completeness state, and derivation-ledger enrichment.
 
-- sect;
-- seven Paulus/Panaretus Hermetic lots;
-- formula proof objects;
-- version manifest;
-- completeness state;
-- Derivation Ledger/tree.
+### `src/conditions/primitive-condition-engine.mjs`
 
-v0.4 condition work should be modularized into explicit rule families rather than making this file a permanent monolith.
+Owns the implemented classical-seven primitive condition model:
 
-### `src/research/`
+```text
+naf.condition.primitive.hellenistic.v0.4.0b
+```
 
-Owns experimental descriptors.
+It computes nine independent primitive factors. It does not compute relational or compound condition and does not emit a scalar planet-strength score.
 
-Current descriptors include:
+### `src/research/graph-analytics-engine.mjs`
 
-- circular harmonic spectrum;
-- ruler-route convergence;
-- multilayer participation.
+Owns current graph analytics/findings:
 
-They are read-only consumers of canonical state and currently remain promotion-gated.
+- SCC condensation;
+- terminal basin;
+- route depth;
+- upstream route capture;
+- nonterminal bottleneck;
+- aspect components/degree/clustering/betweenness;
+- articulation points/bridges;
+- typed three-node motifs;
+- aspect × dispositor overlap.
 
-### `prototype/index.html`
+### `src/research/pattern-engine.mjs`
 
-Owns presentation and interaction only.
+Owns additional exploratory descriptors and integration of research outputs. Research outputs are read-only consumers of canonical state.
 
-It currently renders:
+### `src/interpretation/`
 
-- Natal Field;
-- Aspect Matrix;
-- Flow Map;
-- Sect & Lots;
-- Research Lab;
-- Audit.
+Owns downstream astrological and energetic interpretation. It may consume deterministic state but may not mutate it.
 
-The UI must never contain a second aspect calculator, lot formula, rulership table, or topology algorithm.
-
----
+Outer planets can be interpreted without inheriting Hellenistic essential dignity. Ceres can be interpreted only when a coordinate exists.
 
 ## 6. Running the project
 
-Install:
-
 ```bash
 npm install
-```
-
-Run deterministic tests:
-
-```bash
 npm test
 ```
 
-Serve locally when needed:
+Current `npm test` executes:
+
+```text
+kernel_smoke
+integrity_smoke
+condition_registry_smoke
+primitive_condition_smoke
+graph_analytics_smoke
+astrological_analysis_smoke
+energetic_synthesis_smoke
+v041_ui_contract_smoke
+v0411_ui_contract_smoke
+v0412_ui_contract_smoke
+v0412c_ui_contract_smoke
+boundary_smoke
+timezone_smoke
+astronomy_contract_smoke
+```
+
+Serve locally:
 
 ```bash
 python -m http.server 8000
@@ -233,20 +191,14 @@ python -m http.server 8000
 Open:
 
 ```text
-http://localhost:8000/prototype/
+http://localhost:8000/prototype/v0412c.html
 ```
-
-Ordinary visual testing can use the GitHub Pages deployment from `main`.
-
----
 
 ## 7. Core invariants
 
 ### Longitude
 
-Internal longitude is decimal degrees in `[0, 360)`.
-
-Human-readable sign-degree strings are display values.
+Decimal degrees in `[0,360)` internally.
 
 ### Time
 
@@ -254,39 +206,27 @@ Astronomy receives an unambiguous UTC instant.
 
 ### Houses
 
-Whole Sign house assignment is computed from sign displacement relative to the Ascendant sign.
+Whole Sign house is derived from sign displacement relative to Ascendant sign.
 
 ### Aspects
 
-An aspect edge should preserve:
-
-- endpoints;
-- aspect family/angle;
-- measured separation;
-- orb;
-- orb-policy ID;
-- phase when computable;
-- provenance.
+Each admitted relation must retain endpoints, aspect family, separation/orb, orb-policy identity, phase when computable, and provenance.
 
 ### Lots
 
-A lot result should preserve:
-
-- sect;
-- formula family;
-- source/target points;
-- directed zodiacal arc;
-- ASC;
-- raw/normalized result;
-- house;
-- ruler;
-- source/rule provenance.
+Each lot retains sect, formula family, directed arc, ASC, result, house, ruler, and provenance.
 
 ### Topology
 
 A graph result is incomplete unless the graph definition/rule model is identified.
 
-“Mercury–Venus is a terminal SCC” must mean terminal SCC **of a specified dispositor graph**.
+### Condition
+
+Each primitive factor remains independently reconstructable. No hidden aggregation into a single strength number.
+
+### Interpretation
+
+Interpretation is `interpretive-inference`; it cannot rewrite deterministic state.
 
 ### Completeness
 
@@ -298,251 +238,159 @@ ambiguous
 unsupported
 invalid
 not_implemented
+not_applicable
 ```
 
 Never encode unsupported as zero/false.
 
----
+## 8. Adding an astrological rule
 
-## 8. Derivation/provenance requirement
-
-Every important derived result should be reconstructable.
-
-Typical ledger information:
-
-```json
-{
-  "kind": "astrological_rule",
-  "id": "...",
-  "algorithm_or_rule": "...",
-  "inputs": {},
-  "intermediate": {},
-  "result": {},
-  "provenance": {},
-  "ambiguity": null
-}
-```
-
-Store intermediate values when they are required to independently reproduce the output.
-
-The future ideal is click-any-result → dependency path → original input.
-
----
-
-## 9. Adding an astrological rule
-
-Before code, specify:
+Specify before code:
 
 1. tradition;
-2. source;
+2. source/reconstruction;
 3. competing variants;
 4. required astronomical inputs;
-5. mathematical/logical transformation;
-6. boundary cases;
-7. provenance fields;
-8. test fixtures.
+5. exact transformation;
+6. boundaries;
+7. applicability;
+8. provenance fields;
+9. synthetic fixtures.
 
 Implementation order:
 
 ```text
 source definition
-→ formal rule
+→ formal rule/model ID
 → pure deterministic function
-→ boundary tests
-→ independent/reference verification
+→ edge tests
+→ independent/manual verification
 → provenance output
-→ UI exposure
+→ graph/UI exposure
 → interpretation afterward
 ```
 
-Do not silently blend variants.
+Do not silently blend Hellenistic, medieval, modern, or Jyotish definitions.
 
----
-
-## 10. Adding a research descriptor
-
-A research descriptor is not an astrological rule.
+## 9. Adding a graph metric
 
 Define:
 
 ```text
 name/version
+graph scope
 mathematical definition
-required substrate
-output range
+input graph
 normalization
 invariances/sensitivities
-null model
-promotion status
+null-model requirement
+interpretive status
 ```
 
-Add:
+A generic network statistic is not useful merely because a library exposes it. Prefer metrics that answer a specific astrological structural question.
 
-- unit tests;
-- synthetic sanity checks;
-- canonical regression output only for stability;
-- proposed null/randomization strategy.
+Do not label values high/rare/dominant without an explicit baseline.
 
-Never infer psychological significance merely because a graph metric sounds important.
+## 10. Adding an interpretation feature
 
----
+An interpretation feature must declare:
 
-## 11. v0.4 Condition Engine development contract
+- interpretation model/profile ID;
+- epistemic status;
+- deterministic evidence consumed;
+- tradition/posture;
+- applicability;
+- limitations.
 
-Condition should remain multidimensional.
+It may enrich prose without changing coordinates, houses, aspects, topology, condition, or provenance.
 
-Initial families:
+## 11. Current condition development contract
+
+Implemented:
 
 ```text
-domicile/exaltation/adversity
-sect
-triplicity
-bounds
-angularity
-reception
-overcoming
-bonification/maltreatment
-mitigation
+v0.4.0a ontology/schema
+v0.4.0b primitive condition
 ```
 
-Each condition result requires:
+Next:
 
-- rule ID;
-- tradition/variant;
-- source reference;
-- inputs;
-- result;
-- dependencies;
-- ambiguity/unsupported state.
+```text
+v0.4.2 reception / exchange / overcoming
+v0.4.3 selected compound condition
+```
 
-No single opaque “planet strength” number is allowed to replace these conditions.
+Relational condition must be represented as typed relation objects/layers, not hidden flags on dispositor edges.
 
-See `CONDITION_ENGINE_SPEC.md`.
+Compound rules must be pure consumers of primitive + relational facts.
 
----
+## 12. Current graph research contract
 
-## 12. Testing philosophy
+Implemented descriptive graph math does not establish astrology's causal truth.
 
-Tests verify calculations and contracts, not desired interpretations.
+Required next gate:
 
-### Unit/boundary tests
+```text
+geometric longitude null
+label-permutation null
+degree-preserving null where appropriate
+layer-overlap null
+```
 
-Examples:
+Null findings are acceptable.
 
-- longitude wraparound;
-- sign boundaries;
-- exact aspect and orb cutoff ± epsilon;
-- applying/separating/stationary neighborhoods;
-- near-horizon sect;
-- directed lot wraparound;
-- known SCC graphs;
-- DST repeated/gap times.
+## 13. UI development rules
 
-### Canonical regression
+When changing the public surface:
 
-`NAF-CANON-0001` preserves known expected software structures.
-
-It is not evidence for astrological validity.
-
-### Synthetic fixtures
-
-Prefer synthetic values for exact boundaries.
-
-### Cross-provider validation
-
-Required before stronger production astronomy claims.
-
-See `ASTRONOMY_VALIDATION_PLAN.md`.
-
----
-
-## 13. Visual-development rules
-
-The v0.3.2 restoration makes the visualization a serious application surface again.
-
-When changing it:
-
-- consume canonical computed objects;
-- preserve synchronized selection across views;
-- keep node-link and matrix views complementary;
-- preserve edge/node provenance access;
-- do not hard-code motifs specific to the canonical specimen;
-- distinguish graph-derived from research-exploratory overlays;
-- preserve the traditional wheel as a possible reference/control rather than claiming it is obsolete;
-- add browser/UI tests as the interface stabilizes.
-
----
+- preserve `prototype/index.html` as the source of computed visual-core state unless architecture is deliberately refactored;
+- do not duplicate calculations in wrappers;
+- preserve explicit loading/error states;
+- keep Analysis, Findings, Metrics, Condition, and Integrity semantically distinct;
+- preserve graph-linked proof access;
+- add/update UI contract tests;
+- update `CURRENT_RELEASE.md`, README, INDEX, ROADMAP, and any affected architecture/product docs in the same movement.
 
 ## 14. AI integration rules
 
-AI is downstream.
-
-It may:
-
-- navigate;
-- explain;
-- compare;
-- trace provenance;
-- synthesize source-backed interpretations;
-- generate research hypotheses.
-
-It may not:
-
-- invent astronomical values;
-- silently select rule variants;
-- alter computed houses/aspects;
-- hide provenance conflicts;
-- promote exploratory descriptors into established meaning.
-
----
+AI may explain/navigate/compare/trace/synthesize. It may not invent coordinates, silently pick variants, change chart facts, conceal unsupported states, or convert research descriptors into established meaning.
 
 ## 15. Privacy
 
-Birth data and life-event annotations are sensitive product data.
-
-Production requirements include:
-
-- data minimization;
-- explicit retention/deletion;
-- encryption;
-- separation of identity and research data;
-- explicit consent for research use;
-- no private chart/event-text training without permission;
-- avoid raw birth data in analytics logs.
-
----
+Birth data and life-event annotations are sensitive. Production work must include data minimization, deletion/retention controls, encryption, separate research consent, pseudonymous research IDs, and no private-text training without explicit permission.
 
 ## 16. Definition of done
 
-A computed feature is not complete until:
+A feature is not complete until:
 
+- [ ] owner layer is identified;
 - [ ] formal definition exists;
-- [ ] source/variant is identified;
-- [ ] deterministic implementation exists;
+- [ ] source/model ID exists where applicable;
+- [ ] deterministic implementation exists where applicable;
 - [ ] edge cases are tested;
-- [ ] provenance is emitted;
-- [ ] ambiguity/unsupported states are represented;
-- [ ] regression behavior is recorded;
-- [ ] UI consumes the computed output;
-- [ ] documentation is updated;
-- [ ] interpretation remains downstream and labeled.
+- [ ] provenance/applicability is represented;
+- [ ] unsupported/ambiguous states are explicit;
+- [ ] UI consumes the computed output rather than reimplementing it;
+- [ ] living documentation is updated;
+- [ ] interpretation remains downstream;
+- [ ] release-entry contract is updated if public behavior changed.
 
----
-
-## 17. Developer reading order
+## 17. Reading order
 
 ```text
 README
+→ CURRENT_RELEASE
 → CURRENT_STATE_AND_SCIENTIFIC_RATIONALE
 → THEORY_AND_PURPOSE
 → DEVELOPER_GUIDE
 → ARCHITECTURE
 → ASTROLOGICAL_MODEL
-→ INTEGRITY_AND_PROVENANCE
-→ V03_CLOSEOUT_AND_V04_ENTRY
 → CONDITION_ENGINE_SPEC
+→ INTEGRITY_AND_PROVENANCE
+→ V041_GRAPH_ANALYTICS_AND_FINDINGS
+→ V0412_ENERGETIC_SYNTHESIS
 → ROADMAP
 → tests/
 ```
 
-When implementation and documentation disagree, treat the disagreement as a defect.
+When implementation and living documentation disagree, treat the disagreement as a defect.
