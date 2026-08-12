@@ -17,29 +17,39 @@ The project distinguishes:
 
 These categories must not be collapsed.
 
-## 2. Current substrate
+Frozen architecture:
 
-The present research substrate is no longer v0.3-only.
+```text
+one chart state
+→ many coordinated projections
+```
+
+## 2. Current substrate
 
 Implemented now:
 
 - deterministic chart kernel;
 - sect + seven Hermetic lots;
 - primitive classical condition;
+- relational classical condition;
 - graph analytics/findings for the v0.4.1 scope;
+- Resonance Field;
+- House River route-count projection;
+- reusable condition signatures;
+- Derivation Walker infrastructure for all new v0.4.2 relations and river bands;
 - current energetic interpretation layer;
-- proof/provenance linkage;
-- v0412c operational browser wrapper.
+- preservation of every prior useful public surface through v0413/v0412c.
 
 Still absent:
 
-- relational condition;
 - compound condition;
 - graph-null distributions;
+- statistically validated condition-weighted graph descriptors;
+- complete legacy-proof normalization into the shared walker;
 - Life Spectrum/temporal engine;
 - externally validated predictive/psychological interpretation.
 
-The promotion status for novel astrological claims therefore remains **hold**, even though the primitive condition substrate is now implemented.
+The promotion status for novel astrological claims therefore remains **hold** even though both primitive and relational traditional condition are now executable.
 
 ## 3. Research posture
 
@@ -69,18 +79,22 @@ Examples:
 - What articulation points/bridges exist in the admitted aspect graph?
 - Which typed motifs occur under a named orb policy?
 - Which aspect pairs overlap with dispositor pairs?
+- How many Whole Sign house-ruler paths traverse each dispositor edge?
 
 These are deterministic once the graph/model is defined.
 
 ### 4.2 Historical-rule reproduction
 
-Examples:
+Current examples:
 
 - Hermetic lot formulas;
 - Egyptian-bound lookup;
 - triplicity/sect logic;
 - Whole-Sign angular-triad classification;
-- future reception/overcoming rules.
+- configured domicile reception;
+- domicile exchange;
+- right-hand overcoming;
+- domination/upon-the-tenth.
 
 Success means expert reconstructability under a named source/variant, not empirical proof of astrology.
 
@@ -90,10 +104,12 @@ Examples:
 
 - Does Flow Map reduce time to trace a ruler chain?
 - Does Aspect Matrix improve exact pairwise lookup?
-- Does the graph/findings/metrics separation improve understanding of what is calculation versus interpretation?
-- Does Condition reduce errors in traditional-state reconstruction?
-- Does Integrity improve confidence calibration by exposing evidence?
-- Does the v0412c analysis hierarchy reduce cognitive load relative to a wheel + prose workflow?
+- Does Resonance Field improve comprehension of actual versus optional natural-house relationships?
+- Does Qualified Flow reduce errors distinguishing dispositorship, reception, exchange, and overcoming?
+- Does House River reduce the cognitive cost of tracing lived house domains through ruler chains?
+- Do Condition Signatures improve reconstruction of multidimensional state without inducing a misleading good/bad score?
+- Does Proof Walker improve confidence calibration by exposing derivation paths?
+- Does the graph/findings/metrics/condition separation improve understanding of what is calculation versus interpretation?
 
 Candidate measures:
 
@@ -105,7 +121,7 @@ Candidate measures:
 - workload;
 - expert inter-rater agreement.
 
-The wheel remains an appropriate control condition.
+The wheel remains an appropriate control condition for geometry-heavy tasks; tables and conventional dignity grids may also be appropriate controls for condition tasks.
 
 ### 4.4 Astrological-significance questions
 
@@ -114,8 +130,9 @@ These ask whether formal features correspond to independent expert judgments, ph
 Examples:
 
 - Does terminal-basin concentration correspond to independently rated topical integration?
-- Do condition-qualified graph structures add reproducible information beyond standard delineation?
+- Do primitive + relational condition-qualified graph structures add reproducible information beyond standard delineation?
 - Are articulation/bottleneck structures associated with independently coded interpretive themes?
+- Do House River routing patterns add useful information beyond ordinary house-ruler tables?
 - Do preregistered timing windows correspond to event density above time-shift nulls?
 
 These require stronger controls and cannot be answered from `NAF-CANON-0001`.
@@ -132,7 +149,8 @@ Success criteria:
 - variant named;
 - formula/rule formalized;
 - boundaries documented;
-- independent/manual reconstruction possible.
+- independent/manual reconstruction possible;
+- proof object available.
 
 ### R1 — Mathematical characterization
 
@@ -146,22 +164,23 @@ Current examples:
 - aspect clustering/betweenness;
 - articulation/bridge structure;
 - typed motifs;
+- House River route counts;
 - harmonic magnitude;
 - multilayer overlap/participation.
 
 ### R2 — Exploratory astrological hypothesis
 
-Goal: test whether an R1 property corresponds to an independently measured criterion.
+Goal: test whether an R1 property or source-backed condition structure corresponds to an independently measured criterion.
 
 ### R3 — Replication
 
-Goal: reproduce the relationship in independent charts, periods, astrologers, or datasets.
+Goal: reproduce relationships in independent charts, periods, astrologers, or datasets.
 
 ### R4 — Candidate theory
 
 Only repeated support justifies movement toward a new interpretive technique.
 
-## 6. Current graph research
+## 6. Current graph + relation research
 
 Current graph model:
 
@@ -169,62 +188,86 @@ Current graph model:
 naf.research.graph_analytics.v0.4.1
 ```
 
+Current relational condition:
+
+```text
+naf.condition.relational.hellenistic.v0.4.2
+```
+
+Current House River:
+
+```text
+naf.research.house_river.v0.4.2
+```
+
 ### Classical dispositor graph
 
-The classical-seven ruler network is treated as a functional digraph under traditional domicile rulership. Current analytics include SCC condensation, terminal basins, route depth, upstream capture, and nonterminal bottlenecks.
+Functional digraph under traditional domicile rulership. Current analytics include SCC condensation, terminal basins, route depth, upstream capture, and nonterminal bottlenecks.
 
 ### Aspect graph
 
 Current analytics include components, degree, clustering, normalized unweighted betweenness, articulation points, bridges, typed triangle motifs, and exact ≤1° subsets.
 
+### Relational layers
+
+Source-backed layers include reception, exchange, separately identified mutual-reception compatibility, overcoming, and domination.
+
+These are not automatically “research discoveries”; their novel research use begins when we ask comparative/multiplex questions about them.
+
+### House River
+
+For dispositor edge `e`:
+
+```text
+w(e) = number of Whole Sign house-ruler paths traversing e
+```
+
+This is a route count, not a strength score.
+
 ### Multiplex overlap
 
-Current explicit overlap:
+Existing explicit overlap:
 
 ```text
 E_aspect ∩ E_dispositor
 ```
 
-The system does not aggregate relation layers into one undifferentiated power network.
+Future research may compare reception/overcoming overlap and motif participation, but relation layers must not be collapsed into one undifferentiated power network.
 
 ## 7. Null models — mandatory next gate
 
 ### Geometric longitude null
-
 Randomize longitudes, then recompute aspects.
 
 ### Label permutation
-
 Preserve geometry, permute object identities.
 
 ### Degree-preserving graph null
-
-Rewire while preserving degree sequence where the graph semantics make this appropriate.
+Rewire while preserving degree sequence where graph semantics make this appropriate.
 
 ### Layer-overlap null
-
 Preserve layer size/density, randomize pair assignment.
 
-### Matched astronomical null
+### Relational-layer null
+Future reception/overcoming research must specify which sign/ruler/configuration marginals are preserved before asking whether multiplex overlap is unusual.
 
+### Matched astronomical null
 Use realistic birth instants/locations when independent longitude randomization would destroy dependencies material to the question.
 
 ### Rotation null
-
 Rotate a full chart while preserving internal geometry when isolating house/angle dependence.
 
 ### Time-shift null
-
 For future event/timing research, shift event dates/windows within valid observation periods.
 
 No `rare`, `high`, `dominant`, `exceptional`, or `enriched` graph language before comparison.
 
-## 8. Primitive condition and graph research
+## 8. Condition and graph research
 
-Primitive condition is now implemented, so the research question has evolved from “wait until v0.4 exists” to:
+The question has evolved from “wait for condition” to:
 
 ```text
-How much does primitive condition change or qualify graph-based conclusions?
+What incremental information do primitive and relational condition add to graph/topical representations?
 ```
 
 Useful comparisons:
@@ -234,10 +277,16 @@ topology only
 vs
 primitive condition only
 vs
-primitive condition + topology
+relational condition only
+vs
+primitive + relational condition
+vs
+condition + topology
+vs
+condition + topology + House River / Resonance presentation
 ```
 
-Later, after v0.4.2/v0.4.3:
+After v0.4.3:
 
 ```text
 primitive + relational + compound condition + topology
@@ -247,17 +296,18 @@ Do not create a condition-weighted centrality score merely because weighting is 
 
 ## 9. Interpretation research
 
-The current energetic synthesis is a versioned interpretation model, not a validated predictive theory.
+The energetic synthesis is a versioned interpretation model, not a validated predictive theory.
 
 Research questions may include:
 
-- Do users distinguish graph facts from interpretive hypotheses more accurately with the current card hierarchy?
+- Do users distinguish graph facts, astrological-rule facts, and interpretive hypotheses more accurately with the current hierarchy?
 - Do house+ruler+condition explanations improve expert agreement or novice understanding?
+- Does showing relation type prevent the generic-edge misunderstanding common in network visualizations?
 - Which interpretation profiles generate stable, useful descriptions across independent charts?
 - Which statements are too generic to discriminate among chart structures?
 - Do balanced/depleted/excess framings improve agency without increasing deterministic belief?
 
-Interpretation text must remain downstream from deterministic evidence.
+Interpretation text remains downstream from deterministic evidence.
 
 ## 10. Canonical-chart overfitting is prohibited
 
@@ -266,7 +316,7 @@ Interpretation text must remain downstream from deterministic evidence.
 Rules:
 
 - do not tune thresholds to make it interesting;
-- use synthetic fixtures for edge cases;
+- use synthetic fixtures for edge cases and relation types;
 - use independent charts for research;
 - record proposal timing relative to samples examined;
 - retain boring/failed outputs where feasible.
@@ -287,13 +337,7 @@ Risks include retrospective selection, memory distortion, post-hoc interpretatio
 
 ## 12. Cohort research
 
-With explicit consent, future datasets may test:
-
-- expert agreement about structural descriptors;
-- associations between graph/condition features and independently coded domains;
-- timing-window event density;
-- chart-architecture similarity versus independent life-history similarity;
-- incremental value of traditional techniques.
+With explicit consent, future datasets may test expert agreement about structural/condition descriptors, associations between graph/condition features and independently coded domains, timing-window event density, chart-architecture similarity versus independent life-history similarity, and incremental value of traditional techniques.
 
 Always distinguish mathematical chart similarity from empirical psychological/life similarity.
 
@@ -311,23 +355,7 @@ undefined without reliable time
 
 ## 14. Theory-promotion requirements
 
-A descriptor or interpretation technique moving toward theory must document:
-
-- formal definition;
-- implementation version;
-- object/graph scope;
-- datasets examined;
-- rule-set versions;
-- null models;
-- preregistration status where relevant;
-- replication attempts;
-- effect estimates and uncertainty;
-- multiple-comparison handling;
-- sensitivity tests;
-- known failures;
-- competing explanations;
-- expert commentary;
-- current confidence status.
+A descriptor or interpretation technique moving toward theory must document formal definition, implementation version, object/graph scope, datasets examined, rule-set versions, null models, preregistration status where relevant, replication attempts, effect estimates/uncertainty, multiple-comparison handling, sensitivity tests, known failures, competing explanations, expert commentary, and current confidence status.
 
 Suggested labels:
 
@@ -340,22 +368,11 @@ traditional-source-backed
 retired
 ```
 
+`traditional-source-backed` and `empirically replicated` are different statuses.
+
 ## 15. Reproducibility package
 
-Publishable results should ideally retain:
-
-- code commit SHA;
-- schema/model versions;
-- astronomy provider/version;
-- rule IDs;
-- orb policy;
-- feature definitions;
-- data provenance/consent;
-- random seeds;
-- preprocessing;
-- exact analysis command/notebook;
-- limitations;
-- negative/failed analyses relevant to the hypothesis.
+Publishable results should ideally retain code commit SHA, schema/model versions, astronomy provider/version, rule IDs, orb policy, feature definitions, data provenance/consent, random seeds, preprocessing, exact analysis command/notebook, limitations, and negative/failed analyses relevant to the hypothesis.
 
 ## 16. External technical anchors
 
@@ -369,7 +386,9 @@ Noetic Atlas should become an astrological observatory capable of asking:
 
 > How was it produced?
 
-> What traditional condition qualifies it?
+> What primitive and relational traditional condition qualifies it?
+
+> How do lived house domains route through it?
 
 > What does the selected interpretation model infer?
 
