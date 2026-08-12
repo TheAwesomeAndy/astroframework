@@ -23,7 +23,7 @@ const syntaxOnly=moduleMatch[1].replace(/^import .*$/gm,'');
 new vm.Script(`(async()=>{${syntaxOnly}\n})`);
 
 const entry=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
-// Entry assertion is updated when v0412c becomes the promoted public surface.
-assert.ok(entry.includes('Noetic Atlas v0.4.1.2'));
+assert.match(entry,/prototype\/v0412c\.html\?build=energetic-0412c-bootstrap/);
+assert.match(entry,/Noetic Atlas v0\.4\.1\.2/);
 
 console.log('v0.4.1.2c analysis bootstrap UI contract: ok');
