@@ -1,5 +1,5 @@
-export const DERIVATION_WALKER_VERSION='0.4.2';
-export const DERIVATION_WALKER_MODEL='naf.integrity.derivation_walker.v0.4.2';
+export const DERIVATION_WALKER_VERSION='0.4.3';
+export const DERIVATION_WALKER_MODEL='naf.integrity.derivation_walker.v0.4.3';
 
 export const derivationRef=id=>String(id).startsWith('derivation:')?String(id):`derivation:${id}`;
 const rawId=ref=>String(ref||'').replace(/^derivation:/,'');
@@ -22,12 +22,13 @@ function normalizeLedgerEntry(e,source='unknown'){
   };
 }
 
-export function buildDerivationIndex({analysis=null,primitive=null,relational=null,houseRiver=null,extra=[]}={}){
+export function buildDerivationIndex({analysis=null,primitive=null,relational=null,compound=null,houseRiver=null,extra=[]}={}){
   const index={};
   const add=(entry,source)=>{const n=normalizeLedgerEntry(entry,source);if(n)index[n.id]=n};
   for(const e of analysis?.derivation_ledger||[])add(e,'analysis.derivation_ledger');
   for(const e of primitive?.ledger_entries||[])add(e,'primitive_condition');
   for(const e of relational?.ledger_entries||[])add(e,'relational_condition');
+  for(const e of compound?.ledger_entries||[])add(e,'compound_condition');
   for(const e of houseRiver?.derivation_entries||[])add(e,'house_river');
   for(const e of extra||[])add(e,'extra');
   return {
