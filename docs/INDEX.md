@@ -6,43 +6,45 @@ This index separates **living documentation** from **historical milestone/releas
 
 Read first:
 
-1. [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md) — canonical current release contract, current browser, model IDs, implemented capabilities, and limitations.
-2. [`V042_RELATIONAL_CONDITION.md`](V042_RELATIONAL_CONDITION.md) — v0.4.2 source lock, relational ontology, condition signatures, House River, Derivation Walker, and public projections.
-3. [`../README.md`](../README.md) — project overview and current implementation summary.
-4. [`CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md`](CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md) — current scientific/epistemic posture and claim boundaries.
-5. [`CONDITION_ENGINE_SPEC.md`](CONDITION_ENGINE_SPEC.md) — living condition architecture from primitive through relational, with compound condition next.
-6. [`ROADMAP.md`](ROADMAP.md) — current engineering/research sequence.
+1. [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md) — canonical current release contract, browser surface, model IDs, implemented capabilities, and limitations.
+2. [`V043_COMPOUND_CONDITION.md`](V043_COMPOUND_CONDITION.md) — v0.4.3 compound-condition source lock, implemented/deferred rule boundary, fixtures, UI projection, and proof contract.
+3. [`V042_RELATIONAL_CONDITION.md`](V042_RELATIONAL_CONDITION.md) — v0.4.2 relational ontology, condition signatures, House River, and Derivation Walker foundation.
+4. [`../README.md`](../README.md) — project overview and current implementation summary.
+5. [`CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md`](CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md) — scientific/epistemic posture and claim boundaries.
+6. [`CONDITION_ENGINE_SPEC.md`](CONDITION_ENGINE_SPEC.md) — living condition architecture.
+7. [`ROADMAP.md`](ROADMAP.md) — current engineering/research sequence.
 
 ### Current release identifiers
 
 ```text
-public release                    v0.4.2 — Relational Condition
-current browser surface           prototype/v042.html
+public release                    v0.4.3 — Compound Condition
+current browser surface           prototype/v043.html
 deployed branch                   main
-condition system                  naf.condition.system.v0.4.2
-relational condition model        naf.condition.relational.hellenistic.v0.4.2
-relational rule registry          naf.rules.relational_condition.hellenistic.v0.4.2
+condition system                  naf.condition.system.v0.4.3
+compound condition                naf.condition.compound.hellenistic.v0.4.3
+compound rule registry            naf.rules.compound_condition.hellenistic.v0.4.3
+relational condition              naf.condition.relational.hellenistic.v0.4.2
 condition signature               naf.condition.signature.v0.4.2
 House River                       naf.research.house_river.v0.4.2
-Derivation Walker                 naf.integrity.derivation_walker.v0.4.2
+Derivation Walker                 naf.integrity.derivation_walker.v0.4.3
 house resonance                   naf.interpretation.house_resonance.v0.4.1.3
 energetic synthesis               naf.interpretation.energetic_synthesis.v0.4.1.2
-natural-house overlay             naf.interpretation.natural_house_overlay.modern.v1
 graph analytics                   naf.research.graph_analytics.v0.4.1
 primitive condition               naf.condition.primitive.hellenistic.v0.4.0b
 condition schema                  naf.condition.record.v0.4.0a
 minimum analysis envelope         naf.analysis.v0.3.1
 ```
 
-The root `index.html` redirects to `prototype/v042.html`.
+The root `index.html` redirects to `prototype/v043.html`.
 
 Preservation chain:
 
 ```text
-v042
-└── v0413
-    └── v0412c
-        └── prototype/index.html deterministic visual core
+v043
+└── v042
+    └── v0413
+        └── v0412c
+            └── prototype/index.html deterministic visual core
 ```
 
 The governing architecture is:
@@ -56,18 +58,27 @@ No representation owns a second calculator.
 
 ## Current public projections
 
-The v0.4.2 shell exposes:
+The v0.4.3 shell exposes:
 
 ```text
-Existing Atlas       → complete preserved v0.4.1.3 interface
-Qualified Resonance  → resonance + ruler/occupant condition signatures
-Relations            → typed traditional relational-condition objects
-Qualified Flow       → dispositor + reception/exchange/overcoming layers
-House River          → lived-house domains through ruler/dispositor routes
-Proof Walker         → reversible derivation traversal
+Existing Atlas        → complete preserved v0.4.2 interface
+Compound Condition    → independent compound testimonies
+Compound Map          → compound-condition relationship projection
+Proof Walker          → compound-aware derivation traversal
+Source Boundary       → implemented versus deferred reconstruction states
 ```
 
-Within the preserved Atlas, v0412c still exposes:
+Within preserved v042:
+
+```text
+Qualified Resonance
+Relations
+Qualified Flow
+House River
+Proof Walker
+```
+
+Within preserved v0412c:
 
 ```text
 Energetic Analysis
@@ -77,61 +88,64 @@ Condition
 Integrity
 ```
 
-and the deterministic core still exposes Natal Field, Aspect Matrix, Flow Map, Lots & Sect, Research Lab, and Audit.
+The deterministic core still exposes Natal Field, Aspect Matrix, Flow Map, Lots & Sect, Research Lab, and Audit.
 
 ## Living architecture and engineering docs
 
-- [`ARCHITECTURE.md`](ARCHITECTURE.md) — layer boundaries, one-state/multi-projection rule, current module ownership, and preservation chain.
+- [`ARCHITECTURE.md`](ARCHITECTURE.md) — layer boundaries, one-state/multi-projection rule, module ownership, and preservation chain.
 - [`DEVELOPER_GUIDE.md`](DEVELOPER_GUIDE.md) — repository map, tests, extension rules, and definition of done.
-- [`ASTROLOGICAL_MODEL.md`](ASTROLOGICAL_MODEL.md) — tropical/Whole-Sign/traditional-rulership substrate, primitive + relational condition, modern overlays, and timing boundaries.
-- [`INTEGRITY_AND_PROVENANCE.md`](INTEGRITY_AND_PROVENANCE.md) — epistemic classes, derivation ledger, relation proof, House River proof, and interpretation evidence chain.
+- [`ASTROLOGICAL_MODEL.md`](ASTROLOGICAL_MODEL.md) — tropical/Whole-Sign/traditional-rulership substrate plus primitive, relational, and compound condition boundaries.
+- [`INTEGRITY_AND_PROVENANCE.md`](INTEGRITY_AND_PROVENANCE.md) — epistemic classes, derivation ledger, relation/compound proof, House River proof, and interpretation evidence chain.
 - [`ASTRONOMY_ADAPTERS.md`](ASTRONOMY_ADAPTERS.md) — current Astronomy Engine adapter and extended-object limitations.
 - [`ASTRONOMY_VALIDATION_PLAN.md`](ASTRONOMY_VALIDATION_PLAN.md) — independent provider-validation requirements.
-- [`GLOSSARY.md`](GLOSSARY.md) — engineering, graph, astrological, primitive/relational condition, resonance, and proof vocabulary.
+- [`GLOSSARY.md`](GLOSSARY.md) — engineering, graph, astrological, condition, resonance, and proof vocabulary.
 
 ## Product, theory, and research
 
-- [`PRODUCT.md`](PRODUCT.md) — product hierarchy, user value, product boundaries, and current release surface.
+- [`PRODUCT.md`](PRODUCT.md) — product hierarchy, user value, product boundaries, and public surface.
 - [`THEORY_AND_PURPOSE.md`](THEORY_AND_PURPOSE.md) — philosophical/epistemic mission and geometry → topology → condition → synthesis → time progression.
 - [`RESEARCH_PROGRAM.md`](RESEARCH_PROGRAM.md) — graph/null/HCI/astrological research program and promotion gates.
-- [`RESEARCH_DISCOVERY.md`](RESEARCH_DISCOVERY.md) — current exploratory descriptors and their promotion status.
+- [`RESEARCH_DISCOVERY.md`](RESEARCH_DISCOVERY.md) — current exploratory descriptors and promotion status.
 
 ## Condition implementation
 
 Read in this order:
 
-1. [`V040A_CONDITION_ONTOLOGY.md`](V040A_CONDITION_ONTOLOGY.md) — historical v0.4.0a ontology freeze.
-2. [`V040B_PRIMITIVE_CONDITION.md`](V040B_PRIMITIVE_CONDITION.md) — historical v0.4.0b primitive implementation milestone.
-3. [`V042_RELATIONAL_CONDITION.md`](V042_RELATIONAL_CONDITION.md) — current relational implementation and source lock.
-4. [`CONDITION_ENGINE_SPEC.md`](CONDITION_ENGINE_SPEC.md) — **living** condition specification and next compound-condition sequence.
-5. [`../data/rules/hellenistic/condition-v1.registry.json`](../data/rules/hellenistic/condition-v1.registry.json) — primitive machine-readable registry.
-6. [`../data/rules/hellenistic/relational-condition-v1.registry.json`](../data/rules/hellenistic/relational-condition-v1.registry.json) — relational machine-readable registry.
-7. [`../schemas/naf-condition-record-v0.4.0a.schema.json`](../schemas/naf-condition-record-v0.4.0a.schema.json) — primitive condition record schema retained from v0.4.0a.
+1. [`V040A_CONDITION_ONTOLOGY.md`](V040A_CONDITION_ONTOLOGY.md) — historical primitive ontology freeze.
+2. [`V040B_PRIMITIVE_CONDITION.md`](V040B_PRIMITIVE_CONDITION.md) — historical primitive implementation milestone.
+3. [`V042_RELATIONAL_CONDITION.md`](V042_RELATIONAL_CONDITION.md) — relational implementation/source lock.
+4. [`V043_COMPOUND_CONDITION.md`](V043_COMPOUND_CONDITION.md) — compound implementation/source lock and explicit deferred boundary.
+5. [`CONDITION_ENGINE_SPEC.md`](CONDITION_ENGINE_SPEC.md) — living condition specification.
+6. [`../data/rules/hellenistic/condition-v1.registry.json`](../data/rules/hellenistic/condition-v1.registry.json) — primitive registry.
+7. [`../data/rules/hellenistic/relational-condition-v1.registry.json`](../data/rules/hellenistic/relational-condition-v1.registry.json) — relational registry.
+8. [`../data/rules/hellenistic/compound-condition-v1.registry.json`](../data/rules/hellenistic/compound-condition-v1.registry.json) — compound registry.
 
 Current status:
 
 ```text
 primitive condition      implemented
 relational condition     implemented
-compound condition       not implemented
+compound condition       implemented for source-secure v0.4.3 subset
 scalar strength score    intentionally not implemented
 ```
 
-Implemented relational distinctions:
+### Compound condition currently implemented
 
-```text
-reception
-exchange
-later-tradition mutual-reception compatibility label
-overcoming
-domination / upon-the-tenth
-```
+- bonification by benefic superior trine/square;
+- maltreatment by malefic superior square/domination;
+- benefic sign-based trine testimony;
+- malefic sign-based opposition testimony;
+- seven-degree ray enclosure;
+- intervention breaking enclosure;
+- sect qualification;
+- reception qualification;
+- mixed bonification+maltreatment preservation.
 
-Hellenistic exchange and later mutual-reception terminology remain separate rule identities.
+Selected historically ambiguous variants remain deferred rather than guessed.
 
 ## Resonance / interpretation hierarchy
 
-The modern natural-house correspondence remains a labeled secondary overlay. It does not replace the actual Whole Sign, actual place doctrine, actual domicile ruler, or the ruler's condition/routing.
+The modern natural-house correspondence remains a labeled secondary overlay. It does not replace the actual Whole Sign, actual place doctrine, actual domicile ruler, or ruler condition/routing.
 
 Current qualified read order:
 
@@ -141,6 +155,7 @@ house domain
 → actual ruler + placement
 → primitive condition
 → relational condition
+→ compound testimonies
 → dispositor routing
 → aspect / graph context
 → downstream energetic synthesis
@@ -178,10 +193,10 @@ exact ≤1° subset
 ### Relational-condition graphs
 
 ```text
-G_reception      directed host → guest
-G_exchange       undirected pair
-G_mutual_reception  separate later-tradition compatibility pair
-G_overcoming     directed superior → inferior, with domination typed separately
+G_reception
+G_exchange
+G_mutual_reception
+G_overcoming
 ```
 
 These qualify but do not rewrite dispositorship.
@@ -192,38 +207,25 @@ These qualify but do not rewrite dispositorship.
 house domain → entry ruler → dispositor route → terminal circuit
 ```
 
-For planetary routing edges:
-
-```text
-width = integer number of Whole Sign house-ruler paths traversing the edge
-```
-
-This is routing evidence, not a strength score.
+Planetary band width equals the integer number of Whole Sign house-ruler paths traversing the edge. This is routing evidence, not strength.
 
 ## Derivation Walker
 
-Every relation and House River band introduced in v0.4.2 is created with a `derivation_ref`. The walker indexes existing deterministic, primitive-condition, relational-condition, and House River proof objects.
+The v0.4.3 walker indexes deterministic, primitive-condition, relational-condition, compound-condition, and House River proof objects. Every compound testimony introduced in v0.4.3 is created with a `derivation_ref`.
 
-Unnormalized legacy dependencies are explicitly marked `external_or_unindexed_dependency` rather than fabricated.
+Unnormalized legacy dependencies are explicitly marked rather than fabricated.
 
 ## Current research gate
 
 Claims such as `rare`, `high`, `dominant`, `exceptional`, or `statistically enriched` remain blocked until explicit comparison/null models exist.
 
-Planned null families:
-
-```text
-geometric longitude randomization
-label permutation
-degree-preserving rewiring where mathematically appropriate
-layer-overlap randomization
-```
+Planned null families include geometric-longitude randomization, label permutation, degree-preserving rewiring where appropriate, and layer-overlap randomization.
 
 ## Astronomy/extended-object boundary
 
 Current birth-time adapter automatically supports Sun through Pluto, ASC, MC, motion state, and solar altitude. It does not yet automatically produce validated coordinates for Ceres, Chiron, node variants, Lilith/apogee variants, Vertex, or fixed stars.
 
-Imported/precomputed positions can be consumed only through an explicit supported input path. Unsupported coordinates are never invented.
+Unsupported coordinates are never invented.
 
 ## Historical/release documents
 
@@ -239,10 +241,11 @@ These are intentionally historical or release-scoped:
 - [`V0412_ENERGETIC_SYNTHESIS.md`](V0412_ENERGETIC_SYNTHESIS.md)
 - [`V0412C_RELEASE_CONTRACT.md`](V0412C_RELEASE_CONTRACT.md)
 - [`V0413_RESONANCE_FIELD.md`](V0413_RESONANCE_FIELD.md)
-- [`V042_RELATIONAL_CONDITION.md`](V042_RELATIONAL_CONDITION.md) — current release specification.
+- [`V042_RELATIONAL_CONDITION.md`](V042_RELATIONAL_CONDITION.md)
+- [`V043_COMPOUND_CONDITION.md`](V043_COMPOUND_CONDITION.md) — current release specification.
 
 ## Documentation rule
 
 When living implementation and living documentation disagree, the disagreement is a defect.
 
-A new rule, provider, schema, graph metric, relation, finding, interpretation profile, public browser surface, or release claim is not complete until documentation, provenance identity, epistemic status, and relevant tests are updated in the same development movement.
+A new rule, provider, schema, graph metric, relation, compound testimony, finding, interpretation profile, public browser surface, or release claim is not complete until documentation, provenance identity, epistemic status, and relevant tests are updated in the same development movement.
