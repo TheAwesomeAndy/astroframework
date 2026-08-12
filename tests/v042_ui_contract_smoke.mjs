@@ -19,4 +19,7 @@ assert.match(html,/data-proof/);
 assert.match(html,/MutationObserver/);
 const moduleMatch=html.match(/<script type="module">([\s\S]*?)<\/script>/);assert.ok(moduleMatch,'module script exists');
 const syntaxOnly=moduleMatch[1].replace(/^import .*$/gm,'');new vm.Script(`(async()=>{${syntaxOnly}\n})`);
-console.log('v0.4.2 additive relational UI contract: ok');
+const entry=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
+assert.match(entry,/prototype\/v042\.html\?build=relational-042/);
+assert.match(entry,/Noetic Atlas v0\.4\.2/);
+console.log('v0.4.2 additive relational UI + public entry contract: ok');
