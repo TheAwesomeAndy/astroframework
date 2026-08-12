@@ -20,8 +20,5 @@ assert.ok(moduleMatch,'module script exists');
 const syntaxOnly=moduleMatch[1].replace(/^import .*$/gm,'');
 new vm.Script(`(async()=>{${syntaxOnly}\n})`);
 
-const entry=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
-assert.match(entry,/prototype\/v0412b\.html\?build=energetic-0412b/);
-assert.match(entry,/Noetic Atlas v0\.4\.1\.2/);
-
-console.log('v0.4.1.2 UI contract smoke: ok');
+// v0412b remains regression-tested as the archived predecessor. The current root is owned by v0412c.
+console.log('v0.4.1.2 legacy UI contract smoke: ok');
