@@ -1,0 +1,48 @@
+{
+  "registry_id": "naf.rules.relational_condition.hellenistic.v0.4.2",
+  "version": "0.4.2",
+  "status": "source_locked",
+  "scope": "classical seven only",
+  "rules": [
+    {
+      "rule_id": "naf.relation.reception.domicile_configured.hellenistic.v1",
+      "relation": "reception",
+      "direction": "host_to_guest",
+      "definition": "A classical planet receives another when the guest occupies one of the host planet's domiciles and host and guest are configured by a recognized sign-based aspect.",
+      "recognized_configurations": ["sextile", "square", "trine", "opposition"],
+      "source_reference": "Christopher Brennan, Hellenistic Astrology (2017), glossary: reception; ch. 14, Mitigating Conditions: Reception, pp. 491–494."
+    },
+    {
+      "rule_id": "naf.relation.exchange.domicile.hellenistic.v1",
+      "relation": "exchange",
+      "direction": "pair",
+      "definition": "Two classical planets exchange domiciles when each occupies a domicile of the other.",
+      "configuration_required": false,
+      "source_reference": "Christopher Brennan, Hellenistic Astrology (2017), glossary: exchange."
+    },
+    {
+      "rule_id": "naf.relation.mutual_reception.domicile_configured.later_tradition.v1",
+      "relation": "mutual_reception",
+      "direction": "pair",
+      "definition": "Compatibility label for an exchange pair that also has reciprocal domicile reception through a recognized configuration. It is kept separate from the Hellenistic exchange relation and is not used to rewrite it.",
+      "source_reference": "Christopher Brennan, Hellenistic Astrology (2017), glossary: mutual reception and exchange.",
+      "tradition_note": "Later-tradition compatibility label; distinct identifier retained so Hellenistic exchange and later mutual-reception terminology are never silently collapsed."
+    },
+    {
+      "rule_id": "naf.relation.overcoming.right_hand.hellenistic.v1",
+      "relation": "overcoming",
+      "direction": "superior_to_inferior",
+      "definition": "For sign-based sextile, square, or trine configurations, the planet on the right/earlier side of the zodiacal configuration is in the superior position and overcomes the planet on the left/later side.",
+      "recognized_configurations": ["sextile", "square", "trine"],
+      "source_reference": "Christopher Brennan, Hellenistic Astrology (2017), glossary: overcoming/right; ch. 14, Overcoming, pp. 466–470."
+    },
+    {
+      "rule_id": "naf.relation.domination.tenth_sign.hellenistic.v1",
+      "relation": "domination",
+      "direction": "superior_to_inferior",
+      "definition": "A square in which the superior planet is in the tenth sign relative to the inferior planet is the especially forceful form of overcoming called domination/upon-the-tenth.",
+      "source_reference": "Christopher Brennan, Hellenistic Astrology (2017), glossary: domination; ch. 14, Overcoming, pp. 466–470."
+    }
+  ],
+  "epistemic_boundary": "These are astrological rule models. They do not establish physical causation or empirical efficacy."
+}
