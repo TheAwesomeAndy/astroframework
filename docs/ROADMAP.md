@@ -6,7 +6,7 @@
 
 Current release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
 
-Current progression:
+Current sequence:
 
 ```text
 Geometry
@@ -14,7 +14,6 @@ Geometry
 → Primitive Condition
 → Graph Analytics
 → Energetic / Explainable Synthesis
-→ Coordinated Representation
 → Relational Condition
 → Compound Condition
 → Time
@@ -22,77 +21,168 @@ Geometry
 → Discovery
 ```
 
-## Completed foundation
+## v0.1 — Visual hypothesis
 
-### v0.1 — Visual hypothesis
-Complete historical milestone.
+**Status: complete historical milestone**
 
-### v0.2 — Natal Field instrument
-Complete historical milestone: interactive Natal Field, node inspector, Aspect Matrix, all-house ruler routing, composition views, and method surfaces.
+Delivered first Natal Field/Flow Map/Life Spectrum concepts, canonical specimen, and explicit distinction between mathematical representation and physical claims.
 
-### v0.3.0–v0.3.2 — Deterministic kernel + Visual Observatory
-Complete foundation: runtime parsing, birth input, IANA/DST handling, astronomy adapter, ASC/MC, Whole Sign houses, aspects, traditional rulership, dispositor graph, Tarjan SCC, sect, seven Hermetic lots, ledger/tree, pattern engine, and interactive core surfaces.
+## v0.2 — Natal Field instrument
 
-### v0.4.0a — Condition ontology
-Complete.
+**Status: complete historical milestone**
 
-### v0.4.0b — Primitive Condition Engine
-Complete for the classical seven: domicile, adversity, exaltation/depression, triplicity, Egyptian bounds, sect family, in/out-of-sect, Whole-Sign angular-triad class, ledger entries, UI and tests. No scalar strength score.
+Delivered interactive Natal Field, node inspector, Aspect Matrix, all-house ruler routing, composition views, and model/method surfaces.
 
-### v0.4.1 — Graph Analytics + Explainable Findings
-Complete: SCC condensation, terminal basin, route depth, upstream capture, nonterminal bottleneck; aspect components, degree, clustering, normalized unweighted betweenness, articulation points, bridges, typed motifs, Grand Trine/T-square/triple-conjunction templates, exact ≤1° subset, and aspect × dispositor overlap.
+## v0.3.0–v0.3.2 — Deterministic kernel + Visual Observatory
 
-### v0.4.1.1 — Outer-planet interpretive restoration
-Complete compatibility milestone: Uranus/Neptune/Pluto restored to downstream interpretation while remaining outside classical Hellenistic dignity applicability.
-
-### v0.4.1.2 — Energetic Whole-Chart Synthesis
-Complete and preserved. Delivered actual sign + Whole Sign house synthesis, optional natural-house overlay, ruler routing, aspect-energy translation, graph/house translation, primitive condition qualifiers, balanced/depleted/excess expression, material-life examples, soul/spirit inquiry, outer-planet synthesis, Ceres supplied-coordinate profile, and the resilient `v0412c` browser surface.
-
-## v0.4.1.3 — Resonance Field
-
-**Status: current public release**
-
-Purpose: add a phenomenological representation **on top of** the existing observatory without replacing its graphs, analysis, condition, audit, or core chart views.
+**Status: complete foundation milestone**
 
 Delivered:
 
-- `house-resonance-engine.mjs`;
-- `prototype/v0413.html` coordination shell;
-- preserved `prototype/v0412c.html` as the Structure & Analysis workspace;
-- Resonance Field synchronized to the same serialized chart state;
-- Ascensional Phase Map;
-- Element–Mode Resonance Lattice;
-- 12-house natural-resonance ↔ actual Whole-Sign mapping;
-- actual traditional ruler and ruler-placement context;
-- house occupants;
-- chart-wide phase-rotation summary;
-- explicit element-preserved/changed and mode-preserved/rotated states;
-- new engine/UI regression contracts while retaining every prior contract.
+- runtime chart parsing;
+- birth-data input;
+- IANA time-zone/DST handling;
+- Astronomy Engine adapter;
+- ASC/MC and planetary velocities;
+- Whole Sign houses;
+- major aspects/orb policy;
+- applying/separating where possible;
+- traditional domicile rulers;
+- generic dispositor graph;
+- Tarjan SCC/terminal SCC;
+- sect;
+- seven Hermetic lots;
+- derivation ledger/tree;
+- experimental pattern engine;
+- schema/version manifest;
+- tests and CI;
+- restored Natal Field/Aspect Matrix/Flow Map/Audit surfaces.
 
-Whole-Sign identity:
+## v0.4.0a — Condition ontology
+
+**Status: complete**
+
+Delivered registry/schema/applicability/table definitions and synthetic fixture contract.
+
+## v0.4.0b — Primitive Condition Engine
+
+**Status: complete**
+
+Delivered for Sun through Saturn:
+
+- domicile;
+- adversity;
+- sign-level exaltation/depression;
+- standard/Dorothean triplicity;
+- Egyptian bounds;
+- planetary sect family;
+- in/out-of-sect relation;
+- Whole-Sign angular-triad class;
+- independent ledger entries;
+- inspectable Condition UI;
+- boundary/canonical tests.
+
+No scalar strength score.
+
+## v0.4.1 — Graph Analytics + Explainable Findings
+
+**Status: complete**
+
+### Classical dispositor graph
+
+Delivered:
+
+- SCC condensation;
+- terminal basin membership/fraction;
+- route depth;
+- upstream route capture;
+- nonterminal path bottleneck.
+
+### Aspect graph
+
+Delivered:
+
+- connected components;
+- degree;
+- local/mean clustering;
+- normalized unweighted betweenness;
+- articulation points;
+- bridges;
+- typed closed three-node motifs;
+- Grand Trine/T-square/triple-conjunction templates;
+- exact ≤1° subset.
+
+### Cross-layer
+
+Delivered aspect × dispositor pair overlap.
+
+### Explainability
+
+Metrics/findings retain definition, formula, scope, observation, graph meaning, astrological context, limitations, and proof.
+
+## v0.4.1.1 — Outer-planet interpretive restoration
+
+**Status: complete compatibility milestone**
+
+Delivered Uranus/Neptune/Pluto participation in downstream interpretation while keeping classical Hellenistic dignity `not_applicable` to them.
+
+## v0.4.1.2 — Energetic Whole-Chart Synthesis
+
+**Status: current public release**
+
+Delivered:
+
+- `astrological-analysis-engine.mjs`;
+- `energetic-synthesis-engine.mjs`;
+- `energetic-synthesis-display.mjs`;
+- symbolic energy/current/field vocabulary with explicit nonphysical status;
+- actual sign + Whole Sign house synthesis;
+- optional modern natural-house overlay;
+- ruler/dispositor routing in interpretation;
+- aspect-energy translation;
+- topology translation into house/planet circuits;
+- primitive condition qualifiers;
+- balanced/depleted/excess expression;
+- material-life examples;
+- soul/spirit inquiry and embodiment experiments;
+- outer-planet modern/transpersonal synthesis;
+- Ceres interpretation profile for supplied coordinates.
+
+### v0412c operational surface
+
+The current public browser for v0.4.1.2 is:
 
 ```text
-S_actual(h)  = A + (h - 1) mod 12
-S_natural(h) = h - 1
-Delta(h)     = A mod 12
+prototype/v0412c.html
 ```
 
-Canonical Leo-rising result:
+It supersedes v0412/v0412b as the public entry surface and adds:
+
+- immediate nonblank loading state;
+- automatic canonical specimen bootstrap;
+- chart-state synchronization from `prototype/index.html`;
+- `MutationObserver` updates after recalculation/pasted input;
+- explicit downstream synthesis errors;
+- continued availability of the visual core if interpretation fails;
+- cache-busted root redirect.
+
+The right-hand hierarchy is:
 
 ```text
-+4 signs / 120°
-12/12 elemental correspondence preserved
-0/12 modal position preserved
-element-preserving / mode-rotating
+Energetic Analysis
+Graph Findings
+Metrics
+Condition
+Integrity
 ```
-
-The natural-house layer remains optional, modern, and secondary to actual sign, actual house, actual ruler, condition, aspects, and graph routing.
 
 ## v0.4.2 — Relational Condition
 
 **Next astrological-engine milestone**
 
-Planned distinct relation layers:
+Purpose: qualify relations rather than only node-local condition.
+
+Planned:
 
 ```text
 G_reception
@@ -100,34 +190,48 @@ exchange / mutual-reception variant
 G_overcoming
 ```
 
-Requirements: source/variant IDs, no silent Hellenistic/Medieval blending, relation-level ledger entries, typed graph integration, readable downstream translation, and synthetic edge fixtures.
+Requirements:
 
-### Representation work unlocked by v0.4.2
+- source/variant IDs;
+- no silent Hellenistic/Medieval blending;
+- relation-level ledger entries;
+- typed graph integration;
+- readable downstream translation;
+- synthetic edge fixtures before promotion.
 
-1. **Condition-qualified Flow Map** — show primitive node condition together with reception/overcoming relation types.
-2. **House River / alluvial routing** — house topic → ruler → dispositor → terminal circuit; band width may encode route-count only, never mystical strength.
-3. **Derivation-path walker** — interpretation → graph/condition fact → rule/source → numerical input → coordinate/time provenance.
-4. **Motif + condition field geometry** — T-square, Grand Trine and other motif objects shown with participating condition states.
-5. **Side-by-side rule-set comparison** — synchronized explicit model comparison without hidden rule blending.
+Exit criterion: an expert can reconstruct every relation from serialized result + source/model + proof.
 
-## v0.4.3 — Compound Condition + condition-aware synthesis
+## v0.4.3 — Compound Condition + condition-aware synthesis experiments
 
-Planned candidates: bonification, maltreatment, enclosure, selected mitigation, condition-aware house/topology experiments. Compound rules must be pure functions over primitive + relational facts. No scalar strength score.
+Planned candidates:
 
-## Parallel interpretation / representation track
+- bonification;
+- maltreatment;
+- enclosure;
+- selected mitigation;
+- condition-aware house/topology experiments.
 
-May proceed while preserving deterministic authority:
+Compound rules must be pure functions over primitive + relational facts.
+
+No scalar strength score.
+
+## Parallel interpretation-depth track
+
+May proceed while preserving deterministic authority.
+
+Planned:
 
 - deeper house-ruler synthesis;
-- richer Resonance Field small multiples;
-- aspect standing-wave / torque representations;
+- condition-aware whole-chart motifs;
 - repeated-axis/configuration synthesis;
 - curated versioned interpretation profiles;
-- selected minor-body profiles;
-- explicitly labeled yogic/Ayurvedic/contemplative practice layers;
-- selectable Traditional / Energetic / Psychological / Mystical / Research lenses.
+- expanded selected minor-body profiles;
+- yogic/Ayurvedic/contemplative practice layers with explicit source/posture labels;
+- selectable lenses such as Traditional, Energetic, Psychological, Mystical, Research.
 
 ## Parallel graph-research track
+
+High-priority next gates:
 
 ```text
 geometric longitude nulls
@@ -143,34 +247,99 @@ Do not use rarity/enrichment language before comparison.
 
 ## Extended-body astronomy track
 
-Potentially add Ceres, Chiron, node variants, Lilith/apogee variants, Vertex, and fixed stars only after definitions, provider provenance, licensing, validation, and boundary tests are explicit. Ceres interpretation support already exists for supplied coordinates; automatic astronomy remains separate future work.
+Potentially add Ceres, Chiron, node variants, Lilith/apogee variants, Vertex, and fixed stars only after definitions, provider provenance, licensing, validation, and boundary tests are explicit.
+
+Ceres interpretation support already exists for supplied coordinates; automatic astronomy remains a separate future capability.
 
 ## v0.5 — Life Spectrum v1
 
-Purpose: continuous time after natal state is structurally and conditionally characterized.
+Purpose: introduce continuous time after natal state is structurally/conditionally characterized.
 
-Planned: transit ephemeris, exact hits, stations, applying/separating evolution, natal-target lanes, house activation lanes, activated ruler pathways, explicit activation functions, multi-scale zoom, event annotations, and provenance for every marker/band.
+Planned:
+
+- transit ephemeris over arbitrary windows;
+- exact transit hits;
+- stations;
+- applying/separating temporal evolution;
+- stable natal-target lanes;
+- house activation lanes;
+- activated ruler pathways;
+- explicit activation functions;
+- decades-to-days zoom;
+- life-event annotations;
+- provenance for every marker/band;
+- birth-time sensitivity where relevant.
+
+Concept:
+
+```text
+N_i = geometry + topology + condition + metadata
+T(t) = temporal input
+X_i(t) = F(N_i, T(t), rule-set versions)
+```
+
+Interpretive prose remains downstream.
 
 ## v0.6 — Traditional timing systems
 
-Annual profections, zodiacal releasing, and only later solar returns/related annual techniques after definitions/providers are frozen.
+Planned:
+
+### Annual profections
+
+- activated Whole Sign house;
+- lord of year;
+- natal condition/routing of lord;
+- current activation context.
+
+### Zodiacal releasing
+
+- lot selection;
+- nested sign periods;
+- peak periods;
+- Loosing of the Bond;
+- angular transitions;
+- provenance for period boundaries.
+
+### Solar returns / related annual techniques
+
+Only after provider/rule definitions are frozen.
 
 ## v0.7 — Life Space / recurrence research
 
-Potential state vectors through time, recurring activation motifs, condition-qualified pathways, temporal clustering, event similarity, and state-space visualization after temporal semantics are stable.
+Potential research objects:
+
+- state vectors through time;
+- recurring activation motifs;
+- condition-qualified ruler pathways;
+- temporal clustering;
+- event-annotation similarity;
+- state-space visualization.
+
+Dimensionality reduction belongs here only after state semantics are stable.
+
+## Research validation track
+
+### HCI
+
+Compare wheel versus Atlas on ruler-chain recovery, aspect lookup, motif identification, condition reconstruction, and evidence-chain tasks.
+
+### Astrological empirical research
+
+Test graph/condition/timing descriptors against independent criteria only with appropriate nulls, controls, and replication.
+
+Null findings remain acceptable.
 
 ## Current immediate priorities
 
 ```text
 1. reception / exchange
 2. overcoming
-3. condition-qualified Flow Map
-4. House River / alluvial routing
-5. derivation-path walker
-6. motif + condition field geometry
-7. selected compound condition
-8. graph null models
-9. Life Spectrum
+3. condition-aware house-ruler synthesis
+4. selected compound condition
+5. graph null models
+6. curated interpretation-profile expansion
+7. validated extended-body astronomy where justified
+8. Life Spectrum
 ```
 
 ## Governing product standard
