@@ -9,25 +9,26 @@ Noetic Atlas is an experimental computational framework for representing astrolo
 The project has two linked goals:
 
 1. build a useful public/professional instrument for exploring astrological structure, condition, interpretation, and timing;
-2. build a research environment in which structural, interpretive, and temporal claims can be formulated, reproduced, compared with alternatives, and rejected when they fail.
+2. build a research environment in which structural, interpretive, and temporal claims can be formulated, reproduced, compared, and rejected when they fail.
 
 ## Current release
 
 See [`docs/CURRENT_RELEASE.md`](docs/CURRENT_RELEASE.md) for the canonical release contract.
 
-**Current public release:** v0.4.2 — Relational Condition  
-**Current browser surface:** `prototype/v042.html`  
+**Current public release:** v0.4.3 — Compound Condition  
+**Current browser surface:** `prototype/v043.html`  
 **Deployed/default branch:** `main`
 
-Current model identifiers:
+Current model identifiers include:
 
 ```text
-naf.condition.system.v0.4.2
+naf.condition.system.v0.4.3
+naf.condition.compound.hellenistic.v0.4.3
+naf.rules.compound_condition.hellenistic.v0.4.3
 naf.condition.relational.hellenistic.v0.4.2
-naf.rules.relational_condition.hellenistic.v0.4.2
 naf.condition.signature.v0.4.2
 naf.research.house_river.v0.4.2
-naf.integrity.derivation_walker.v0.4.2
+naf.integrity.derivation_walker.v0.4.3
 naf.interpretation.house_resonance.v0.4.1.3
 naf.interpretation.energetic_synthesis.v0.4.1.2
 naf.interpretation.natural_house_overlay.modern.v1
@@ -37,7 +38,7 @@ naf.condition.record.v0.4.0a
 naf.analysis.v0.3.1
 ```
 
-The root `index.html` redirects to the current v042 wrapper. v042 embeds the complete v0413 Atlas, which embeds v0412c, which reads the serialized chart state from the existing deterministic visual core. There is still only **one chart calculator/state authority**.
+The root `index.html` redirects to v043. v043 embeds the complete v042 Atlas, which embeds v0413, which embeds v0412c, which reads the serialized chart state from the existing deterministic visual core. There is still only **one chart calculator/state authority**.
 
 ## Frozen architecture law
 
@@ -48,13 +49,14 @@ one chart state
 
 A new representation does not get to recalculate the astronomical or kernel substrate. It must project the state already produced by the deterministic pipeline.
 
-Current preservation chain:
+Preservation chain:
 
 ```text
-v042 Relational Condition
-└── v0413 Resonance Field + Structure/Analysis switch
-    └── v0412c Energetic Analysis observatory
-        └── prototype/index.html deterministic visual core
+v043 Compound Condition
+└── v042 Relational Condition
+    └── v0413 Resonance Field
+        └── v0412c Energetic Analysis observatory
+            └── prototype/index.html deterministic visual core
 ```
 
 ## Current architecture
@@ -67,19 +69,21 @@ Civil input
 → traditional integrity + lots
 → primitive condition
 → relational condition
+→ compound condition
 → graph analytics / findings
 → resonance / House River / qualified flow projections
 → energetic astrological synthesis
 → proof / provenance
 ```
 
-The governing epistemic rules are:
+Governing epistemic rules:
 
 ```text
 graph ≠ reading
 metric ≠ meaning
 relation type ≠ generic connection
 route count ≠ strength
+compound testimony ≠ net score
 symbolic-energy language ≠ measured physical energy
 ```
 
@@ -97,40 +101,28 @@ symbolic-energy language ≠ measured physical energy
 - applying/separating when motion data exist;
 - traditional domicile rulership;
 - directed dispositor graph;
-- Tarjan strongly connected components and terminal SCCs;
+- Tarjan SCCs and terminal SCCs;
 - all-house ruler routes;
 - seven Paulus/Panaretus Hermetic lots with sect reversal;
 - derivation/provenance ledger and derivation tree;
-- interactive SVG Natal Field;
-- computed Aspect Matrix;
-- directed Flow Map with SCC and house-route inspection;
+- Natal Field, Aspect Matrix, Flow Map, Lots/Sect, Research Lab, and Audit surfaces;
 - automated integrity/boundary tests in GitHub Actions.
 
 ## Primitive condition
 
-For Sun, Moon, Mercury, Venus, Mars, Jupiter, and Saturn, the primitive condition engine independently computes:
-
-- domicile;
-- adversity/opposite domicile;
-- sign-level exaltation;
-- sign-level depression/fall;
-- standard/Dorothean triplicity participation and active sect ruler;
-- Egyptian bound/term under `[start,end)` degree conventions;
-- planetary sect family;
-- in-sect/out-of-sect relation;
-- Whole-Sign angular-triad class.
+For Sun through Saturn the primitive engine independently computes domicile/adversity, sign-level exaltation/depression, standard/Dorothean triplicity, Egyptian bound, planetary sect family, in/out-of-sect relation, and Whole-Sign angular-triad class.
 
 Every factor is independently represented and provenance-bearing. **No scalar planet-strength score is calculated.**
 
 ## Relational condition — v0.4.2
 
-The machine-readable source lock is:
+Machine-readable source lock:
 
 ```text
 data/rules/hellenistic/relational-condition-v1.registry.json
 ```
 
-The relational engine adds distinct relation layers for the classical seven:
+Distinct layers remain separate:
 
 ```text
 G_dispositor
@@ -140,33 +132,49 @@ G_mutual_reception
 G_overcoming
 ```
 
-Current rule types:
+Current relation types include configured domicile reception, domicile exchange, a separately identified later-tradition mutual-reception compatibility label, right-hand overcoming, and right-hand-square domination/upon-the-tenth.
 
-- configured domicile **reception**;
-- domicile **exchange**;
-- separately identified later-tradition **mutual-reception compatibility** for configured reciprocal reception/exchange;
-- right-hand **overcoming** through sextile, square, and trine;
-- right-hand square / upon-the-tenth **domination**.
+Dispositorship, reception, exchange, and overcoming never collapse into one generic astrological edge.
 
-Hellenistic `exchange` is not silently renamed `mutual reception`. Dispositorship, reception, exchange, and overcoming remain separate graph layers with separate rule IDs and proof objects.
+## Compound condition — v0.4.3
 
-## Reusable Condition Signatures
+Machine-readable source lock:
 
-The v0.4.2 condition-signature projection follows each classical planet across views. It can display essential condition, sect, Whole-Sign angularity, bound, triplicity, reception, exchange, overcoming, and domination as categorical tokens.
+```text
+data/rules/hellenistic/compound-condition-v1.registry.json
+```
 
-There is deliberately no red/green compression and no single strength score.
+Executable model:
+
+```text
+naf.condition.compound.hellenistic.v0.4.3
+```
+
+Implemented source-secure subset:
+
+- bonification by benefic overcoming through superior trine/square;
+- maltreatment by malefic superior square/domination;
+- benefic sign-based trine testimony;
+- malefic sign-based opposition testimony;
+- degree-based seven-degree ray enclosure;
+- intervention that can break enclosure;
+- sect qualification of the acting benefic/malefic;
+- reception qualification that may enhance bonification or mitigate maltreatment;
+- mixed condition when bonification and maltreatment coexist.
+
+Noetic Atlas does **not** average these into a hidden strength number. Independent testimonies remain inspectable.
+
+Selected historically ambiguous variants remain explicitly deferred rather than guessed, including unresolved bodily/sign-containment enclosure variants and not-yet-source-locked adherence, engagement, striking-with-a-ray, and related compound testimonies.
+
+## Reusable condition signatures
+
+Categorical condition tokens continue to follow classical planets across views. Primitive and relational state remain visible without red/green compression or scalar scoring. Compound testimonies are presented as separate evidence objects rather than folded into a single token score.
 
 ## Graph analytics + explainable findings
 
-### Classical dispositor functional graph
+### Classical dispositor graph
 
-Current derivations include:
-
-- SCC condensation;
-- terminal basin membership and basin fraction;
-- route depth to terminal SCC;
-- upstream route capture;
-- largest nonterminal path bottleneck.
+Implemented derivations include SCC condensation, terminal basin membership/fraction, route depth, upstream route capture, and the largest nonterminal path bottleneck.
 
 For `NAF-CANON-0001` under traditional domicile rulership:
 
@@ -183,27 +191,7 @@ These are graph-derived facts conditional on the selected ruler model, not claim
 
 ### Aspect graph
 
-Current calculations include:
-
-- connected components;
-- degree;
-- local and mean clustering coefficient;
-- normalized unweighted betweenness;
-- articulation points;
-- bridges;
-- closed three-node typed motifs;
-- Grand Trine, T-square, and triple-conjunction templates;
-- exact ≤1° edge subset.
-
-### Cross-layer overlap
-
-The first explicit multiplex comparison remains:
-
-```text
-E_aspect ∩ E_dispositor
-```
-
-v0.4.2 adds relational layers beside that topology rather than collapsing them into a single weighted graph.
+Current calculations include connected components, degree, local/mean clustering, normalized unweighted betweenness, articulation points, bridges, typed closed three-node motifs, Grand Trine/T-square/triple-conjunction templates, and an exact ≤1° subset.
 
 ## Resonance Field
 
@@ -218,7 +206,7 @@ mode preserved: 0 / 12
 phase character: element-preserving / mode-rotating
 ```
 
-v0.4.2 **Qualified Resonance** adds the actual ruler's condition signature and classical occupant signatures without changing the natural-house overlay's status as a secondary modern/phenomenological comparison.
+The natural-house overlay remains secondary and explicitly modern; it never replaces the actual Whole Sign or actual domicile ruler.
 
 ## House River
 
@@ -232,47 +220,39 @@ w(e) = number of Whole Sign house-ruler paths traversing e
 
 Band thickness therefore has a precise integer routing meaning. It does **not** mean soul power, fate, energetic intensity, or planet strength.
 
-## Qualified Flow
-
-The new flow view superimposes, without merging:
-
-```text
-solid gray    dispositor routing
-cyan dashed   reception
-gold dotted   exchange
-red            overcoming
-violet         domination
-```
-
-Classical planet nodes carry reusable categorical condition state.
-
 ## Derivation Walker
 
-Every v0.4.2 relation and every House River band is created with a `derivation_ref`.
-
-The shared walker can traverse:
+The shared proof infrastructure is now versioned as:
 
 ```text
-visible claim / relation / band
+naf.integrity.derivation_walker.v0.4.3
+```
+
+It indexes deterministic, primitive, relational, compound, and House River proof objects. Every v0.4.3 compound testimony is born with a `derivation_ref`.
+
+Visible proof can traverse:
+
+```text
+claim / testimony / relation / band
 → derivation object
 → rule ID + source
 → inputs / result
 → dependencies
-→ existing deterministic proof where indexed
+→ deterministic proof where indexed
 ```
 
-If an older dependency is not yet normalized into the walker index, it is surfaced as `external_or_unindexed_dependency`; the system does not fabricate a missing proof step.
+Missing legacy dependencies remain explicit; they are never fabricated.
 
 ## Energetic whole-chart synthesis
 
-The preserved energetic synthesis remains:
+The preserved energetic synthesis remains downstream:
 
 ```text
 archetypal current
 → actual sign
 → actual Whole Sign house
-→ optional modern natural-house resonance
-→ sign ruler / dispositor route
+→ optional natural-house resonance
+→ ruler / dispositor route
 → aspect geometry
 → graph architecture
 → traditional condition where applicable
@@ -282,36 +262,30 @@ archetypal current
 → evidence / proof
 ```
 
-The actual sign and actual house remain primary. The twelve-letter/natural-house layer is optional and explicitly versioned as a modern correspondence model.
+Uranus, Neptune, and Pluto participate in modern/transpersonal interpretation while remaining outside classical Hellenistic dignity applicability. Ceres is supported as an interpretive minor body when a coordinate is supplied; the birth-time astronomy adapter does not automatically generate a validated Ceres coordinate.
 
-Uranus, Neptune, and Pluto participate in modern/transpersonal interpretation while remaining `not_applicable` to classical Hellenistic dignity rules.
+Energy/current/field vocabulary is symbolic/phenomenological language, not experimentally established field physics.
 
-Ceres is supported as an interpretive `minor_body` when a coordinate is supplied. The current birth-time astronomy adapter does **not** automatically generate a validated Ceres coordinate.
-
-Energy/current/field vocabulary is symbolic/phenomenological language. It is not presented as experimentally established physical field mechanics.
-
-## Public v0.4.2 hierarchy
+## Public v0.4.3 hierarchy
 
 ```text
-Existing Atlas       → all prior Structure/Analysis + Resonance work
-Qualified Resonance  → sign/house/ruler resonance plus condition signatures
-Relations            → source-locked typed traditional relations
-Qualified Flow       → routing + relation layers + node condition
-House River          → lived-domain drainage through ruler paths
-Proof Walker         → reversible derivation infrastructure
+Existing Atlas        → all prior Structure/Analysis + Resonance + Relational work
+Compound Condition    → independent compound testimonies
+Compound Map          → condition-qualified compound relationships
+Proof Walker          → compound-aware reversible derivation infrastructure
+Source Boundary       → implemented versus deferred source reconstructions
 ```
 
-Nothing in the prior v0412c or v0413 surfaces is deleted to create these views.
+Nothing in v0412c, v0413, or v042 is deleted.
 
 ## Current limitations
 
 Still absent or intentionally blocked:
 
 - automatic validated Ceres/small-body astronomy;
-- Chiron, nodes, Lilith/apogee, Vertex, and fixed stars in the current birth-time adapter;
+- complete Chiron/node/Lilith/Vertex/fixed-star birth-time support;
 - complete independent cross-provider astronomy validation;
-- bonification/maltreatment synthesis;
-- enclosure and selected compound mitigation/counteraction rules;
+- deferred compound-condition variants described above;
 - degree-based quadrant dynamic strength;
 - graph null distributions;
 - statistical motif enrichment;
@@ -321,20 +295,20 @@ Still absent or intentionally blocked:
 - complete normalization of all legacy derivation entries into the shared walker contract;
 - Life Spectrum;
 - production annual profections/zodiacal releasing;
-- externally validated predictive interpretation model.
+- externally validated predictive interpretation.
 
 ## Next engineering sequence
 
 ```text
-v0.4.3  selected compound condition / condition-aware synthesis
-         bonification / maltreatment / enclosure / selected mitigation
+source-lock remaining compound variants where justified
+condition-aware synthesis
 motif + condition field geometry
 side-by-side rule-set comparison
-research graph nulls and multilayer baselines
+research graph nulls / multilayer baselines
 validated extended-body astronomy where justified
-v0.5    Life Spectrum
-v0.6    traditional timing systems
-v0.7    recurrence / Life Space research
+v0.5 Life Spectrum
+v0.6 traditional timing systems
+v0.7 recurrence / Life Space research
 ```
 
 ## Tests
@@ -344,7 +318,7 @@ npm install
 npm test
 ```
 
-The standard suite currently includes kernel, integrity, condition registry, primitive condition, relational condition, graph analytics, astrological analysis, energetic synthesis, house resonance, House River/Derivation Walker, all legacy UI contracts through v0413, the v042 UI contract, boundary geometry, timezone, and astronomy-adapter contract tests.
+The standard suite includes kernel, integrity, condition registry, primitive condition, relational condition, compound condition, graph analytics, astrological analysis, energetic synthesis, house resonance, House River/Derivation Walker, all preserved UI contracts through v042, the v043 UI/public-entry contract, boundary geometry, timezone, and astronomy-adapter tests.
 
 Serve locally:
 
@@ -355,7 +329,7 @@ python -m http.server 8000
 Open:
 
 ```text
-http://localhost:8000/prototype/v042.html
+http://localhost:8000/prototype/v043.html
 ```
 
 ## Design rules
@@ -365,36 +339,37 @@ http://localhost:8000/prototype/v042.html
 3. Structure before meaning.
 4. Houses remain first-class life fields.
 5. Ruler/dispositor pathways remain visible.
-6. Relation types remain distinct; no generic astrological edge.
-7. A graph term is never the final interpretation.
-8. No naked graph metric.
-9. No opaque condition/strength score.
-10. Route count is routing evidence, not energetic strength.
-11. Show the work.
-12. Every new relational/flow object is born with provenance and a derivation reference.
-13. Never manufacture missing coordinates or false precision.
-14. Ambiguity and unsupported states are data.
-15. Traditions are explicit rule models, not hidden mixtures.
-16. Graph fact and interpretation remain separately labeled.
-17. A graph is an encoded model, not evidence that astrology is a physical network.
-18. Do not call a graph feature rare/high/unusual without a defined baseline.
-19. The wheel remains a useful reference and future HCI control.
-20. AI consumes deterministic state; it does not replace it.
-21. A failed hypothesis is an acceptable result.
-22. Energetic language may be spiritually useful without being mislabeled as experimental physics.
+6. Relation types remain distinct.
+7. Compound testimonies remain distinct.
+8. A graph term is never the final interpretation.
+9. No naked graph metric.
+10. No opaque condition/strength score.
+11. Route count is routing evidence, not energetic strength.
+12. Show the work.
+13. New relational/compound/flow objects are born with provenance and derivation references.
+14. Never manufacture missing coordinates or false precision.
+15. Ambiguity and unsupported states are data.
+16. Traditions are explicit rule models, not hidden mixtures.
+17. Graph fact and interpretation remain separately labeled.
+18. A graph is an encoded model, not evidence that astrology is a physical network.
+19. Do not call a graph feature rare/high/unusual without a defined baseline.
+20. The wheel remains a useful reference and future HCI control.
+21. AI consumes deterministic state; it does not replace it.
+22. A failed hypothesis is an acceptable result.
+23. Energetic language may be spiritually useful without being mislabeled as experimental physics.
 
 ## Documentation
 
 Start with:
 
 1. [`docs/CURRENT_RELEASE.md`](docs/CURRENT_RELEASE.md)
-2. [`docs/V042_RELATIONAL_CONDITION.md`](docs/V042_RELATIONAL_CONDITION.md)
-3. [`docs/CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md`](docs/CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md)
-4. [`docs/V0413_RESONANCE_FIELD.md`](docs/V0413_RESONANCE_FIELD.md)
-5. [`docs/V0412_ENERGETIC_SYNTHESIS.md`](docs/V0412_ENERGETIC_SYNTHESIS.md)
-6. [`docs/V041_GRAPH_ANALYTICS_AND_FINDINGS.md`](docs/V041_GRAPH_ANALYTICS_AND_FINDINGS.md)
+2. [`docs/V043_COMPOUND_CONDITION.md`](docs/V043_COMPOUND_CONDITION.md)
+3. [`docs/V042_RELATIONAL_CONDITION.md`](docs/V042_RELATIONAL_CONDITION.md)
+4. [`docs/CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md`](docs/CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md)
+5. [`docs/V0413_RESONANCE_FIELD.md`](docs/V0413_RESONANCE_FIELD.md)
+6. [`docs/V0412_ENERGETIC_SYNTHESIS.md`](docs/V0412_ENERGETIC_SYNTHESIS.md)
 7. [`docs/CONDITION_ENGINE_SPEC.md`](docs/CONDITION_ENGINE_SPEC.md)
 8. [`docs/ROADMAP.md`](docs/ROADMAP.md)
 9. [`docs/INDEX.md`](docs/INDEX.md)
 
-Historical milestone docs are retained as historical records. Living docs must agree with the current release contract and implementation.
+Historical milestone docs remain historical records. Living docs must agree with the current release contract and implementation.
