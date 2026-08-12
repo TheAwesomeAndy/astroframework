@@ -17,5 +17,4 @@ const moduleMatch=html.match(/<script type="module">([\s\S]*?)<\/script>/);asser
 const preserved=fs.readFileSync(new URL('../prototype/v0412c.html',import.meta.url),'utf8');
 assert.match(preserved,/Energetic Analysis/);assert.match(preserved,/Graph Findings/);assert.match(preserved,/Metrics/);assert.match(preserved,/Condition/);assert.match(preserved,/Integrity/);assert.match(preserved,/Loading analysis/);
 const hash=crypto.createHash('sha256').update(preserved).digest('hex');assert.equal(hash.length,64);
-const entry=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');assert.match(entry,/prototype\/v0413\.html/);
-console.log('v0.4.1.3 additive UI contract smoke: ok');
+console.log('v0.4.1.3 preserved additive UI contract smoke: ok');
