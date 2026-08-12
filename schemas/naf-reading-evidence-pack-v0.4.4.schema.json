@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "naf.reading.evidence_pack.v0.4.4",
+  "title": "Noetic Atlas Reading Evidence Pack v0.4.4",
+  "type": "object",
+  "required": ["model_id","version","contract","chart","placements","planet_routes","terminal_basins","house_routes","condition_signatures","relations","compound_testimonies","enclosures","resonance","house_river","motifs","graph_facts","discoveries","evidence_index","epistemic_boundary"],
+  "properties": {
+    "model_id": {"const":"naf.reading.evidence_pack.v0.4.4"},
+    "version": {"const":"0.4.4"},
+    "contract": {
+      "type":"object",
+      "required":["generator_may_recompute","raw_longitudes_exposed","natural_house_overlay","structural_claims_require_derivation_refs","unsupported_or_deferred_rules_must_not_be_promoted"],
+      "properties": {
+        "generator_may_recompute":{"const":false},
+        "raw_longitudes_exposed":{"const":false},
+        "natural_house_overlay":{"const":"secondary_modern_comparison_only"},
+        "structural_claims_require_derivation_refs":{"const":true},
+        "unsupported_or_deferred_rules_must_not_be_promoted":{"const":true}
+      },
+      "additionalProperties": false
+    },
+    "chart":{"type":"object"},
+    "placements":{"type":"array","items":{"$ref":"#/$defs/placement"}},
+    "placement_by_id":{"type":"object"},
+    "planet_routes":{"type":"object"},
+    "terminal_basins":{"type":"array"},
+    "house_routes":{"type":"array"},
+    "condition_signatures":{"type":"object"},
+    "relations":{"type":"array"},
+    "compound_testimonies":{"type":"array"},
+    "enclosures":{"type":"array"},
+    "resonance":{"type":"object"},
+    "house_river":{"type":"object"},
+    "motifs":{"type":"array"},
+    "graph_facts":{"type":"object"},
+    "interpretive_frames":{"type":"array"},
+    "discoveries":{"type":"array"},
+    "evidence_index":{"type":"object"},
+    "epistemic_boundary":{"type":"string"}
+  },
+  "$defs": {
+    "placement": {
+      "type":"object",
+      "required":["evidence_id","id","sign","whole_sign_house","derivation_refs"],
+      "properties": {
+        "evidence_id":{"type":"string"},"id":{"type":"string"},"type":{"type":"string"},"sign":{"type":"string"},
+        "whole_sign_house":{"type":["integer","null"],"minimum":1,"maximum":12},"house_label":{"type":["string","null"]},
+        "traditional_ruler":{"type":["string","null"]},"motion":{},"derivation_refs":{"type":"array","items":{"type":"string"}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
