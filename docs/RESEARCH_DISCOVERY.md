@@ -12,50 +12,33 @@ Current release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
 
 ## 2. Current promotion status
 
-The research layer is no longer accurately described as “condition engine incomplete.” Primitive condition is implemented for the classical seven, and v0.4.1 graph analytics are implemented.
+Primitive and relational condition are now implemented for the classical seven, and v0.4.1 graph analytics plus v0.4.2 House River route counts are implemented.
 
-Current status is better represented as:
+Current status:
 
 ```text
 primitive_condition_complete = true
-relational_condition_complete = false
+relational_condition_complete = true
 compound_condition_complete = false
 graph_analytics_complete_for_v0.4.1_scope = true
+house_river_route_counts_complete = true
+derivation_walker_v042_objects_complete = true
 graph_null_models_complete = false
 temporal_engine_complete = false
 promotion_status_for_new_astrological_meaning = hold
 ```
 
-The hold remains because reproducible graph calculations are not enough to establish psychological, predictive, spiritual, or causal meaning. Relevant descriptors must survive null/comparison tests, sensitivity analysis, replication, and domain review before interpretive promotion.
+The hold remains because reproducible graph/rule calculations are not enough to establish psychological, predictive, spiritual, or causal meaning. Relevant descriptors must survive null/comparison tests, sensitivity analysis, replication, and domain review before interpretive promotion.
 
 ## 3. Implemented graph analytics
 
 ### Classical dispositor functional graph
 
-Current deterministic derivations include:
-
-- SCC condensation;
-- terminal SCCs;
-- terminal basin membership/fraction;
-- route depth to terminal SCC;
-- upstream route capture;
-- largest nonterminal path bottleneck.
-
-These are mathematical properties of the selected traditional domicile-ruler graph.
+Current deterministic derivations include SCC condensation, terminal SCCs, terminal basin membership/fraction, route depth, upstream route capture, and largest nonterminal path bottleneck.
 
 ### Aspect graph
 
-Current calculations include:
-
-- connected components;
-- degree;
-- local and mean clustering;
-- normalized unweighted betweenness;
-- articulation points;
-- bridges;
-- typed closed three-node motifs;
-- Grand Trine, T-square, and triple-conjunction templates;
-- exact ≤1° subset.
+Current calculations include connected components, degree, local/mean clustering, normalized unweighted betweenness, articulation points, bridges, typed closed three-node motifs, Grand Trine/T-square/triple-conjunction templates, and exact ≤1° subset.
 
 ### Cross-layer overlap
 
@@ -67,7 +50,38 @@ E_aspect ∩ E_dispositor
 
 Layers remain semantically distinct.
 
-## 4. Existing exploratory descriptors
+## 4. Relational-condition graphs — implemented
+
+v0.4.2 adds source-locked relation objects for:
+
+```text
+G_reception
+G_exchange
+G_mutual_reception
+G_overcoming
+```
+
+with domination separately typed inside the superiority relation family.
+
+These relations are astrological-rule objects, not research-discovered correlations. Research may later examine their graph consequences, but must preserve their source/rule identity.
+
+Relational condition **qualifies** the selected dispositor topology. It does not rewrite house/ruler routes by default.
+
+## 5. House River — implemented graph-derived projection
+
+House River starts with the 12 existing Whole-Sign house-ruler routes.
+
+For each dispositor edge `e`:
+
+```text
+w(e) = number of house-ruler paths traversing e
+```
+
+This route count is reproducible and graph-derived. It is not currently interpreted as strength, destiny, soul power, energetic intensity, or statistical importance.
+
+The canonical specimen currently serves as a regression fixture for the calculation, not evidence that a particular route-count distribution is rare or meaningful.
+
+## 6. Existing exploratory descriptors
 
 ### Circular harmonic spectrum
 
@@ -77,23 +91,21 @@ For longitudes `θ_i`:
 R_n = |(1/N) Σ exp(i n θ_i)|
 ```
 
-This is an angular-organization descriptor, not an established astrological technique.
+Angular-organization descriptor, not an established astrological technique.
 
 ### Ruler-route convergence
 
-Measures how strongly multiple house-ruler/dispositor paths terminate on common nodes/components under a selected ruler model.
-
-The more specific v0.4.1 basin/depth/bottleneck analytics now provide additional interpretable graph structure around this older descriptor.
+Measures how strongly multiple house-ruler/dispositor paths terminate on common nodes/components under a selected ruler model. v0.4.1 basin/depth/bottleneck analytics and v0.4.2 House River route counts now provide more explicit decompositions of this older descriptor.
 
 ### Multilayer participation
 
 Counts or records participation across distinct relation layers. It is not a planet-strength score.
 
-Candidate layers include aspects, dispositors, house rulership, lots, condition relations, and future time activation.
+Candidate/current layers include aspects, dispositors, house rulership, lots, primitive condition, reception/exchange/overcoming, and future time activation.
 
-## 5. What changed after v0.3
+## 7. What changed through v0.4.2
 
-Earlier research notes treated bottleneck/bridge analysis and condition-aware graph work as future. That is no longer accurate.
+Earlier research notes treated bridge/bottleneck analysis, condition-aware graph work, reception/overcoming layers, and House River as future. That is no longer accurate.
 
 Implemented now:
 
@@ -101,49 +113,50 @@ Implemented now:
 articulation points
 bridges
 nonterminal path bottlenecks
-primitive condition summaries available to downstream graph findings
+primitive condition
+relational condition
+reception / exchange / overcoming / domination graph layers
+House River route counts
+proof references for all new v0.4.2 relation/river objects
 ```
 
 Still future:
 
 ```text
-reception/overcoming layers
 compound condition
 graph-null distributions
 statistical motif enrichment
 validated condition-weighted graph measures
+motif + condition field geometry
+comparative rule-set experiments
 temporal activation / recurrence
 ```
 
-## 6. Null models are mandatory
+## 8. Null models are mandatory
 
 Before qualitative claims such as `rare`, `high`, `unusual`, `dominant`, `exceptional`, or `enriched`, define an explicit baseline.
 
 ### Geometric longitude null
-
 Randomize longitudes and recompute aspects under the same edge policy.
 
 ### Label permutation
-
 Keep geometry fixed while permuting object identities.
 
 ### Degree-preserving graph null
-
-Rewire edges while preserving degree sequence where the graph semantics make this mathematically appropriate.
+Rewire edges while preserving degree sequence where graph semantics make this mathematically appropriate.
 
 ### Layer-overlap null
-
 Preserve layer sizes/densities while randomizing pair assignments.
 
-### Matched astronomical null — later
+### Relational-layer nulls
+Future relation research must define what aspects of rulership, signs, and relation frequencies are preserved before claiming unusual reception/overcoming overlap or qualified motifs.
 
+### Matched astronomical null — later
 Sample realistic birth instants/locations when independent random longitudes would destroy astronomy-specific dependencies relevant to the hypothesis.
 
 The null must preserve what is irrelevant to the hypothesis and disrupt what is being tested.
 
-## 7. Discovery protocol
-
-Candidate structures progress through:
+## 9. Discovery protocol
 
 ```text
 formal definition
@@ -160,78 +173,69 @@ formal definition
 
 A candidate can fail any gate and remain useful as a mathematical diagnostic.
 
-## 8. Canonical-chart overfitting is prohibited
+## 10. Canonical-chart overfitting is prohibited
 
 `NAF-CANON-0001` is a regression fixture, not evidence for theory.
 
-Do not:
-
-- tune thresholds to make the canonical specimen interesting;
-- infer prevalence from one chart;
-- call a canonical graph pattern rare without a population/null reference;
-- convert regression stability into astrological validation.
+Do not tune thresholds to make it interesting, infer prevalence from one chart, call its relation/river pattern rare without a population/null reference, or convert regression stability into astrological validation.
 
 Use synthetic fixtures for boundaries and independent charts for research.
 
-## 9. Condition-aware research — current position
+## 11. Condition-aware research — current position
 
-Primitive condition now exists, so research can already preserve statements such as:
+The system can now preserve distinct statements such as:
 
 ```text
-terminal SCC membership        → graph-derived
-terminal basin fraction        → graph-derived
-Venus depression in Virgo      → rule-defined primitive condition
+terminal basin fraction                → graph-derived
+Venus depression in Virgo              → primitive astrological rule
+Jupiter receives another planet        → relational astrological rule
+Mars dominates Jupiter                 → relational astrological rule
+12 house routes traverse edge X        → graph-derived House River count
 ```
 
-What is **not** yet justified is collapsing these into one weighted importance score.
+What is **not** justified is collapsing these into one weighted importance score.
 
-The next stronger design is comparative:
+High-value comparative research design:
 
 ```text
 topology only
 vs
 primitive condition only
 vs
-primitive condition + topology
+relational condition only
 vs
-later relational/compound condition + topology
+primitive + relational condition
+vs
+condition + topology
+vs
+condition + topology + resonance/House River presentation
 ```
 
-Each comparison needs an explicit target task or external criterion.
+Each comparison needs an explicit task or external criterion.
 
-## 10. Future directions
+## 12. Future directions
 
 High-priority research families:
 
 - graph null distributions for current metrics;
 - motif enrichment under defined nulls;
 - layer-overlap baselines;
-- sensitivity to orb/rulership/object-set choices;
-- reception/overcoming multiplex motifs after v0.4.2;
+- reception/overcoming multiplex motifs;
+- sensitivity to orb/rulership/object-set/relation-variant choices;
 - condition-aware house-route structures;
 - comparative chart architecture;
+- HCI evaluation of House River versus tables/graphs;
+- HCI evaluation of relation-type reconstruction;
+- motif + condition field geometry;
+- comparative rule-set visualization;
 - temporal activation motifs after Life Spectrum;
 - family/synastry multiplex structures;
 - cross-tradition agreement/disagreement;
 - birth-time sensitivity/Monte Carlo analysis.
 
-## 11. Promotion rule
+## 13. Promotion rule
 
-A research descriptor may move toward interpretive use only when documentation records:
-
-- formal definition;
-- implementation version;
-- graph/object scope;
-- datasets/charts examined;
-- rule-set versions;
-- null models;
-- sensitivity analyses;
-- replication attempts;
-- effect estimates/uncertainty where applicable;
-- known failures;
-- competing explanations;
-- expert commentary;
-- current confidence state.
+A research descriptor may move toward interpretive use only when documentation records formal definition, implementation version, graph/object scope, datasets/charts examined, rule-set versions, null models, sensitivity analyses, replication attempts, effect estimates/uncertainty where applicable, known failures, competing explanations, expert commentary, and current confidence state.
 
 Suggested labels:
 
@@ -244,9 +248,9 @@ traditional-source-backed
 retired
 ```
 
-`traditional-source-backed` and `empirically replicated` are different statuses.
+`traditional-source-backed` and `empirically replicated` remain different statuses.
 
-## 12. Research principle
+## 14. Research principle
 
 > **The Observatory should make negative results visible.**
 
