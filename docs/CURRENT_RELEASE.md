@@ -4,12 +4,14 @@ This file is the canonical human-readable release contract for the living docume
 
 ## Public release
 
-- **Release:** v0.4.1.2 — Energetic Whole-Chart Synthesis
+- **Release:** v0.4.1.3 — Resonance Field
 - **Deployed branch:** `main`
 - **Public Pages entry:** repository root `index.html`
-- **Current browser surface:** `prototype/v0412c.html`
-- **Visual core embedded by the current surface:** `prototype/index.html`
-- **Primary interpretation model:** `naf.interpretation.energetic_synthesis.v0.4.1.2`
+- **Current browser surface:** `prototype/v0413.html`
+- **Preserved Structure & Analysis workspace:** `prototype/v0412c.html`
+- **Visual core beneath the preserved workspace:** `prototype/index.html`
+- **House resonance model:** `naf.interpretation.house_resonance.v0.4.1.3`
+- **Primary energetic synthesis model:** `naf.interpretation.energetic_synthesis.v0.4.1.2`
 - **Natural-house overlay:** `naf.interpretation.natural_house_overlay.modern.v1`
 - **Graph model:** `naf.research.graph_analytics.v0.4.1`
 - **Primitive condition model:** `naf.condition.primitive.hellenistic.v0.4.0b`
@@ -18,36 +20,60 @@ This file is the canonical human-readable release contract for the living docume
 
 The package version remains an implementation/package identifier and is not the public UI release number.
 
-## What v0412c changed operationally
+## Additive preservation contract
 
-`prototype/v0412c.html` is the current v0.4.1.2 browser wrapper. It exists because the earlier v0412/v0412b surfaces could display an empty Analysis pane while the underlying chart core was still usable.
+v0.4.1.3 is a representation-layer release. It **does not replace** the existing wheel/core views, Natal Field, Aspect Matrix, Flow Map, Lots/Sect, Research Lab, Audit ledger, graph findings, metrics, condition inspector, energetic analysis, or integrity proof surfaces.
 
-The current surface:
-
-1. renders a visible loading state immediately;
-2. loads the canonical specimen automatically for the initial demonstration;
-3. reads the serialized chart state produced by `prototype/index.html` rather than maintaining a second chart calculator;
-4. computes primitive condition, graph analytics, and energetic synthesis from that chart state;
-5. attaches `MutationObserver` listeners to chart JSON/status so recalculation or pasted input resynchronizes the analysis dock;
-6. exposes explicit error states when the synthesis bridge cannot initialize;
-7. keeps the visual core available even if the downstream interpretation layer fails;
-8. uses a cache-busted root redirect so the public entry contract points to the current wrapper.
-
-Current right-hand analysis hierarchy:
+The public `prototype/v0413.html` shell has two coordinated workspaces:
 
 ```text
-Energetic Analysis
-Graph Findings
-Metrics
-Condition
-Integrity
+Structure & Analysis → embeds v0412c unchanged
+Resonance Field      → reads the same serialized chart state
 ```
 
-The hierarchy is deliberate:
+This is the governing representation rule going forward: new views project the same deterministic state rather than creating parallel calculators.
+
+## v0.4.1.3 Resonance Field
+
+The new view adds:
+
+- Whole-Sign Ascensional Phase Map;
+- Element–Mode Resonance Lattice;
+- 12-house natural-resonance ↔ actual-sign comparison;
+- traditional actual-house ruler and ruler-placement context;
+- house occupants;
+- global rotation summary;
+- explicit preserved/changed element and mode relations;
+- synchronized updates from the existing chart core.
+
+For Whole Sign houses, if Aries = 0 and the Ascendant sign index is `A`:
 
 ```text
-reading ≠ graph finding ≠ metric ≠ traditional condition ≠ proof
+S_actual(h)  = A + (h - 1) mod 12
+S_natural(h) = h - 1
+Delta(h)     = A mod 12
 ```
+
+So the natural-house overlay and the actual Whole Sign zodiac differ by one constant chart-wide phase rotation.
+
+For the canonical Leo-rising specimen:
+
+```text
+rotation: +4 signs / 120°
+element preserved: 12/12
+mode preserved: 0/12
+phase character: element-preserving / mode-rotating
+```
+
+The 1st-house comparison is therefore:
+
+```text
+Aries / Cardinal Fire / Mars resonance
+→ Leo / Fixed Fire / Sun actual Whole Sign
+→ actual ruler Sun in Libra / 3H
+```
+
+The optional Aries resonance never replaces Leo, the Sun, the 1st-place doctrine, condition, aspects, or routing.
 
 ## Implemented deterministic substrate
 
@@ -72,59 +98,15 @@ Current supported foundations include:
 
 ## Primitive traditional condition
 
-For Sun through Saturn the current engine computes independent, auditable factors:
-
-- domicile;
-- adversity/opposite domicile;
-- sign-level exaltation;
-- sign-level depression/fall;
-- standard/Dorothean triplicity participation and active sect ruler;
-- Egyptian bound/term under `[start,end)` intervals;
-- planetary sect family;
-- in-sect/out-of-sect relation;
-- Whole-Sign angular-triad class.
-
-No opaque scalar planet-strength score is produced.
+For Sun through Saturn the engine computes independent, auditable domicile/adversity, exaltation/depression, triplicity, Egyptian bounds, planetary sect family, in/out-of-sect relation, and Whole-Sign angular-triad class. No opaque scalar planet-strength score is produced.
 
 ## Graph analytics
 
-### Classical dispositor functional graph
-
-Current graph derivations include:
-
-- SCC condensation;
-- terminal basin membership/fraction;
-- route depth to terminal SCC;
-- upstream route capture;
-- largest nonterminal path bottleneck.
-
-### Aspect graph
-
-Current calculations include:
-
-- connected components;
-- degree;
-- local/mean clustering;
-- normalized unweighted betweenness;
-- articulation points;
-- bridges;
-- typed closed three-node motifs;
-- Grand Trine, T-square, and triple-conjunction templates;
-- exact ≤1° subset.
-
-### Cross-layer
-
-Current explicit overlap calculation:
-
-```text
-E_aspect ∩ E_dispositor
-```
-
-Relation layers are not collapsed into one opaque connection score.
+The classical dispositor graph includes SCC condensation, terminal basin membership/fraction, route depth, upstream route capture, and largest nonterminal path bottleneck. The aspect graph includes connected components, degree, clustering, normalized unweighted betweenness, articulation points, bridges, typed closed three-node motifs, Grand Trine/T-square/triple-conjunction templates, and an exact ≤1° subset. Aspect × dispositor overlap is explicitly retained as a cross-layer comparison.
 
 ## Interpretation layer
 
-The current synthesis pipeline is:
+The energetic synthesis remains:
 
 ```text
 coordinate / placement
@@ -142,45 +124,46 @@ coordinate / placement
 → evidence / proof
 ```
 
-Uranus, Neptune, and Pluto participate in modern/transpersonal interpretation while remaining outside classical Hellenistic dignity applicability.
+Uranus, Neptune, and Pluto participate in modern/transpersonal interpretation while remaining outside classical Hellenistic dignity applicability. Ceres is recognized as a `minor_body` for interpretation when a coordinate is supplied; the current astronomy adapter does not automatically calculate a validated Ceres position.
 
-Ceres is recognized as a `minor_body` for interpretation when a coordinate is supplied. The current astronomy adapter does **not** automatically calculate a validated Ceres position.
-
-Energy/current/field language is an explicitly symbolic/phenomenological interpretive model, not a claim that astrology has been experimentally shown to operate through measurable physical energies or forces.
+Energy/current/field language remains symbolic/phenomenological rather than a claim of experimentally measured physical force.
 
 ## Current limitations
 
 Not yet implemented or validated:
 
 - automatic validated Ceres/small-body astronomy;
-- Chiron, node variants, Lilith/apogee variants, Vertex, and fixed-star calculation in the current birth-time adapter;
+- full Chiron/node/Lilith/Vertex/fixed-star birth-time calculation;
 - independent professional-grade cross-provider astronomy validation corpus;
 - reception/exchange graph;
 - overcoming graph;
 - bonification/maltreatment, enclosure, and selected mitigation;
 - degree-based quadrant dynamic strength;
 - graph null distributions and statistical motif enrichment;
-- condition-weighted graph research validated against baselines;
+- validated condition-weighted graph research;
+- House River/alluvial routing view;
+- full derivation-path walker interaction;
+- motif + condition field-geometry view;
+- side-by-side rule-set comparison;
 - Life Spectrum temporal activation;
-- annual profections/zodiacal releasing production modules;
+- production annual profections/zodiacal releasing;
 - externally validated predictive or psychological superiority.
 
 ## Current next sequence
 
 ```text
 v0.4.2  relational condition: reception / exchange / overcoming
+condition-qualified Flow Map
+House River / alluvial routing
+derivation-path walker
+motif + condition field geometry
 v0.4.3  selected compound condition + condition-aware synthesis experiments
-research graph nulls / motif enrichment / multilayer baselines
-extended-body astronomy where justified and validated
+research graph nulls / multilayer baselines
 v0.5    Life Spectrum
-v0.6    traditional timing systems
-v0.7    recurrence / Life Space research
 ```
 
-Interpretive-depth work may proceed in parallel so long as it consumes, rather than rewrites, deterministic state.
+Interpretive and representation-depth work may proceed in parallel so long as it consumes rather than rewrites deterministic state.
 
 ## Documentation rule
 
-Living docs must agree with this release contract and with implementation. A disagreement between implementation and current documentation is a defect.
-
-Historical milestone documents are intentionally historical. They should state the status of their own release and be linked from `docs/INDEX.md` as such.
+Living docs must agree with this release contract and implementation. A disagreement between implementation and current documentation is a defect.
