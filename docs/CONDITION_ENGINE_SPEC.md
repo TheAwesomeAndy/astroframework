@@ -5,67 +5,73 @@
 The condition layer answers a different question from geometry and topology:
 
 ```text
-Where is the object?                  → geometry
-How does rulership route?             → topology
-What is the rule-defined state of it? → condition
+Where is the object?                     → geometry
+How does rulership route?                → topology
+What is the local rule-defined state?    → primitive condition
+How is one planet qualified by another?  → relational condition
+What compound testimony follows?         → compound condition
 ```
 
 Condition is a multidimensional ontology, not a scalar-strength engine.
 
 Current release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
+Current relational implementation: [`V042_RELATIONAL_CONDITION.md`](V042_RELATIONAL_CONDITION.md).
 
 ## 2. Current status
 
 Implemented:
 
 ```text
-v0.4.0a  rule registry + condition schema + fixture contract
+v0.4.0a  primitive rule registry + condition schema + fixture contract
 v0.4.0b  primitive condition engine + inspectable UI
+v0.4.2   relational condition + reusable signatures + qualified projections
 ```
 
-Current executable model:
+Current models:
 
 ```text
 naf.condition.primitive.hellenistic.v0.4.0b
+naf.condition.relational.hellenistic.v0.4.2
+naf.condition.signature.v0.4.2
+naf.condition.system.v0.4.2
 ```
 
-Current schema:
+Current registries:
+
+```text
+data/rules/hellenistic/condition-v1.registry.json
+data/rules/hellenistic/relational-condition-v1.registry.json
+```
+
+Current primitive schema:
 
 ```text
 naf.condition.record.v0.4.0a
 ```
 
-Current machine-readable registry:
-
-```text
-data/rules/hellenistic/condition-v1.registry.json
-```
-
-The current public v0.4.1.2/v0412c surface exposes primitive condition in a dedicated Condition pane and folds applicable condition qualifiers into energetic interpretation.
+The public v0.4.2 surface preserves the earlier Condition pane and adds relational state to Qualified Resonance, Relations, and Qualified Flow.
 
 ## 3. Applicability
 
-Full primitive condition applies to:
+Full primitive and relational traditional condition currently applies to:
 
 ```text
 Sun Moon Mercury Venus Mars Jupiter Saturn
 ```
 
-Outer planets, lots, angles, nodes, and minor bodies do not automatically inherit Hellenistic essential dignity.
+Outer planets, lots, angles, nodes, and minor bodies do not automatically inherit Hellenistic dignity or relational-condition rules.
 
-Applicability is explicit. `not_applicable`, `not_implemented`, and `unsupported` are distinct states.
+Applicability is explicit. `not_applicable`, `not_implemented`, `unsupported`, and `indeterminate` are distinct states.
 
 ## 4. Primitive factors — implemented
 
 ### Domicile
 
-Rule family: traditional/Hellenistic domicile rulership.
-
-Result is independent and provenance-bearing.
+Traditional/Hellenistic domicile rulership. Independent and provenance-bearing.
 
 ### Adversity / opposite domicile
 
-Represented separately from domicile. No point scoring is attached.
+Represented separately from domicile. No point scoring.
 
 ### Exaltation
 
@@ -77,9 +83,7 @@ Current v1 uses sign-level opposition to the selected exaltation scheme.
 
 ### Standard/Dorothean triplicity
 
-Current rule family follows the source-locked standard/Dorothean table. It records participation and the active ruler under chart sect.
-
-Alternative triplicity tables require separate IDs.
+Records participation and active ruler under chart sect. Alternative triplicity tables require separate IDs.
 
 ### Egyptian bounds/terms
 
@@ -89,20 +93,16 @@ Current rule uses Egyptian bounds with local sign degrees in `[0,30)` and half-o
 [start_deg, end_deg)
 ```
 
-Exact boundaries belong to the following interval. Exact 30° normalizes to 0° of the next sign before lookup.
-
-Ptolemaic/Chaldean variants are not silently mixed in.
+Exact boundaries belong to the following interval. Exact 30° normalizes to 0° of the next sign before lookup. Ptolemaic/Chaldean variants are not silently mixed in.
 
 ### Planetary sect family
-
-Fixed families:
 
 ```text
 Diurnal: Sun, Jupiter, Saturn
 Nocturnal: Moon, Venus, Mars
 ```
 
-Mercury is variable under the selected morning/evening-star rule. Exact/unsupported phase can return `indeterminate`.
+Mercury is variable under the selected morning/evening-star rule. Unsupported/exact phase can return `indeterminate`.
 
 ### In-sect / out-of-sect
 
@@ -118,90 +118,246 @@ Declining: 3, 6, 9, 12
 
 This does not replace degree-based quadrant dynamic strength, which remains unimplemented.
 
-## 5. Ledger granularity
+## 5. Relational condition — implemented in v0.4.2
+
+Relational source lock:
+
+```text
+naf.rules.relational_condition.hellenistic.v0.4.2
+```
+
+Primary engine:
+
+```text
+src/conditions/relational-condition-engine.mjs
+```
+
+Model:
+
+```text
+naf.condition.relational.hellenistic.v0.4.2
+```
+
+The ontology remains multiplex:
+
+```text
+G_R = {
+  G_dispositor,
+  G_reception,
+  G_exchange,
+  G_mutual_reception,
+  G_overcoming
+}
+```
+
+Dispositorship is included in the conceptual relation family but is still calculated by the deterministic kernel. v0.4.2 does not replace or recalculate it.
+
+### Reception
+
+Rule ID:
+
+```text
+naf.relation.reception.domicile_configured.hellenistic.v1
+```
+
+Direction:
+
+```text
+host → guest
+```
+
+Current implementation requires:
+
+1. guest occupies one of host's domiciles;
+2. both are classical planets;
+3. host and guest are sign-configured by sextile, square, trine, or opposition.
+
+### Exchange
+
+Rule ID:
+
+```text
+naf.relation.exchange.domicile.hellenistic.v1
+```
+
+Two classical planets exchange domiciles when each occupies a domicile of the other. Configuration is not required for the exchange fact.
+
+### Mutual-reception compatibility
+
+Rule ID:
+
+```text
+naf.relation.mutual_reception.domicile_configured.later_tradition.v1
+```
+
+A configured exchange with reciprocal domicile reception receives this additional later-tradition compatibility label.
+
+This label is not allowed to rewrite the Hellenistic `exchange` relation. Both objects remain separately inspectable.
+
+### Overcoming
+
+Rule ID:
+
+```text
+naf.relation.overcoming.right_hand.hellenistic.v1
+```
+
+For sign-based sextile, square, and trine, the right-hand/earlier planet is represented as superior to the left-hand/later planet.
+
+Opposition is retained as a configuration for reception but is not forced into a directional overcoming edge in v0.4.2.
+
+### Domination / upon-the-tenth
+
+Rule ID:
+
+```text
+naf.relation.domination.tenth_sign.hellenistic.v1
+```
+
+A right-hand square is emitted as the separately typed stronger form `domination`.
+
+## 6. Condition-system composition
+
+Composition module:
+
+```text
+src/conditions/condition-system.mjs
+```
+
+Model:
+
+```text
+naf.condition.system.v0.4.2
+```
+
+It composes without flattening:
+
+```text
+primitive condition
++
+relational condition
++
+condition signature projection
+```
+
+Completeness currently reports:
+
+```text
+primitive     implemented
+relational    implemented
+compound      not_implemented
+scalar score  intentionally_not_implemented
+```
+
+## 7. Reusable Condition Signature
+
+Module:
+
+```text
+src/conditions/condition-signature.mjs
+```
+
+Model:
+
+```text
+naf.condition.signature.v0.4.2
+```
+
+The signature is a categorical state strip, not a summary score. Tokens may include:
+
+- domicile;
+- exaltation;
+- adversity;
+- depression/fall;
+- sect;
+- Whole-Sign angularity;
+- bound ruler;
+- triplicity role;
+- reception given/received;
+- exchange;
+- mutual-reception compatibility;
+- overcoming given/received;
+- domination given/received.
+
+The same signature vocabulary can travel with a planet across Qualified Resonance, Qualified Flow, and later motif/House River inspectors.
+
+## 8. Ledger and derivation granularity
 
 There is no single opaque condition row.
 
-Each factor receives its own record/ledger entry with:
+Primitive factors and relational objects retain:
 
 - rule/model ID;
 - tradition/source reference;
 - applicability;
 - inputs;
-- intermediate/boundary values where needed;
+- intermediate/boundary values where relevant;
 - result;
 - dependencies;
 - engine version;
 - completeness state.
 
-This granularity is required so later compound rules can cite their ingredients rather than recomputing them invisibly.
-
-## 6. Condition in the current UI
-
-The current v0412c wrapper exposes a dedicated Condition pane for classical planets.
-
-The energetic interpretation layer may also consume primitive condition and state it as a qualifier, for example:
+Every v0.4.2 relation also carries:
 
 ```text
-Mercury ↔ Venus terminal SCC     → graph-derived
-Venus depression/fall in Virgo   → astrological-rule condition
-3H ↔ 2H routed house circuit     → downstream interpretation context
+derivation_ref
 ```
 
-These are not collapsed into one “dominance” number.
+so proof infrastructure exists at object birth rather than being retrofitted later.
 
-## 7. Next milestone — v0.4.2 Relational Condition
+## 9. Condition in the current UI
 
-The earlier v0.4 planning documents used provisional numbering such as v0.4.0c. The implemented roadmap evolved: v0.4.1 became Graph Analytics, v0.4.1.1 restored outer-planet interpretation, and v0.4.1.2 introduced Energetic Whole-Chart Synthesis.
+### Existing Atlas
 
-The **current** next condition milestone is therefore:
+The preserved v0412c Condition pane remains available.
+
+### Qualified Resonance
+
+Attaches the reusable signature to:
+
+- actual house ruler;
+- classical occupants.
+
+Read order:
 
 ```text
-v0.4.2  Relational Condition
+house domain
+→ actual Whole Sign
+→ actual ruler + placement
+→ primitive condition
+→ relational condition
+→ routing
 ```
 
-Planned relation families:
+### Relations
+
+Displays each typed relation with rule ID, source, and Derivation Walker control.
+
+### Qualified Flow
+
+Visual layers remain distinguishable:
 
 ```text
-G_reception
-G_exchange / mutual reception variant
-G_overcoming
+solid gray   dispositor
+cyan dashed  reception
+gold dotted  exchange
+red          overcoming
+violet       domination
 ```
 
-### Reception
+Node state remains categorical.
 
-Reception is directed and tradition-sensitive. Required fields should include:
-
-- receiver;
-- received planet;
-- dignity/configuration basis;
-- selected historical variant;
-- phase/configuration metadata where applicable;
-- rule/source IDs;
-- proof;
-- ledger references.
-
-Hellenistic reception must not be silently equated with later Medieval mutual-reception definitions.
-
-### Exchange / mutual reception
-
-Exchange is represented as its own relation or compound of directed receptions according to the selected source model. Variant definitions require separate rule IDs.
-
-### Overcoming
-
-Overcoming is directional superior/inferior sign-based geometry under an explicit traditional model. It must not be inferred from a generic undirected square edge alone.
-
-## 8. Compound condition — v0.4.3 target
+## 10. Compound condition — v0.4.3 target
 
 Candidate compound techniques:
 
 - bonification;
 - maltreatment;
 - enclosure;
-- selected mitigation;
+- selected mitigation/counteraction;
 - other source-locked compound testimonies adopted later.
 
-Compound conditions are pure consumers of already computed primitive and relational facts:
+Compound conditions must be pure consumers of already computed primitive and relational facts:
 
 ```text
 astronomy
@@ -211,62 +367,51 @@ astronomy
 → compound condition
 ```
 
-Because surviving source traditions can diverge, each reconstruction must be named and versioned.
+Because source traditions can diverge, each reconstruction must be named, versioned, and independently testable.
 
-## 9. No scalar strength score
+## 11. No scalar strength score
 
 The canonical condition model must not emit one opaque planet-strength number.
 
-Any future aggregation must be:
+Any future aggregation must be optional, decomposable, explicitly defined, versioned, sensitivity-tested, and research-exploratory unless independently validated.
 
-- optional;
-- decomposable;
-- explicitly defined;
-- versioned;
-- sensitivity-tested;
-- research-exploratory unless independently validated.
+## 12. Testing strategy
 
-## 10. Testing strategy
+Primitive condition tests cover sign/table boundaries, exact bound cusps ± epsilon, sign normalization at 30°, day/night triplicity, Mercury sect-family variants, Whole-Sign angularity classes, canonical regressions, and one ledger entry per primitive factor.
 
-Primitive condition tests must cover:
+Relational tests use explicit synthetic fixtures and require positive distinctions between reception, exchange, mutual-reception compatibility, overcoming, and domination. Every relation must have source, rule ID, inputs, result, dependencies, and derivation reference.
 
-- all sign and table boundaries;
-- exact bound cusps ± epsilon;
-- sign normalization at 30°;
-- day/night triplicity behavior;
-- fixed and Mercury-variable sect cases;
-- all Whole-Sign angularity classes;
-- canonical regression expectations;
-- one ledger entry per primitive factor;
-- explicit not-implemented relational/compound states.
+House River/Derivation Walker tests verify that relational proof can coexist with routing proof without inventing missing dependencies.
 
-Relational condition must add synthetic fixtures **before** promotion, including positive/negative/boundary cases for every selected variant.
-
-## 11. Current limitations
+## 13. Current limitations
 
 Not implemented:
 
-- reception/exchange;
-- overcoming;
-- bonification/maltreatment;
+- bonification/maltreatment synthesis;
 - enclosure;
-- selected mitigation;
+- selected compound mitigation/counteraction;
 - degree-based quadrant dynamic strength;
 - solar-phase conditions beyond current sect-family handling;
-- condition-weighted graph research with validated nulls.
+- condition-weighted graph research with validated nulls;
+- complete legacy-ledger normalization into the v0.4.2 walker contract.
 
-## 12. Exit criterion for relational condition
+## 14. Exit criterion achieved for v0.4.2
 
-A competent traditional astrologer should be able to select any displayed reception/exchange/overcoming relation and reconstruct it from:
+A displayed reception/exchange/overcoming/domination relation exposes:
 
 ```text
+relation type
 rule ID
 source/variant
 inputs
-geometry
-proof
+result
+proof reference
 applicability
 ledger dependencies
 ```
 
-Only then should compound condition and condition-sensitive timing depend on it.
+Synthetic fixtures verify those contracts before public promotion.
+
+## 15. Next exit criterion — compound condition
+
+A compound testimony should be promotable only when an expert can reconstruct it as a pure, source-locked function over already serialized primitive and relational records, without hidden recalculation or an opaque strength score.
