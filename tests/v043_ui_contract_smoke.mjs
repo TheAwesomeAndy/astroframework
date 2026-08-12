@@ -20,5 +20,6 @@ assert.match(html,/MutationObserver/);
 const moduleMatch=html.match(/<script type="module">([\s\S]*?)<\/script>/);assert.ok(moduleMatch,'module script exists');
 const syntaxOnly=moduleMatch[1].replace(/^import .*$/gm,'');new vm.Script(`(async()=>{${syntaxOnly}\n})`);
 const root=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
-assert.match(root,/prototype\/v042\.html/,'v0.4.3 feature branch must not seize the public root before promotion');
-console.log('v0.4.3 additive compound UI contract: ok');
+assert.match(root,/prototype\/v043\.html\?build=compound-043/);
+assert.match(root,/Noetic Atlas v0\.4\.3/);
+console.log('v0.4.3 additive compound UI + public entry contract: ok');
