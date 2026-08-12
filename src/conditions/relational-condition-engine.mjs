@@ -144,7 +144,7 @@ export function computeRelationalConditions(analysis){
     engine_version:RELATIONAL_CONDITION_VERSION,
     rule_registry:RELATIONAL_RULE_REGISTRY,
     scope:'classical_seven_relational_condition',
-    completeness:{reception:'implemented',exchange:'implemented',mutual_reception:'implemented_as_separate_compatibility_label',overcoming:'implemented',opposition_superiority:'not_encoded_as_directional_overcoming',compound_condition:'not_implemented'},
+    completeness:{reception:'implemented',exchange:'implemented',mutual_reception:'implemented_as_separate_compatibility_label',overcoming:'implemented',opposition_superiority:'not_encoded_as_directional_overcoming',compound_condition:'downstream_external_to_relational_engine_v0.4.3'},
     graphs:{
       reception:{directed:true,nodes:CLASSICAL_PLANETS,edges:receptions},
       exchange:{directed:false,nodes:CLASSICAL_PLANETS,edges:exchange},
