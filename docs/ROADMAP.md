@@ -57,19 +57,7 @@ Delivered registry/schema/applicability/table definitions and synthetic fixture 
 
 **Status: complete**
 
-Delivered for Sun through Saturn:
-
-- domicile;
-- adversity;
-- sign-level exaltation/depression;
-- standard/Dorothean triplicity;
-- Egyptian bounds;
-- planetary sect family;
-- in/out-of-sect relation;
-- Whole-Sign angular-triad class;
-- independent ledger entries;
-- inspectable Condition UI;
-- boundary/canonical tests.
+Delivered for Sun through Saturn: domicile, adversity, sign-level exaltation/depression, standard/Dorothean triplicity, Egyptian bounds, planetary sect family, in/out-of-sect relation, Whole-Sign angular-triad class, independent ledger entries, inspectable Condition UI, and boundary/canonical tests.
 
 No scalar strength score.
 
@@ -77,21 +65,7 @@ No scalar strength score.
 
 **Status: complete**
 
-### Classical dispositor graph
-
-Delivered SCC condensation, terminal basin membership/fraction, route depth, upstream route capture, and nonterminal path bottleneck.
-
-### Aspect graph
-
-Delivered connected components, degree, local/mean clustering, normalized unweighted betweenness, articulation points, bridges, typed closed three-node motifs, Grand Trine/T-square/triple-conjunction templates, and exact ≤1° subset.
-
-### Cross-layer
-
-Delivered aspect × dispositor pair overlap.
-
-### Explainability
-
-Metrics/findings retain definition, formula, scope, observation, graph meaning, astrological context, limitations, and proof.
+Delivered SCC condensation, terminal basin membership/fraction, route depth, upstream route capture, nonterminal path bottleneck, aspect components/degree/clustering/betweenness, articulation points, bridges, typed motifs, Grand Trine/T-square/triple-conjunction templates, exact ≤1° subset, aspect × dispositor overlap, and explainable metric/finding proof objects.
 
 ## v0.4.1.1 — Outer-planet interpretive restoration
 
@@ -103,48 +77,15 @@ Delivered Uranus/Neptune/Pluto participation in downstream interpretation while 
 
 **Status: complete release milestone**
 
-Delivered:
+Delivered the astrological-analysis, energetic-synthesis, and display layers; actual sign + Whole Sign house synthesis; optional modern natural-house overlay; ruler/dispositor routing; aspect-energy translation; topology translation into house/planet circuits; primitive condition qualifiers; balanced/depleted/excess framing; material-life examples; soul/spirit inquiry; outer-planet modern/transpersonal synthesis; and supplied-coordinate Ceres interpretation.
 
-- `astrological-analysis-engine.mjs`;
-- `energetic-synthesis-engine.mjs`;
-- `energetic-synthesis-display.mjs`;
-- symbolic energy/current/field vocabulary with explicit nonphysical status;
-- actual sign + Whole Sign house synthesis;
-- optional modern natural-house overlay;
-- ruler/dispositor routing in interpretation;
-- aspect-energy translation;
-- topology translation into house/planet circuits;
-- primitive condition qualifiers;
-- balanced/depleted/excess expression;
-- material-life examples;
-- soul/spirit inquiry and embodiment experiments;
-- outer-planet modern/transpersonal synthesis;
-- Ceres interpretation profile for supplied coordinates.
-
-### v0412c operational surface
-
-Preserved at:
-
-```text
-prototype/v0412c.html
-```
-
-It adds a nonblank loading state, automatic canonical specimen bootstrap, chart-state synchronization, `MutationObserver` updates, explicit synthesis errors, and preservation of the deterministic visual core when downstream interpretation fails.
+The resilient v0412c wrapper remains preserved.
 
 ## v0.4.1.3 — Resonance Field
 
 **Status: complete additive release milestone**
 
-Delivered:
-
-- `src/interpretation/house-resonance-engine.mjs`;
-- Whole-Sign Ascensional Phase Map;
-- Element–Mode Resonance Lattice;
-- actual-sign versus optional natural-house comparison;
-- actual house-ruler continuation and ruler-placement context;
-- all-twelve-house phase mapping;
-- global phase signature;
-- preservation of the complete v0412c observatory beneath the additive shell.
+Delivered Whole-Sign Ascensional Phase Map, Element–Mode Resonance Lattice, actual-sign versus optional natural-house comparison, actual house-ruler continuation and ruler-placement context, all-twelve-house phase mapping, global phase signature, and preservation of the complete earlier observatory beneath the additive shell.
 
 Canonical Leo-rising result:
 
@@ -157,131 +98,82 @@ phase character: element-preserving / mode-rotating
 
 ## v0.4.2 — Relational Condition + Qualified Routing
 
-**Status: current public release**
+**Status: complete release milestone**
 
-Purpose: qualify relations and house routing while preserving every previous representation.
+Delivered:
 
-### Relational condition — delivered
-
-Source-locked registry:
-
-```text
-data/rules/hellenistic/relational-condition-v1.registry.json
-```
-
-Delivered distinct relation models:
-
-```text
-G_reception
-G_exchange
-G_mutual_reception
-G_overcoming
-```
-
-with domination as a separately typed form of right-hand square superiority.
-
-Implemented rules:
-
-- configured domicile reception;
+- source-locked configured domicile reception;
 - domicile exchange;
 - separately identified later-tradition mutual-reception compatibility label;
 - right-hand sextile/square/trine overcoming;
-- domination / upon-the-tenth.
+- domination / upon-the-tenth;
+- relation-level ledger entries and `derivation_ref`s;
+- reusable categorical condition signatures;
+- House River with integer route-count width;
+- Derivation Walker infrastructure;
+- Qualified Resonance, Relations, Qualified Flow, House River, and Proof Walker projections;
+- preservation of all earlier v0.4.1.x surfaces.
 
-Requirements satisfied:
+## v0.4.3 — Compound Condition
 
-- source/variant IDs;
-- no silent Hellenistic/later-tradition blending;
-- relation-level ledger entries;
-- typed graph integration;
-- `derivation_ref` on every relation;
-- synthetic relation fixtures;
-- explicit classical-seven applicability.
+**Status: current public release**
 
-### Reusable condition signatures — delivered
+Purpose: compute higher-order condition testimonies as pure functions over deterministic geometry plus already-computed primitive and relational condition.
 
-`naf.condition.signature.v0.4.2` carries categorical primitive + relational state across Qualified Resonance and Qualified Flow. No scalar strength score.
+### Delivered source-secure subset
 
-### House River — delivered
-
-`naf.research.house_river.v0.4.2` starts from lived Whole-Sign domains and follows existing ruler routes.
-
-For each planetary dispositor edge:
+Machine-readable registry:
 
 ```text
-w(e) = number of Whole Sign house-ruler paths traversing e
+data/rules/hellenistic/compound-condition-v1.registry.json
 ```
 
-Band width is routing count, not energetic intensity or planet strength.
-
-### Derivation Walker infrastructure — delivered
-
-`naf.integrity.derivation_walker.v0.4.2` indexes deterministic, primitive-condition, relational-condition, and House River proof objects. New v0.4.2 relations and bands are born with proof references.
-
-### Public shell — delivered
+Executable model:
 
 ```text
-prototype/v042.html
+naf.condition.compound.hellenistic.v0.4.3
 ```
 
-Preservation chain:
+Implemented:
 
-```text
-v042
-└── v0413
-    └── v0412c
-        └── deterministic visual core
-```
+- bonification by benefic superior trine/square;
+- maltreatment by malefic superior square/domination;
+- benefic sign-based trine testimony;
+- malefic sign-based opposition testimony;
+- degree-based seven-degree ray enclosure;
+- intervention that can break enclosure;
+- sect qualification of acting benefics/malefics;
+- reception qualification enhancing bonification or mitigating maltreatment;
+- mixed bonification+maltreatment preservation;
+- compound ledger entries and derivation refs;
+- compound-aware Derivation Walker integration;
+- additive v043 interface with Existing Atlas, Compound Condition, Compound Map, Proof Walker, and Source Boundary.
 
-Current coordinated projections:
+No scalar strength score. Multiple testimonies may coexist.
 
-```text
-Existing Atlas
-Qualified Resonance
-Relations
-Qualified Flow
-House River
-Proof Walker
-```
+### Explicitly deferred
 
-## v0.4.3 — Compound Condition + condition-aware synthesis experiments
-
-**Next astrological-engine milestone**
-
-Planned candidates:
-
-- bonification;
-- maltreatment;
-- enclosure;
-- selected mitigation/counteraction;
-- condition-aware house/topology experiments;
-- deeper condition-aware energetic synthesis.
-
-Compound rules must be pure functions over primitive + relational facts and must preserve source/variant identity.
-
-No scalar strength score.
+Selected historically ambiguous or not-yet-frozen variants remain deferred rather than guessed, including unresolved bodily/sign-containment enclosure variants and not-yet-source-locked counteraction/adherence/engagement/striking-with-a-ray details.
 
 ## Parallel representation-depth track
 
-May proceed while preserving deterministic authority.
+High-value next work:
 
-High-value candidates:
-
+- deeper condition-aware energetic synthesis;
 - motif + condition field geometry;
 - side-by-side rule-set comparison;
-- deeper ruler-path visualization;
 - expanded Derivation Walker normalization for legacy proof objects;
 - repeated-axis/configuration synthesis;
-- curated versioned interpretation profiles;
-- expanded selected minor-body profiles;
+- curated interpretation profiles;
+- selected minor-body profiles;
 - yogic/Ayurvedic/contemplative practice layers with explicit source/posture labels;
-- selectable lenses such as Traditional, Energetic, Psychological, Mystical, Research.
+- selectable Traditional, Energetic, Psychological, Mystical, and Research lenses.
 
 Every new view remains a projection of the single chart state.
 
 ## Parallel graph-research track
 
-High-priority next gates:
+High-priority gates:
 
 ```text
 geometric longitude nulls
@@ -324,7 +216,7 @@ Planned:
 Concept:
 
 ```text
-N_i = geometry + topology + primitive condition + relational condition + resonance + metadata
+N_i = geometry + topology + primitive condition + relational condition + compound condition + resonance + metadata
 T(t) = temporal input
 X_i(t) = F(N_i, T(t), rule-set versions)
 ```
@@ -333,7 +225,7 @@ Interpretive prose remains downstream.
 
 ## v0.6 — Traditional timing systems
 
-Planned annual profections, zodiacal releasing, and carefully source-locked return techniques after the relevant provider/rule definitions are frozen.
+Planned annual profections, zodiacal releasing, and carefully source-locked return techniques after relevant provider/rule definitions are frozen.
 
 ## v0.7 — Life Space / recurrence research
 
@@ -345,7 +237,7 @@ Dimensionality reduction belongs here only after state semantics are stable.
 
 ### HCI
 
-Compare wheel versus Atlas on ruler-chain recovery, aspect lookup, motif identification, primitive/relational condition reconstruction, house-route recovery, and evidence-chain tasks.
+Compare wheel versus Atlas on ruler-chain recovery, aspect lookup, motif identification, primitive/relational/compound condition reconstruction, house-route recovery, and evidence-chain tasks.
 
 ### Astrological empirical research
 
@@ -354,15 +246,13 @@ Test graph/condition/timing descriptors against independent criteria only with a
 ## Current immediate priorities
 
 ```text
-1. compound condition source lock
-2. bonification / maltreatment
-3. enclosure / selected mitigation
-4. deeper condition-aware synthesis
-5. motif + condition field geometry
-6. graph null models / multilayer baselines
-7. rule-set comparison
-8. validated extended-body astronomy where justified
-9. Life Spectrum
+1. source-lock any remaining compound variants worth implementing
+2. condition-aware whole-chart synthesis
+3. motif + condition field geometry
+4. graph null models / multilayer baselines
+5. side-by-side rule-set comparison
+6. validated extended-body astronomy where justified
+7. Life Spectrum
 ```
 
 ## Governing product standard
