@@ -1,7 +1,7 @@
 import {CLASSICAL_PLANETS} from './primitive-condition-engine.mjs';
 
-export const CONDITION_SIGNATURE_VERSION='0.4.2';
-export const CONDITION_SIGNATURE_MODEL='naf.condition.signature.v0.4.2';
+export const CONDITION_SIGNATURE_VERSION='0.4.3';
+export const CONDITION_SIGNATURE_MODEL='naf.condition.signature.v0.4.3';
 
 function presentEssential(e={}){
   const out=[];
@@ -12,9 +12,9 @@ function presentEssential(e={}){
   return out;
 }
 
-export function buildConditionSignature(planet,primitiveConditions,relationalConditions){
+export function buildConditionSignature(planet,primitiveConditions,relationalConditions,compoundConditions=null){
   if(!CLASSICAL_PLANETS.includes(planet))return {planet,model_id:CONDITION_SIGNATURE_MODEL,applicability:'not_applicable',tokens:[],derivation_refs:[]};
-  const p=primitiveConditions?.by_planet?.[planet],r=relationalConditions?.by_planet?.[planet];
+  const p=primitiveConditions?.by_planet?.[planet],r=relationalConditions?.by_planet?.[planet],c=compoundConditions?.by_planet?.[planet];
   if(!p)return {planet,model_id:CONDITION_SIGNATURE_MODEL,applicability:'missing_primitive_record',tokens:[],derivation_refs:[]};
   const tokens=[];
   const add=(key,label,value,status,ref=null)=>tokens.push({key,label,value,status,derivation_ref:ref});
@@ -33,22 +33,29 @@ export function buildConditionSignature(planet,primitiveConditions,relationalCon
     if(r.domination_given.length)add('domination_given','dominates',r.domination_given.map(x=>x.to).join(', '),'relational',r.domination_given[0].derivation_ref);
     if(r.domination_received.length)add('domination_received','dominated by',r.domination_received.map(x=>x.from).join(', '),'relational',r.domination_received[0].derivation_ref);
   }
+  if(c){
+    if(c.bonifications_received?.length)add('bonification_received','bonified by',c.bonifications_received.map(x=>x.agents.join('+')).join(', '),'compound',c.bonifications_received[0].derivation_ref);
+    if(c.maltreatments_received?.length)add('maltreatment_received','maltreated by',c.maltreatments_received.map(x=>x.agents.join('+')).join(', '),'compound',c.maltreatments_received[0].derivation_ref);
+    if(c.presence&&c.presence!=='none')add('compound_presence','compound state',c.presence,'compound',c.bonifications_received?.[0]?.derivation_ref||c.maltreatments_received?.[0]?.derivation_ref||null);
+    const activeEnclosures=(c.enclosure_states||[]).filter(x=>x.status==='active');
+    if(activeEnclosures.length)add('enclosure','enclosure',activeEnclosures.map(x=>x.enclosure_kind).join(', '),'compound',activeEnclosures[0].derivation_ref);
+  }
   return {
     planet,model_id:CONDITION_SIGNATURE_MODEL,version:CONDITION_SIGNATURE_VERSION,applicability:'full',
     tokens,
     compact:tokens.map(t=>`${t.label}:${t.value}`).join(' | '),
     derivation_refs:[...new Set(tokens.map(t=>t.derivation_ref).filter(Boolean))],
-    epistemic_boundary:'Categorical condition signature only; no scalar planet-strength score is computed.'
+    epistemic_boundary:'Categorical multidimensional condition signature only; compound testimonies are preserved independently and no scalar planet-strength score is computed.'
   };
 }
 
-export function buildConditionSignatures(primitiveConditions,relationalConditions){
-  return Object.fromEntries(CLASSICAL_PLANETS.map(p=>[p,buildConditionSignature(p,primitiveConditions,relationalConditions)]));
+export function buildConditionSignatures(primitiveConditions,relationalConditions,compoundConditions=null){
+  return Object.fromEntries(CLASSICAL_PLANETS.map(p=>[p,buildConditionSignature(p,primitiveConditions,relationalConditions,compoundConditions)]));
 }
 
 export function renderConditionSignatureHTML(signature,{compact=false}={}){
   if(!signature||signature.applicability!=='full')return '<span class="condSig na">condition n/a</span>';
   const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const tokens=compact?signature.tokens.slice(0,5):signature.tokens;
+  const tokens=compact?signature.tokens.slice(0,7):signature.tokens;
   return `<span class="condSig" data-planet="${esc(signature.planet)}">${tokens.map(t=>`<span class="condToken" data-derivation="${esc(t.derivation_ref||'')}"><b>${esc(t.label)}</b> ${esc(t.value)}</span>`).join('')}</span>`;
 }
