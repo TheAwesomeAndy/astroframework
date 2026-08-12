@@ -6,6 +6,13 @@
 
 Current release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
 
+Frozen representation law:
+
+```text
+one chart state
+→ many coordinated projections
+```
+
 Current sequence:
 
 ```text
@@ -14,6 +21,7 @@ Geometry
 → Primitive Condition
 → Graph Analytics
 → Energetic / Explainable Synthesis
+→ Resonance
 → Relational Condition
 → Compound Condition
 → Time
@@ -37,26 +45,7 @@ Delivered interactive Natal Field, node inspector, Aspect Matrix, all-house rule
 
 **Status: complete foundation milestone**
 
-Delivered:
-
-- runtime chart parsing;
-- birth-data input;
-- IANA time-zone/DST handling;
-- Astronomy Engine adapter;
-- ASC/MC and planetary velocities;
-- Whole Sign houses;
-- major aspects/orb policy;
-- applying/separating where possible;
-- traditional domicile rulers;
-- generic dispositor graph;
-- Tarjan SCC/terminal SCC;
-- sect;
-- seven Hermetic lots;
-- derivation ledger/tree;
-- experimental pattern engine;
-- schema/version manifest;
-- tests and CI;
-- restored Natal Field/Aspect Matrix/Flow Map/Audit surfaces.
+Delivered runtime chart parsing, birth-data input, IANA time-zone/DST handling, Astronomy Engine adapter, ASC/MC and planetary velocities, Whole Sign houses, major aspects/orb policy, applying/separating where possible, traditional domicile rulers, generic dispositor graph, Tarjan SCC/terminal SCC, sect, seven Hermetic lots, derivation ledger/tree, experimental pattern engine, schema/version manifest, tests/CI, and restored Natal Field/Aspect Matrix/Flow Map/Audit surfaces.
 
 ## v0.4.0a — Condition ontology
 
@@ -90,27 +79,11 @@ No scalar strength score.
 
 ### Classical dispositor graph
 
-Delivered:
-
-- SCC condensation;
-- terminal basin membership/fraction;
-- route depth;
-- upstream route capture;
-- nonterminal path bottleneck.
+Delivered SCC condensation, terminal basin membership/fraction, route depth, upstream route capture, and nonterminal path bottleneck.
 
 ### Aspect graph
 
-Delivered:
-
-- connected components;
-- degree;
-- local/mean clustering;
-- normalized unweighted betweenness;
-- articulation points;
-- bridges;
-- typed closed three-node motifs;
-- Grand Trine/T-square/triple-conjunction templates;
-- exact ≤1° subset.
+Delivered connected components, degree, local/mean clustering, normalized unweighted betweenness, articulation points, bridges, typed closed three-node motifs, Grand Trine/T-square/triple-conjunction templates, and exact ≤1° subset.
 
 ### Cross-layer
 
@@ -128,7 +101,7 @@ Delivered Uranus/Neptune/Pluto participation in downstream interpretation while 
 
 ## v0.4.1.2 — Energetic Whole-Chart Synthesis
 
-**Status: current public release**
+**Status: complete release milestone**
 
 Delivered:
 
@@ -150,84 +123,161 @@ Delivered:
 
 ### v0412c operational surface
 
-The current public browser for v0.4.1.2 is:
+Preserved at:
 
 ```text
 prototype/v0412c.html
 ```
 
-It supersedes v0412/v0412b as the public entry surface and adds:
+It adds a nonblank loading state, automatic canonical specimen bootstrap, chart-state synchronization, `MutationObserver` updates, explicit synthesis errors, and preservation of the deterministic visual core when downstream interpretation fails.
 
-- immediate nonblank loading state;
-- automatic canonical specimen bootstrap;
-- chart-state synchronization from `prototype/index.html`;
-- `MutationObserver` updates after recalculation/pasted input;
-- explicit downstream synthesis errors;
-- continued availability of the visual core if interpretation fails;
-- cache-busted root redirect.
+## v0.4.1.3 — Resonance Field
 
-The right-hand hierarchy is:
+**Status: complete additive release milestone**
+
+Delivered:
+
+- `src/interpretation/house-resonance-engine.mjs`;
+- Whole-Sign Ascensional Phase Map;
+- Element–Mode Resonance Lattice;
+- actual-sign versus optional natural-house comparison;
+- actual house-ruler continuation and ruler-placement context;
+- all-twelve-house phase mapping;
+- global phase signature;
+- preservation of the complete v0412c observatory beneath the additive shell.
+
+Canonical Leo-rising result:
 
 ```text
-Energetic Analysis
-Graph Findings
-Metrics
-Condition
-Integrity
+rotation: +4 signs / 120°
+element preserved: 12/12
+mode preserved: 0/12
+phase character: element-preserving / mode-rotating
 ```
 
-## v0.4.2 — Relational Condition
+## v0.4.2 — Relational Condition + Qualified Routing
 
-**Next astrological-engine milestone**
+**Status: current public release**
 
-Purpose: qualify relations rather than only node-local condition.
+Purpose: qualify relations and house routing while preserving every previous representation.
 
-Planned:
+### Relational condition — delivered
+
+Source-locked registry:
+
+```text
+data/rules/hellenistic/relational-condition-v1.registry.json
+```
+
+Delivered distinct relation models:
 
 ```text
 G_reception
-exchange / mutual-reception variant
+G_exchange
+G_mutual_reception
 G_overcoming
 ```
 
-Requirements:
+with domination as a separately typed form of right-hand square superiority.
+
+Implemented rules:
+
+- configured domicile reception;
+- domicile exchange;
+- separately identified later-tradition mutual-reception compatibility label;
+- right-hand sextile/square/trine overcoming;
+- domination / upon-the-tenth.
+
+Requirements satisfied:
 
 - source/variant IDs;
-- no silent Hellenistic/Medieval blending;
+- no silent Hellenistic/later-tradition blending;
 - relation-level ledger entries;
 - typed graph integration;
-- readable downstream translation;
-- synthetic edge fixtures before promotion.
+- `derivation_ref` on every relation;
+- synthetic relation fixtures;
+- explicit classical-seven applicability.
 
-Exit criterion: an expert can reconstruct every relation from serialized result + source/model + proof.
+### Reusable condition signatures — delivered
+
+`naf.condition.signature.v0.4.2` carries categorical primitive + relational state across Qualified Resonance and Qualified Flow. No scalar strength score.
+
+### House River — delivered
+
+`naf.research.house_river.v0.4.2` starts from lived Whole-Sign domains and follows existing ruler routes.
+
+For each planetary dispositor edge:
+
+```text
+w(e) = number of Whole Sign house-ruler paths traversing e
+```
+
+Band width is routing count, not energetic intensity or planet strength.
+
+### Derivation Walker infrastructure — delivered
+
+`naf.integrity.derivation_walker.v0.4.2` indexes deterministic, primitive-condition, relational-condition, and House River proof objects. New v0.4.2 relations and bands are born with proof references.
+
+### Public shell — delivered
+
+```text
+prototype/v042.html
+```
+
+Preservation chain:
+
+```text
+v042
+└── v0413
+    └── v0412c
+        └── deterministic visual core
+```
+
+Current coordinated projections:
+
+```text
+Existing Atlas
+Qualified Resonance
+Relations
+Qualified Flow
+House River
+Proof Walker
+```
 
 ## v0.4.3 — Compound Condition + condition-aware synthesis experiments
+
+**Next astrological-engine milestone**
 
 Planned candidates:
 
 - bonification;
 - maltreatment;
 - enclosure;
-- selected mitigation;
-- condition-aware house/topology experiments.
+- selected mitigation/counteraction;
+- condition-aware house/topology experiments;
+- deeper condition-aware energetic synthesis.
 
-Compound rules must be pure functions over primitive + relational facts.
+Compound rules must be pure functions over primitive + relational facts and must preserve source/variant identity.
 
 No scalar strength score.
 
-## Parallel interpretation-depth track
+## Parallel representation-depth track
 
 May proceed while preserving deterministic authority.
 
-Planned:
+High-value candidates:
 
-- deeper house-ruler synthesis;
-- condition-aware whole-chart motifs;
+- motif + condition field geometry;
+- side-by-side rule-set comparison;
+- deeper ruler-path visualization;
+- expanded Derivation Walker normalization for legacy proof objects;
 - repeated-axis/configuration synthesis;
 - curated versioned interpretation profiles;
 - expanded selected minor-body profiles;
 - yogic/Ayurvedic/contemplative practice layers with explicit source/posture labels;
 - selectable lenses such as Traditional, Energetic, Psychological, Mystical, Research.
+
+Every new view remains a projection of the single chart state.
 
 ## Parallel graph-research track
 
@@ -241,6 +291,7 @@ layer-overlap nulls
 motif enrichment
 multilayer baselines
 comparative chart architecture
+condition-qualified graph hypotheses
 ```
 
 Do not use rarity/enrichment language before comparison.
@@ -249,11 +300,11 @@ Do not use rarity/enrichment language before comparison.
 
 Potentially add Ceres, Chiron, node variants, Lilith/apogee variants, Vertex, and fixed stars only after definitions, provider provenance, licensing, validation, and boundary tests are explicit.
 
-Ceres interpretation support already exists for supplied coordinates; automatic astronomy remains a separate future capability.
+Ceres interpretation support exists for supplied coordinates; automatic astronomy remains separate future capability.
 
 ## v0.5 — Life Spectrum v1
 
-Purpose: introduce continuous time after natal state is structurally/conditionally characterized.
+Purpose: introduce continuous time only after natal state is structurally and conditionally mature.
 
 Planned:
 
@@ -273,7 +324,7 @@ Planned:
 Concept:
 
 ```text
-N_i = geometry + topology + condition + metadata
+N_i = geometry + topology + primitive condition + relational condition + resonance + metadata
 T(t) = temporal input
 X_i(t) = F(N_i, T(t), rule-set versions)
 ```
@@ -282,38 +333,11 @@ Interpretive prose remains downstream.
 
 ## v0.6 — Traditional timing systems
 
-Planned:
-
-### Annual profections
-
-- activated Whole Sign house;
-- lord of year;
-- natal condition/routing of lord;
-- current activation context.
-
-### Zodiacal releasing
-
-- lot selection;
-- nested sign periods;
-- peak periods;
-- Loosing of the Bond;
-- angular transitions;
-- provenance for period boundaries.
-
-### Solar returns / related annual techniques
-
-Only after provider/rule definitions are frozen.
+Planned annual profections, zodiacal releasing, and carefully source-locked return techniques after the relevant provider/rule definitions are frozen.
 
 ## v0.7 — Life Space / recurrence research
 
-Potential research objects:
-
-- state vectors through time;
-- recurring activation motifs;
-- condition-qualified ruler pathways;
-- temporal clustering;
-- event-annotation similarity;
-- state-space visualization.
+Potential research objects include state vectors through time, recurring activation motifs, condition-qualified ruler pathways, temporal clustering, event-annotation similarity, and state-space visualization.
 
 Dimensionality reduction belongs here only after state semantics are stable.
 
@@ -321,25 +345,24 @@ Dimensionality reduction belongs here only after state semantics are stable.
 
 ### HCI
 
-Compare wheel versus Atlas on ruler-chain recovery, aspect lookup, motif identification, condition reconstruction, and evidence-chain tasks.
+Compare wheel versus Atlas on ruler-chain recovery, aspect lookup, motif identification, primitive/relational condition reconstruction, house-route recovery, and evidence-chain tasks.
 
 ### Astrological empirical research
 
-Test graph/condition/timing descriptors against independent criteria only with appropriate nulls, controls, and replication.
-
-Null findings remain acceptable.
+Test graph/condition/timing descriptors against independent criteria only with appropriate nulls, controls, and replication. Null findings remain acceptable.
 
 ## Current immediate priorities
 
 ```text
-1. reception / exchange
-2. overcoming
-3. condition-aware house-ruler synthesis
-4. selected compound condition
-5. graph null models
-6. curated interpretation-profile expansion
-7. validated extended-body astronomy where justified
-8. Life Spectrum
+1. compound condition source lock
+2. bonification / maltreatment
+3. enclosure / selected mitigation
+4. deeper condition-aware synthesis
+5. motif + condition field geometry
+6. graph null models / multilayer baselines
+7. rule-set comparison
+8. validated extended-body astronomy where justified
+9. Life Spectrum
 ```
 
 ## Governing product standard
