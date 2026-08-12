@@ -1,0 +1,92 @@
+{
+  "registry_id": "naf.rules.compound_condition.hellenistic.v0.4.3",
+  "version": "0.4.3",
+  "status": "source_locked_selected_subset",
+  "scope": "classical seven; bonification/maltreatment testimonies involving Venus/Jupiter and Mars/Saturn",
+  "source_model": "Christopher Brennan reconstruction of Antiochus-derived bonification/maltreatment conditions, Hellenistic Astrology (2017), chapter 14",
+  "rules": [
+    {
+      "rule_id": "naf.compound.bonification.overcoming.hellenistic.v1",
+      "condition": "bonification",
+      "mechanism": "overcoming",
+      "definition": "A benefic bonifies a target when the benefic overcomes it through a superior sign-based trine or square. Superior sextile is retained as positive but is not promoted to a full bonification condition in this v1 because Brennan marks that point uncertain.",
+      "source_reference": "Christopher Brennan, Hellenistic Astrology (2017), ch. 14, Overcoming, pp. 466–470."
+    },
+    {
+      "rule_id": "naf.compound.maltreatment.overcoming_square.hellenistic.v1",
+      "condition": "maltreatment",
+      "mechanism": "overcoming",
+      "definition": "A malefic maltreats a target when the malefic overcomes it through a superior sign-based square; the upon-the-tenth form is domination.",
+      "source_reference": "Christopher Brennan, Hellenistic Astrology (2017), ch. 14, Overcoming, pp. 466–470."
+    },
+    {
+      "rule_id": "naf.compound.bonification.sign_trine.hellenistic_reconstruction.v1",
+      "condition": "bonification",
+      "mechanism": "sign_based_trine",
+      "definition": "A benefic trining another planet by sign is treated as a bonification condition in Brennan's reconstruction.",
+      "source_reference": "Christopher Brennan, Hellenistic Astrology (2017), ch. 14, Opposition and Trine, pp. 471–472."
+    },
+    {
+      "rule_id": "naf.compound.maltreatment.sign_opposition.hellenistic.v1",
+      "condition": "maltreatment",
+      "mechanism": "sign_based_opposition",
+      "definition": "A malefic opposing another planet by sign is a maltreatment condition.",
+      "source_reference": "Christopher Brennan, Hellenistic Astrology (2017), ch. 14, Opposition and Trine, pp. 471–472."
+    },
+    {
+      "rule_id": "naf.compound.enclosure.ray.seven_degree.hellenistic.v1",
+      "condition": "bonification_or_maltreatment",
+      "mechanism": "degree_based_ray_enclosure",
+      "definition": "A planet is enclosed when rays from the two benefics or the two malefics fall on opposite sides of it within seven degrees, provided no other classical planet intervenes bodily or by ray in the intervening degrees. Benefic enclosure bonifies; malefic enclosure maltreats.",
+      "source_reference": "Christopher Brennan, Hellenistic Astrology (2017), ch. 14, Enclosure, pp. 474–477; Porphyry, Introduction 15–16 as discussed there.",
+      "implementation_boundary": "v1 implements the explicit degree-based ray enclosure with two distinct enclosers. Bodily enclosure range and single-planet multi-ray variants remain deferred because the surviving definitions leave material ambiguity."
+    },
+    {
+      "rule_id": "naf.compound.qualifier.sect.benefic_malefic.hellenistic.v1",
+      "condition": "qualifier",
+      "mechanism": "sect",
+      "definition": "Sect qualifies the intensity of bonification/maltreatment: the benefic of sect is more capable of bonifying; the malefic contrary to sect is more capable of maltreating; the inverse cases are comparatively restrained.",
+      "source_reference": "Christopher Brennan, Hellenistic Astrology (2017), ch. 14, Sect as a Mitigating Factor, pp. 467–468."
+    },
+    {
+      "rule_id": "naf.compound.qualifier.reception.mitigation.hellenistic_medieval_bridge.v1",
+      "condition": "qualifier",
+      "mechanism": "reception",
+      "definition": "When a bonifying or maltreating pair also has domicile reception, reception enhances bonification or mitigates maltreatment. The historical caveat that the formal doctrine is Medieval while having Hellenistic precedent is retained.",
+      "source_reference": "Christopher Brennan, Hellenistic Astrology (2017), ch. 14, Mitigating Conditions: Reception, pp. 491–494."
+    }
+  ],
+  "deferred_variants": [
+    {
+      "name": "counteraction",
+      "status": "deferred_for_separate_source_lock",
+      "reason": "The broad category of well/poorly-situated rulers needs an explicit selected place/condition predicate before implementation."
+    },
+    {
+      "name": "bodily_enclosure",
+      "status": "deferred_due_range_ambiguity",
+      "reason": "Brennan notes uncertainty over the bodily enclosure degree range and sign-boundary treatment."
+    },
+    {
+      "name": "sign_based_containment",
+      "status": "deferred",
+      "reason": "Kept distinct from degree-based enclosure rather than silently merged."
+    },
+    {
+      "name": "adherence",
+      "status": "deferred_due_application_direction_ambiguity",
+      "reason": "The surviving definitions leave ambiguity over which planet must apply."
+    },
+    {
+      "name": "striking_with_a_ray",
+      "status": "deferred_due_reconstruction_ambiguity",
+      "reason": "Directionality, range, and application requirements have competing reconstructions."
+    },
+    {
+      "name": "engagement",
+      "status": "deferred_until_motion_phase_contract_v2",
+      "reason": "Requires robust application/perfection semantics; the Moon also has a distinct 13-degree range."
+    }
+  ],
+  "epistemic_boundary": "Compound condition is a source-defined astrological rule layer. It is categorical and decomposable; no scalar strength, fate, health, or causal score is produced."
+}
