@@ -22,8 +22,6 @@ assert.ok(moduleMatch,'module script exists');
 const syntaxOnly=moduleMatch[1].replace(/^import .*$/gm,'');
 new vm.Script(`(async()=>{${syntaxOnly}\n})`);
 
-const entry=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
-assert.match(entry,/prototype\/v0412c\.html\?build=energetic-0412c-bootstrap/);
-assert.match(entry,/Noetic Atlas v0\.4\.1\.2/);
-
-console.log('v0.4.1.2c analysis bootstrap UI contract: ok');
+// v0412c remains regression-protected as the preserved Structure & Analysis workspace.
+// Root ownership belongs to the newest release contract and is tested by that release's UI test.
+console.log('v0.4.1.2c preserved analysis bootstrap UI contract: ok');
