@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tests/kernel_smoke.mjs && node tests/integrity_smoke.mjs && node tests/condition_registry_smoke.mjs && node tests/primitive_condition_smoke.mjs && node tests/graph_analytics_smoke.mjs && node tests/astrological_analysis_smoke.mjs && node tests/energetic_synthesis_smoke.mjs && node tests/v041_ui_contract_smoke.mjs && node tests/v0411_ui_contract_smoke.mjs && node tests/v0412_ui_contract_smoke.mjs && node tests/boundary_smoke.mjs && node tests/timezone_smoke.mjs && node tests/astronomy_contract_smoke.mjs"
+    "test": "node tests/kernel_smoke.mjs && node tests/integrity_smoke.mjs && node tests/condition_registry_smoke.mjs && node tests/primitive_condition_smoke.mjs && node tests/graph_analytics_smoke.mjs && node tests/astrological_analysis_smoke.mjs && node tests/energetic_synthesis_smoke.mjs && node tests/v041_ui_contract_smoke.mjs && node tests/v0411_ui_contract_smoke.mjs && node tests/v0412_ui_contract_smoke.mjs && node tests/v0412c_ui_contract_smoke.mjs && node tests/boundary_smoke.mjs && node tests/timezone_smoke.mjs && node tests/astronomy_contract_smoke.mjs"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19",
