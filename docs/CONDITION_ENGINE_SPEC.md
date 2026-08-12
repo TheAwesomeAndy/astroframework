@@ -1,170 +1,272 @@
-# Noetic Atlas v0.4 — Astrological Condition Engine Specification
+# Noetic Atlas — Condition Engine Specification
 
-## Purpose
+## 1. Purpose
 
-v0.4 adds the condition layer deliberately omitted from v0.3.
-
-v0.3 answers:
+The condition layer answers a different question from geometry and topology:
 
 ```text
-Where is the object?
-How is it geometrically related?
-Where do ruler/dispositor paths route?
+Where is the object?                  → geometry
+How does rulership route?             → topology
+What is the rule-defined state of it? → condition
 ```
 
-v0.4 adds:
+Condition is a multidimensional ontology, not a scalar-strength engine.
+
+Current release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
+
+## 2. Current status
+
+Implemented:
 
 ```text
-Under a named, source-controlled traditional rule model,
-what is the condition of the planet and of its relevant relationships?
+v0.4.0a  rule registry + condition schema + fixture contract
+v0.4.0b  primitive condition engine + inspectable UI
 ```
 
-The engine is **not** a scalar-strength engine. It emits structured, independently auditable condition facts.
-
-## Development sequence
+Current executable model:
 
 ```text
-v0.4.0a  rule registry + condition schema + synthetic fixture specification
-v0.4.0b  primitive condition engine + minimal Condition Inspector
-v0.4.0c  relational primitives: reception / exchange / overcoming
-v0.4.1   deeper integration into Natal Field / Flow Map / house routes
-v0.4.2   compound condition techniques
-v0.4.3   condition-aware topology experiments (research only)
+naf.condition.primitive.hellenistic.v0.4.0b
 ```
 
-No Life Spectrum weighting and no new condition-derived research metric should precede a stable condition substrate.
+Current schema:
 
-## v0.4.0a — ontology freeze
+```text
+naf.condition.record.v0.4.0a
+```
 
-The machine-readable source of truth is `data/rules/hellenistic/condition-v1.registry.json`. The schema contract is `schemas/naf-condition-record-v0.4.0a.schema.json`. The pre-implementation fixture contract is `tests/fixtures/condition/v0.4.0a-fixture-spec.json`.
+Current machine-readable registry:
 
-See `V040A_CONDITION_ONTOLOGY.md`.
+```text
+data/rules/hellenistic/condition-v1.registry.json
+```
 
-### Source-control principle
+The current public v0.4.1.2/v0412c surface exposes primitive condition in a dedicated Condition pane and folds applicable condition qualifiers into energetic interpretation.
 
-Every rule must state its rule ID, modern controlling reconstruction/reference, ancient witnesses where known, implementation status, input/output contract, boundary convention where relevant, and major variants deliberately excluded.
+## 3. Applicability
 
-Historical disagreement becomes separate versioned rule models, never a hidden option or silent blend.
+Full primitive condition applies to:
 
-## ConditionRecord ontology
+```text
+Sun Moon Mercury Venus Mars Jupiter Saturn
+```
 
-A classical planet receives independent `identity`, `essential`, `sect`, `positional`, `relational`, `compound`, `completeness`, and `ledger_refs` blocks. The empty compound slots are reserved from the first schema so later techniques do not require a breaking redesign.
+Outer planets, lots, angles, nodes, and minor bodies do not automatically inherit Hellenistic essential dignity.
 
-## Applicability
+Applicability is explicit. `not_applicable`, `not_implemented`, and `unsupported` are distinct states.
 
-The v1 bundle applies fully to Sun, Moon, Mercury, Venus, Mars, Jupiter, and Saturn. Uranus, Neptune, and Pluto do not inherit Hellenistic essential dignity. Lots remain derived points; angles remain positional/geometric points; node condition remains tradition-dependent.
+## 4. Primitive factors — implemented
 
-## Primitive condition rules — v0.4.0b
+### Domicile
 
-### Domicile and adversity
+Rule family: traditional/Hellenistic domicile rulership.
 
-Rules: `naf.condition.domicile.hellenistic.v1` and `naf.condition.adversity.hellenistic.v1`.
+Result is independent and provenance-bearing.
 
-The registry stores the tables directly. No point scoring is attached.
+### Adversity / opposite domicile
 
-### Exaltation and depression
+Represented separately from domicile. No point scoring is attached.
 
-Rules: `naf.condition.exaltation.sign.hellenistic.v1` and `naf.condition.depression.sign.hellenistic.v1`.
+### Exaltation
 
-v1 is sign-level only. Degree-specific exaltation doctrines require separate IDs.
+Current v1 uses sign-level exaltation only.
+
+### Depression / fall
+
+Current v1 uses sign-level opposition to the selected exaltation scheme.
 
 ### Standard/Dorothean triplicity
 
-Rule: `naf.condition.triplicity.standard_dorothean.v1`.
+Current rule family follows the source-locked standard/Dorothean table. It records participation and the active ruler under chart sect.
 
-Source anchor: Brennan Table 8.1; Dorotheus `Carmen Astrologicum` 1.1:2-4; Valens `Anthology` 2.1. Ptolemy's alternate table is explicitly excluded.
+Alternative triplicity tables require separate IDs.
 
-### Egyptian bounds
+### Egyptian bounds/terms
 
-Rule: `naf.condition.bounds.egyptian.v1`.
-
-Source anchor: Brennan Table 8.3; Dorotheus' verse table via Hephaestio; Valens as an additional witness.
-
-Local sign degrees use `[0,30)`. Bounds are half-open `[start,end)`. An exact boundary belongs to the following interval; exact 30° normalizes to 0° of the next sign. Ptolemaic and Chaldean bounds are not implemented under this ID.
-
-### Sect decomposition
-
-Sect is three separate facts: chart sect, planetary sect family, and sect condition.
-
-Rules: `naf.condition.sect.planet_family.ptolemy_porphyry.v1` and `naf.condition.sect.in_or_out.v1`.
-
-Fixed families: diurnal = Sun/Jupiter/Saturn; nocturnal = Moon/Venus/Mars. Mercury is variable. v1 follows the Ptolemy/Porphyry morning/evening-star rule; unknown phase yields `indeterminate`. Valens' alternate association rule remains a separate future variant.
-
-### Whole-Sign place angularity
-
-Rule: `naf.condition.angularity.whole_sign_place.v1`.
+Current rule uses Egyptian bounds with local sign degrees in `[0,30)` and half-open intervals:
 
 ```text
-angular   = 1, 4, 7, 10
-succedent = 2, 5, 8, 11
-cadent    = 3, 6, 9, 12
+[start_deg, end_deg)
 ```
 
-This does not replace degree-based quadrant dynamic strength. The schema reserves `quadrant_dynamic_strength`, initially `not_implemented`.
+Exact boundaries belong to the following interval. Exact 30° normalizes to 0° of the next sign before lookup.
 
-## Relational condition — v0.4.0c
+Ptolemaic/Chaldean variants are not silently mixed in.
 
-Relational condition is represented as separate graph layers rather than attributes hidden inside dispositor edges.
+### Planetary sect family
+
+Fixed families:
 
 ```text
-G = {
-  G_aspect,
-  G_dispositor,
-  G_reception,
-  G_overcoming,
-  G_house,
-  G_lot
-}
+Diurnal: Sun, Jupiter, Saturn
+Nocturnal: Moon, Venus, Mars
 ```
 
-Planned rules are `naf.condition.reception.domicile.hellenistic.v1`, `naf.condition.exchange.domicile.hellenistic.v1`, and `naf.condition.overcoming.sign_based.v1`.
+Mercury is variable under the selected morning/evening-star rule. Exact/unsupported phase can return `indeterminate`.
 
-Reception is directed and preserves receiver, received planet, dignity/configuration basis, phase metadata when available, source IDs, and proof. Hellenistic exchange remains separate from later Medieval mutual-reception definitions. Overcoming remains directional sign-based superior/inferior geometry.
+### In-sect / out-of-sect
 
-## Compound condition — v0.4.2
+Chart sect, planetary sect family, and resulting sect relation remain separate facts.
 
-Compound conditions may include bonification, maltreatment, enclosure, mitigation, and later selected forms such as adherence, striking with a ray, counteraction, and engagement if adopted.
+### Whole-Sign angular-triad class
 
-These rules must be pure consumers of already-computed primitive and relational facts:
+```text
+Angular:   1, 4, 7, 10
+Succedent: 2, 5, 8, 11
+Declining: 3, 6, 9, 12
+```
+
+This does not replace degree-based quadrant dynamic strength, which remains unimplemented.
+
+## 5. Ledger granularity
+
+There is no single opaque condition row.
+
+Each factor receives its own record/ledger entry with:
+
+- rule/model ID;
+- tradition/source reference;
+- applicability;
+- inputs;
+- intermediate/boundary values where needed;
+- result;
+- dependencies;
+- engine version;
+- completeness state.
+
+This granularity is required so later compound rules can cite their ingredients rather than recomputing them invisibly.
+
+## 6. Condition in the current UI
+
+The current v0412c wrapper exposes a dedicated Condition pane for classical planets.
+
+The energetic interpretation layer may also consume primitive condition and state it as a qualifier, for example:
+
+```text
+Mercury ↔ Venus terminal SCC     → graph-derived
+Venus depression/fall in Virgo   → astrological-rule condition
+3H ↔ 2H routed house circuit     → downstream interpretation context
+```
+
+These are not collapsed into one “dominance” number.
+
+## 7. Next milestone — v0.4.2 Relational Condition
+
+The earlier v0.4 planning documents used provisional numbering such as v0.4.0c. The implemented roadmap evolved: v0.4.1 became Graph Analytics, v0.4.1.1 restored outer-planet interpretation, and v0.4.1.2 introduced Energetic Whole-Chart Synthesis.
+
+The **current** next condition milestone is therefore:
+
+```text
+v0.4.2  Relational Condition
+```
+
+Planned relation families:
+
+```text
+G_reception
+G_exchange / mutual reception variant
+G_overcoming
+```
+
+### Reception
+
+Reception is directed and tradition-sensitive. Required fields should include:
+
+- receiver;
+- received planet;
+- dignity/configuration basis;
+- selected historical variant;
+- phase/configuration metadata where applicable;
+- rule/source IDs;
+- proof;
+- ledger references.
+
+Hellenistic reception must not be silently equated with later Medieval mutual-reception definitions.
+
+### Exchange / mutual reception
+
+Exchange is represented as its own relation or compound of directed receptions according to the selected source model. Variant definitions require separate rule IDs.
+
+### Overcoming
+
+Overcoming is directional superior/inferior sign-based geometry under an explicit traditional model. It must not be inferred from a generic undirected square edge alone.
+
+## 8. Compound condition — v0.4.3 target
+
+Candidate compound techniques:
+
+- bonification;
+- maltreatment;
+- enclosure;
+- selected mitigation;
+- other source-locked compound testimonies adopted later.
+
+Compound conditions are pure consumers of already computed primitive and relational facts:
 
 ```text
 astronomy
-  ↓
-geometry
-  ↓
-primitive condition
-  ↓
-relational condition
-  ↓
-compound condition
+→ geometry
+→ primitive condition
+→ relational condition
+→ compound condition
 ```
 
-Brennan's Chapter 14 explicitly presents a reconstruction from divergent Antiochus-derived materials. Compound rules therefore remain `research_required` until each technique is separately formalized.
+Because surviving source traditions can diverge, each reconstruction must be named and versioned.
 
-## Ledger granularity
+## 9. No scalar strength score
 
-There is no opaque condition ledger row. Domicile, exaltation, triplicity, bound, sect family, sect condition, angularity, each reception, each exchange, and each overcoming relation receive independent ledger entries. Compound testimonies cite those entries as dependencies.
+The canonical condition model must not emit one opaque planet-strength number.
 
-## Minimal Condition Inspector — required in v0.4.0b
+Any future aggregation must be:
 
-v0.4.0b is not complete if condition data exist only in JSON. Clicking a classical planet must expose a plain inspectable panel showing essential factors, sect decomposition, positional classification, relational arrays, compound placeholders, rule IDs/source references, and direct derivation links. The first inspector optimizes validation rather than aesthetics.
+- optional;
+- decomposable;
+- explicitly defined;
+- versioned;
+- sensitivity-tested;
+- research-exploratory unless independently validated.
 
-## Synthetic test strategy
+## 10. Testing strategy
 
-The synthetic fixture specification is written before calculation code. It includes dignity oppositions, day/night triplicity, every Egyptian-bound boundary family, exact 30° normalization, fixed and Mercury-variable sect cases, place angularity, and reserved relational/compound cases.
+Primitive condition tests must cover:
 
-For every degree table, tests must include just below, exact boundary, and just above. The canonical specimen remains regression evidence only.
+- all sign and table boundaries;
+- exact bound cusps ± epsilon;
+- sign normalization at 30°;
+- day/night triplicity behavior;
+- fixed and Mercury-variable sect cases;
+- all Whole-Sign angularity classes;
+- canonical regression expectations;
+- one ledger entry per primitive factor;
+- explicit not-implemented relational/compound states.
 
-## No scalar strength score
+Relational condition must add synthetic fixtures **before** promotion, including positive/negative/boundary cases for every selected variant.
 
-The canonical model must not emit a single planet-strength number. Any future aggregation must remain optional, decomposable, explicit, versioned, and exploratory unless independently validated.
+## 11. Current limitations
 
-## Exit criteria
+Not implemented:
 
-**v0.4.0a:** registry, schema, fixture specification, and contract tests pass with no executable dignity engine.
+- reception/exchange;
+- overcoming;
+- bonification/maltreatment;
+- enclosure;
+- selected mitigation;
+- degree-based quadrant dynamic strength;
+- solar-phase conditions beyond current sect-family handling;
+- condition-weighted graph research with validated nulls.
 
-**v0.4.0b:** every classical planet receives auditable primitive condition facts and the prototype exposes them through the Condition Inspector.
+## 12. Exit criterion for relational condition
 
-**v0.4.0c:** reception, exchange, and overcoming have independent source-locked relation objects and synthetic tests.
+A competent traditional astrologer should be able to select any displayed reception/exchange/overcoming relation and reconstruct it from:
 
-**v0.4 overall:** a competent traditional astrologer can select any classical planet and independently reconstruct every displayed condition claim from rule IDs, sources, inputs, proof, and ledger dependencies. Only after that should natal condition become a substrate for Life Spectrum.
+```text
+rule ID
+source/variant
+inputs
+geometry
+proof
+applicability
+ledger dependencies
+```
+
+Only then should compound condition and condition-sensitive timing depend on it.
