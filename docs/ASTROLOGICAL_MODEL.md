@@ -7,8 +7,9 @@ This document defines the astrological domain model currently implemented or exp
 Noetic Atlas treats astrological traditions as **versioned rule systems** layered on top of astronomical data. It does not assume one tradition is universally correct and does not permit techniques from different traditions to be mixed silently.
 
 Current release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
+Relational release specification: [`V042_RELATIONAL_CONDITION.md`](V042_RELATIONAL_CONDITION.md).
 
-Current deterministic baseline:
+Current deterministic/traditional baseline:
 
 ```text
 Tropical zodiac
@@ -18,9 +19,10 @@ Tropical zodiac
 + day/night sect
 + seven Paulus/Panaretus Hermetic lots
 + primitive classical condition
++ relational classical condition
 ```
 
-Current interpretation layer additionally supports modern/transpersonal outer-planet meanings and an explicitly modern natural-house correspondence overlay.
+Current downstream models additionally support modern/transpersonal outer-planet meanings, an explicitly modern natural-house correspondence overlay, House Resonance, House River routing, and proof traversal.
 
 ## 2. Coordinates and zodiac
 
@@ -62,8 +64,6 @@ Imported house labels may be retained for comparison but are not treated as upst
 
 ## 4. Traditional domicile rulership
 
-Current ruler map:
-
 | Sign | Ruler |
 |---|---|
 | Aries | Mars |
@@ -79,7 +79,7 @@ Current ruler map:
 | Aquarius | Saturn |
 | Pisces | Jupiter |
 
-This map is used for house rulers, planetary dispositors, lot rulers, directed routing graphs, and terminal-SCC discovery.
+This map is used for house rulers, planetary dispositors, lot rulers, directed routing graphs, terminal-SCC discovery, domicile reception, and domicile exchange.
 
 Uranus, Neptune, and Pluto do not replace Saturn/Jupiter/Mars under this rule set. A modern-rulership model must use a distinct identifier.
 
@@ -91,18 +91,11 @@ For each planet `p` in sign `s`:
 p → domicile_ruler(s)
 ```
 
-This creates directed graph `G_R=(V,E_R)`.
-
-Current graph derivations include:
-
-- SCCs and SCC condensation;
-- terminal SCCs;
-- terminal basin membership/fraction;
-- route depth;
-- upstream route capture;
-- largest nonterminal path bottleneck.
+Current graph derivations include SCCs/SCC condensation, terminal SCCs, terminal basin membership/fraction, route depth, upstream route capture, and largest nonterminal path bottleneck.
 
 These are mathematical properties of the selected ruler model. They are not automatically traditional delineations or validated psychological measures.
+
+Relational condition introduced in v0.4.2 **qualifies** this graph; it does not rewrite the dispositor edges.
 
 ## 6. Sect
 
@@ -114,15 +107,9 @@ Sun altitude < 0° → night
 Sun altitude = 0° → horizon/indeterminate
 ```
 
-Near-horizon sensitivity is retained rather than hidden.
-
-If only imported chart geometry exists, a fallback may be used where possible and must be labeled as such.
-
-Sect changes deterministic rules, including sect-reversing lots and primitive condition.
+Near-horizon sensitivity is retained rather than hidden. Sect changes deterministic rules including sect-reversing lots and primitive condition.
 
 ## 7. Major aspects
-
-Current major family:
 
 | Aspect | Exact angle |
 |---|---:|
@@ -139,9 +126,9 @@ For two longitudes `a,b`:
 orb = |δ - exact_angle|
 ```
 
-Admission depends on a named/versioned orb policy.
+Admission depends on a named/versioned orb policy. Applying/separating is computed only when motion data exist; otherwise phase is `unknown`.
 
-Applying/separating is computed only when motion data exist. Otherwise phase is `unknown`.
+Relational condition uses **sign-based configuration** under its own named rules and does not infer doctrine merely from the display orb of an aspect edge.
 
 ## 8. Symbolic aspect mechanics
 
@@ -155,13 +142,11 @@ The interpretation layer may describe exact geometry with symbolic field-mechani
 180° opposition  → standing-wave polarity
 ```
 
-This vocabulary is interpretive/phenomenological. It is not a measured physical energy model.
+This vocabulary is interpretive/phenomenological, not a measured physical energy model.
 
 ## 9. Hermetic lots
 
 Current formula family: seven Paulus/Panaretus Hermetic lots.
-
-Directed zodiacal arc:
 
 ```text
 directed_arc(A → B) = (B - A + 360) mod 360
@@ -178,19 +163,17 @@ Lot = normalize360(ASC + directed_arc(source → target))
 | Victory | Spirit → Jupiter | Jupiter → Spirit |
 | Nemesis | Saturn → Fortune | Fortune → Saturn |
 
-Every lot retains formula family, sect, inputs, directed arc, result, Whole Sign house, ruler, and provenance.
-
-Variants are not silently merged.
+Every lot retains formula family, sect, inputs, directed arc, result, Whole Sign house, ruler, and provenance. Variants are not silently merged.
 
 ## 10. Primitive planetary condition — implemented
 
-Current model:
+Model:
 
 ```text
 naf.condition.primitive.hellenistic.v0.4.0b
 ```
 
-Applies to Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn.
+Applies to Sun through Saturn.
 
 Independent factors:
 
@@ -206,37 +189,106 @@ Independent factors:
 
 No scalar planet-strength score is produced.
 
-Uranus, Neptune, Pluto, lots, angles, nodes, and minor bodies do not inherit these Hellenistic essential-dignity rules unless a separately defined model explicitly says otherwise.
+Uranus, Neptune, Pluto, lots, angles, nodes, and minor bodies do not inherit these Hellenistic rules unless a separately defined model explicitly says otherwise.
 
-## 11. Relational condition — next
+## 11. Relational condition — implemented v0.4.2
 
-Planned v0.4.2 relation layers:
+Model:
+
+```text
+naf.condition.relational.hellenistic.v0.4.2
+```
+
+Rule registry:
+
+```text
+naf.rules.relational_condition.hellenistic.v0.4.2
+```
+
+The current relation ontology keeps separate:
 
 ```text
 G_reception
-G_exchange / mutual reception variant
+G_exchange
+G_mutual_reception
 G_overcoming
 ```
 
-Reception definitions are tradition-sensitive. Hellenistic and later Medieval definitions must remain distinct rule variants.
+### Domicile reception
 
-Overcoming is directional superior/inferior geometry under a named source model.
+```text
+naf.relation.reception.domicile_configured.hellenistic.v1
+```
 
-Every relation requires its own rule ID, proof, applicability, and ledger entry.
+A classical host receives a classical guest when the guest occupies a domicile of the host and the pair is configured by sign through sextile, square, trine, or opposition.
 
-## 12. Compound condition — planned
+Direction:
 
-After relational facts stabilize, candidate compound techniques include:
+```text
+host → guest
+```
 
-- bonification;
-- maltreatment;
-- enclosure;
-- selected mitigation;
-- other source-locked compound testimonies.
+### Domicile exchange
 
-Compound rules are pure functions over existing primitive + relational facts. They may not introduce hidden extra calculations.
+```text
+naf.relation.exchange.domicile.hellenistic.v1
+```
 
-## 13. Higher-order aspect patterns — implemented subset
+Two classical planets exchange when each occupies a domicile of the other. Configuration is not required for the exchange fact itself.
+
+### Mutual-reception compatibility label
+
+```text
+naf.relation.mutual_reception.domicile_configured.later_tradition.v1
+```
+
+A configured exchange with reciprocal domicile reception may also receive this separately identified later-tradition label. It does not replace Hellenistic `exchange`.
+
+### Overcoming
+
+```text
+naf.relation.overcoming.right_hand.hellenistic.v1
+```
+
+For sign-based sextile, square, and trine, the right-hand/earlier planet is represented as superior to the left-hand/later planet.
+
+### Domination / upon-the-tenth
+
+```text
+naf.relation.domination.tenth_sign.hellenistic.v1
+```
+
+A right-hand square is separately typed as domination.
+
+Opposition remains a recognized reception configuration but v0.4.2 does not impose an arbitrary directional overcoming edge on oppositions.
+
+Each relation carries rule ID, source, inputs, result, applicability, dependencies, ledger entry, and `derivation_ref`.
+
+## 12. Condition system and signatures — implemented
+
+Composition model:
+
+```text
+naf.condition.system.v0.4.2
+```
+
+Signature model:
+
+```text
+naf.condition.signature.v0.4.2
+```
+
+The signature carries categorical primitive + relational state across coordinated views. It may include dignity/adversity, sect, angularity, bound, triplicity, reception, exchange, mutual-reception compatibility, overcoming, and domination.
+
+No traffic-light or scalar-strength compression is produced.
+
+## 13. Compound condition — planned v0.4.3
+
+Candidates include bonification, maltreatment, enclosure, selected mitigation/counteraction, and other source-locked compound testimonies.
+
+Compound rules are pure functions over existing primitive + relational facts. They may not introduce hidden recalculation.
+
+## 14. Higher-order aspect patterns — implemented subset
 
 Current graph-analysis layer detects typed closed three-node patterns including:
 
@@ -250,22 +302,20 @@ Other typed triangles remain unnamed if they do not match an explicit template.
 
 The word motif refers to typed subgraph detection. Statistical motif enrichment is not claimed until null distributions exist.
 
-## 14. Modern/transpersonal interpretation — implemented
+## 15. Modern/transpersonal interpretation — implemented
 
-Uranus, Neptune, and Pluto participate in the current interpretation layer through actual sign, Whole Sign house, aspects, graph context, and modern/transpersonal archetypal profiles.
-
-Important applicability distinction:
+Uranus, Neptune, and Pluto participate through actual sign, Whole Sign house, aspects, graph context, and modern/transpersonal archetypal profiles.
 
 ```text
 modern outer-planet interpretation = applicable
-Hellenistic essential dignity = not_applicable
+Hellenistic essential/relational condition = not_applicable
 ```
 
 This preserves modern interpretive usefulness without falsifying historical rule applicability.
 
-## 15. Natural-house overlay — implemented, secondary
+## 16. Natural-house overlay — implemented, secondary
 
-Current optional model:
+Model:
 
 ```text
 naf.interpretation.natural_house_overlay.modern.v1
@@ -290,33 +340,75 @@ Correspondence:
 
 This overlay never replaces the actual sign on the actual Whole Sign house and is not presented as universal Hellenistic doctrine.
 
-## 16. Ceres — interpretation support, astronomy limitation
+## 17. House Resonance — implemented v0.4.1.3
 
-Ceres is recognized as `minor_body` when a coordinate is supplied.
+Model:
 
-Current custom/modern profile emphasizes nourishment, harvest, enoughness, resourcing, receiving support, embodied pleasure, and conditions that allow life to grow.
+```text
+naf.interpretation.house_resonance.v0.4.1.3
+```
+
+Under Whole Sign houses:
+
+```text
+S_actual(h)  = A_ASC + (h-1) mod 12
+S_natural(h) = h-1
+Delta(h)     = A_ASC mod 12
+```
+
+So the optional natural-house sequence and actual Whole-Sign sequence differ by one chart-wide rotation.
+
+v0.4.2 Qualified Resonance attaches actual-ruler and classical-occupant condition signatures while keeping the natural comparison secondary.
+
+## 18. House River — implemented v0.4.2
+
+Model:
+
+```text
+naf.research.house_river.v0.4.2
+```
+
+House River projects existing house-ruler routes into lived topical sources:
+
+```text
+house domain → ruler → dispositor route → terminal circuit
+```
+
+For a planetary dispositor edge `e`:
+
+```text
+w(e) = number of Whole Sign house-ruler paths traversing e
+```
+
+Width is a routing count, not a condition/energy/fate score.
+
+## 19. Derivation Walker — implemented infrastructure
+
+Model:
+
+```text
+naf.integrity.derivation_walker.v0.4.2
+```
+
+Every v0.4.2 relation and House River band is born with a derivation reference. The walker traverses proof objects and leaves legacy dependencies explicit when not yet normalized.
+
+## 20. Ceres — interpretation support, astronomy limitation
+
+Ceres is recognized as `minor_body` when a coordinate is supplied. The current custom/modern profile emphasizes nourishment, harvest, enoughness, resourcing, receiving support, embodied pleasure, and conditions that allow life to grow.
 
 The current birth-time astronomy adapter does **not** automatically calculate a validated Ceres coordinate. Unsupported coordinates are never invented.
 
-## 17. Other extended objects
+## 21. Other extended objects
 
-The current birth-time adapter also does not automatically generate validated:
+The current birth-time adapter does not automatically generate validated Chiron, true/mean node variants, Black Moon Lilith/apogee variants, Vertex, or fixed stars. Imported/precomputed values require explicit object definitions and provenance.
 
-- Chiron;
-- true/mean node variants;
-- Black Moon Lilith/apogee variants;
-- Vertex;
-- fixed stars.
+## 22. Jyotish — separate future model
 
-Imported/precomputed values require explicit object definitions and provenance.
-
-## 18. Jyotish — separate future model
-
-Jyotish must be implemented as a separate rule system requiring explicit sidereal zodiac/ayanamsha, graha set, nakshatra model, drishti, dignity/relationship logic, dashas, divisional charts, and bhava conventions.
+Jyotish requires its own explicit sidereal zodiac/ayanamsha, graha set, nakshatra model, drishti, dignity/relationship logic, dashas, divisional charts, and bhava conventions.
 
 Western tropical assumptions must not leak silently into the Jyotish model.
 
-## 19. Temporal systems — planned
+## 23. Temporal systems — planned
 
 ### Life Spectrum
 
@@ -332,7 +424,7 @@ Planned lot-based nested sign periods, peaks, Loosing of the Bond, and explicit 
 
 No timing period should be generated by an LLM.
 
-## 20. Model identifiers
+## 24. Model identifiers
 
 A mature analysis should expose at least:
 
@@ -344,14 +436,20 @@ sect_model
 lot_model
 aspect_family
 orb_policy
-condition_model
+primitive_condition_model
+relational_condition_model
+relation_rule_registry
+condition_signature_model
 research_graph_model
+house_river_model
 interpretation_model
+house_resonance_model
 natural_house_overlay
+derivation_model
 ```
 
-## 21. Domain rule
+## 25. Domain rule
 
 > **Do not encode an interpretation where a calculation belongs, and do not encode a calculation without identifying the tradition/model that defines it.**
 
-Noetic Atlas can compare astrological models only if their assumptions remain explicit.
+Noetic Atlas can compare astrological models only if their assumptions remain explicit and reversible.
