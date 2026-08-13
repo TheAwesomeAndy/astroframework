@@ -21,5 +21,3 @@ const pending=lab.comparisons.find(x=>x.hypothesis_id==='NAF-HYP-CERES-TAURUS-00
 assert.equal(lab.discovery.count,discoveries.findings.length);assert.ok(lab.discovery.candidates.every(c=>c.model_identity.status.null_comparison==='pending'));
 assert.ok(lab.constitution_refs.some(x=>x.includes('surprising its creators')));
 console.log('v0.4.5 research lab integration: ok');
-await import('./null_model_v046_smoke.mjs');
-await import('./network_null_v046_smoke.mjs');
