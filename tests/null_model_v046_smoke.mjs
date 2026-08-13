@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {parseChartInput} from '../src/kernel/noetic-kernel.mjs';
+import {analyzeChartWithIntegrity} from '../src/kernel/hellenistic-integrity.mjs';
+import {computeConditionSystem} from '../src/conditions/condition-system.mjs';
+import {analyzeGraphArchitecture} from '../src/research/graph-analytics-engine.mjs';
+import {buildHouseRiver} from '../src/research/house-river-engine.mjs';
+import {buildV044DiscoverySuite} from '../src/research/v044-discovery-suite.mjs';
+import {buildHouseResonanceMap} from '../src/interpretation/house-resonance-engine.mjs';
+import {buildModernRulershipOverlay} from '../src/interpretation/modern-rulership-overlay.mjs';
+import {computeExtendedAspects} from '../src/research/aspect-family-engine.mjs';
+import {runStandardNullSuite} from '../src/research/null-model-lab.mjs';
+const text=fs.readFileSync(new URL('./fixtures/audrey-chart.txt',import.meta.url),'utf8'),analysis=analyzeChartWithIntegrity(parseChartInput(text));
+const conditions=computeConditionSystem(analysis),graph=analyzeGraphArchitecture(analysis,conditions.primitive),river=buildHouseRiver(analysis),resonance=buildHouseResonanceMap(analysis),modern=buildModernRulershipOverlay(analysis),extended=computeExtendedAspects(analysis),discoveries=buildV044DiscoverySuite({analysis,conditions,graph,resonance,river,modern,extended});
+const a=runStandardNullSuite({analysis,graph,river,discoveries,iterations:64,seed:'audrey-regression'}),b=runStandardNullSuite({analysis,graph,river,discoveries,iterations:64,seed:'audrey-regression'});
+assert.equal(a.tests.length,16);assert.equal(a.population_frequency_status,'not_measured');assert.equal(a.interpretation_status,'withheld');
+assert.deepEqual(a.tests.map(x=>x.null_distribution_summary.digest),b.tests.map(x=>x.null_distribution_summary.digest));
+for(const t of a.tests){assert.equal(t.n_iterations,64);assert.ok(t.raw_p>0&&t.raw_p<=1);assert.ok(t.adjusted_p>0&&t.adjusted_p<=1);assert.ok(Array.isArray(t.what_this_null_can_test)&&t.what_this_null_can_test.length);assert.ok(Array.isArray(t.what_this_null_cannot_test)&&t.what_this_null_cannot_test.length);assert.equal(t.model_identity.status.interpretation,'withheld');}
+assert.equal(a.observed_metrics.largest_house_basin_fraction,10/12);assert.equal(a.observed_metrics.max_route_capture,5);
+console.log('v0.4.6 null model laboratory: ok');
