@@ -1,229 +1,138 @@
 # Noetic Atlas — Current Release Contract
 
-This file is the canonical human-readable contract for the living release. Historical milestone documents remain release-scoped and are not rewritten to impersonate the present.
-
 ## Public release
 
-- **Release:** v0.4.3 — Compound Condition, unified application shell
+- **Release:** v0.4.5 — Research Regimes & Hypothesis Architecture
 - **Deployed branch:** `main`
 - **Public Pages entry:** repository root `index.html`
 - **Current browser surface:** `prototype/app.html`
-- **Deterministic visual core / single chart authority:** `prototype/index.html`
-- **Historical release surfaces retained for regression only:** `prototype/v0412c.html`, `prototype/v0413.html`, `prototype/v042.html`, `prototype/v043.html`
-- **Condition system:** `naf.condition.system.v0.4.3`
-- **Compound condition model:** `naf.condition.compound.hellenistic.v0.4.3`
-- **Compound rule registry:** `naf.rules.compound_condition.hellenistic.v0.4.3`
-- **Relational condition model:** `naf.condition.relational.hellenistic.v0.4.2`
-- **Condition signature model:** `naf.condition.signature.v0.4.2`
-- **House River model:** `naf.research.house_river.v0.4.2`
-- **Derivation Walker model:** `naf.integrity.derivation_walker.v0.4.3`
-- **House resonance model:** `naf.interpretation.house_resonance.v0.4.1.3`
-- **Energetic synthesis model:** `naf.interpretation.energetic_synthesis.v0.4.1.2`
-- **Graph model:** `naf.research.graph_analytics.v0.4.1`
-- **Primitive condition model:** `naf.condition.primitive.hellenistic.v0.4.0b`
-- **Condition schema:** `naf.condition.record.v0.4.0a`
-- **Minimum deterministic analysis envelope:** `naf.analysis.v0.3.1`
+- **Deterministic chart authority:** `prototype/index.html`
+- **Public UI law:** one current application shell, one direct core iframe, sibling projections
+- **Package implementation identifier:** `0.4.5-alpha.1`
 
-The package version is an implementation identifier and is not the public release number.
-
-## Frozen architectural law
+## Frozen architectural laws
 
 ```text
-one chart state
-→ many coordinated projections
+one chart state → many coordinated projections
 ```
-
-No public view may independently recalculate astronomy, houses, aspects, lots, or the kernel substrate.
-
-The current UI adds a second invariant:
 
 ```text
-one current application shell
-→ one direct deterministic-core iframe
-→ sibling projection views
+Operational ≠ Experimental ≠ Discovery
 ```
 
-Historical release wrappers remain in the repository for regression and documentation history. They are **not** recursively embedded in the public app.
+Experimental models may produce explicit deltas from Operational state but may not silently mutate Operational state. Discovery detections may be described before they are interpreted; they may not acquire significance or rarity language without an explicit baseline.
 
-## Current public application
+## Current application
 
-`prototype/app.html` exposes one current navigation system:
+The current app preserves the seven coordinated views:
 
 ```text
-Chart       → deterministic birth/chart workspace, Natal Field, Aspect Matrix, Flow Map, Lots & Sect, Research Lab, Audit
-Reading     → energetic whole-chart synthesis
-Resonance   → sign/house natural-resonance comparison + ruler continuation + condition signatures
-Network     → graph findings/metrics + dispositor/reception/exchange/overcoming qualified flow
-House Flow  → House River and all-house ruler routing
-Condition   → primitive + relational + compound testimonies and compound map
-Proof       → Derivation Walker + integrity/completeness state
+Chart · Reading · Resonance · Network · House Flow · Condition · Proof
 ```
 
-There are no visible historical version shells stacked inside one another. The current app contains exactly one iframe and that iframe points directly to `prototype/index.html`, the deterministic chart authority.
-
-## Deterministic substrate
-
-Current foundations remain:
-
-- local civil date/time and observer coordinates;
-- historical time-zone/DST resolution;
-- Astronomy Engine 2.1.19 adapter for Sun through Pluto;
-- geocentric ecliptic longitude and longitudinal motion;
-- ASC and MC;
-- geometric solar altitude for sect;
-- tropical zodiac;
-- Whole Sign houses;
-- major aspects under a named orb policy;
-- applying/separating when motion exists;
-- traditional domicile rulership;
-- directed dispositor graph;
-- Tarjan SCC and terminal-SCC derivation;
-- all-house ruler routes;
-- seven Paulus/Panaretus Hermetic lots;
-- derivation ledger/tree and completeness/provenance metadata.
-
-## Condition stack
+and adds an aperture switch:
 
 ```text
-primitive condition
-→ relational condition
-→ compound condition
-→ reusable categorical signatures
-→ coordinated projections + proof
+Personal | Research
 ```
 
-### Primitive condition
+Research is not an eighth top-level view. Personal mode keeps the Operational model primary. Research mode reveals hypothesis IDs, model deltas, discovery candidates, research-status vectors, and regime boundaries inside the same instrument.
 
-For Sun through Saturn, independent factors include domicile/adversity, sign-level exaltation/depression, standard/Dorothean triplicity, Egyptian bound, planetary sect family, in/out-of-sect relation, and Whole-Sign angular-triad class.
+The current app contains exactly one iframe and that iframe points directly to `prototype/index.html`. Historical release surfaces remain in the repository for regression/history and are not recursively embedded.
 
-### Relational condition
+## Natal / interpretive stack preserved
 
-v0.4.2 keeps dispositorship, reception, exchange, later-tradition mutual-reception compatibility, overcoming, and domination as distinct relation types with distinct rule IDs.
+v0.4.5 preserves the full current stack:
 
-### Compound condition — implemented in v0.4.3
+- deterministic geometry and Whole Sign houses;
+- canonical major aspects under named policy;
+- traditional dispositorship, SCCs, terminal basins, bottlenecks, House River;
+- Hermetic lots and sect provenance;
+- primitive condition;
+- relational condition;
+- compound condition;
+- reusable categorical condition signatures;
+- Resonance Field and modern-rulership overlay kept secondary;
+- energetic synthesis;
+- auditable Evidence Pack Reading;
+- Reading integrity gate;
+- expanded aspect-family experimental projection;
+- cross-layer discovery suite;
+- Derivation Walker / proof surface;
+- multi-basin preservation;
+- two-state family multiplex engine contract.
 
-Machine-readable source lock:
+## v0.4.5 research-regime architecture
+
+Three regimes are first-class model identities:
+
+| Regime | Purpose | Contamination rule |
+|---|---|---|
+| Operational | reproducible techniques inside a named astrological model | cannot be silently rewritten by experiments |
+| Experimental | named/versioned hypotheses and alternate models | must carry hypothesis/model identity and remain separable |
+| Discovery | search for unnamed mathematically reproducible structures | detection before interpretation; null comparison before rarity/significance language |
+
+### Research Hypothesis Pack
+
+Schema:
 
 ```text
-data/rules/hellenistic/compound-condition-v1.registry.json
+schemas/naf-research-hypothesis-pack-v0.4.5.schema.json
 ```
 
-Executable model:
+Hypothesis packs can represent contested rulerships, alternate aspect policies, historical-model variants, modern-body hypotheses, new configuration definitions, graph/hypergraph ideas, field-language models, and future research questions not yet conceived.
+
+Ceres–Taurus is one registered example only; it is not the organizing research program. Registered hypotheses that do not yet have executable engines remain explicitly `registered-not-executed`.
+
+### Generic model comparison
+
+The model-comparison engine compares structural snapshots and records added/removed/changed objects without assuming the experimental model is superior. Current snapshot dimensions include dispositor edges, terminal basins, House River routes, canonical aspects, compound testimonies, model overlays, supplemental aspects, and discovery findings.
+
+### Discovery candidates
+
+Unnamed findings can be registered under temporary candidate IDs. Default research status keeps population frequency unknown, null comparison pending, replication absent, and interpretation withheld until additional evidence exists.
+
+### Research status vector
+
+Research objects keep independent states for:
 
 ```text
-naf.condition.compound.hellenistic.v0.4.3
+geometry
+derivation
+historical analogue
+population frequency
+null comparison
+phenomenological association
+replication
+interpretation
 ```
 
-Implemented source-secure subset:
+These are not collapsed into a single confidence score.
 
-- bonification by benefic overcoming through superior trine or square;
-- maltreatment by malefic overcoming through superior square/domination;
-- sign-based benefic trine testimony;
-- sign-based malefic opposition testimony;
-- degree-based ray enclosure using the selected seven-degree range;
-- intervention that can break enclosure;
-- sect qualification of benefic/malefic agents;
-- reception qualification that can enhance bonification or mitigate maltreatment;
-- mixed condition where benefic and malefic testimonies coexist.
-
-The engine does **not** calculate a net score. Multiple testimonies remain separately inspectable.
-
-Possible per-planet categorical summaries include:
+## Research lifecycle
 
 ```text
-none
-bonification_present
-maltreatment_present
-mixed
+Detect → Describe → Compare → Test → Replicate → Interpret
 ```
 
-These categories summarize coexistence only; they do not numerically average testimonies.
+Interpretation comes after formal detection and comparison. Experimental or discovery findings do not rewrite the Operational model by stealth.
 
-## Deferred compound reconstructions
+## Constitutional principles
 
-The current registry explicitly defers historically ambiguous or not-yet-frozen variants rather than guessing them. These include selected bodily/sign-containment enclosure variants, counteraction details not yet source-locked, adherence, engagement, striking-with-a-ray, and related compound testimonies requiring additional source reconstruction.
+The living research constitution is maintained in `docs/RESEARCH_CONSTITUTION.md`.
 
-`not_implemented`, `deferred_source_ambiguity`, and `not_applicable` remain distinct states.
+The project is governed by radical curiosity under strict provenance. Historical technique is prior knowledge rather than the boundary of inquiry. Mathematical novelty is not automatically astrological meaning. The absence of an inherited name does not make a reproducible structure nonexistent.
 
-## Sect and reception qualification
+**Noetic Atlas must remain capable of surprising its creators.**
 
-Sect qualifies an acting benefic or malefic without producing a numeric multiplier. Reception is consumed as a relational fact and may qualify the effect of a compound testimony. Neither rewrites the underlying geometric or relational fact.
+## Current limitations / next research sequence
 
-## House River and relational views
+The next major laboratory milestone is **v0.4.6 — Null Model Laboratory**. Planned controls include geometric nulls, label-permutation nulls, degree-preserving controls, topology-preserving controls where justified, observed-versus-expected distributions, orb-policy sensitivity, and baseline characterization of current discovery detectors.
 
-House River continues to use:
+Until those baselines exist, discovery language remains descriptive rather than rarity/significance language.
 
-```text
-w(e) = number of Whole Sign house-ruler paths traversing dispositor edge e
-```
-
-Band width is routing evidence only. Relational graphs qualify the route but do not replace dispositorship. In the unified app these capabilities are rendered directly from the shared state instead of by embedding the historical v0.4.2 shell.
-
-## Derivation Walker
-
-The shared walker is versioned as:
-
-```text
-naf.integrity.derivation_walker.v0.4.3
-```
-
-It indexes deterministic, primitive, relational, compound, and House River proof objects. Every compound testimony is born with a `derivation_ref` and can walk backward through rule/source, inputs/result, relational dependencies, geometry, and existing coordinate proof where indexed.
-
-Missing legacy dependencies remain explicit rather than invented.
-
-## Resonance and energetic synthesis
-
-The v0.4.1.3 Resonance Field model and v0.4.1.2 energetic synthesis models remain active computational capabilities. Their historical HTML wrappers are no longer part of the public composition. Natural-house correspondence remains an explicitly modern secondary comparison and never replaces the actual Whole Sign or actual ruler.
-
-Energy/current/field language remains symbolic and phenomenological rather than a claim of measured physical force.
-
-## UI preservation rule
-
-Preserving functionality means preserving capabilities, calculations, rule models, provenance, and regression coverage. It does **not** mean recursively embedding every historical release interface.
-
-The current UI contract requires:
-
-- exactly one iframe in `prototype/app.html`;
-- that iframe must point directly to `prototype/index.html`;
-- no current-app iframe may point to `v0412c`, `v0413`, `v042`, or `v043`;
-- historical UI files remain independently testable;
-- current non-chart views must be independently scrollable;
-- chart-state changes must synchronize through `MutationObserver` without creating another calculator.
-
-## Current limitations
-
-Still absent or intentionally blocked:
-
-- automatic validated Ceres/small-body astronomy;
-- full Chiron/node/Lilith/Vertex/fixed-star birth-time calculation;
-- independent professional-grade cross-provider astronomy validation corpus;
-- deferred compound-condition variants listed above;
-- degree-based quadrant dynamic strength;
-- validated condition-weighted graph research;
-- graph null distributions and statistical motif enrichment;
-- full motif + condition field-geometry visualization;
-- side-by-side rule-set comparison;
-- complete normalization of all legacy proof objects into the shared walker contract;
-- Life Spectrum temporal activation;
-- production annual profections/zodiacal releasing;
-- externally validated predictive or psychological superiority.
-
-## Next sequence
-
-```text
-source-lock remaining compound-condition variants where justified
-condition-aware whole-chart synthesis
-motif + condition field geometry
-side-by-side rule-set comparison
-graph nulls / multilayer baselines
-validated extended-body astronomy where justified
-v0.5 Life Spectrum
-v0.6 traditional timing systems
-v0.7 recurrence / Life Space research
-```
-
-Life Spectrum remains deferred until the natal state and its condition semantics are sufficiently stable.
+Life Spectrum and production timing systems remain deferred until the natal/research semantics and baselines are sufficiently stable.
 
 ## Documentation rule
 
-Living docs must agree with this contract and implementation. A disagreement between living implementation and living documentation is a defect.
+Living documentation and living implementation must agree. Historical release documents remain historical and must not be recursively embedded or rewritten to impersonate the current application.
