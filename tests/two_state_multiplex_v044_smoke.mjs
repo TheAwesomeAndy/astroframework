@@ -13,5 +13,5 @@ const result=buildFamilyMultiplex(bundle(a),bundle(b),{labelA:'Chart A',labelB:'
 assert.ok(result.contacts.length>0);assert.ok(result.structural_contacts.length>0);
 assert.ok(result.summary.contacted_terminal_nodes.length>0);
 assert.ok(result.contacts.every(x=>x.from.chart==='Chart A'&&x.to.chart==='Chart B'));
-assert.match(result.applicability.two_state_contract,/already-computed/);
+assert.match(result.applicability.two_state_contract,/already be computed/);
 console.log('v0.4.4 two-state multiplex: ok');
