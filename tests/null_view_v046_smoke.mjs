@@ -1,0 +1,5 @@
+import assert from 'node:assert/strict';
+import {buildNullLabViewModel} from '../src/research/null-lab-view-model.mjs';
+const vm=buildNullLabViewModel({nulls:{iterations:64,interpretation_status:'withheld',population_frequency_status:'not_measured',tests:[{id:'t1',null_model_id:'n1',metric_id:'m1',metric_label:'Metric',observed_value:2,null_distribution_summary:{mean:1,sd:.5,digest:'abc'},empirical_percentile:.95,raw_p:.05,adjusted_p:.1,seed:'s',preserved_properties:['A'],randomized_properties:['B'],what_this_null_can_test:['C'],what_this_null_cannot_test:['D']}]},candidate_nulls:[{candidate_id:'c1',status:'null-tested',tests:[{}],population_frequency:'unknown',interpretation:'withheld'}]});
+assert.equal(vm.run_state,'complete');assert.equal(vm.summary.test_count,1);assert.equal(vm.summary.interpretation,'withheld');assert.equal(vm.rows[0].digest,'abc');assert.equal(vm.rows[0].interpretation,'withheld');assert.equal(vm.candidate_rows[0].population_frequency,'unknown');assert.match(vm.ui_contract.personal,/Do not run/);assert.match(vm.ui_contract.research,/Do not translate p-values/);
+console.log('v0.4.6 null lab view model: ok');
