@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "naf.research.hypothesis_pack.v0.4.5",
+  "title": "Noetic Atlas Research Hypothesis Pack v0.4.5",
+  "type": "object",
+  "required": ["model_id","version","regime","hypothesis_id","title","proposition","control_model","variants","execution_status","status_vector"],
+  "properties": {
+    "model_id": {"const":"naf.research.hypothesis_pack.v0.4.5"},
+    "version": {"const":"0.4.5"},
+    "regime": {"const":"experimental"},
+    "hypothesis_id": {"type":"string","minLength":1},
+    "title": {"type":"string","minLength":1},
+    "proposition": {"type":"string","minLength":1},
+    "control_model": {"type":"string","minLength":1},
+    "variants": {
+      "type":"array",
+      "items": {"type":"object","required":["variant_id","label","execution_status"],"properties":{"variant_id":{"type":"string"},"label":{"type":"string"},"execution_status":{"type":"string"}}}
+    },
+    "expected_structural_effects": {"type":"array","items":{"type":"string"}},
+    "sources": {"type":"array"},
+    "cohort": {"type":"object","required":["status"]},
+    "null_model": {"type":"object","required":["status"]},
+    "execution_status": {"type":"string"},
+    "status_vector": {
+      "type":"object",
+      "required":["geometry","derivation","historical_analogue","population_frequency","null_comparison","phenomenological_association","replication","interpretation"]
+    },
+    "contamination_rule": {"type":"string"},
+    "significance_rule": {"type":"string"}
+  },
+  "additionalProperties": true
+}
