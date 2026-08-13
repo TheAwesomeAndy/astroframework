@@ -1,0 +1,11 @@
+{
+  "registry_id":"naf.rules.null_models.v0.4.6",
+  "version":"0.4.6",
+  "models":[
+    {"id":"naf.null.geometric_independent_longitude.v1","family":"geometric","preserves":["planet inventory","Ascendant sign","traditional domicile-ruler rule","Whole-Sign house-sign sequence"],"randomizes":["classical longitudes independently over 0..360 degrees"],"can_test":["rulership and House-River concentration under independent geometric placement"],"cannot_test":["real ephemeris frequency","real birth-chart population frequency","astrological meaning"]},
+    {"id":"naf.null.label_permutation.v1","family":"label_permutation","preserves":["observed classical longitude multiset","Ascendant sign"],"randomizes":["planet identities assigned to those longitudes"],"can_test":["dependence of rulership topology on planetary identity"],"cannot_test":["astronomical plausibility of relabeled planets","population frequency","astrological meaning"]},
+    {"id":"naf.null.degree_preserving_aspect_rewire.v1","family":"network_rewire","preserves":["aspect-graph nodes","edge count","degree sequence"],"randomizes":["edge pairing"],"can_test":["triangle and articulation structure conditional on degree sequence"],"cannot_test":["zodiac geometry","aspect type/orb semantics after rewiring","astrological meaning"]},
+    {"id":"naf.null.topic_routing_permutation.v1","family":"topic_routing","preserves":["observed classical dispositorship","terminal basins","multiset of twelve house entry rulers"],"randomizes":["assignment of entry-ruler instances to house topics"],"can_test":["topic concentration conditional on the observed ruler graph"],"cannot_test":["whether the observed ruler graph is unusual","astronomical geometry","astrological meaning"]}
+  ],
+  "global_limits":["Null-model frequency is not real-population frequency.","Null comparison does not promote interpretation.","Every simulation is reproducible from source state, model version, metric version, iteration count, and seed."]
+}
