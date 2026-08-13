@@ -1,11 +1,15 @@
-import {buildDerivationIndex as buildLegacy,walkDerivation as walkLegacy,flattenDerivationWalk,derivationRef} from './derivation-walker.mjs';
+import {buildDerivationIndex as buildLegacy,flattenDerivationWalk,derivationRef} from './derivation-walker.mjs';
 export {flattenDerivationWalk,derivationRef};
 export const DERIVATION_WALKER_V044_MODEL='naf.integrity.derivation_walker.v0.4.4';
 const raw=x=>String(x||'').replace(/^derivation:/,'');
+function normalize(e,source='v044'){
+  const q=`${e.kind||'derivation'}:${e.id}`;
+  return {id:q,canonical_id:e.id,kind:e.kind||'derivation',label:e.label||e.title||e.id,epistemic_layer:e.epistemic_layer||'unknown',rule_id:e.rule_id||e.provenance?.calculation||null,source_reference:e.source_reference||e.provenance?.traditional_reference||null,inputs:e.inputs||null,result:e.result??null,dependencies:(e.dependencies||e.ledger_refs||[]).map(raw),provenance:e.provenance||e.integrity||null,source_collection:source,derivation_ref:derivationRef(q)};
+}
 export function buildDerivationIndexV044(args={}){
   const base=buildLegacy(args),entries={...base.entries},aliases={};
-  const collections=[...(args.analysis?.derivation_ledger||[]),...(args.primitive?.ledger_entries||[]),...(args.relational?.ledger_entries||[]),...(args.compound?.ledger_entries||[]),...(args.houseRiver?.derivation_entries||[]),...(args.extra||[])];
-  for(const e of collections){if(!e?.id)continue;const q=`${e.kind||'derivation'}:${e.id}`;const existing=entries[e.id]||null;entries[q]=existing?{...existing,id:q,canonical_id:e.id,derivation_ref:derivationRef(q)}:{id:q,canonical_id:e.id,kind:e.kind||'derivation',label:e.label||e.title||e.id,epistemic_layer:e.epistemic_layer||'unknown',rule_id:e.rule_id||e.provenance?.calculation||null,source_reference:e.source_reference||e.provenance?.traditional_reference||null,inputs:e.inputs||null,result:e.result??null,dependencies:(e.dependencies||e.ledger_refs||[]).map(raw),provenance:e.provenance||e.integrity||null,derivation_ref:derivationRef(q)};aliases[q]=q;}
+  const groups=[['analysis.derivation_ledger',args.analysis?.derivation_ledger||[]],['primitive_condition',args.primitive?.ledger_entries||[]],['relational_condition',args.relational?.ledger_entries||[]],['compound_condition',args.compound?.ledger_entries||[]],['house_river',args.houseRiver?.derivation_entries||[]],['extra',args.extra||[]]];
+  for(const [source,rows] of groups)for(const e of rows){if(!e?.id)continue;const n=normalize(e,source);entries[n.id]=n;aliases[n.id]=n.id;}
   return {model_id:DERIVATION_WALKER_V044_MODEL,version:'0.4.4',entries,aliases,count:Object.keys(entries).length};
 }
 export function walkDerivationV044(ref,index,{maxDepth=20}={}){
