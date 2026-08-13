@@ -1,5 +1,5 @@
 import {buildResearchLab as buildV045ResearchLab} from './research-lab-engine.mjs';
-import {runStandardNullSuite,runCandidateNullSuite,NULL_LAB_MODEL} from './null-model-lab.mjs';
+import {runStandardNullSuite,runCandidateNullSuite,NULL_LAB_MODEL} from './null-model-laboratory.mjs';
 export const RESEARCH_LAB_V046_VERSION='0.4.6';
 export const RESEARCH_LAB_V046_MODEL='naf.research.lab.v0.4.6';
 export function buildResearchLabV046(args={}){
