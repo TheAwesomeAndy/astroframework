@@ -23,13 +23,13 @@ A null test may update only the `null_comparison` dimension of a research-status
 
 Randomizes classical longitudes independently over 0–360° while preserving object inventory, Ascendant sign, Whole-Sign house-sign sequence, and the selected traditional domicile-ruler rule.
 
-It can test rulership/House-River concentration under independent geometric placement. It cannot represent the real solar-system ephemeris or human birth-time population.
+It can test global rulership/House-River concentration under independent geometric placement. It cannot represent the real solar-system ephemeris or human birth-time population.
 
 ### Classical label permutation
 
 Preserves the observed classical longitude multiset and Ascendant sign while permuting which classical planet identity occupies each longitude.
 
-It asks whether a rulership/topology result depends on planetary identity rather than only the observed angular skeleton.
+It asks whether global rulership/topology results depend on planetary identity rather than only the observed angular skeleton.
 
 ### Degree-preserving aspect-network rewiring
 
@@ -39,9 +39,11 @@ It can compare triangle and articulation structure conditional on connectivity. 
 
 ### House-topic routing permutation
 
-Preserves the observed classical ruler graph, terminal basins, and multiset of twelve house entry rulers while permuting the assignment of those entry-ruler instances to house topics.
+Preserves the observed classical ruler graph, terminal basins, and multiset of twelve house entry rulers while permuting which house labels receive those entry-ruler instances.
 
-It asks whether topical concentration is notable conditional on the already-observed planetary ruler graph.
+This null **cannot** test global twelve-house basin concentration or global maximum route capture: those counts are invariant when only house labels are permuted. v0.4.6 therefore gives this control a house-label-sensitive metric, **angular-house basin concentration**, using houses 1, 4, 7, and 10. This asks whether the angular topical subset is unusually concentrated conditional on the observed planetary ruler graph.
+
+That correction is deliberate: a null model is not considered implemented merely because it produces randomized output. Its paired statistic must actually vary under the declared randomization.
 
 ## Frozen metrics
 
@@ -54,6 +56,7 @@ Initial metrics:
 - House-route basin entropy
 - House-route basin concentration
 - largest house-basin fraction
+- angular-house basin concentration
 - terminal-basin count
 - maximum House River route capture
 - aspect triangle count
@@ -90,15 +93,17 @@ A small p-value means only that the observed metric is extreme under the named c
 
 ## Candidate progression
 
-v0.4.6 can attach compatible null plans to selected Discovery candidates. For example, a house-terminal partition can be compared under geometric, label, and topic-routing controls using largest-basin fraction and concentration.
+v0.4.6 attaches only scientifically compatible null plans. A whole-chart house-terminal partition may be compared under geometric and label-permutation controls using largest-basin fraction and concentration. It is **not** compared against the topic-routing null because that null preserves the global partition counts by construction.
 
-Candidates without a scientifically compatible null remain `no-compatible-null-yet`; the system does not force every discovery through an irrelevant baseline.
+House-label-sensitive findings can use the topic-routing control, beginning with angular-house basin concentration. Candidates without a compatible null remain `no-compatible-null-yet`; the system does not force every discovery through an irrelevant baseline.
 
 After a null comparison, population frequency remains `unknown` and interpretation remains `withheld`.
 
 ## Personal / Research boundary
 
 Null simulations are opt-in and belong to Research aperture. Personal mode remains Operational by default and does not pay the simulation cost or display Monte Carlo tables.
+
+`src/research/null-lab-view-model.mjs` provides a UI-facing projection of null-test results so the current seven-view app can surface them in Research aperture without teaching the interface how simulations work. The view model carries observed/null summaries, p/FDR values, seed/digest provenance, scope limits, and candidate status while keeping interpretation withheld.
 
 ## Deferred beyond v0.4.6
 
