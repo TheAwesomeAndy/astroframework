@@ -1,1 +1,7 @@
+import {countTriangles,countArticulationPoints} from './null-metric-registry.mjs';
 export const NETWORK_NULL_VERSION='0.4.6';
+const key=(a,b)=>[a,b].sort().join('|');
+export function aspectGraph(analysis){const seen=new Set(),edges=[];for(const a of analysis?.aspects||[]){if(!a.a||!a.b||a.a===a.b)continue;const k=key(a.a,a.b);if(!seen.has(k)){seen.add(k);edges.push([a.a,a.b]);}}return {nodes:[...new Set(edges.flat())].sort(),edges};}
+export function degreeSequence(g){const d=Object.fromEntries(g.nodes.map(n=>[n,0]));for(const [a,b] of g.edges){d[a]++;d[b]++;}return d;}
+export function rewireDegreeSequence(g,rng){const edges=g.edges.map(e=>[...e]),set=new Set(edges.map(e=>key(...e)));for(let t=0;t<Math.max(20,edges.length*6);t++){const i=Math.floor(rng.random()*edges.length),j=Math.floor(rng.random()*edges.length);if(i===j)continue;const [a,b]=edges[i],[c,d]=edges[j];if(new Set([a,b,c,d]).size<4)continue;const n1=[a,d],n2=[c,b],k1=key(...n1),k2=key(...n2);if(set.has(k1)||set.has(k2)||k1===k2)continue;set.delete(key(a,b));set.delete(key(c,d));set.add(k1);set.add(k2);edges[i]=n1;edges[j]=n2;}return {nodes:[...g.nodes],edges};}
+export function sampleNetworkControl(analysis,rng){const g=rewireDegreeSequence(aspectGraph(analysis),rng);return {aspect_triangle_count:countTriangles(g.nodes,g.edges),aspect_articulation_count:countArticulationPoints(g.nodes,g.edges),edge_count:g.edges.length,degrees:degreeSequence(g)};}
