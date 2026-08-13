@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {NULL_METRICS} from '../src/research/null-metric-registry.mjs';
+import {NULL_MODELS} from '../src/research/null-model-registry.mjs';
+const metricRegistry=JSON.parse(fs.readFileSync(new URL('../data/rules/research/null-metrics-v046.registry.json',import.meta.url),'utf8'));
+const modelRegistry=JSON.parse(fs.readFileSync(new URL('../data/rules/research/null-models-v046.registry.json',import.meta.url),'utf8'));
+assert.deepEqual(metricRegistry.metrics.map(x=>x.id).sort(),Object.keys(NULL_METRICS).sort());
+assert.deepEqual(modelRegistry.models.map(x=>x.id).sort(),Object.values(NULL_MODELS).map(x=>x.id).sort());
+assert.ok(metricRegistry.rules.some(x=>x.includes('frozen before simulation')));
+assert.ok(modelRegistry.global_limits.some(x=>x.includes('not real-population frequency')));
+console.log('v0.4.6 null registries: ok');
