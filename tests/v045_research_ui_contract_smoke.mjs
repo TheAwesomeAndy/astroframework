@@ -1,1 +1,15 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const app=fs.readFileSync(new URL('../prototype/app.html',import.meta.url),'utf8');
+const bridge=fs.readFileSync(new URL('../src/research/v044-discovery-suite.mjs',import.meta.url),'utf8');
+const ui=fs.readFileSync(new URL('../src/research/research-aperture-ui.mjs',import.meta.url),'utf8');
+const lab=fs.readFileSync(new URL('../src/research/research-lab-engine.mjs',import.meta.url),'utf8');
+assert.equal((app.match(/<iframe\b/g)||[]).length,1);
+assert.doesNotMatch(app,/data-view="research"/i);
+for(const label of ['Chart','Reading','Resonance','Network','House Flow','Condition','Proof'])assert.match(app,new RegExp(`>${label}<`));
+assert.match(bridge,/window\.NoeticAtlasState=state/);
+assert.match(bridge,/research-aperture-ui\.mjs/);
+assert.match(bridge,/v0\.4\.5 candidate/);
+for(const term of ['Personal','Research','buildOperationalModelSnapshot','buildCurrentExperimentSuite','buildResearchLab','Open discovery candidates','Null comparison is required before rarity language'])assert.match(ui,new RegExp(term));
+assert.match(lab,/Discovery.*unnamed structures.*pre-registered.*hypotheses/s);
+console.log('v0.4.5 Personal/Research aperture contract: ok');
