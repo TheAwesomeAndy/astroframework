@@ -4,6 +4,7 @@ import {basinMetricsFromCounts} from './null-metric-registry.mjs';
 const SIGNS=['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
 const RULER={Aries:'Mars',Taurus:'Venus',Gemini:'Mercury',Cancer:'Moon',Leo:'Sun',Virgo:'Mercury',Libra:'Venus',Scorpio:'Mars',Sagittarius:'Jupiter',Capricorn:'Saturn',Aquarius:'Saturn',Pisces:'Jupiter'};
 const CLASSICAL=['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn'];
+const ANGULAR_HOUSES=new Set([1,4,7,10]);
 const signOf=x=>SIGNS[Math.floor((((Number(x)%360)+360)%360)/30)%12];
 const objMap=a=>Object.fromEntries((a?.objects||[]).map(o=>[o.id,o]));
 const ascSign=a=>a?.angles?.ASC?.sign||signOf(a?.angles?.ASC?.longitude||0);
@@ -14,9 +15,11 @@ function nextMap(longitudes){return Object.fromEntries(CLASSICAL.filter(p=>Numbe
 function walk(start,next){const route=[],seen=new Map();let p=start;while(p&&next[p]&&route.length<32){if(seen.has(p)){const cyc=route.slice(seen.get(p));return {route,terminal:[...cyc].sort().join('|')};}seen.set(p,route.length);route.push(p);p=next[p];}return {route,terminal:p||route.at(-1)||start};}
 function summarize(longitudes,asc,entries=null){
   const next=nextMap(longitudes),terminalByPlanet={};for(const p of Object.keys(next))terminalByPlanet[p]=walk(p,next).terminal;
-  const terminal_basin_count=new Set(Object.values(terminalByPlanet)).size,house_terminal_counts={},edgeCounts={};
-  for(const entry of entries||houseEntries(asc)){const r=walk(entry,next);house_terminal_counts[r.terminal]=(house_terminal_counts[r.terminal]||0)+1;for(let i=0;i<r.route.length-1;i++){const k=`${r.route[i]}->${r.route[i+1]}`;edgeCounts[k]=(edgeCounts[k]||0)+1;}}
-  return {...basinMetricsFromCounts(house_terminal_counts),terminal_basin_count,max_route_capture:Math.max(0,...Object.values(edgeCounts)),house_terminal_counts};
+  const terminal_basin_count=new Set(Object.values(terminalByPlanet)).size,house_terminal_counts={},angular_counts={},edgeCounts={},house_terminal_by_house={};
+  const entryList=entries||houseEntries(asc);
+  entryList.forEach((entry,i)=>{const house=i+1,r=walk(entry,next);house_terminal_by_house[house]=r.terminal;house_terminal_counts[r.terminal]=(house_terminal_counts[r.terminal]||0)+1;if(ANGULAR_HOUSES.has(house))angular_counts[r.terminal]=(angular_counts[r.terminal]||0)+1;for(let j=0;j<r.route.length-1;j++){const k=`${r.route[j]}->${r.route[j+1]}`;edgeCounts[k]=(edgeCounts[k]||0)+1;}});
+  const angular=basinMetricsFromCounts(angular_counts);
+  return {...basinMetricsFromCounts(house_terminal_counts),terminal_basin_count,max_route_capture:Math.max(0,...Object.values(edgeCounts)),angular_house_basin_concentration:angular.house_basin_concentration,house_terminal_counts,house_terminal_by_house};
 }
 
 export function sampleIndependentGeometry(analysis,rng){const obs=observedLongitudes(analysis),x=Object.fromEntries(Object.keys(obs).map(p=>[p,rng.random()*360]));return summarize(x,ascSign(analysis));}
