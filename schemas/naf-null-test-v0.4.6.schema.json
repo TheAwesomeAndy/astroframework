@@ -1,0 +1,10 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"naf-null-test-v0.4.6.schema.json",
+  "title":"Noetic Atlas Null Test v0.4.6",
+  "type":"object",
+  "required":["id","target_id","null_model_id","metric_id","seed","n_iterations","observed_value","null_distribution_summary","raw_p","status","interpretive_limit"],
+  "properties":{
+    "id":{"type":"string"},"target_id":{"type":"string"},"null_model_id":{"type":"string"},"metric_id":{"type":"string"},"seed":{"type":"string"},"n_iterations":{"type":"integer","minimum":1},"n_valid":{"type":"integer","minimum":0},"observed_value":{"type":"number"},"raw_p":{"type":"number","minimum":0,"maximum":1},"adjusted_p":{"type":["number","null"],"minimum":0,"maximum":1},"empirical_percentile":{"type":["number","null"],"minimum":0,"maximum":1},"preserved_properties":{"type":"array","items":{"type":"string"}},"randomized_properties":{"type":"array","items":{"type":"string"}},"what_this_null_can_test":{"type":"array","items":{"type":"string"}},"what_this_null_cannot_test":{"type":"array","items":{"type":"string"}},"null_distribution_summary":{"type":"object","required":["mean","sd","median","digest"]},"status":{"enum":["complete","failed","not-run"]},"interpretive_limit":{"type":"string"}
+  }
+}
