@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+const html=fs.readFileSync(new URL('../prototype/v045.html',import.meta.url),'utf8');
+assert.equal((html.match(/<iframe\b/g)||[]).length,1);
+assert.match(html,/id="core" src="\.\/index\.html\?build=v045-core"/);
+for(const label of ['Chart','Reading','Resonance','Network','House Flow','Condition','Proof'])assert.match(html,new RegExp(`>${label}<`));
+assert.match(html,/data-aperture="personal"/);assert.match(html,/data-aperture="research"/);
+assert.doesNotMatch(html,/>Research</g,'Research must be an aperture control, not an eighth top-level view');
+for(const token of ['buildResearchLab','buildModernRulershipOverlay','computeExtendedAspects','buildV044DiscoverySuite'])assert.match(html,new RegExp(token));
+assert.match(html,/Ceres/);assert.match(html,/registered-not-executed/);assert.match(html,/surprising its creators|Research constitution/);
+assert.match(html,/A delta is not evidence that the experimental model is superior/);
+const m=html.match(/<script type="module">([\s\S]*?)<\/script>/);assert.ok(m);const code=m[1].replace(/^import .*$/gm,'');new vm.Script(`(async()=>{${code}\n})`);
+console.log('v0.4.5 research aperture UI contract: ok');
