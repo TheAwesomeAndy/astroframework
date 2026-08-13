@@ -1,5 +1,6 @@
 import {runStandardNullSuite,runCandidateNullSuite} from './null-model-laboratory.mjs';
 import {buildNullLabViewModel} from './null-lab-view-model.mjs';
+import {buildDiscoveryCandidateRegistry} from './discovery-candidate-registry.mjs';
 
 export const NULL_LAB_BROWSER_VERSION='0.4.6';
 export const NULL_LAB_BROWSER_MODEL='naf.research.null_lab_browser.v0.4.6';
@@ -9,17 +10,16 @@ const short=x=>String(x||'').replace(/^naf\.null\./,'').replace(/\.v\d+$/,'');
 let rendering=false;
 
 function context(){return globalThis.__NAF_RESEARCH_CONTEXT__||null;}
-function baseLab(){return globalThis.__NAF_RESEARCH_LAB__||null;}
 function result(){return globalThis.__NAF_V046_NULL_RESULT__||null;}
 function researchOpen(){return typeof document!=='undefined'&&document.body?.dataset?.aperture==='research';}
 
 export function runBrowserNullSuite({iterations=256,seed='naf-v046-browser'}={}){
-  const ctx=context(),base=baseLab();
-  if(!ctx?.analysis||!base)throw new Error('Research chart context is not available.');
+  const ctx=context();
+  if(!ctx?.analysis)throw new Error('Research chart context is not available.');
   const args={analysis:ctx.analysis,graph:ctx.graph,river:ctx.river,discoveries:ctx.discoveries,iterations:Number(iterations),seed:String(seed)};
-  const nulls=runStandardNullSuite(args);
-  const candidate_nulls=(base.discovery?.candidates||[]).map(candidate=>runCandidateNullSuite({candidate,...args}));
-  const lab={...base,model_id:'naf.research.lab.v0.4.6.browser',version:'0.4.6',nulls,candidate_nulls,null_policy:{population_frequency:'not measured by null models',interpretation:'withheld',reproducibility:'same source state + model version + metric version + iteration count + seed reproduces the result'}};
+  const nulls=runStandardNullSuite(args),discovery=buildDiscoveryCandidateRegistry(ctx.discoveries);
+  const candidate_nulls=(discovery.candidates||[]).map(candidate=>runCandidateNullSuite({candidate,...args}));
+  const lab={model_id:'naf.research.lab.v0.4.6.browser',version:'0.4.6',discovery,nulls,candidate_nulls,null_policy:{population_frequency:'not measured by null models',interpretation:'withheld',reproducibility:'same source state + model version + metric version + iteration count + seed reproduces the result'}};
   globalThis.__NAF_V046_NULL_RESULT__=lab;
   renderNullLabPanels(true);
   return lab;
