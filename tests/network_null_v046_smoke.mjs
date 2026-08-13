@@ -8,3 +8,4 @@ const text=fs.readFileSync(new URL('./fixtures/audrey-chart.txt',import.meta.url
 const g=aspectGraph(analysis),r=rewireDegreeSequence(g,createSeededRng('degree-regression'));
 assert.equal(r.edges.length,g.edges.length);assert.deepEqual(degreeSequence(r),degreeSequence(g));assert.deepEqual([...r.nodes].sort(),[...g.nodes].sort());
 console.log('v0.4.6 degree-preserving aspect-network null: ok');
+await import('./null_registry_v046_smoke.mjs');
