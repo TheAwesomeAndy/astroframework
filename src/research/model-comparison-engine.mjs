@@ -1,4 +1,5 @@
 import {createModelIdentity,createResearchStatus} from './research-regime-registry.mjs';
+import {notifyResearchContext} from './null-lab-browser-integration.mjs';
 
 export const MODEL_COMPARISON_VERSION='0.4.5';
 export const MODEL_COMPARISON_MODEL='naf.research.model_comparison.v0.4.5';
@@ -12,6 +13,11 @@ export function buildOperationalSnapshot({analysis=null,graph=null,river=null,co
   const houseRoutes=(river?.houses||[]).map(h=>({house:h.house,entry_ruler:h.entry_ruler,path:[...(h.path||h.route||[])]}));
   const aspects=(analysis?.aspects||[]).filter(a=>['conjunction','sextile','square','trine','opposition'].includes(a.type||a.aspect)).map(a=>`${a.a}:${a.type||a.aspect}:${a.b}`).sort();
   const compound=(conditions?.compound?.testimonies||[]).map(t=>t.id).sort();
+  if(typeof document!=='undefined'){
+    globalThis.__NAF_RESEARCH_CONTEXT__={analysis,graph,river,conditions,discoveries:null};
+    globalThis.__NAF_V046_NULL_RESULT__=null;
+    notifyResearchContext();
+  }
   return {model_identity:createModelIdentity({regime:'operational',model_id:'naf.operational.hellenistic_wsh.v0.4.5',tradition:'Hellenistic/traditional control'}),dispositor_edges:dispositors,terminal_basins:basins,house_routes:houseRoutes,canonical_aspects:aspects,compound_testimonies:compound};
 }
 
@@ -24,6 +30,10 @@ export function compareModelSnapshots({hypothesis_id,control,variant,variant_mod
 }
 
 export function buildOverlayComparison({hypothesis,operational,modern=null,extended=null,discoveries=null}={}){
+  if(typeof document!=='undefined'&&discoveries){
+    globalThis.__NAF_RESEARCH_CONTEXT__={...(globalThis.__NAF_RESEARCH_CONTEXT__||{}),discoveries};
+    notifyResearchContext();
+  }
   if(!hypothesis||!operational)return null;
   let variant={...operational};
   if(hypothesis.hypothesis_id==='NAF-HYP-MODERN-OUTER-CORULERS-001'){
