@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {RESEARCH_REGIMES,RESEARCH_STATUS_KEYS} from '../src/research/research-regime-registry.mjs';
+import {buildDefaultHypothesisRegistry} from '../src/research/hypothesis-pack.mjs';
+import {compareModelSnapshots} from '../src/research/model-comparison-engine.mjs';
+assert.deepEqual(Object.keys(RESEARCH_REGIMES),['operational','experimental','discovery']);
+assert.equal(RESEARCH_STATUS_KEYS.length,8);
+const registry=buildDefaultHypothesisRegistry();
+assert.ok(registry.length>=5);
+const ceres=registry.find(h=>h.hypothesis_id==='NAF-HYP-CERES-TAURUS-001');
+assert.ok(ceres);assert.equal(ceres.execution_status,'registered-not-executed');assert.match(ceres.notes.join(' '),/example hypothesis/i);
+const generic=compareModelSnapshots({hypothesis_id:'TEST-GENERIC',control:{dispositor_edges:['A->B'],canonical_aspects:['A:square:B']},variant:{dispositor_edges:['A->B','C->B'],canonical_aspects:['A:square:B']},variant_model_id:'naf.test.generic.v1'});
+assert.deepEqual(generic.changed_fields,['dispositor_edges']);assert.deepEqual(generic.deltas.dispositor_edges.added,['C->B']);
+console.log('v0.4.5 research regime registry: ok');
