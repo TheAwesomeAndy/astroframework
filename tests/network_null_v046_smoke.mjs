@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {parseChartInput} from '../src/kernel/noetic-kernel.mjs';
+import {analyzeChartWithIntegrity} from '../src/kernel/hellenistic-integrity.mjs';
+import {createSeededRng} from '../src/research/deterministic-prng.mjs';
+import {aspectGraph,degreeSequence,rewireDegreeSequence} from '../src/research/network-null-sampler.mjs';
+const text=fs.readFileSync(new URL('./fixtures/audrey-chart.txt',import.meta.url),'utf8'),analysis=analyzeChartWithIntegrity(parseChartInput(text));
+const g=aspectGraph(analysis),r=rewireDegreeSequence(g,createSeededRng('degree-regression'));
+assert.equal(r.edges.length,g.edges.length);assert.deepEqual(degreeSequence(r),degreeSequence(g));assert.deepEqual([...r.nodes].sort(),[...g.nodes].sort());
+console.log('v0.4.6 degree-preserving aspect-network null: ok');
