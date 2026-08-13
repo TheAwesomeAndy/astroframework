@@ -11,3 +11,4 @@ assert.ok(metricRegistry.rules.some(x=>x.includes('frozen before simulation')));
 assert.ok(metricRegistry.rules.some(x=>x.includes('house-label-sensitive')));
 assert.ok(modelRegistry.global_limits.some(x=>x.includes('not real-population frequency')));
 console.log('v0.4.6 null registries: ok');
+await import('./null_view_v046_smoke.mjs');
