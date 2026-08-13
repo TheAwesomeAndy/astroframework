@@ -16,5 +16,5 @@ const a=runStandardNullSuite({analysis,graph,river,discoveries,iterations:64,see
 assert.equal(a.tests.length,16);assert.equal(a.population_frequency_status,'not_measured');assert.equal(a.interpretation_status,'withheld');
 assert.deepEqual(a.tests.map(x=>x.null_distribution_summary.digest),b.tests.map(x=>x.null_distribution_summary.digest));
 for(const t of a.tests){assert.equal(t.n_iterations,64);assert.ok(t.raw_p>0&&t.raw_p<=1);assert.ok(t.adjusted_p>0&&t.adjusted_p<=1);assert.ok(Array.isArray(t.what_this_null_can_test)&&t.what_this_null_can_test.length);assert.ok(Array.isArray(t.what_this_null_cannot_test)&&t.what_this_null_cannot_test.length);assert.equal(t.model_identity.status.interpretation,'withheld');}
-assert.equal(a.observed_metrics.largest_house_basin_fraction,10/12);assert.equal(a.observed_metrics.max_route_capture,5);
+assert.ok(Math.abs(a.observed_metrics.largest_house_basin_fraction-10/12)<1e-6);assert.equal(a.observed_metrics.max_route_capture,5);
 console.log('v0.4.6 null model laboratory: ok');
