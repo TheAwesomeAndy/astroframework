@@ -12,12 +12,12 @@ import {computeExtendedAspects} from '../src/research/aspect-family-engine.mjs';
 import {runStandardNullSuite} from '../src/research/null-model-laboratory.mjs';
 const text=fs.readFileSync(new URL('./fixtures/audrey-chart.txt',import.meta.url),'utf8'),analysis=analyzeChartWithIntegrity(parseChartInput(text));
 const conditions=computeConditionSystem(analysis),graph=analyzeGraphArchitecture(analysis,conditions.primitive),river=buildHouseRiver(analysis),resonance=buildHouseResonanceMap(analysis),modern=buildModernRulershipOverlay(analysis),extended=computeExtendedAspects(analysis),discoveries=buildV044DiscoverySuite({analysis,conditions,graph,resonance,river,modern,extended});
-const a=runStandardNullSuite({analysis,graph,river,discoveries,iterations:64,seed:'audrey-regression'}),b=runStandardNullSuite({analysis,graph,river,discoveries,iterations:64,seed:'audrey-regression'});
-assert.equal(a.tests.length,13);assert.equal(a.population_frequency_status,'not_measured');assert.equal(a.interpretation_status,'withheld');
-assert.deepEqual(a.tests.map(x=>x.null_distribution_summary.digest),b.tests.map(x=>x.null_distribution_summary.digest));
-for(const t of a.tests){assert.equal(t.n_iterations,64);assert.ok(t.raw_p>0&&t.raw_p<=1);assert.ok(t.adjusted_p>0&&t.adjusted_p<=1);assert.ok(Array.isArray(t.what_this_null_can_test)&&t.what_this_null_can_test.length);assert.ok(Array.isArray(t.what_this_null_cannot_test)&&t.what_this_null_cannot_test.length);assert.equal(t.model_identity.status.interpretation,'withheld');}
+const args={analysis,graph,river,conditions,discoveries,iterations:64,seed:'audrey-regression'},a=runStandardNullSuite(args),b=runStandardNullSuite(args);
+assert.equal(a.tests.length,15);assert.equal(a.population_frequency_status,'not_measured');assert.equal(a.interpretation_status,'withheld');assert.match(a.source_state_fingerprint,/^fnv1a32:/);
+assert.equal(a.source_state_fingerprint,b.source_state_fingerprint);assert.deepEqual(a.tests.map(x=>x.null_distribution_summary.digest),b.tests.map(x=>x.null_distribution_summary.digest));
+for(const t of a.tests){assert.equal(t.n_iterations,64);assert.ok(t.raw_p>0&&t.raw_p<=1);assert.ok(t.adjusted_p>0&&t.adjusted_p<=1);assert.ok(Array.isArray(t.what_this_null_can_test)&&t.what_this_null_can_test.length);assert.ok(Array.isArray(t.what_this_null_cannot_test)&&t.what_this_null_cannot_test.length);assert.equal(t.model_identity.status.interpretation,'withheld');assert.equal(t.model_identity.status.null_comparison,'tested');assert.equal(t.source_state_fingerprint,a.source_state_fingerprint);assert.equal(t.null_model_registry_version,'0.4.6');assert.equal(t.metric_registry_version,'0.4.6');}
 const topic=a.tests.find(t=>t.null_model_id==='naf.null.topic_routing_permutation.v1');assert.equal(topic.metric_id,'angular_house_basin_concentration');assert.ok(topic.null_distribution_summary.sd>0,'topic null must vary a house-label-sensitive metric');
-assert.ok(Math.abs(a.observed_metrics.largest_house_basin_fraction-10/12)<1e-6);
-assert.equal(a.observed_metrics.max_route_capture,river.max_route_count);
-assert.equal(river.planetary_bands.find(x=>x.from==='Mars'&&x.to==='Saturn')?.count,5);
+const networkMetrics=a.tests.filter(t=>t.null_model_id==='naf.null.degree_preserving_aspect_rewire.v1').map(t=>t.metric_id);assert.deepEqual(networkMetrics,['aspect_triangle_count','aspect_articulation_count','motif_overlay_intersection_count','max_multilayer_role_count']);
+assert.ok(Number.isFinite(a.observed_metrics.motif_overlay_intersection_count));assert.ok(Number.isFinite(a.observed_metrics.max_multilayer_role_count));
+assert.ok(Math.abs(a.observed_metrics.largest_house_basin_fraction-10/12)<1e-6);assert.equal(a.observed_metrics.max_route_capture,river.max_route_count);assert.equal(river.planetary_bands.find(x=>x.from==='Mars'&&x.to==='Saturn')?.count,5);
 console.log('v0.4.6 null model laboratory: ok');
