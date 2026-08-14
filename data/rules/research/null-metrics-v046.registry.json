@@ -11,7 +11,8 @@
     {"id":"max_route_capture","formula":"max_e count(house routes traversing e)","direction":"high_is_extreme"},
     {"id":"aspect_triangle_count","formula":"number of undirected 3-cliques","direction":"high_is_extreme"},
     {"id":"aspect_articulation_count","formula":"number of articulation vertices","direction":"high_is_extreme"},
-    {"id":"max_multilayer_role_count","formula":"max_v sum_l indicator(role_l(v))","direction":"high_is_extreme"}
+    {"id":"motif_overlay_intersection_count","formula":"count of aspect 3-cliques containing at least one fixed relational or compound-condition pair","direction":"high_is_extreme","limit":"Structural 3-clique intersection only; the degree-preserving null does not preserve typed aspect-family semantics."},
+    {"id":"max_multilayer_role_count","formula":"max_v [I(aspect articulation)+I(dispositor bottleneck)+I(non-neutral compound condition)]","direction":"high_is_extreme"}
   ],
-  "rules":["Metrics are frozen before simulation.","A metric is not an astrological strength score.","A low null probability under one control is not astrological validation.","Topic-routing permutations must use house-label-sensitive metrics; global basin concentration is invariant when only house labels are permuted."]
+  "rules":["Metrics are frozen before simulation.","A metric is not an astrological strength score.","A low null probability under one control is not astrological validation.","Topic-routing permutations must use house-label-sensitive metrics; global basin concentration is invariant when only house labels are permuted.","Cross-layer network metrics hold the observed dispositor and condition layers fixed while rewiring only aspect connectivity."]
 }
