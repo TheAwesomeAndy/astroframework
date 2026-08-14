@@ -1,205 +1,188 @@
 # Noetic Atlas Documentation Index
 
-This index separates **living documentation** from **historical milestone/release records**. Living documents describe the current `main` implementation. Historical documents preserve what a specific release meant at the time and are not rewritten to impersonate the present.
+This index separates **current public documentation**, **active research-candidate documentation**, and **historical milestone records**.
 
-## Current release
+Living documents must describe the actual current project state. Historical milestone documents preserve what a specific release meant at the time and are not rewritten to impersonate the present.
 
-Read first:
+## Read first
 
-1. [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md) — canonical current release contract, browser surface, model IDs, implemented capabilities, and limitations.
-2. [`V043_COMPOUND_CONDITION.md`](V043_COMPOUND_CONDITION.md) — v0.4.3 compound-condition source lock, implemented/deferred rule boundary, fixtures, UI projection, and proof contract.
-3. [`V042_RELATIONAL_CONDITION.md`](V042_RELATIONAL_CONDITION.md) — v0.4.2 relational ontology, condition signatures, House River, and Derivation Walker foundation.
-4. [`../README.md`](../README.md) — project overview and current implementation summary.
-5. [`CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md`](CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md) — scientific/epistemic posture and claim boundaries.
-6. [`CONDITION_ENGINE_SPEC.md`](CONDITION_ENGINE_SPEC.md) — living condition architecture.
-7. [`ROADMAP.md`](ROADMAP.md) — current engineering/research sequence.
+1. [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md) — canonical public release contract.
+2. [`RESEARCH_CONSTITUTION.md`](RESEARCH_CONSTITUTION.md) — Operational / Experimental / Discovery boundaries and promotion rules.
+3. [`LONG_RANGE_RESEARCH_ARCHITECTURE.md`](LONG_RANGE_RESEARCH_ARCHITECTURE.md) — accepted five-strata architecture and dependency order.
+4. [`ROADMAP.md`](ROADMAP.md) — current engineering/research sequence.
+5. [`CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md`](CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md) — scientific and epistemic posture.
+6. [`../README.md`](../README.md) — repository overview.
 
-### Current release identifiers
+## Current public release
 
-```text
-public release                    v0.4.3 — Compound Condition
-current browser surface           prototype/v043.html
-deployed branch                   main
-condition system                  naf.condition.system.v0.4.3
-compound condition                naf.condition.compound.hellenistic.v0.4.3
-compound rule registry            naf.rules.compound_condition.hellenistic.v0.4.3
-relational condition              naf.condition.relational.hellenistic.v0.4.2
-condition signature               naf.condition.signature.v0.4.2
-House River                       naf.research.house_river.v0.4.2
-Derivation Walker                 naf.integrity.derivation_walker.v0.4.3
-house resonance                   naf.interpretation.house_resonance.v0.4.1.3
-energetic synthesis               naf.interpretation.energetic_synthesis.v0.4.1.2
-graph analytics                   naf.research.graph_analytics.v0.4.1
-primitive condition               naf.condition.primitive.hellenistic.v0.4.0b
-condition schema                  naf.condition.record.v0.4.0a
-minimum analysis envelope         naf.analysis.v0.3.1
-```
-
-The root `index.html` redirects to `prototype/v043.html`.
-
-Preservation chain:
+Public release:
 
 ```text
-v043
-└── v042
-    └── v0413
-        └── v0412c
-            └── prototype/index.html deterministic visual core
+v0.4.5 — Research Regimes & Hypothesis Architecture
 ```
 
-The governing architecture is:
+Current browser surface:
 
 ```text
-one chart state
-→ many coordinated projections
+prototype/app.html
 ```
 
-No representation owns a second calculator.
-
-## Current public projections
-
-The v0.4.3 shell exposes:
+Current package implementation identifier on `main`:
 
 ```text
-Existing Atlas        → complete preserved v0.4.2 interface
-Compound Condition    → independent compound testimonies
-Compound Map          → compound-condition relationship projection
-Proof Walker          → compound-aware derivation traversal
-Source Boundary       → implemented versus deferred reconstruction states
+0.4.5-alpha.1
 ```
 
-Within preserved v042:
+The public application preserves the seven coordinated views:
 
 ```text
-Qualified Resonance
-Relations
-Qualified Flow
-House River
-Proof Walker
+Chart · Reading · Resonance · Network · House Flow · Condition · Proof
 ```
 
-Within preserved v0412c:
+and the aperture switch:
 
 ```text
-Energetic Analysis
-Graph Findings
-Metrics
-Condition
-Integrity
+Personal | Research
 ```
 
-The deterministic core still exposes Natal Field, Aspect Matrix, Flow Map, Lots & Sect, Research Lab, and Audit.
+v0.4.5 makes three model regimes first-class:
+
+```text
+Operational ≠ Experimental ≠ Discovery
+```
+
+The research lifecycle is:
+
+```text
+Detect → Describe → Compare → Test → Replicate → Interpret
+```
+
+Detection does not imply rarity, significance, validity, or meaning.
+
+## Active research candidate — v0.4.6
+
+Feature branch:
+
+```text
+feat-v046-null-model-lab
+```
+
+Primary specification:
+
+- [`V046_NULL_MODEL_LAB.md`](V046_NULL_MODEL_LAB.md)
+
+Machine-readable contracts:
+
+- [`../data/rules/research/null-models-v046.registry.json`](../data/rules/research/null-models-v046.registry.json)
+- [`../data/rules/research/null-metrics-v046.registry.json`](../data/rules/research/null-metrics-v046.registry.json)
+- [`../schemas/naf-null-test-v0.4.6.schema.json`](../schemas/naf-null-test-v0.4.6.schema.json)
+
+v0.4.6 supplies plural deterministic counterfactual baselines:
+
+```text
+N_G — independent geometric longitude control
+N_L — classical label permutation
+N_D — degree-preserving aspect-network rewiring
+N_T — house-topic routing permutation
+```
+
+The candidate freezes metrics before simulation, records source-state and registry provenance, uses deterministic seeds, reports empirical Monte Carlo probabilities and FDR-adjusted values where appropriate, and updates only the `null_comparison` research-status dimension when a compatible null is executed.
+
+It explicitly does **not** measure real natal-population frequency and does **not** authorize interpretation.
+
+## Accepted long-range research architecture
+
+The governing five strata are:
+
+```text
+A — Astronomical substrate
+B — Rule models
+C — Structural mathematics
+D — Research inference
+E — Human synthesis
+```
+
+Accepted dependency order:
+
+```text
+Nulls
+→ Formal Configurations / Hypergraphs
+→ New Geometry
+→ Experimental Models
+→ Persistence
+→ Population Baselines
+→ Interpretive Research
+```
+
+Boundary condition:
+
+> **The mathematics should not manufacture meaning. It should make claims testable.**
+
+Field language, harmonics, hypergraphs, learned models, and experimental rulerships are therefore subordinate to explicit model identity, provenance, controlled comparison, and the research lifecycle.
 
 ## Living architecture and engineering docs
 
-- [`ARCHITECTURE.md`](ARCHITECTURE.md) — layer boundaries, one-state/multi-projection rule, module ownership, and preservation chain.
+- [`ARCHITECTURE.md`](ARCHITECTURE.md) — software-layer ownership and dependency direction.
 - [`DEVELOPER_GUIDE.md`](DEVELOPER_GUIDE.md) — repository map, tests, extension rules, and definition of done.
-- [`ASTROLOGICAL_MODEL.md`](ASTROLOGICAL_MODEL.md) — tropical/Whole-Sign/traditional-rulership substrate plus primitive, relational, and compound condition boundaries.
-- [`INTEGRITY_AND_PROVENANCE.md`](INTEGRITY_AND_PROVENANCE.md) — epistemic classes, derivation ledger, relation/compound proof, House River proof, and interpretation evidence chain.
-- [`ASTRONOMY_ADAPTERS.md`](ASTRONOMY_ADAPTERS.md) — current Astronomy Engine adapter and extended-object limitations.
-- [`ASTRONOMY_VALIDATION_PLAN.md`](ASTRONOMY_VALIDATION_PLAN.md) — independent provider-validation requirements.
+- [`ASTROLOGICAL_MODEL.md`](ASTROLOGICAL_MODEL.md) — tropical / Whole Sign / traditional-rulership substrate and model boundaries.
+- [`CONDITION_ENGINE_SPEC.md`](CONDITION_ENGINE_SPEC.md) — living condition architecture.
+- [`INTEGRITY_AND_PROVENANCE.md`](INTEGRITY_AND_PROVENANCE.md) — epistemic classes and evidence-chain requirements.
+- [`ASTRONOMY_ADAPTERS.md`](ASTRONOMY_ADAPTERS.md) — current Astronomy Engine adapter and unsupported-object boundaries.
+- [`ASTRONOMY_VALIDATION_PLAN.md`](ASTRONOMY_VALIDATION_PLAN.md) — independent astronomy validation requirements.
 - [`GLOSSARY.md`](GLOSSARY.md) — engineering, graph, astrological, condition, resonance, and proof vocabulary.
 
 ## Product, theory, and research
 
-- [`PRODUCT.md`](PRODUCT.md) — product hierarchy, user value, product boundaries, and public surface.
-- [`THEORY_AND_PURPOSE.md`](THEORY_AND_PURPOSE.md) — philosophical/epistemic mission and geometry → topology → condition → synthesis → time progression.
-- [`RESEARCH_PROGRAM.md`](RESEARCH_PROGRAM.md) — graph/null/HCI/astrological research program and promotion gates.
-- [`RESEARCH_DISCOVERY.md`](RESEARCH_DISCOVERY.md) — current exploratory descriptors and promotion status.
+- [`PRODUCT.md`](PRODUCT.md) — product hierarchy and public-surface boundaries.
+- [`THEORY_AND_PURPOSE.md`](THEORY_AND_PURPOSE.md) — philosophical and epistemic mission.
+- [`RESEARCH_PROGRAM.md`](RESEARCH_PROGRAM.md) — empirical, graph, HCI, and promotion research program.
+- [`RESEARCH_DISCOVERY.md`](RESEARCH_DISCOVERY.md) — exploratory descriptors and discovery posture.
+- [`RESEARCH_CONSTITUTION.md`](RESEARCH_CONSTITUTION.md) — constitutional research doctrine.
+- [`LONG_RANGE_RESEARCH_ARCHITECTURE.md`](LONG_RANGE_RESEARCH_ARCHITECTURE.md) — accepted long-range dependency architecture.
 
-## Condition implementation
+## Condition implementation history
 
-Read in this order:
+Read in order:
 
-1. [`V040A_CONDITION_ONTOLOGY.md`](V040A_CONDITION_ONTOLOGY.md) — historical primitive ontology freeze.
-2. [`V040B_PRIMITIVE_CONDITION.md`](V040B_PRIMITIVE_CONDITION.md) — historical primitive implementation milestone.
-3. [`V042_RELATIONAL_CONDITION.md`](V042_RELATIONAL_CONDITION.md) — relational implementation/source lock.
-4. [`V043_COMPOUND_CONDITION.md`](V043_COMPOUND_CONDITION.md) — compound implementation/source lock and explicit deferred boundary.
-5. [`CONDITION_ENGINE_SPEC.md`](CONDITION_ENGINE_SPEC.md) — living condition specification.
-6. [`../data/rules/hellenistic/condition-v1.registry.json`](../data/rules/hellenistic/condition-v1.registry.json) — primitive registry.
-7. [`../data/rules/hellenistic/relational-condition-v1.registry.json`](../data/rules/hellenistic/relational-condition-v1.registry.json) — relational registry.
-8. [`../data/rules/hellenistic/compound-condition-v1.registry.json`](../data/rules/hellenistic/compound-condition-v1.registry.json) — compound registry.
+1. [`V040A_CONDITION_ONTOLOGY.md`](V040A_CONDITION_ONTOLOGY.md)
+2. [`V040B_PRIMITIVE_CONDITION.md`](V040B_PRIMITIVE_CONDITION.md)
+3. [`V042_RELATIONAL_CONDITION.md`](V042_RELATIONAL_CONDITION.md)
+4. [`V043_COMPOUND_CONDITION.md`](V043_COMPOUND_CONDITION.md)
+5. [`CONDITION_ENGINE_SPEC.md`](CONDITION_ENGINE_SPEC.md)
 
-Current status:
+Current condition stack:
 
 ```text
 primitive condition      implemented
 relational condition     implemented
-compound condition       implemented for source-secure v0.4.3 subset
+compound condition       implemented for source-secure selected subset
 scalar strength score    intentionally not implemented
 ```
 
-### Compound condition currently implemented
+Traditional source-secure condition testimonies remain categorical and independently inspectable. Mixed bonification and maltreatment may coexist.
 
-- bonification by benefic superior trine/square;
-- maltreatment by malefic superior square/domination;
-- benefic sign-based trine testimony;
-- malefic sign-based opposition testimony;
-- seven-degree ray enclosure;
-- intervention breaking enclosure;
-- sect qualification;
-- reception qualification;
-- mixed bonification+maltreatment preservation.
-
-Selected historically ambiguous variants remain deferred rather than guessed.
-
-## Resonance / interpretation hierarchy
-
-The modern natural-house correspondence remains a labeled secondary overlay. It does not replace the actual Whole Sign, actual place doctrine, actual domicile ruler, or ruler condition/routing.
-
-Current qualified read order:
-
-```text
-house domain
-→ actual Whole Sign
-→ actual ruler + placement
-→ primitive condition
-→ relational condition
-→ compound testimonies
-→ dispositor routing
-→ aspect / graph context
-→ downstream energetic synthesis
-→ proof
-```
-
-Ceres is interpreted only when a coordinate is supplied. The current birth-time astronomy adapter does not automatically calculate a validated Ceres position.
-
-## Current graph families
+## Current structural stack
 
 ### Classical dispositor graph
 
 ```text
 SCC condensation
-terminal basin membership / fraction
+terminal basins
 route depth
 upstream route capture
-nonterminal path bottleneck
+nonterminal bottlenecks
 ```
 
 ### Aspect graph
 
 ```text
-connected components
-degree
-local / mean clustering
-normalized unweighted betweenness
+components
+degree / clustering / betweenness
 articulation points
 bridges
-typed closed three-node motifs
-Grand Trine / T-square / triple conjunction
-exact ≤1° subset
+typed three-node motifs
+exact-aspect subsets
 ```
-
-### Relational-condition graphs
-
-```text
-G_reception
-G_exchange
-G_mutual_reception
-G_overcoming
-```
-
-These qualify but do not rewrite dispositorship.
 
 ### House River
 
@@ -207,45 +190,32 @@ These qualify but do not rewrite dispositorship.
 house domain → entry ruler → dispositor route → terminal circuit
 ```
 
-Planetary band width equals the integer number of Whole Sign house-ruler paths traversing the edge. This is routing evidence, not strength.
+Band width is the integer number of house-ruler paths traversing an edge. It is routing evidence, not planetary strength.
 
-## Derivation Walker
+### Research discovery
 
-The v0.4.3 walker indexes deterministic, primitive-condition, relational-condition, compound-condition, and House River proof objects. Every compound testimony introduced in v0.4.3 is created with a `derivation_ref`.
+Cross-layer detectors may report reproducible intersections among topology, condition, resonance, and routing. Discovery candidates remain provisional until appropriate comparison, nulls, population baselines, replication, and interpretation stages are completed.
 
-Unnormalized legacy dependencies are explicitly marked rather than fabricated.
+### v0.4.6 null inference candidate
 
-## Current research gate
+The current candidate adds frozen metrics for house-basin concentration/entropy, route capture, terminal-basin count, aspect triangles/articulation, cross-layer motif intersections, multi-role coincidence, and a house-label-sensitive angular concentration statistic.
 
-Claims such as `rare`, `high`, `dominant`, `exceptional`, or `statistically enriched` remain blocked until explicit comparison/null models exist.
+Null-model frequency is not real-population frequency.
 
-Planned null families include geometric-longitude randomization, label permutation, degree-preserving rewiring where appropriate, and layer-overlap randomization.
+## Timing and extended geometry
 
-## Astronomy/extended-object boundary
+Timing, additional celestial objects, declination, antiscia, midpoints, field models, harmonics, and learned systems remain downstream of the dependency rules in [`LONG_RANGE_RESEARCH_ARCHITECTURE.md`](LONG_RANGE_RESEARCH_ARCHITECTURE.md).
 
-Current birth-time adapter automatically supports Sun through Pluto, ASC, MC, motion state, and solar altitude. It does not yet automatically produce validated coordinates for Ceres, Chiron, node variants, Lilith/apogee variants, Vertex, or fixed stars.
+Near-term hidden-geometry priority after formal configurations is:
 
-Unsupported coordinates are never invented.
+```text
+declination/parallels
+→ antiscia/contra-antiscia
+→ midpoints
+```
 
-## Historical/release documents
+Continuous field topographies and learned graph models come later.
 
-These are intentionally historical or release-scoped:
+## Governing project standard
 
-- [`NOETIC_ATLAS_V02_DEV_NOTES.md`](NOETIC_ATLAS_V02_DEV_NOTES.md)
-- [`V03_KERNEL_AND_INPUT.md`](V03_KERNEL_AND_INPUT.md)
-- [`V03_CLOSEOUT_AND_V04_ENTRY.md`](V03_CLOSEOUT_AND_V04_ENTRY.md)
-- [`V040A_CONDITION_ONTOLOGY.md`](V040A_CONDITION_ONTOLOGY.md)
-- [`V040B_PRIMITIVE_CONDITION.md`](V040B_PRIMITIVE_CONDITION.md)
-- [`V041_GRAPH_ANALYTICS_AND_FINDINGS.md`](V041_GRAPH_ANALYTICS_AND_FINDINGS.md)
-- [`V0411_INTERPRETIVE_ANALYSIS.md`](V0411_INTERPRETIVE_ANALYSIS.md)
-- [`V0412_ENERGETIC_SYNTHESIS.md`](V0412_ENERGETIC_SYNTHESIS.md)
-- [`V0412C_RELEASE_CONTRACT.md`](V0412C_RELEASE_CONTRACT.md)
-- [`V0413_RESONANCE_FIELD.md`](V0413_RESONANCE_FIELD.md)
-- [`V042_RELATIONAL_CONDITION.md`](V042_RELATIONAL_CONDITION.md)
-- [`V043_COMPOUND_CONDITION.md`](V043_COMPOUND_CONDITION.md) — current release specification.
-
-## Documentation rule
-
-When living implementation and living documentation disagree, the disagreement is a defect.
-
-A new rule, provider, schema, graph metric, relation, compound testimony, finding, interpretation profile, public browser surface, or release claim is not complete until documentation, provenance identity, epistemic status, and relevant tests are updated in the same development movement.
+> **If a feature merely makes astrology look interesting, it does not belong. If it exposes a structural or experiential question difficult to inspect, reproduce, compare, or test with traditional representation, it may belong.**
