@@ -16,10 +16,10 @@ function researchOpen(){return typeof document!=='undefined'&&document.body?.dat
 export function runBrowserNullSuite({iterations=256,seed='naf-v046-browser'}={}){
   const ctx=context();
   if(!ctx?.analysis)throw new Error('Research chart context is not available.');
-  const args={analysis:ctx.analysis,graph:ctx.graph,river:ctx.river,discoveries:ctx.discoveries,iterations:Number(iterations),seed:String(seed)};
+  const args={analysis:ctx.analysis,graph:ctx.graph,river:ctx.river,conditions:ctx.conditions,discoveries:ctx.discoveries,iterations:Number(iterations),seed:String(seed)};
   const nulls=runStandardNullSuite(args),discovery=buildDiscoveryCandidateRegistry(ctx.discoveries);
   const candidate_nulls=(discovery.candidates||[]).map(candidate=>runCandidateNullSuite({candidate,...args}));
-  const lab={model_id:'naf.research.lab.v0.4.6.browser',version:'0.4.6',discovery,nulls,candidate_nulls,null_policy:{population_frequency:'not measured by null models',interpretation:'withheld',reproducibility:'same source state + model version + metric version + iteration count + seed reproduces the result'}};
+  const lab={model_id:'naf.research.lab.v0.4.6.browser',version:'0.4.6',discovery,nulls,candidate_nulls,null_policy:{population_frequency:'not measured by null models',interpretation:'withheld',reproducibility:'same source state + null-model registry version + metric registry version + iteration count + seed reproduces the result'}};
   globalThis.__NAF_V046_NULL_RESULT__=lab;
   renderNullLabPanels(true);
   return lab;
@@ -34,7 +34,7 @@ function networkMarkup(){
 function proofMarkup(){
   const r=result(),vm=r?buildNullLabViewModel(r):null;
   if(!vm||!vm.rows.length)return `<h2>Null-test provenance <span class="tag disc">v0.4.6</span></h2><p class="muted">Run the Null Model Laboratory from Research → Network to create a reproducible experiment record.</p>`;
-  return `<h2>Null-test provenance <span class="tag disc">v0.4.6</span></h2>${vm.rows.map(x=>`<details class="testimony"><summary><b>${esc(x.metric_label)}</b> · ${esc(short(x.null_model_id))} · FDR p ${esc(x.adjusted_p)}</summary><div class="proof">test_id: ${esc(x.test_id)}\nseed: ${esc(x.seed)}\ndistribution_digest: ${esc(x.digest)}\nobserved: ${esc(x.observed)}\nnull_mean: ${esc(x.null_mean)}\nnull_sd: ${esc(x.null_sd)}\nempirical_percentile: ${esc(x.percentile)}\nraw_p: ${esc(x.raw_p)}\nadjusted_p: ${esc(x.adjusted_p)}\ninterpretation: withheld</div><div class="fact"><span class="muted">Preserves</span><span>${x.preserves.map(esc).join(' · ')}</span></div><div class="fact"><span class="muted">Randomizes</span><span>${x.randomizes.map(esc).join(' · ')}</span></div><div class="fact"><span class="muted">Can test</span><span>${x.can_test.map(esc).join(' · ')}</span></div><div class="fact"><span class="muted">Cannot test</span><span>${x.cannot_test.map(esc).join(' · ')}</span></div></details>`).join('')}`;
+  return `<h2>Null-test provenance <span class="tag disc">v0.4.6</span></h2>${vm.rows.map(x=>`<details class="testimony"><summary><b>${esc(x.metric_label)}</b> · ${esc(short(x.null_model_id))} · FDR p ${esc(x.adjusted_p)}</summary><div class="proof">test_id: ${esc(x.test_id)}\nsource_state: ${esc(x.source_state_fingerprint)}\nnull_registry: ${esc(x.null_model_registry)} @ ${esc(x.null_model_registry_version)}\nmetric_registry: ${esc(x.metric_registry)} @ ${esc(x.metric_registry_version)}\nseed: ${esc(x.seed)}\ndistribution_digest: ${esc(x.digest)}\nobserved: ${esc(x.observed)}\nnull_mean: ${esc(x.null_mean)}\nnull_sd: ${esc(x.null_sd)}\nempirical_percentile: ${esc(x.percentile)}\nraw_p: ${esc(x.raw_p)}\nadjusted_p: ${esc(x.adjusted_p)}\ninterpretation: withheld</div><div class="fact"><span class="muted">Preserves</span><span>${x.preserves.map(esc).join(' · ')}</span></div><div class="fact"><span class="muted">Randomizes</span><span>${x.randomizes.map(esc).join(' · ')}</span></div><div class="fact"><span class="muted">Can test</span><span>${x.can_test.map(esc).join(' · ')}</span></div><div class="fact"><span class="muted">Cannot test</span><span>${x.cannot_test.map(esc).join(' · ')}</span></div></details>`).join('')}`;
 }
 
 function wire(panel){
