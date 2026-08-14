@@ -1,39 +1,58 @@
 # Noetic Atlas — Development Roadmap
 
-## Guiding principle
+## Governing principle
 
 > **Do not visualize, weight, interpret, or time-activate a layer that the framework cannot derive and audit.**
 
-Current release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
+> **The mathematics should not manufacture meaning. It should make claims testable.**
+
+Current public release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).  
+Research constitution: [`RESEARCH_CONSTITUTION.md`](RESEARCH_CONSTITUTION.md).  
+Accepted long-range architecture: [`LONG_RANGE_RESEARCH_ARCHITECTURE.md`](LONG_RANGE_RESEARCH_ARCHITECTURE.md).
 
 Frozen representation law:
 
 ```text
 one chart state
+→ many explicit models
 → many coordinated projections
 ```
 
-Current sequence:
+## Dependency-ordered research arc
+
+The accepted long-range order is:
 
 ```text
-Geometry
-→ Topology
-→ Primitive Condition
-→ Graph Analytics
-→ Energetic / Explainable Synthesis
-→ Resonance
-→ Relational Condition
-→ Compound Condition
-→ Time
-→ Recurrence
-→ Discovery
+Nulls
+→ Formal Configurations / Hypergraphs
+→ New Geometry
+→ Experimental Models
+→ Persistence
+→ Population Baselines
+→ Interpretive Research
 ```
+
+This is a dependency graph, not a calendar sprint.
+
+The five system strata are:
+
+```text
+A — Astronomical substrate
+B — Rule models
+C — Structural mathematics
+D — Research inference
+E — Human synthesis
+```
+
+Downstream layers may consume upstream state but may not silently rewrite it.
+
+---
 
 ## v0.1 — Visual hypothesis
 
 **Status: complete historical milestone**
 
-Delivered first Natal Field/Flow Map/Life Spectrum concepts, canonical specimen, and explicit distinction between mathematical representation and physical claims.
+Delivered first Natal Field / Flow Map / Life Spectrum concepts, canonical specimen, and explicit distinction between mathematical representation and physical claims.
 
 ## v0.2 — Natal Field instrument
 
@@ -77,9 +96,7 @@ Delivered Uranus/Neptune/Pluto participation in downstream interpretation while 
 
 **Status: complete release milestone**
 
-Delivered the astrological-analysis, energetic-synthesis, and display layers; actual sign + Whole Sign house synthesis; optional modern natural-house overlay; ruler/dispositor routing; aspect-energy translation; topology translation into house/planet circuits; primitive condition qualifiers; balanced/depleted/excess framing; material-life examples; soul/spirit inquiry; outer-planet modern/transpersonal synthesis; and supplied-coordinate Ceres interpretation.
-
-The resilient v0412c wrapper remains preserved.
+Delivered astrological-analysis, energetic-synthesis, and display layers; actual sign + Whole Sign house synthesis; optional modern natural-house overlay; ruler/dispositor routing; aspect-energy translation; topology translation into house/planet circuits; primitive condition qualifiers; balanced/depleted/excess framing; material-life examples; soul/spirit inquiry; outer-planet modern/transpersonal synthesis; and supplied-coordinate Ceres interpretation.
 
 ## v0.4.1.3 — Resonance Field
 
@@ -87,173 +104,224 @@ The resilient v0412c wrapper remains preserved.
 
 Delivered Whole-Sign Ascensional Phase Map, Element–Mode Resonance Lattice, actual-sign versus optional natural-house comparison, actual house-ruler continuation and ruler-placement context, all-twelve-house phase mapping, global phase signature, and preservation of the complete earlier observatory beneath the additive shell.
 
-Canonical Leo-rising result:
-
-```text
-rotation: +4 signs / 120°
-element preserved: 12/12
-mode preserved: 0/12
-phase character: element-preserving / mode-rotating
-```
-
 ## v0.4.2 — Relational Condition + Qualified Routing
 
 **Status: complete release milestone**
 
-Delivered:
-
-- source-locked configured domicile reception;
-- domicile exchange;
-- separately identified later-tradition mutual-reception compatibility label;
-- right-hand sextile/square/trine overcoming;
-- domination / upon-the-tenth;
-- relation-level ledger entries and `derivation_ref`s;
-- reusable categorical condition signatures;
-- House River with integer route-count width;
-- Derivation Walker infrastructure;
-- Qualified Resonance, Relations, Qualified Flow, House River, and Proof Walker projections;
-- preservation of all earlier v0.4.1.x surfaces.
+Delivered source-locked configured domicile reception; domicile exchange; separately identified later-tradition mutual-reception compatibility; right-hand sextile/square/trine overcoming; domination/upon-the-tenth; relation-level ledger entries and derivation refs; reusable categorical condition signatures; House River with integer route-count width; Derivation Walker infrastructure; and additive relation/flow/proof projections.
 
 ## v0.4.3 — Compound Condition
 
+**Status: complete release milestone**
+
+Delivered source-secure higher-order condition testimonies including selected bonification/maltreatment, overcoming, sign trine/opposition testimony, seven-degree ray enclosure, intervention, sect qualification, reception qualification, mixed-state preservation, compound ledger entries, proof walking, and explicit deferred variants.
+
+No scalar strength score.
+
+## v0.4.4 — Auditable Reading + Cross-Layer Discovery
+
+**Status: complete foundation milestone**
+
+Delivered auditable Evidence Pack Reading, reading-integrity gate, cross-layer discovery detectors, multi-basin preservation, modern-rulership overlay comparison, expanded aspect-family experimental projection, two-state multiplex contract, and proof-bearing discovery objects.
+
+Discovery objects remain `detected-no-null-model` until research comparison is available.
+
+## v0.4.5 — Research Regimes & Hypothesis Architecture
+
 **Status: current public release**
 
-Purpose: compute higher-order condition testimonies as pure functions over deterministic geometry plus already-computed primitive and relational condition.
+Delivered:
 
-### Delivered source-secure subset
+- Operational / Experimental / Discovery model identities;
+- Research Hypothesis Packs;
+- generic structural model comparison;
+- Discovery candidate registry;
+- independent research-status dimensions;
+- Personal / Research aperture separation;
+- research constitution;
+- lifecycle `Detect → Describe → Compare → Test → Replicate → Interpret`.
 
-Machine-readable registry:
+Detection does not imply significance. Experimental models do not overwrite Operational state.
 
-```text
-data/rules/hellenistic/compound-condition-v1.registry.json
-```
+## v0.4.6 — Null Model Laboratory
 
-Executable model:
+**Status: implementation candidate on `feat-v046-null-model-lab`**
 
-```text
-naf.condition.compound.hellenistic.v0.4.3
-```
+Purpose: supply the first serious answer to **“compared with what?”**
 
-Implemented:
+Implemented candidate architecture:
 
-- bonification by benefic superior trine/square;
-- maltreatment by malefic superior square/domination;
-- benefic sign-based trine testimony;
-- malefic sign-based opposition testimony;
-- degree-based seven-degree ray enclosure;
-- intervention that can break enclosure;
-- sect qualification of acting benefics/malefics;
-- reception qualification enhancing bonification or mitigating maltreatment;
-- mixed bonification+maltreatment preservation;
-- compound ledger entries and derivation refs;
-- compound-aware Derivation Walker integration;
-- additive v043 interface with Existing Atlas, Compound Condition, Compound Map, Proof Walker, and Source Boundary.
+- `N_G` independent geometric longitude control;
+- `N_L` classical label permutation;
+- `N_D` degree-preserving aspect-network rewiring;
+- `N_T` house-topic routing permutation;
+- frozen null-metric registry;
+- deterministic seeded PRNG;
+- source-state fingerprint;
+- null-model and metric registry provenance;
+- empirical Monte Carlo probabilities;
+- Benjamini–Hochberg FDR family adjustment;
+- effect-position z where defined;
+- explicit preserved/randomized/can-test/cannot-test contracts;
+- Personal mode opt-out / Research mode opt-in browser surface;
+- candidate null plans only where the metric actually varies under the null;
+- research-status update limited to `null_comparison → tested`;
+- population frequency unknown, replication absent, interpretation withheld.
 
-No scalar strength score. Multiple testimonies may coexist.
+Cross-layer `N_D` metrics include structural aspect-motif/condition intersections and maximum articulation+bottleneck+compound role coincidence while holding non-aspect layers fixed.
 
-### Explicitly deferred
+A low null probability is not population rarity and is not astrological validation.
 
-Selected historically ambiguous or not-yet-frozen variants remain deferred rather than guessed, including unresolved bodily/sign-containment enclosure variants and not-yet-source-locked counteraction/adherence/engagement/striking-with-a-ray details.
+---
 
-## Parallel representation-depth track
+# Next dependency gates
 
-High-value next work:
+## 1. Formal Configuration Grammar + Hypergraphs
 
-- deeper condition-aware energetic synthesis;
-- motif + condition field geometry;
-- side-by-side rule-set comparison;
-- expanded Derivation Walker normalization for legacy proof objects;
-- repeated-axis/configuration synthesis;
-- curated interpretation profiles;
-- selected minor-body profiles;
-- yogic/Ayurvedic/contemplative practice layers with explicit source/posture labels;
-- selectable Traditional, Energetic, Psychological, Mystical, and Research lenses.
+Next major structural milestone after nulls.
 
-Every new view remains a projection of the single chart state.
+Build configurations as first-class predicate trees rather than hard-coded name checks.
 
-## Parallel graph-research track
-
-High-priority gates:
+A configuration contract may include:
 
 ```text
-geometric longitude nulls
-label-permutation nulls
-degree-preserving nulls where appropriate
-layer-overlap nulls
-motif enrichment
-multilayer baselines
-comparative chart architecture
-condition-qualified graph hypotheses
+participants
+spatial predicates
+sign predicates
+house predicates
+rulership predicates
+condition predicates
+orb policy
+source/model identity
 ```
 
-Do not use rarity/enrichment language before comparison.
+Represent multi-body configurations as hyperedges/configuration objects so proof, condition, discovery, null testing, and later interpretation can attach to the configuration itself.
 
-## Extended-body astronomy track
+Do not infer meaning from configuration existence.
 
-Potentially add Ceres, Chiron, node variants, Lilith/apogee variants, Vertex, and fixed stars only after definitions, provider provenance, licensing, validation, and boundary tests are explicit.
+## 2. Hidden Geometry
 
-Ceres interpretation support exists for supplied coordinates; automatic astronomy remains separate future capability.
-
-## v0.5 — Life Spectrum v1
-
-Purpose: introduce continuous time only after natal state is structurally and conditionally mature.
-
-Planned:
-
-- transit ephemeris over arbitrary windows;
-- exact transit hits;
-- stations;
-- applying/separating temporal evolution;
-- stable natal-target lanes;
-- house activation lanes;
-- activated ruler pathways;
-- explicit activation functions;
-- decades-to-days zoom;
-- life-event annotations;
-- provenance for every marker/band;
-- birth-time sensitivity where relevant.
-
-Concept:
+Near-term geometry priority:
 
 ```text
-N_i = geometry + topology + primitive condition + relational condition + compound condition + resonance + metadata
-T(t) = temporal input
-X_i(t) = F(N_i, T(t), rule-set versions)
+declination + parallels/contra-parallels
+→ antiscia/contra-antiscia
+→ midpoints
+→ additional validated geometries
 ```
 
-Interpretive prose remains downstream.
+These precede continuous 3D potential topographies because they create new explicit predicates without requiring a field equation.
 
-## v0.6 — Traditional timing systems
+## 3. Experimental Model Laboratory
 
-Planned annual profections, zodiacal releasing, and carefully source-locked return techniques after relevant provider/rule definitions are frozen.
+Compare named alternate models against Operational controls:
 
-## v0.7 — Life Space / recurrence research
+- rulership variants;
+- historical rule variants;
+- expanded aspect policies;
+- additional celestial objects;
+- harmonic descriptors;
+- field kernels;
+- reconstructed scoring algorithms.
 
-Potential research objects include state vectors through time, recurring activation motifs, condition-qualified ruler pathways, temporal clustering, event-annotation similarity, and state-space visualization.
+Every model remains reversible and separately identified.
 
-Dimensionality reduction belongs here only after state semantics are stable.
+## 4. Persistence / Sensitivity
 
-## Research validation track
+Once structural semantics are stable, test which properties survive:
 
-### HCI
+- orb policy;
+- model choice;
+- coordinate uncertainty;
+- birth-time uncertainty;
+- nearby parameter changes;
+- competing field kernels.
 
-Compare wheel versus Atlas on ruler-chain recovery, aspect lookup, motif identification, primitive/relational/compound condition reconstruction, house-route recovery, and evidence-chain tasks.
+Persistence is a descriptor, not automatic validation.
 
-### Astrological empirical research
+## 5. Population Baselines
 
-Test graph/condition/timing descriptors against independent criteria only with appropriate nulls, controls, and replication. Null findings remain acceptable.
+Only after metrics and null contracts are stable:
 
-## Current immediate priorities
+- real natal-population frequency;
+- sampling-frame provenance;
+- demographic/time/geographic structure;
+- astronomy-aware baselines;
+- cohort stratification;
+- uncertainty estimates.
+
+Never collapse null-model frequency into population frequency.
+
+## 6. Interpretive Research
+
+Only after comparison and replication infrastructure:
+
+- phenomenological association;
+- external outcomes;
+- replicated interpretive hypotheses;
+- learned embeddings;
+- graph neural networks or other learned systems.
+
+Learned systems stay late because they amplify the epistemology of their inputs.
+
+---
+
+# Parallel substrate track
+
+## Astronomical enrichment
+
+Potential future additions include declination, validated additional bodies, node variants, Lilith/apogee variants, Vertex, and fixed stars only after provider provenance, definitions, validation, and boundary tests are explicit.
+
+Ceres interpretation support exists for supplied coordinates; automatic astronomy remains a separate capability.
+
+## Field mathematics laboratory — later
+
+A formal field may be defined as:
 
 ```text
-1. source-lock any remaining compound variants worth implementing
-2. condition-aware whole-chart synthesis
-3. motif + condition field geometry
-4. graph null models / multilayer baselines
-5. side-by-side rule-set comparison
-6. validated extended-body astronomy where justified
-7. Life Spectrum
+Φ_M(x)
 ```
+
+under explicit model `M` and kernel choice.
+
+Gradients, interference, extrema, phase, spectra, and persistence are legitimate properties of the representation. They are not laboratory-confirmed planetary physical forces unless independent evidence exists.
+
+Multiple competing kernels should be compared. No single field becomes “the planetary energy field” by default.
+
+## Harmonics — descriptors before interpretation
+
+Circular statistics such as
+
+```text
+Z_k = Σ_j w_j exp(i k θ_j)
+R_k = |Z_k|
+```
+
+may be introduced as explicit descriptors under frozen object/weight policies.
+
+“Harmonic 5 = genius” or “harmonic 7 = mysticism” remains an interpretive hypothesis and must pass the same research lifecycle as any Discovery candidate.
+
+---
+
+# Timing track
+
+Life Spectrum and traditional timing remain valuable but should not outrun the research dependency graph.
+
+Future work may include transit ephemerides, exact hits, stations, applying/separating temporal evolution, activated ruler pathways, profections, zodiacal releasing, and recurrence/state-space research once the natal structural and provenance layers are sufficiently mature.
+
+---
+
+# Validation track
+
+## HCI
+
+Compare wheel versus Atlas on ruler-chain recovery, aspect lookup, motif/configuration identification, condition reconstruction, house-route recovery, proof recovery, and model-comparison tasks.
+
+## Astrological empirical research
+
+Test graph/condition/configuration/timing descriptors against independent criteria only with appropriate nulls, controls, cohort definitions, and replication. Null findings remain acceptable results.
+
+---
 
 ## Governing product standard
 
