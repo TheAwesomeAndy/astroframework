@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "naf-hypergraph-result-v0.4.7.schema.json",
+  "title": "Noetic Atlas Formal Astrological Hypergraph v0.4.7",
+  "type": "object",
+  "required": ["schema","model_id","version","regime","vertices","hyperedges","classes","incidence","epistemic_contract"],
+  "properties": {
+    "schema": {"const":"naf.research.astrological_hypergraph_result.v0.4.7"},
+    "model_id": {"const":"naf.research.astrological_hypergraph.v0.4.7"},
+    "version": {"const":"0.4.7"},
+    "regime": {"const":"discovery"},
+    "vertices": {"type":"array","items":{"type":"object","required":["id","type","object_class","longitude"]}},
+    "hyperedges": {"type":"array","items":{"$ref":"#/$defs/hyperedge"}},
+    "classes": {"type":"object","required":["geometric_polygon","topological_basin","compound_hybrid"]},
+    "incidence": {"type":"object","required":["model","vertex_ids","hyperedge_ids","H","D_v","D_e","spectral_status"]},
+    "epistemic_contract": {"type":"object","required":["layer_e_quarantined","detection_not_unexpectedness","null_profile_required_before_baseline_promotion","population_frequency","interpretation","no_scalar_strength_score"]}
+  },
+  "$defs": {
+    "researchStatus": {
+      "type":"object",
+      "required":["vector","dimensions","rule"],
+      "properties": {
+        "vector":{"type":"array","prefixItems":[{"type":"integer","enum":[0,1]},{"type":"integer","enum":[0,1]},{"type":"integer","enum":[0,1]},{"type":"integer","enum":[0,1]},{"type":"integer","enum":[0,1]}],"minItems":5,"maxItems":5},
+        "dimensions":{"type":"object","required":["detection","verification","null_comparison","population_frequency","interpretation"]}
+      }
+    },
+    "hyperedge": {
+      "type":"object",
+      "required":["schema","hyperedge_id","hyperedge_class","configuration_type","participating_nodes","participant_classes","required_cardinality","geometric_metrics","topological_metrics","derivation_hash","derivation_hash_algorithm","derivation","research_status","null_profile","population_frequency","interpretation_status"],
+      "properties": {
+        "schema":{"const":"naf.research.hyperedge.v0.4.7"},
+        "hyperedge_id":{"type":"string","minLength":1},
+        "hyperedge_class":{"enum":["geometric_polygon","topological_basin","compound_hybrid"]},
+        "participating_nodes":{"type":"array","minItems":2,"items":{"type":"string"}},
+        "required_cardinality":{"type":"integer","minimum":2},
+        "geometric_metrics":{"type":["object","null"]},
+        "topological_metrics":{"type":["object","null"]},
+        "derivation_hash":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+        "derivation_hash_algorithm":{"const":"sha-256"},
+        "research_status":{"$ref":"#/$defs/researchStatus"},
+        "null_profile":{"type":["object","null"]},
+        "population_frequency":{"const":"unknown"},
+        "interpretation_status":{"const":"withheld"}
+      }
+    }
+  },
+  "additionalProperties": true
+}
