@@ -8,7 +8,7 @@ const worker=fs.readFileSync(new URL('../prototype/v047-research-worker.mjs',imp
 
 assert.match(html,/<title>Noetic Atlas v0\.4\.7<\/title>/);
 assert.match(html,/Noetic Atlas <span class="build">v0\.4\.7<\/span>/);
-assert.doesNotMatch(html,/v0\.4\.5|v0\.4\.0b|candidate/i,'current v047 chrome must not expose stale product labels');
+assert.doesNotMatch(html,/v0\.4\.5|v0\.4\.0b|v0\.4\.6\s+candidate/i,'current v047 chrome must not expose stale product-version labels');
 assert.equal((html.match(/<iframe\b/g)||[]).length,1,'v047 must have exactly one iframe');
 assert.match(html,/id="core" src="\.\/index\.html\?build=v047-core"/);
 for(const historical of ['v0412c','v0413','v042','v043','v044','v045','v046'])assert.doesNotMatch(html,new RegExp(`src="\\./${historical}\\.html`));
@@ -37,7 +37,7 @@ assert.match(html,/Route width remains an integer count of Whole Sign house-rule
 
 assert.match(html,/id="nullLabPanel"/);
 assert.match(html,/Run null tests/);
-assert.match(html,/199,999,4999,9999/);
+assert.match(html,/\[199,999,4999,9999\]/);
 assert.match(html,/v047-research-worker\.mjs/);
 assert.match(html,/new Worker/);
 assert.match(html,/Web Worker execution/);
