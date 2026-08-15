@@ -2,68 +2,57 @@
 
 ## 1. Purpose
 
-Noetic Atlas is intended to do more than digitize inherited astrological practice. Its research purpose is to expose structures, model dependencies, recurrences, and cross-layer relationships that conventional interfaces may conceal, then evaluate them under increasingly demanding evidence regimes.
+Noetic Atlas is intended to do more than digitize inherited astrological practice. Its research purpose is to expose structures and cross-layer relationships that conventional chart interfaces may conceal, then evaluate whether those structures are reproducible, unexpected under explicit counterfactuals, prevalent in real populations, associated with independent criteria, and eventually interpretable.
 
-Current framework baseline: **v0.4.7**.  
-Canonical release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
+These stages remain separate.
 
-The project distinguishes:
+Current state:
 
-1. historical-rule reproduction;
-2. deterministic mathematical properties of an encoded model;
-3. Discovery structure;
-4. counterfactual unexpectedness;
+```text
+framework baseline       v0.4.7
+public product baseline  v0.4.7 (productized)
+current research ceiling named counterfactual comparison
+population frequency     unknown
+interpretation            downstream / withheld for formal Research objects
+```
+
+## 2. Research hierarchy
+
+Noetic Atlas distinguishes:
+
+1. astronomical/input facts;
+2. source-locked astrological rules;
+3. deterministic mathematical derivation;
+4. named counterfactual comparison;
 5. empirical population frequency;
-6. visualization/HCI performance;
-7. phenomenological or outcome association;
-8. replication;
-9. candidate interpretive theory.
+6. external association;
+7. replication;
+8. interpretation/theory.
 
-These categories may not be collapsed.
+Do not collapse these categories.
 
-## 2. Frozen research architecture
-
-```text
-one astronomical/chart state
-→ many explicit models
-→ many coordinated projections
-```
-
-and:
-
-```text
-Operational ≠ Experimental ≠ Discovery
-```
-
-The Operational model is a reproducible control, not a claim of physical truth. Experimental models are reversible alternatives. Discovery structures are allowed to exist before anyone knows what they mean.
-
-## 3. Current implemented research substrate
+## 3. Current substrate
 
 Implemented:
 
-- deterministic chart kernel and astronomy adapter;
-- sect + seven Hermetic lots;
-- primitive, relational, and source-secure compound condition;
+- deterministic chart kernel;
+- sect and seven Hermetic lots;
+- primitive, relational, and compound classical condition;
 - graph analytics and House River;
-- auditable Reading/proof infrastructure;
-- model-overlay and Discovery machinery;
-- v0.4.5 research-regime separation;
+- Resonance and auditable Reading;
+- Operational / Experimental / Discovery regimes;
 - v0.4.6 Null Model Laboratory;
-- v0.4.7 formal hypergraph engine;
-- candidate-specific hypergraph null evaluation;
-- SHA-256 hyperedge derivation;
-- binary hypergraph incidence matrix / degree structures;
-- deterministic CI regressions for historical and current research contracts.
+- v0.4.7 formal higher-order hypergraphs;
+- public Research UI for null execution and hypergraph/null-profile inspection;
+- live browser regression on GitHub Pages.
 
-Not implemented as general infrastructure:
+Still absent:
 
-- public v0.4.7 browser productization;
-- real population cohort/reference distributions;
-- generalized external association/phenomenology engine;
-- independent replication program at scale;
-- validated predictive/psychological/spiritual interpretation;
-- hypergraph spectral eigensystem;
-- full k=5–6 configuration library;
+- real natal population-frequency engine;
+- externally validated phenotype/outcome association;
+- independent replication infrastructure at scale;
+- validated predictive/psychological superiority;
+- v0.4.8 hidden geometry;
 - production timing/Life Spectrum.
 
 ## 4. Research posture
@@ -71,122 +60,65 @@ Not implemented as general infrastructure:
 ```text
 represent faithfully
 → derive transparently
-→ detect reproducibly
-→ specify counterfactual
-→ compare
-→ estimate prevalence only from real cohorts
-→ test external criteria
+→ detect formally
+→ compare against named counterfactual
+→ characterize real population frequency
+→ test independent association
 → replicate
-→ interpret cautiously
-→ refine or reject
+→ interpret or reject
 ```
 
-A negative result is useful. A descriptor that fails to depart from a plausible baseline should remain visible rather than being hidden because the chart looks less interesting.
+A negative result is useful. A descriptor should not be promoted because it makes one canonical chart look interesting.
 
-## 5. Research layers
+## 5. Current mathematical questions
 
-### R0 — Historical rule reproduction
+Examples answerable now:
 
-Goal: faithfully encode a selected technique.
+- Which SCCs and terminal basins exist under the selected ruler model?
+- Which house-ruler paths traverse each dispositor edge?
+- Which typed major-aspect configurations occur under the named orb policy?
+- Which formal hyperedges are detected under the v0.4.7 registry?
+- Which geometric hyperedges intersect independently derived routing basins?
+- How does a candidate statistic sit inside N_G, N_L, N_D, or N_T?
+- Does a candidate survive the exact named counterfactual question being asked?
 
-Success criteria:
+These are formal/model-relative questions, not empirical validation of astrology.
 
-- source identified;
-- variant named;
-- transformation formalized;
-- boundaries documented;
-- independent/manual reconstruction possible;
-- provenance and proof available.
+## 6. Historical-rule reproduction
 
-Examples include Hermetic lots, Egyptian bounds, triplicity/sect logic, configured reception/exchange, overcoming/domination, and the current compound-condition subset.
+Source-backed techniques are evaluated for reconstructability under a named model/variant.
 
-### R1 — Mathematical characterization
+Current examples include:
 
-Goal: calculate exact properties of an encoded model without asserting new astrological meaning.
+- Hermetic lots;
+- triplicity/bounds/sect logic;
+- domicile reception and exchange;
+- overcoming/domination;
+- source-secure compound testimonies;
+- classical aspect geometry underlying formal configurations.
 
-Examples:
+Historical-source support and empirical replication remain different statuses.
 
-- SCCs and terminal basins;
-- route depth/upstream capture;
-- aspect graph connectivity;
-- articulation/bridge structure;
-- House River counts;
-- formal hyperedge detection;
-- configuration RMS residuals;
-- hypergraph incidence structure.
+## 7. Null Model Laboratory
 
-### R2 — Counterfactual comparison
-
-Goal: ask whether an R1 statistic departs from a named reference process.
-
-Implemented in v0.4.6/v0.4.7.
-
-Examples:
+Current nulls:
 
 ```text
-N_G independent geometry
-N_L identity/label permutation
-N_D degree-preserving rewire
-N_T routing-codebook permutation
+N_G  broad independent geometry
+N_L  class-preserving identity permutation
+N_D  degree-preserving aspect-network rewire
+N_T  routing-codebook permutation
 ```
 
-A result here establishes conditional unexpectedness only.
+Each null has an explicit question and cannot be treated as a vote for/against astrology.
 
-### R3 — Population characterization
+Finite Monte Carlo uses the +1 correction. BH-FDR is applied per named null-model family. Empirical percentile/effect position and generator quality are recorded.
 
-Goal: estimate prevalence in real chart populations.
+No cross-null pass count is permitted.
 
-Not implemented. Reserved for v0.5.0 Population Cohort Engine.
+## 8. Hypergraph research
 
-### R4 — External association
-
-Goal: test whether formal features correspond to independent expert judgments, phenomenology, behavior, events, or other external criteria.
-
-Not generally implemented.
-
-### R5 — Replication
-
-Goal: reproduce results in independent charts, cohorts, periods, researchers, or sites.
-
-### R6 — Candidate theory / interpretation
-
-Only repeated support under appropriate controls justifies movement toward a new interpretive technique.
-
-## 6. v0.4.6 Null Model Laboratory
-
-The Null Model Laboratory is the first formal inference subsystem.
-
-### Source-locked statistics
-
-The observed chart and every simulation are evaluated with the same executable statistic `T(C)`.
-
-### Finite Monte Carlo
-
-Upper-tail example:
-
-```text
-p_hat = (1 + # {T_i >= T_obs}) / (B + 1)
-```
-
-No p=0.
-
-### Multiple testing
-
-Raw and adjusted p-values remain separate. BH-FDR is the current default exploratory procedure within declared null-model families.
-
-### No pseudo-replication across nulls
-
-N_G, N_L, N_D, and N_T ask different questions. A favorable result under three different nulls is not a three-vote replication of one hypothesis.
-
-### Effect position
-
-Empirical percentile and null-distribution position are reported alongside p-values so results are not reduced to a binary threshold.
-
-## 7. v0.4.7 Formal Hypergraph program
-
-v0.4.7 moves from pairwise-only graph objects to first-class k-body structures.
-
-Hyperedge classes:
+v0.4.7 adds formal higher-order objects:
 
 ```text
 geometric_polygon
@@ -194,229 +126,138 @@ topological_basin
 compound_hybrid
 ```
 
-The initial typed registry deliberately covers k=3/k=4:
+Current k=3/k=4 templates include Grand Trine, T-Square, Yod, Grand Cross, Kite, and the Noetic Discovery T-Square Anchor Cluster.
 
-- Grand Trine;
-- T-Square;
-- Yod;
-- Grand Cross;
-- Kite;
-- T-Square Anchor Cluster.
+Topological hyperedges represent closed SCCs and terminal basin capture. Hybrid objects preserve both their geometric and routing parents.
 
-Topological hyperedges elevate closed SCCs and terminal basin-capture sets.
+Every object retains deterministic proof identity and explicit research status.
 
-Compound hybrids record coupling between independently derived geometry and routing.
+## 9. Public research instrument
 
-This creates a more appropriate research unit: the whole configuration can now carry derivation, metrics, null profile, and research status.
+The current v0.4.7 product exposes the research apparatus under the Research aperture while keeping Personal mode Operational-first.
 
-## 8. Hypergraph research questions now possible
+This matters scientifically because a research result that exists only in source code is not yet a usable instrument for inspection, reproducibility, or HCI evaluation.
 
-Pure geometry:
+The live Pages gate verifies the public research path, including an actual 199-iteration null execution in Chromium.
 
-- How tightly does a detected configuration fit its template?
-- How symmetric is the closure?
-- Does a typed k-body closure depart from N_G?
-- Is the geometry specific to the observed identities under N_L?
+## 10. Canonical-chart overfitting is prohibited
 
-Routing topology:
-
-- How large is a terminal basin?
-- Is a closed routing object sensitive to the traditional codebook under N_T?
-
-Hybrid structure:
-
-- Does a geometric configuration disproportionately coincide with a routing attractor?
-- Does that coincidence survive degree-preserving rewiring under N_D?
-- Does it survive routing-codebook permutation under N_T?
-
-No answer to these questions automatically grants human meaning.
-
-## 9. Canonical-chart discipline
-
-The canonical specimen is a regression fixture.
-
-It currently verifies structures including:
-
-```text
-Sun–Moon–Jupiter Grand Trine
-Spirit-closed Kite
-Venus–Mars / Uranus–Chiron T-Square Anchor Cluster
-Mercury–Venus closed SCC
-Mercury–Venus terminal basin
-compound geometry × routing hyperedge
-```
-
-It also verifies a negative cardinality case.
+The canonical chart is a regression fixture.
 
 Rules:
 
-- do not tune thresholds to make the canonical chart interesting;
-- use synthetic fixtures for boundaries;
-- use independent charts for research;
-- record proposal timing relative to samples examined;
-- retain boring/failed outputs.
+- do not tune thresholds to make it interesting;
+- use synthetic fixtures for edge cases;
+- use independent charts/cohorts for research claims;
+- retain negative outputs;
+- formal cardinality/geometry outranks desired narrative output.
 
-## 10. HCI / product research
+The Sun–Mercury two-body negative hypergraph regression is a deliberate example of this principle.
 
-Noetic Atlas should also be tested as an information instrument.
+## 11. Population research — future v0.5.0
 
-Candidate questions:
+Artificial counterfactual distributions answer “unexpected relative to model N,” not “rare among real natal charts.”
 
-- Does Flow Map reduce ruler-chain tracing error?
-- Does Aspect Matrix improve exact pairwise lookup?
-- Does House River reduce cognitive load for house-to-ruler routing?
-- Does explicit relation typing prevent dispositorship/reception confusion?
-- Does the Proof surface improve confidence calibration?
-- Does formal hyperedge presentation improve multi-body pattern identification over a conventional wheel?
-- Does showing null profiles help users distinguish detected from unexpected?
+A Population Cohort Engine must own:
 
-Candidate outcomes:
+- real empirical chart/reference samples;
+- prevalence estimates;
+- cohort provenance;
+- sampling/selection limitations;
+- stratified sensitivity analyses;
+- independent replication.
 
-- completion time;
-- error rate;
-- recall;
-- workload;
+Until then:
+
+```text
+population_frequency = unknown
+```
+
+## 12. Interpretation research
+
+Interpretive models may be studied for:
+
+- specificity versus genericity;
+- expert agreement;
+- novice understanding;
 - confidence calibration;
-- novice learning;
-- expert agreement.
+- phenomenological fit;
+- incremental value over conventional representations.
 
-The conventional wheel remains an appropriate control for geometry-heavy tasks.
+Interpretation text remains downstream from formal evidence.
 
-## 11. Public-product research dependency
+## 13. HCI research
 
-The current public browser does not expose the full v0.4.7 research stack.
+The current v0.4.7 product makes controlled interface questions possible.
 
-Until [`V047_PUBLIC_PRODUCTIZATION_GATE.md`](V047_PUBLIC_PRODUCTIZATION_GATE.md) is green, end-to-end HCI research on hyperedge + null-profile interaction would be testing an incomplete product surface.
+Candidate tasks:
 
-Therefore productization precedes v0.4.8.
+- ruler-chain recovery;
+- terminal basin identification;
+- exact aspect/configuration recognition;
+- condition reconstruction;
+- House River route tracing;
+- null-profile comprehension;
+- research/interpretation boundary recognition;
+- proof-chain recovery.
 
-## 12. Locked next milestones
+Candidate measures include completion time, error rate, learning rate, workload, recall, confidence calibration, and expert agreement.
 
-### v0.4.8 — Hidden Geometry Engine
+## 14. Theory promotion
 
-Formalize additional geometric relations:
+A candidate moving toward theory must document:
 
-- midpoints;
-- declination / parallels / contraparallels;
-- antiscia / contra-antiscia.
-
-These should enter as provenance-bearing geometry, not interpretive shortcuts.
-
-### v0.4.9 — Experimental Model Laboratory
-
-Provide a stronger generalized home for contested model alternatives:
-
-- Ceres–Taurus;
-- alternative rulership tensors;
-- alternative configuration/orb policies;
-- other named reversible hypotheses.
-
-Operational state remains control.
-
-### v0.5.0 — Population Cohort Engine
-
-Build real empirical reference distributions at 100k+ scale where data/provenance permit.
-
-Core requirements include:
-
-- sampling-frame disclosure;
-- astronomy-provider/version control;
-- chart-quality/birth-time metadata;
-- stratification and sensitivity analysis;
-- prevalence confidence/uncertainty;
-- cohort/version identity;
-- multiple-testing controls;
-- no conflation of population frequency with interpretation.
-
-Only this layer can advance the population-frequency research dimension in a general way.
-
-## 13. Hidden-geometry and hypergraph interaction
-
-v0.4.8 should not bypass the hypergraph architecture. Midpoints, declination relations, and antiscia may become new edges, attributes, or higher-order configuration inputs under explicit model/version contracts.
-
-A future pattern may therefore be represented as:
-
-```text
-visible zodiac geometry
-+ hidden geometry relation
-+ routing topology
-+ condition
-```
-
-but each layer must remain separately recoverable in provenance.
-
-## 14. Theory-promotion requirements
-
-A descriptor moving toward theory should document:
-
-- formal definition;
-- implementation version;
-- object/graph/hypergraph scope;
-- data examined;
-- rule-set versions;
-- counterfactual models;
-- population cohort where relevant;
-- preregistration status where relevant;
-- effect estimates/uncertainty;
-- multiplicity handling;
-- sensitivity tests;
-- known failures;
-- competing explanations;
+- formal definition/version;
+- sources/models;
+- datasets/charts examined;
+- null models;
+- population baseline where relevant;
+- multiple-comparison handling;
+- sensitivity analysis;
 - replication attempts;
-- expert commentary;
-- current research-status vector.
+- effect estimates/uncertainty;
+- known failures and competing explanations;
+- current interpretation status.
 
-Suggested labels remain distinct:
+## 15. Release reproducibility
+
+Public research functionality must preserve:
 
 ```text
-traditional-source-backed
-mathematically-detected
-counterfactually-displaced
-population-characterized
-observationally-associated
-replicated
-provisional-theory
-retired
+code commit
+model/schema versions
+provider/rule identities
+seed + iterations
+metric/null identities
+browser release contract
+Pages deployment
+live verification
 ```
 
-## 15. Reproducibility package
+The v0.4.7 productization incident permanently added public-surface reproducibility to the research program.
 
-Publishable research should retain:
+## 16. Next research milestone
 
-- commit SHA;
-- schema/model versions;
-- astronomy provider/version;
-- rule IDs;
-- orb/configuration policy;
-- metric implementation fingerprints;
-- null generator versions;
-- seeds/RNG;
-- cohort/data provenance and consent;
-- exact analysis command/notebook;
-- multiple-testing family;
-- sensitivity/negative analyses;
-- limitations.
+The public productization gate is closed. v0.4.8 Hidden Geometry is next, but not implemented here.
 
-## 16. Long-term objective
+Midpoints, declination/parallels, and antiscia must enter through deterministic transforms, source/model identities, explicit input support, proof objects, and candidate-specific null applicability before interpretive use.
 
-Noetic Atlas should become an astrological observatory capable of asking, in order:
+## 17. Long-term objective
+
+Noetic Atlas should be able to ask, separately:
 
 > What structure is present?
 
 > How was it produced?
 
-> Under which explicit astrological model?
+> Which rule/model generated it?
 
-> Is the higher-order structure formally closed?
-
-> Does it depart from a named counterfactual?
+> Is it unexpected under a named counterfactual?
 
 > How common is it in real charts?
 
-> Does it correspond to anything outside the chart?
+> Does it associate with anything outside the chart?
 
 > Does it replicate?
 
-> What, if anything, should a human interpreter infer from it?
-
-The framework should be equally capable of returning **yes**, **no**, and **not yet knowable**.
+> What interpretation, if any, survives those tests?
