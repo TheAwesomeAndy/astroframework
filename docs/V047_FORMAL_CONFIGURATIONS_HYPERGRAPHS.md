@@ -1,6 +1,6 @@
 # Noetic Atlas v0.4.7 — Formal Configurations & Astrological Hypergraphs
 
-Status: implementation candidate.
+Status: **merged framework milestone**. v0.4.7 is the current implementation/research baseline on `main`. Public browser productization remains incomplete until the v0.4.7 productization gate is satisfied.
 
 ## Governing boundary
 
@@ -225,6 +225,22 @@ The accepted `research-lab-engine.mjs` remains v0.4.6 so its historical contract
 v0.4.7 adds `research-lab-v047.mjs`, a wrapper that exposes the formal hypergraph research surface while preserving the v0.4.6 operational/null machinery unchanged underneath.
 
 This is deliberate provenance, not duplication.
+
+## Public-product status
+
+The framework milestone is merged, but the public root still reaches the v0.4.5 shell and no `prototype/v047.html` currently exists.
+
+Therefore the hypergraph engine is **not yet exposed as the authoritative public product surface**.
+
+The active release blocker is specified in [`V047_PUBLIC_PRODUCTIZATION_GATE.md`](V047_PUBLIC_PRODUCTIZATION_GATE.md).
+
+The milestone should be described as:
+
+```text
+merged framework implementation = yes
+CI-green                         = yes
+public v0.4.7 product shell      = no
+```
 
 ## Deferred work
 

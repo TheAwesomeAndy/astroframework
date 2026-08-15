@@ -1,6 +1,6 @@
 # Noetic Atlas v0.4.6 — Null Model Laboratory
 
-Status: implementation candidate. Public release remains unchanged until separately promoted.
+Status: **merged framework milestone**. The inference subsystem is part of `main`; the dedicated `prototype/v046.html` shell remains a historical/side surface and has not been promoted to the authoritative current public application.
 
 ## Objective
 
@@ -199,20 +199,22 @@ Candidates for which v0.4.6 has no admissible detector statistic remain `detecte
 
 ## Personal / Research aperture
 
-Null simulation is explicit-run-only. The browser candidate executes the Monte Carlo batch in a dedicated module Web Worker so larger research runs do not block the chart interface. A new chart state invalidates the attached batch rather than silently reusing it.
+Null simulation is explicit-run-only. The browser milestone shell executes the Monte Carlo batch in a dedicated module Web Worker so larger research runs do not block the chart interface. A new chart state invalidates the attached batch rather than silently reusing it.
 
 Personal mode does not display null models, Monte Carlo controls, p-values, or research tables.
 
-Research mode can launch a deterministic batch and open a Discovery candidate's null profile. This preserves the existing product architecture: Research is an aperture over the seven views, not an eighth workspace.
+Research mode can launch a deterministic batch and open a Discovery candidate's null profile. This preserves the product architecture: Research is an aperture over the seven views, not an eighth workspace.
+
+The current authoritative public root does not yet expose this full v0.4.6 surface; see the v0.4.7 productization gate.
 
 ## Claim ceiling
 
-After v0.4.6 the system may say:
+After v0.4.6 the framework may say:
 
 - detected;
 - derivationally verified;
 - null-tested under N_G / N_L / N_D / N_T;
-- at the 99.2nd percentile of a named simulated reference distribution;
+- at a stated percentile of a named simulated reference distribution;
 - departure detected under a declared FDR-controlled test family;
 - worthy of population-level investigation.
 
