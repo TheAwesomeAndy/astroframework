@@ -1,121 +1,52 @@
 # Noetic Atlas Documentation Index
 
-This index separates **living documentation** from **historical milestone records**.
+This index separates living documentation from historical milestone records. Living documents describe the current `main` implementation **and** the current public product. Historical milestone documents preserve what a specific release meant at the time.
 
-Living documents describe current repository and public-surface reality. Historical milestone documents preserve what a particular implementation stage meant and are not silently rewritten into newer models.
-
-## Read first
-
-1. [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md) — canonical two-axis release contract: framework baseline vs public browser product.
-2. [`V047_PUBLIC_PRODUCTIZATION_GATE.md`](V047_PUBLIC_PRODUCTIZATION_GATE.md) — active blocker required before v0.4.8.
-3. [`../README.md`](../README.md) — project overview and current architecture.
-4. [`CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md`](CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md) — scientific claim boundaries and current evidence ladder.
-5. [`ARCHITECTURE.md`](ARCHITECTURE.md) — software/module ownership and dependency direction.
-6. [`RESEARCH_CONSTITUTION.md`](RESEARCH_CONSTITUTION.md) — governing epistemic rules.
-7. [`V047_FORMAL_CONFIGURATIONS_HYPERGRAPHS.md`](V047_FORMAL_CONFIGURATIONS_HYPERGRAPHS.md) — current higher-order structure milestone.
-8. [`V046_NULL_MODEL_LABORATORY.md`](V046_NULL_MODEL_LABORATORY.md) — accepted counterfactual-inference contract.
-9. [`ROADMAP.md`](ROADMAP.md) — locked dependency chain and later research program.
-
-## Current status matrix
+## Current release
 
 ```text
-framework / research baseline      v0.4.7
-package                            0.4.7-alpha.1
-deployed branch                    main
-public root                        currently v0.4.5 shell
-reachable v0.4.6 shell             prototype/v046.html
-v0.4.7 public shell                not implemented
-public productization              BLOCKED / incomplete
-next milestone                     v0.4.8 after productization gate
+framework baseline       v0.4.7 — Formal Configurations & Astrological Hypergraphs
+public product baseline  v0.4.7 — productized
+current shell            prototype/v047.html
+root entry               index.html → prototype/v047.html
+package                   0.4.7
+productization gate      CLOSED — live verified
 ```
 
-Correct release statement:
+Read first:
 
-> v0.4.7 is implemented, merged, and CI-green as the framework/research baseline; the public application has not yet been productized to that baseline.
+1. [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md) — canonical release contract.
+2. [`V047_PUBLIC_PRODUCTIZATION_GATE.md`](V047_PUBLIC_PRODUCTIZATION_GATE.md) — why framework/product release were separated and the evidence that closed the gate.
+3. [`V047_FORMAL_CONFIGURATIONS_HYPERGRAPHS.md`](V047_FORMAL_CONFIGURATIONS_HYPERGRAPHS.md) — v0.4.7 higher-order object model and null integration.
+4. [`V046_NULL_MODEL_LABORATORY.md`](V046_NULL_MODEL_LABORATORY.md) — named counterfactual/inference contract.
+5. [`../README.md`](../README.md) — project overview.
+6. [`CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md`](CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md) — current epistemic posture.
+7. [`ARCHITECTURE.md`](ARCHITECTURE.md) — software/layer architecture.
+8. [`DEVELOPER_GUIDE.md`](DEVELOPER_GUIDE.md) — implementation and release rules.
+9. [`PRODUCT.md`](PRODUCT.md) — product definition and Personal/Research surface.
+10. [`ROADMAP.md`](ROADMAP.md) — locked dependency sequence.
 
-## Current architecture lineage
+## Current public views
 
 ```text
-v0.3.x  deterministic kernel / input / astronomy / lots
-   ↓
-v0.4.0  primitive condition
-   ↓
-v0.4.1  graph analytics / interpretation / resonance
-   ↓
-v0.4.2  relational condition / House River / proof walker
-   ↓
-v0.4.3  compound condition
-   ↓
-v0.4.4  auditable Reading / Discovery expansion / overlays
-   ↓
-v0.4.5  Operational | Experimental | Discovery regimes
-   ↓
-v0.4.6  Null Model Laboratory
-   ↓
-v0.4.7  Formal Configurations & Astrological Hypergraphs
-   ↓
-PUBLIC PRODUCTIZATION GATE
-   ↓
-v0.4.8  Hidden Geometry Engine
-   ↓
-v0.4.9  Experimental Model Laboratory
-   ↓
-v0.5.0  Population Cohort Engine
+Chart
+Reading
+Resonance
+Network
+House Flow
+Condition
+Proof
 ```
 
-## Governing epistemic sequence
+Aperture:
 
 ```text
-Observation
-→ Detection
-→ Derivation
-→ Counterfactual Comparison
-→ Population Frequency
-→ External Association
-→ Replication
-→ Interpretation
+Personal | Research
 ```
 
-Current general infrastructure reaches through Counterfactual Comparison.
+The shell contains one deterministic core iframe. Research is not an eighth top-level view.
 
-The core separations are:
-
-```text
-Operational ≠ Experimental ≠ Discovery
-Detection ≠ Unexpectedness
-Unexpectedness ≠ Population Frequency
-Population Frequency ≠ Interpretation
-```
-
-## Living architecture and engineering docs
-
-- [`ARCHITECTURE.md`](ARCHITECTURE.md) — one-state/many-models architecture, deterministic layers, research regimes, null laboratory, hypergraphs, and presentation boundary.
-- [`DEVELOPER_GUIDE.md`](DEVELOPER_GUIDE.md) — repository map, module ownership, test/release rules, and definition of done.
-- [`ASTROLOGICAL_MODEL.md`](ASTROLOGICAL_MODEL.md) — baseline tropical / Whole Sign / traditional-rulership rule model and condition boundaries.
-- [`CONDITION_ENGINE_SPEC.md`](CONDITION_ENGINE_SPEC.md) — primitive, relational, and compound condition specification.
-- [`INTEGRITY_AND_PROVENANCE.md`](INTEGRITY_AND_PROVENANCE.md) — evidence classes and reversible proof/research lineage.
-- [`ASTRONOMY_ADAPTERS.md`](ASTRONOMY_ADAPTERS.md) — astronomy provider and current extended-object limitations.
-- [`ASTRONOMY_VALIDATION_PLAN.md`](ASTRONOMY_VALIDATION_PLAN.md) — independent provider-validation requirements.
-- [`GLOSSARY.md`](GLOSSARY.md) — project vocabulary.
-
-## Research documentation
-
-- [`RESEARCH_CONSTITUTION.md`](RESEARCH_CONSTITUTION.md) — project doctrine.
-- [`RESEARCH_DISCOVERY.md`](RESEARCH_DISCOVERY.md) — current Discovery state, null integration, hyperedge promotion, and population firewall.
-- [`RESEARCH_PROGRAM.md`](RESEARCH_PROGRAM.md) — evidence levels, research questions, HCI, counterfactuals, cohort roadmap, and theory promotion.
-- [`V045_RESEARCH_REGIMES.md`](V045_RESEARCH_REGIMES.md) — milestone contract for Operational/Experimental/Discovery separation.
-- [`V046_NULL_MODEL_LABORATORY.md`](V046_NULL_MODEL_LABORATORY.md) — finite Monte Carlo, named nulls, metric registry, FDR, and immutable experiment ledger.
-- [`V047_FORMAL_CONFIGURATIONS_HYPERGRAPHS.md`](V047_FORMAL_CONFIGURATIONS_HYPERGRAPHS.md) — geometric/topological/hybrid hyperedges and candidate-specific null evaluation.
-
-## Product documentation
-
-- [`PRODUCT.md`](PRODUCT.md) — product thesis, intended current seven-view application, Personal/Research behavior, and current packaging gap.
-- [`V047_PUBLIC_PRODUCTIZATION_GATE.md`](V047_PUBLIC_PRODUCTIZATION_GATE.md) — concrete acceptance criteria for making v0.4.7 usable from the root public entry.
-- [`UI_CONSOLIDATION_PLAN.md`](UI_CONSOLIDATION_PLAN.md) — earlier shell-consolidation history; current release gate supersedes it where requirements differ.
-
-## Current research machinery
-
-### v0.4.5 regimes
+## Current research architecture
 
 ```text
 Operational
@@ -123,29 +54,39 @@ Experimental
 Discovery
 ```
 
-Research status remains multidimensional rather than scalar.
-
-### v0.4.6 nulls
+Research lifecycle:
 
 ```text
-N_G geometric randomization
-N_L class-preserving label/identity permutation
-N_D degree-preserving rewire
+Observation
+→ Detection
+→ Derivation
+→ Counterfactual comparison
+→ Population frequency
+→ External association
+→ Replication
+→ Interpretation
+```
+
+Current computational ceiling reaches counterfactual comparison. Population frequency remains unknown and interpretation remains downstream/withheld for formal Research objects.
+
+## v0.4.6 Null Model Laboratory
+
+Named null families:
+
+```text
+N_G geometric
+N_L identity/label permutation
+N_D degree-preserving aspect rewire
 N_T routing-codebook permutation
 ```
 
-Rules:
+The laboratory uses finite Monte Carlo +1 correction and BH-FDR per declared null family. Each null row remains separate; there is no cross-null vote or universal significance score.
 
-- same executable statistic for observed and simulated state;
-- finite Monte Carlo +1 correction;
-- no p=0;
-- empirical percentile/effect position;
-- raw + adjusted p;
-- BH-FDR per declared family;
-- no cross-null pass count;
-- no population claim.
+Public Research mode now exposes the laboratory explicitly through a Web Worker.
 
-### v0.4.7 hyperedges
+## v0.4.7 Formal Hypergraphs
+
+Classes:
 
 ```text
 geometric_polygon
@@ -153,7 +94,7 @@ topological_basin
 compound_hybrid
 ```
 
-Initial typed configurations:
+Initial typed configuration registry:
 
 ```text
 Grand Trine
@@ -164,92 +105,64 @@ Kite
 T-Square Anchor Cluster
 ```
 
-Topological promotion includes closed SCCs and terminal basin-capture sets. Hyperedges carry SHA-256 derivation hashes and candidate-specific null profiles.
+Topological hyperedges include closed dispositor SCCs and terminal basin-capture sets. Compound hybrid objects preserve their independent geometric and routing parents.
 
-## Condition implementation
+Public Research mode now exposes hyperedge identity, participants/cardinality, metrics, derivation hash, `[D,V,B,P,I]`, and candidate-specific null profiles.
 
-Read in this order:
+## Proof / claim boundary
 
-1. [`V040A_CONDITION_ONTOLOGY.md`](V040A_CONDITION_ONTOLOGY.md)
-2. [`V040B_PRIMITIVE_CONDITION.md`](V040B_PRIMITIVE_CONDITION.md)
-3. [`V042_RELATIONAL_CONDITION.md`](V042_RELATIONAL_CONDITION.md)
-4. [`V043_COMPOUND_CONDITION.md`](V043_COMPOUND_CONDITION.md)
-5. [`CONDITION_ENGINE_SPEC.md`](CONDITION_ENGINE_SPEC.md)
-6. machine-readable registries under `data/rules/hellenistic/`
-
-Current condition state:
+Current formal Research objects may be:
 
 ```text
-primitive condition      implemented
-relational condition     implemented
-compound condition       implemented for source-secure v0.4.3 subset
-scalar strength score    intentionally not implemented
+detected
+derivationally verified
+null-tested under named counterfactuals
 ```
 
-## Proof / provenance hierarchy
-
-The intended reversible chain now includes research inference:
+but remain:
 
 ```text
-visible claim
-→ interpretation / research object
-→ hyperedge / graph / route / condition fact
-→ null experiment where applicable
-→ metric + named counterfactual
-→ astrological rule/model
-→ mathematical derivation
-→ astronomical coordinate
-→ civil-time resolution
-→ original input
+population_frequency = unknown
+interpretation = withheld
 ```
 
-Missing or unsupported dependencies remain explicit rather than fabricated.
+Do not infer real-world rarity from an artificial null distribution.
 
-## Current public product contract
+## Live public regression
 
-Intended current shell:
+The v0.4.7 product shell is guarded by:
 
 ```text
-Chart · Reading · Resonance · Network · House Flow · Condition · Proof
-Personal | Research
+tests/v047_ui_contract_smoke.mjs
+tests/v047_live_pages_smoke.mjs
+.github/workflows/v047-live-pages.yml
 ```
 
-Current public reality does not satisfy that full v0.4.7 contract because the root still reaches the v0.4.5 shell and no v0.4.7 shell exists.
+The live test opens the public GitHub Pages root with Chromium, verifies v047 routing/chrome/bootstrap, exercises all seven views, checks Personal concealment, inspects canonical hyperedges, runs a 199-iteration null batch, inspects Proof boundaries, and confirms stale Research-state invalidation after core reload.
 
-The public productization gate must close before v0.4.8 work begins.
+## Living architecture / engineering docs
 
-## Next research milestones
+- [`ARCHITECTURE.md`](ARCHITECTURE.md) — chart authority, module/layer boundaries, research and product flow.
+- [`DEVELOPER_GUIDE.md`](DEVELOPER_GUIDE.md) — repository map, invariants, tests, release law, definition of done.
+- [`ASTROLOGICAL_MODEL.md`](ASTROLOGICAL_MODEL.md) — formal astrological rule model.
+- [`CONDITION_ENGINE_SPEC.md`](CONDITION_ENGINE_SPEC.md) — primitive/relational/compound condition architecture.
+- [`INTEGRITY_AND_PROVENANCE.md`](INTEGRITY_AND_PROVENANCE.md) — evidence/derivation protocol.
+- [`GLOSSARY.md`](GLOSSARY.md) — vocabulary.
+- [`ASTRONOMY_ADAPTERS.md`](ASTRONOMY_ADAPTERS.md) — provider/support boundaries.
+- [`ASTRONOMY_VALIDATION_PLAN.md`](ASTRONOMY_VALIDATION_PLAN.md) — independent astronomy-validation requirements.
 
-### v0.4.8 — Hidden Geometry Engine
+## Research / product docs
 
-```text
-midpoints
-declination / parallels / contraparallels
-antiscia / contra-antiscia
-```
+- [`PRODUCT.md`](PRODUCT.md) — current product surface and boundaries.
+- [`RESEARCH_CONSTITUTION.md`](RESEARCH_CONSTITUTION.md) — governing research doctrine.
+- [`RESEARCH_PROGRAM.md`](RESEARCH_PROGRAM.md) — empirical/research program.
+- [`RESEARCH_DISCOVERY.md`](RESEARCH_DISCOVERY.md) — Discovery layer and promotion boundaries.
+- [`THEORY_AND_PURPOSE.md`](THEORY_AND_PURPOSE.md) — philosophical/epistemic mission.
+- [`ROADMAP.md`](ROADMAP.md) — dependency sequence.
 
-### v0.4.9 — Experimental Model Laboratory
+## Historical / release-scoped documents
 
-```text
-Ceres–Taurus
-alternative rulership tensors
-other named reversible hypotheses
-```
-
-### v0.5.0 — Population Cohort Engine
-
-```text
-100k+ empirical reference distributions
-population prevalence / uncertainty
-sampling and stratification
-cohort provenance
-```
-
-Life Spectrum / timing remains later work and no longer owns the v0.5.0 slot.
-
-## Historical milestone records
-
-Historical/release-scoped documents remain valuable records of prior contracts, including:
+Historical milestones remain useful provenance and should not be rewritten to impersonate the present:
 
 - `NOETIC_ATLAS_V02_DEV_NOTES.md`
 - `V03_KERNEL_AND_INPUT.md`
@@ -263,13 +176,37 @@ Historical/release-scoped documents remain valuable records of prior contracts, 
 - `V0413_RESONANCE_FIELD.md`
 - `V042_RELATIONAL_CONDITION.md`
 - `V043_COMPOUND_CONDITION.md`
-- `V044_*` milestone documents
 - `V045_RESEARCH_REGIMES.md`
 - `V046_NULL_MODEL_LABORATORY.md`
 - `V047_FORMAL_CONFIGURATIONS_HYPERGRAPHS.md`
 
-## Documentation rule
+The v0.4.6/v0.4.7 milestone docs are historical definitions of the implemented subsystems while still being authoritative technical references for those subsystem contracts.
 
-When living implementation, release documentation, and public browser behavior disagree, the disagreement is a defect.
+## Current dependency chain
 
-A feature is not fully released until definition, implementation, tests, provenance, current entrypoint, public shell, and living documentation all agree.
+```text
+v0.4.6 Null Model Laboratory                          DONE
+v0.4.7 Formal Configurations & Hypergraphs             DONE
+        Public Productization Gate                     CLOSED
+v0.4.8 Hidden Geometry Engine                          NEXT
+v0.4.9 Experimental Model Laboratory
+v0.5.0 Population Cohort Engine
+```
+
+No v0.4.8 implementation is included in the v0.4.7 release.
+
+## Documentation law
+
+When living implementation, current documentation, Pages deployment, and public browser behavior disagree, the disagreement is a release defect.
+
+A new public feature is not complete until:
+
+```text
+implementation
++ provenance/model identity
++ deterministic tests
++ current entrypoint/shell
++ documentation
++ Pages deployment
++ live browser verification
+```

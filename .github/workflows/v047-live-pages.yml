@@ -1,0 +1,31 @@
+name: v0.4.7 live Pages gate
+
+on:
+  push:
+    branches:
+      - test/v047-live-pages-gate
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-pages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser test runtime
+        run: npm install --no-save playwright@1.55.0
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Exercise deployed v0.4.7 product
+        env:
+          NOETIC_LIVE_URL: https://theawesomeandy.github.io/astroframework/
+        run: node tests/v047_live_pages_smoke.mjs

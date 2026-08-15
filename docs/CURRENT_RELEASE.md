@@ -2,25 +2,26 @@
 
 ## Canonical status
 
-Noetic Atlas currently has a **framework implementation baseline** that is ahead of its **public product surface**. These are separate release axes and must be reported separately.
+Noetic Atlas v0.4.7 is now aligned across the framework and public product.
 
 | Release axis | Current state |
 |---|---|
 | Framework / research implementation | **v0.4.7 — Formal Configurations & Astrological Hypergraphs** |
-| Package implementation identifier | `0.4.7-alpha.1` |
+| Public product baseline | **v0.4.7 — productized** |
+| Package version | `0.4.7` |
 | Deployed branch | `main` |
-| Public Pages source | `main` repository root |
-| Public root entry | currently redirects to `prototype/app.html?build=research-045` |
-| Root-visible product version | effectively **v0.4.5** |
-| Reachable v0.4.6 shell | `prototype/v046.html` |
-| v0.4.7 shell | **not implemented** |
-| Release-packaging status | **BLOCKED / incomplete** |
+| Authoritative shell | `prototype/v047.html` |
+| Public root entry | `index.html` → `prototype/v047.html` |
+| Public productization gate | **CLOSED** |
+| Live browser gate | **PASS** |
 
-Therefore the correct statement is:
+The release law introduced during v0.4.7 remains permanent:
 
-> **v0.4.7 is the current computational and research baseline on `main`; the public browser instrument has not yet been productized to v0.4.7.**
+```text
+merged implementation ≠ deployed usable feature
+```
 
-The public productization gate is specified in [`V047_PUBLIC_PRODUCTIZATION_GATE.md`](V047_PUBLIC_PRODUCTIZATION_GATE.md).
+A future feature is not publicly released merely because code is on `main` or CI is green. Public release requires agreement among repository state, deterministic integrity tests, Pages deployment, and browser behavior.
 
 ## Frozen architectural laws
 
@@ -36,11 +37,41 @@ Operational ≠ Experimental ≠ Discovery
 Detection ≠ Unexpectedness ≠ Population Frequency ≠ Interpretation
 ```
 
-No downstream layer may silently rewrite the deterministic chart authority. No research result may silently rewrite the Operational model. No counterfactual result may be described as real-population rarity.
+No downstream layer may silently rewrite deterministic chart authority. No research result may silently rewrite the Operational model. No counterfactual result may be described as real-population rarity.
 
-## Implemented framework stack
+## Current product contract
 
-The current `main` branch contains the complete lineage through v0.4.7:
+One current shell exposes seven coordinated views:
+
+```text
+Chart · Reading · Resonance · Network · House Flow · Condition · Proof
+```
+
+and one aperture control:
+
+```text
+Personal | Research
+```
+
+Personal is the default and keeps the Operational model primary. Research reveals versioned Experimental/Discovery machinery without creating a second chart or calculator.
+
+The current shell embeds exactly one deterministic core iframe. Historical versioned shells remain in the repository for regression/history but do not compete for root ownership.
+
+## Bootstrap contract
+
+The current shell implements:
+
+```text
+Loading → Ready | Empty | Error
+```
+
+`Ready` requires both bound chart JSON and a rendered Natal Field. The shell does not present a populated outer truth state beside an unexplained blank core graph.
+
+Canonical bootstrap can load the regression specimen. A visible Empty/Error state is used when the core cannot produce a usable chart.
+
+Any core reload or chart-state change invalidates attached null and hypergraph-null results and terminates an active Research worker before new derived state is accepted.
+
+## Implemented framework lineage
 
 ```text
 v0.3.x deterministic kernel / input / astronomy / lots
@@ -60,34 +91,20 @@ v0.4.5 Operational | Experimental | Discovery regimes
 v0.4.6 Null Model Laboratory
         ↓
 v0.4.7 Formal Configurations & Astrological Hypergraphs
+        ↓
+v0.4.7 Public Productization
 ```
 
-The accepted v0.4.6 `research-lab-engine.mjs` remains versioned as v0.4.6 for reproducibility. v0.4.7 extends it through `research-lab-v047.mjs` rather than rewriting the accepted artifact.
-
-## Current coordinated product contract
-
-The intended current application architecture remains seven coordinated views with a research aperture:
-
-```text
-Chart · Reading · Resonance · Network · House Flow · Condition · Proof
-
-Personal | Research
-```
-
-Research is an aperture, not an eighth chart or a second calculator.
-
-However, the browser entrypoint currently lands on the v0.4.5 shell. The v0.4.7 implementation is therefore **not yet a complete public release** under the product definition.
+The accepted v0.4.6 `research-lab-engine.mjs` remains versioned as v0.4.6 for reproducibility. v0.4.7 extends it through `research-lab-v047.mjs`; the product shell surfaces that wrapper rather than rewriting the historical engine.
 
 ## v0.4.6 — Null Model Laboratory
 
-v0.4.6 is merged and part of the framework baseline.
-
 Named counterfactuals:
 
-- `N_G` geometric null;
-- `N_L` class-preserving label/identity permutation;
-- `N_D` degree-preserving aspect-network rewire;
-- `N_T` rulership/routing-codebook permutation.
+- `N_G` — geometric null;
+- `N_L` — class-preserving identity/label permutation;
+- `N_D` — degree-preserving aspect-network rewire;
+- `N_T` — rulership/routing-codebook permutation.
 
 Core statistical rules:
 
@@ -95,23 +112,38 @@ Core statistical rules:
 p_hat = (1 + exceedance_count) / (B + 1)
 ```
 
-- p=0 is impossible;
+Therefore:
+
+- `p = 0` is impossible;
 - empirical percentile/effect position is first-class;
 - BH-FDR adjustment is applied within declared null-model families;
 - no cross-null pass count exists;
-- each null preserves its own explicit counterfactual meaning;
-- a failed/null-negative result remains informative.
+- every null retains its own counterfactual question and limitations;
+- null-negative results remain valid outputs.
 
-A candidate can advance from `detected-no-baseline` to `null-tested`, while:
+A Discovery object may advance from `detected-no-baseline` to `null-tested`, while:
 
 ```text
 population_frequency = unknown
 interpretation = withheld
 ```
 
-## v0.4.7 — Formal Configurations & Astrological Hypergraphs
+### Public Research exposure
 
-v0.4.7 is merged and CI-green as the current implementation baseline.
+Research mode exposes:
+
+- iteration choices `199 / 999 / 4999 / 9999`;
+- explicit deterministic seed;
+- **Run null tests** control;
+- Web Worker execution;
+- simulation ledger;
+- per-candidate null profiles;
+- raw/adjusted p-values and percentiles;
+- simulation-quality state.
+
+The run is explicit-only and never starts automatically.
+
+## v0.4.7 — Formal Configurations & Astrological Hypergraphs
 
 Implemented hyperedge classes:
 
@@ -121,7 +153,7 @@ topological_basin
 compound_hybrid
 ```
 
-Initial k=3 / k=4 typed registry:
+Initial k=3/k=4 typed registry:
 
 - Grand Trine;
 - T-Square;
@@ -130,17 +162,15 @@ Initial k=3 / k=4 typed registry:
 - Kite;
 - Noetic Discovery template: T-Square Anchor Cluster.
 
-Topological promotion includes closed Tarjan SCCs and terminal basin-capture sets. Hybrid objects couple independently derived geometry and routing without collapsing the layers.
+Topological promotion includes closed Tarjan SCCs and terminal basin-capture sets. Compound hybrid objects couple independently derived geometry and routing without flattening the parent layers.
 
-Every hyperedge is provenance-bearing and includes an immutable SHA-256 derivation hash. Candidate-specific null profiles reuse v0.4.6 inference. A completed baseline comparison advances only the baseline/null-comparison dimension.
-
-Compact hyperedge status:
+Every hyperedge includes participants/cardinality, geometric and/or topological metrics, a SHA-256 derivation hash, provenance, and compact research state:
 
 ```text
 [D,V,B,P,I]
 ```
 
-At detection:
+At deterministic detection:
 
 ```text
 [1,1,0,0,0]
@@ -152,7 +182,78 @@ After all admissible named null comparisons complete:
 [1,1,1,0,0]
 ```
 
-`P` and `I` remain zero because population frequency and interpretation are not implemented at this layer.
+`P` and `I` remain zero because neither real-population frequency nor interpretation is supplied by this subsystem.
+
+### Public Research exposure
+
+The v0.4.7 shell shows for every detected hyperedge:
+
+- hyperedge ID/class/label;
+- participants and cardinality;
+- geometric/topological metrics;
+- derivation hash;
+- `[D,V,B,P,I]`;
+- explicit candidate-specific null rows after a run;
+- `not-admissible` when a null is mathematically inappropriate;
+- raw/adjusted p-values, empirical percentile, departure state, and simulation quality;
+- population frequency `unknown`;
+- interpretation `withheld`.
+
+No universal hypergraph-strength or cross-null significance score exists.
+
+## Canonical regression structures
+
+The canonical fixture continues to require:
+
+```text
+Sun–Moon–Jupiter Grand Trine
+Spirit-closed Kite
+Venus–Mars / Uranus–Chiron T-Square Anchor Cluster
+Mercury–Venus closed dispositor SCC
+Mercury–Venus terminal basin
+compound geometry × routing hyperedge
+```
+
+It also requires the negative result that Sun + Mercury alone is not a k≥3 hyperedge. Cardinality rules outrank desired narrative output.
+
+## Live productization evidence
+
+The release gate was closed only after all four release surfaces agreed:
+
+```text
+repository main
+CI
+GitHub Pages deployment
+public browser behavior
+```
+
+Implementation was merged as commit:
+
+```text
+0a4b425755fd347e6a9824fe7881e056eab478b3
+```
+
+That commit passed the deterministic integrity suite and GitHub Pages reported a successful build from the same SHA.
+
+A Chromium live-browser gate then exercised the deployed public site and passed the release checklist, including:
+
+- root landing on `prototype/v047.html`;
+- current v0.4.7 chrome;
+- canonical bootstrap reaching Ready with a rendered Natal Field;
+- all seven views opening;
+- Personal hiding Research null/hypergraph controls;
+- Research exposing canonical hyperedges;
+- a real 199-iteration v0.4.6 + v0.4.7 null run completing in the browser;
+- simulation ledger/null profiles appearing;
+- Proof showing claim ceiling, population unknown, and interpretation withheld;
+- core reload invalidating the previously attached null batch.
+
+Permanent live regression:
+
+```text
+tests/v047_live_pages_smoke.mjs
+.github/workflows/v047-live-pages.yml
+```
 
 ## Research-status firewall
 
@@ -169,59 +270,9 @@ replication
 interpretation
 ```
 
-No single confidence/strength/significance score may replace this vector.
+No scalar confidence/strength/significance score may replace these distinct dimensions.
 
-A counterfactual departure means only that the observed statistic departs from a named simulated reference under that model. It does not establish prevalence in real natal charts, astrological validity, psychological association, causality, spirituality, or prediction.
-
-## Public-surface defect
-
-The following are current release blockers:
-
-1. root `index.html` still identifies/routes the current application as v0.4.5;
-2. no `prototype/v047.html` exists;
-3. `prototype/v046.html` remains labeled as a candidate even though v0.4.6 is merged;
-4. the outer shell, inner core, and repository version labels disagree;
-5. canonical bootstrap can expose transient empty/partially attached chart state;
-6. no public shell exposes both the v0.4.6 null laboratory and v0.4.7 hypergraph objects/null profiles;
-7. multiple historical shells remain reachable without one authoritative current-app redirect.
-
-These facts are not documentation trivia. They mean the research framework is ahead of the public product.
-
-## Release-completion gate
-
-v0.4.7 becomes a fully productized public release only after all of the following are true:
-
-- one authoritative current shell exists;
-- root redirects to it;
-- the seven views remain available;
-- Personal/Research aperture remains intact;
-- Research mode exposes v0.4.6 null controls and v0.4.7 hyperedges/null profiles;
-- Personal mode hides Monte Carlo details;
-- version chrome is coherent;
-- bootstrap has explicit loading/empty/error states;
-- chart/truth/graph state cannot visibly desynchronize;
-- Research-path UI tests exercise hyperedge detection → null run → status transition;
-- Pages deploys the exact accepted commit successfully.
-
-See [`V047_PUBLIC_PRODUCTIZATION_GATE.md`](V047_PUBLIC_PRODUCTIZATION_GATE.md).
-
-## Locked next dependency chain
-
-No v0.4.8 design/implementation should outrun the release gate above.
-
-```text
-v0.4.6  Null Model Laboratory                         DONE
-v0.4.7  Formal Configurations & Hypergraphs            DONE — implementation
-         Public Productization Gate                    BLOCKING
-v0.4.8  Hidden Geometry Engine                         NEXT AFTER GATE
-         Midpoints · Declination/Parallels · Antiscia
-v0.4.9  Experimental Model Laboratory
-         Ceres–Taurus · Alternative Rulership Tensors
-v0.5.0  Population Cohort Engine
-         100k+ empirical reference distributions
-```
-
-Life Spectrum / production timing is deferred beyond this locked dependency chain rather than occupying v0.5.0.
+A counterfactual departure means only that an observed statistic departs from a named simulated reference under that model. It does not establish real natal prevalence, astrological validity, psychological association, causality, spirituality, or prediction.
 
 ## Claim ceiling
 
@@ -232,7 +283,7 @@ Allowed now:
 - null-tested under named counterfactuals;
 - empirical percentile within a simulated reference;
 - departure/no-departure under a declared multiple-testing family;
-- candidate for population-level investigation.
+- candidate for later population-level investigation.
 
 Not allowed now:
 
@@ -244,8 +295,28 @@ Not allowed now:
 - spiritually proven;
 - experimentally established physical astrology.
 
+## Next dependency chain
+
+The v0.4.7 Public Productization Gate is closed. v0.4.8 is therefore the next engineering milestone, but **no v0.4.8 implementation is part of this release**.
+
+```text
+v0.4.6  Null Model Laboratory                         DONE
+v0.4.7  Formal Configurations & Hypergraphs            DONE
+         Public Productization Gate                    CLOSED
+v0.4.8  Hidden Geometry Engine                         NEXT
+         Midpoints · Declination/Parallels · Antiscia
+v0.4.9  Experimental Model Laboratory
+         Ceres–Taurus · Alternative Rulership Tensors
+v0.5.0  Population Cohort Engine
+         empirical natal reference distributions
+```
+
+Life Spectrum / production timing remains later work.
+
 ## Documentation rule
 
-Living documentation must describe both **repository reality** and **public-surface reality**. A merge to `main` is not, by itself, sufficient to call a feature publicly available.
+Living documentation must describe both repository reality and public-surface reality. Historical milestone documents remain historical records.
 
-Historical milestone documents remain historical. Their status headers may be advanced from `candidate` to `merged implementation milestone`, but their technical definitions must not be rewritten to impersonate newer models.
+The release law remains:
+
+> **A merge to `main` is necessary but not sufficient for public release.**
