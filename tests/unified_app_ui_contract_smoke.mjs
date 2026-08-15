@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 const html=fs.readFileSync(new URL('../prototype/app.html',import.meta.url),'utf8');
-assert.equal((html.match(/<iframe\b/g)||[]).length,1,'current app must have exactly one iframe');
+assert.equal((html.match(/<iframe\b/g)||[]).length,1,'preserved unified v0.4.5 app must have exactly one iframe');
 assert.match(html,/id="core" src="\.\/index\.html\?build=v045-core"/);
 for(const historical of ['v0412c','v0413','v042','v043','v044','v045'])assert.doesNotMatch(html,new RegExp(`src="\\./${historical}\\.html`));
 for(const label of ['Chart','Reading','Resonance','Network','House Flow','Condition','Proof'])assert.match(html,new RegExp(`>${label}<`));
@@ -11,5 +11,7 @@ for(const capability of ['buildEnergeticSynthesis','buildHouseResonanceMap','ana
 assert.match(html,/conditions\.relational/);assert.match(html,/conditions\.compound/);assert.match(html,/renderConditionSignatureHTML/);assert.match(html,/MutationObserver/);
 assert.match(html,/Structural mismatch or unresolved proof blocks publication/i);assert.match(html,/Route width remains an integer count of house-ruler paths/i);assert.match(html,/modern overlay never rewrites traditional dispositor edges/i);assert.match(html,/expanded aspect famil/i);assert.match(html,/Regime contamination audit/i);assert.match(html,/overflow:auto/);
 const m=html.match(/<script type="module">([\s\S]*?)<\/script>/);assert.ok(m);new vm.Script(`(async()=>{${m[1].replace(/^import .*$/gm,'')}\n})`);
-const root=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');assert.match(root,/prototype\/app\.html\?build=research-045/);assert.doesNotMatch(root,/prototype\/v045\.html/);
-console.log('unified application shell contract: ok · v0.4.5 current app');
+const root=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
+assert.match(root,/prototype\/v047\.html/,'root ownership must move to the v0.4.7 productization shell');
+assert.doesNotMatch(root,/prototype\/app\.html|research-045/,'the preserved v0.4.5 app is historical, not the root target');
+console.log('preserved unified v0.4.5 shell contract: ok · root ownership moved to v0.4.7');
