@@ -2,16 +2,19 @@
 
 ## 1. Current target
 
-See [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md) first.
+Read [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md) first.
 
-Current deployed branch: **`main`**.  
-Current public release: **v0.4.2 — Relational Condition**.  
-Current browser surface: **`prototype/v042.html`**.  
-Current minimum deterministic envelope: **`naf.analysis.v0.3.1`**.
+```text
+framework / research baseline   v0.4.7
+package                         0.4.7-alpha.1
+deployed branch                 main
+public product                  stale at v0.4.5 shell
+v0.4.7 public shell             absent
+active engineering priority     v0.4.7 productization gate
+next research milestone         v0.4.8 only after gate closes
+```
 
-Current next astrological-engine milestone: **v0.4.3 compound condition**.
-
-The present system includes deterministic chart structure, primitive + relational classical condition, graph analytics/findings, outer-planet interpretation, energetic whole-chart synthesis, Resonance Field, Qualified Resonance/Flow, House River, and Derivation Walker infrastructure. Life Spectrum is not implemented yet.
+The immediate target is **not** to start v0.4.8. It is to close [`V047_PUBLIC_PRODUCTIZATION_GATE.md`](V047_PUBLIC_PRODUCTIZATION_GATE.md).
 
 ## 2. Engineering contract
 
@@ -21,10 +24,12 @@ input
 → astronomy
 → deterministic astrological rules
 → canonical analysis
-→ primitive condition
-→ relational condition
-→ graph derivation / research
-→ interpretation / resonance
+→ primitive / relational / compound condition
+→ graph / routing derivation
+→ Operational reading / interpretation projections
+→ research-regime boundary
+→ counterfactual inference
+→ hypergraph derivation / hypergraph null profiles
 → coordinated projections
 → proof / provenance
 ```
@@ -34,121 +39,133 @@ input
 Frozen representation law:
 
 ```text
-one chart state
+one astronomical/chart state
+→ many explicit models
 → many coordinated projections
 ```
 
-## 3. Repository map
+## 3. Repository map — current research surface
 
 ```text
 astroframework/
 ├── README.md
-├── index.html                         # public redirect → prototype/v042.html
-├── package.json
+├── index.html                         # CURRENTLY redirects to stale v0.4.5 app
+├── package.json                       # 0.4.7-alpha.1
 ├── schemas/
+│   ├── naf-null-laboratory-result-v0.4.6.schema.json
+│   └── naf-hypergraph-result-v0.4.7.schema.json
 ├── data/
 │   ├── canonical/
 │   └── rules/hellenistic/
-│       ├── condition-v1.registry.json
-│       └── relational-condition-v1.registry.json
 ├── src/
 │   ├── astronomy/
 │   ├── time/
 │   ├── kernel/
 │   ├── pipeline/
 │   ├── conditions/
-│   │   ├── primitive-condition-engine.mjs
-│   │   ├── relational-condition-engine.mjs
-│   │   ├── condition-signature.mjs
-│   │   └── condition-system.mjs
 │   ├── integrity/
-│   │   └── derivation-walker.mjs
-│   ├── research/
-│   │   ├── graph-analytics-engine.mjs
-│   │   ├── house-river-engine.mjs
-│   │   └── pattern-engine.mjs
-│   └── interpretation/
-│       ├── astrological-analysis-engine.mjs
-│       ├── energetic-synthesis-engine.mjs
-│       ├── energetic-synthesis-display.mjs
-│       └── house-resonance-engine.mjs
+│   ├── interpretation/
+│   └── research/
+│       ├── graph-analytics-engine.mjs
+│       ├── house-river-engine.mjs
+│       ├── research-regime-registry.mjs
+│       ├── research-lab-engine.mjs       # accepted v0.4.6 artifact
+│       ├── null-state.mjs
+│       ├── null-metric-registry.mjs
+│       ├── null-model-registry.mjs
+│       ├── null-model-laboratory.mjs
+│       ├── null-model-worker.mjs
+│       ├── hypergraph-engine.mjs
+│       ├── hypergraph-null-evaluator.mjs
+│       └── research-lab-v047.mjs         # v0.4.7 wrapper
 ├── prototype/
-│   ├── index.html                     # deterministic graph-first visual core
-│   ├── v0412c.html                    # preserved Structure & Analysis
-│   ├── v0413.html                     # preserved additive Resonance Field
-│   └── v042.html                      # CURRENT public shell
+│   ├── index.html                        # deterministic visual core
+│   ├── historical v041*–v045 shells
+│   ├── app.html                          # current root target, still v0.4.5
+│   └── v046.html                         # reachable null-lab shell
+│       # v047.html does not yet exist
 ├── tests/
+│   ├── null_model_laboratory_v046_smoke.mjs
+│   ├── research_lab_v046_smoke.mjs
+│   ├── v046_ui_contract_smoke.mjs
+│   ├── hypergraph_v047_smoke.mjs
+│   ├── hypergraph_nulls_v047_smoke.mjs
+│   └── research_lab_v047_smoke.mjs
 ├── docs/
 └── .github/workflows/
 ```
 
-Historical versioned surfaces remain in `prototype/` for regression/history purposes.
+## 4. Current version-preservation rule
 
-## 4. Current browser data flow
+Do not “fix” provenance by rewriting accepted subsystem versions.
 
-```text
-prototype/index.html computes / serializes chart state
-        ↓
-prototype/v0412c.html consumes it for synthesis/findings/condition
-        ↓
-prototype/v0413.html consumes the same state for Resonance Field
-        ↓
-prototype/v042.html consumes the same state for relational projections
-        ↓
-computeConditionSystem(...)
-buildHouseResonanceMap(...)
-buildHouseRiver(...)
-buildDerivationIndex(...)
-        ↓
-Existing Atlas / Qualified Resonance / Relations /
-Qualified Flow / House River / Proof Walker
-```
+`research-lab-engine.mjs` remains v0.4.6 because it is an accepted historical executable contract.
 
-No wrapper is permitted to become a second chart kernel.
-
-Preservation chain:
+v0.4.7 extends it through:
 
 ```text
-v042 → v0413 → v0412c → deterministic core
+research-lab-v047.mjs
 ```
+
+This is the preferred pattern when a new layer extends a stable subsystem without changing its old semantics.
+
+Product chrome may say v0.4.7 while subsystem provenance still truthfully says v0.4.6 where that subsystem is the one producing the result.
 
 ## 5. Module ownership
 
 ### `src/time/`
-Owns local civil time, IANA zone lookup/override, historical offsets, DST ambiguity/nonexistence, and UTC resolution.
+
+Owns civil-time resolution, IANA zone lookup/override, historical offsets, DST ambiguity/nonexistence, and UTC provenance.
 
 ### `src/astronomy/`
-Owns Sun through Pluto astronomy, longitude, motion, ASC, MC, solar altitude, and provider/convention provenance. Automatic exclusions currently include Ceres, Chiron, node variants, Lilith/apogee variants, Vertex, and fixed stars.
 
-### `src/kernel/noetic-kernel.mjs`
-Owns normalization/parsing, sign conversion, Whole Sign houses, major aspects/orbs, applying/separating, traditional domicile rulership, dispositor graph, Tarjan SCC/terminal SCC, house-ruler routes, and element/modality composition.
+Owns numerical celestial coordinates and observer geometry under explicit provider/convention identity.
 
-### `src/kernel/hellenistic-integrity.mjs`
-Owns sect, seven Hermetic lots, formula proof, version/completeness state, and deterministic derivation-ledger enrichment.
+### `src/kernel/`
 
-### `src/conditions/primitive-condition-engine.mjs`
-Owns `naf.condition.primitive.hellenistic.v0.4.0b`: independent primitive factors for the classical seven. No scalar strength score.
+Owns reusable deterministic zodiac/house/aspect/rulership/topology primitives.
 
-### `src/conditions/relational-condition-engine.mjs`
-Owns `naf.condition.relational.hellenistic.v0.4.2`: source-locked reception, exchange, later-tradition mutual-reception compatibility, overcoming, and domination relations. It consumes deterministic signs/configurations and does not rewrite dispositorship.
+### `src/conditions/`
 
-### `src/conditions/condition-system.mjs`
-Composes primitive + relational condition while keeping layers separately inspectable.
+Owns primitive, relational, and compound astrological condition as typed provenance-bearing rule outputs.
 
-### `src/conditions/condition-signature.mjs`
-Projects categorical condition tokens across views. It is not a scoring engine.
+No universal strength scalar.
 
 ### `src/research/graph-analytics-engine.mjs`
-Owns SCC condensation, terminal basin, route depth, upstream route capture, nonterminal bottleneck, aspect components/degree/clustering/betweenness, articulation points/bridges, typed motifs, and aspect × dispositor overlap.
+
+Owns graph-derived structure such as SCC/basin/depth, aspect connectivity, motifs, and overlap.
 
 ### `src/research/house-river-engine.mjs`
-Consumes existing house routes and derives route-count bands. Width semantics are exactly `# house-ruler paths traversing the edge`.
 
-### `src/integrity/derivation-walker.mjs`
-Normalizes/indexes proof objects and traverses `derivation_ref` dependencies. Missing legacy dependencies stay explicit.
+Owns route-count projection over already-computed house/ruler paths.
+
+### `src/research/research-regime-registry.mjs`
+
+Owns Operational / Experimental / Discovery identity and research-status dimensions.
+
+### `src/research/null-*.mjs`
+
+Owns v0.4.6 counterfactual state, source-locked metrics, named null generators, deterministic RNG/seed handling, finite Monte Carlo inference, FDR families, and experiment ledgers.
+
+### `src/research/hypergraph-engine.mjs`
+
+Owns formal higher-order configuration detection and topological/hybrid hyperedge construction.
+
+### `src/research/hypergraph-null-evaluator.mjs`
+
+Owns candidate-specific admissible null evaluation for hyperedges. It reuses the accepted v0.4.6 inference contract.
+
+### `src/research/research-lab-v047.mjs`
+
+Owns the v0.4.7 research wrapper over the accepted v0.4.6 lab.
 
 ### `src/interpretation/`
-Owns downstream astrological/energetic interpretation and Resonance Field modeling. It may consume deterministic state but may not mutate it. Outer planets can be interpreted without inheriting Hellenistic condition. Ceres can be interpreted only when a coordinate exists.
+
+Owns downstream readable meaning. It may consume evidence but may not mutate coordinates, houses, aspects, condition, graph/hypergraph facts, null experiments, or research status.
+
+### `src/integrity/`
+
+Owns normalization/indexing/walking of proof and derivation references.
 
 ## 6. Running the project
 
@@ -157,7 +174,16 @@ npm install
 npm test
 ```
 
-Current `npm test` executes kernel, integrity, primitive and relational condition, graph analytics, astrological/energetic analysis, house resonance, House River/Derivation Walker, every preserved UI contract through v0413, the v042 UI contract, geometry/boundary, timezone, and astronomy-adapter tests.
+The current suite includes historical tests plus:
+
+```text
+v0.4.6 null model laboratory
+v0.4.6 research lab integration
+v0.4.6 UI contract
+v0.4.7 formal hypergraph core
+v0.4.7 hypergraph null integration
+v0.4.7 research lab wrapper
+```
 
 Serve locally:
 
@@ -165,188 +191,277 @@ Serve locally:
 python -m http.server 8000
 ```
 
-Open:
-
-```text
-http://localhost:8000/prototype/v042.html
-```
+Current public-equivalent root behavior is **not** the desired v0.4.7 development target. For research-module inspection, use direct module/tests or the v0.4.6 shell as appropriate until the productization gate is implemented.
 
 ## 7. Core invariants
 
+### Chart authority
+
+There is one current astronomical/chart state.
+
 ### Longitude
+
 Decimal degrees in `[0,360)` internally.
 
 ### Time
+
 Astronomy receives an unambiguous UTC instant.
 
 ### Houses
-Whole Sign house is derived from sign displacement relative to Ascendant sign.
+
+Whole Sign house assignment derives from sign displacement relative to the Ascendant sign.
 
 ### Aspects
-Each admitted relation retains endpoints, aspect family, separation/orb, orb-policy identity, phase when computable, and provenance.
+
+Every admitted relation preserves endpoints, family/angle, separation/orb, policy identity, phase where computable, and provenance.
 
 ### Lots
-Each lot retains sect, formula family, directed arc, ASC, result, house, ruler, and provenance.
+
+Every lot preserves sect, formula family, directed arc, result, house, ruler, and provenance.
 
 ### Topology
-A graph result is incomplete unless graph definition/rule model is identified.
+
+Every graph/hypergraph result names its scope and rule/model.
 
 ### Condition
-Primitive and relational facts remain independently reconstructable. Do not hide them in one strength number.
 
-### Relation layers
-Dispositorship, reception, exchange, mutual-reception compatibility, overcoming, and domination remain distinguishable objects.
+Primitive, relational, and compound factors remain separately reconstructible.
 
 ### House River
-Band width is a route count, never an energetic-strength proxy.
 
-### Provenance
-Every new v0.4.2 relation/band is created with a `derivation_ref`.
+Band width is route count only.
+
+### Research regimes
+
+Experimental/Discovery results cannot overwrite Operational facts.
+
+### Null inference
+
+A null must declare preserves/randomizes/question/limitations and use the same statistic on observed and simulated state.
+
+### Monte Carlo
+
+Use +1 finite correction. No p=0.
+
+### Multiple testing
+
+Raw and adjusted p remain distinct. Family/procedure/rank/size are explicit.
+
+### Cross-null semantics
+
+No `N of 4 nulls passed` field or universal score.
+
+### Population firewall
+
+Counterfactual percentile is not population prevalence.
+
+### Hyperedge cardinality
+
+Do not create missing participants to satisfy a named pattern.
+
+### Hyperedge provenance
+
+Every v0.4.7 hyperedge carries a SHA-256 derivation hash and explicit derivation payload.
 
 ### Interpretation
-Interpretation is `interpretive-inference`; it cannot rewrite deterministic state.
 
-### Completeness
-Use explicit states such as `valid`, `ambiguous`, `unsupported`, `invalid`, `not_implemented`, `not_applicable`, and `indeterminate`. Never encode unsupported as zero/false.
+Interpretation remains downstream and cannot change formal research state.
 
 ## 8. Adding an astrological rule
 
 Specify before code:
 
-1. tradition;
-2. source/reconstruction;
-3. competing variants;
-4. required astronomical inputs;
-5. exact transformation;
-6. boundaries;
-7. applicability;
+1. tradition/source;
+2. reconstruction/variant;
+3. required inputs;
+4. exact transformation;
+5. boundaries;
+6. applicability;
+7. model/rule ID;
 8. provenance fields;
-9. synthetic fixtures;
-10. derivation-reference contract.
+9. fixtures;
+10. derivation contract.
 
-Implementation order:
+Do not silently blend traditions.
 
-```text
-source definition
-→ formal rule/model ID
-→ pure deterministic function
-→ edge tests
-→ independent/manual verification
-→ provenance + derivation output
-→ graph/UI exposure
-→ interpretation afterward
-```
+## 9. Adding a graph metric
 
-Do not silently blend Hellenistic, medieval, modern, or Jyotish definitions.
+Declare:
 
-## 9. Adding a relation type
+- name/version;
+- graph scope;
+- mathematical definition;
+- normalization;
+- invariances/sensitivities;
+- executable implementation fingerprint when used in inference;
+- admissible nulls;
+- interpretation status.
 
-A relation type must declare directionality, endpoints, configuration prerequisites, tradition/source, rule ID, applicability, proof inputs/results, and whether it changes routing or merely qualifies it.
+Do not label a value rare/high/dominant without the relevant baseline.
 
-Default rule: **relational condition qualifies dispositorship; it does not rewrite the dispositor graph.**
+## 10. Adding a null model
 
-## 10. Adding a graph metric
-
-Define name/version, graph scope, mathematical definition, input graph, normalization, invariances/sensitivities, null-model requirement, and interpretive status.
-
-Do not label values high/rare/dominant without an explicit baseline.
-
-## 11. Adding an interpretation feature
-
-Declare interpretation model/profile ID, epistemic status, deterministic evidence consumed, tradition/posture, applicability, and limitations. It may enrich prose without changing coordinates, houses, aspects, topology, condition, or provenance.
-
-## 12. Current condition development contract
-
-Implemented:
+A new null requires:
 
 ```text
-v0.4.0a ontology/schema
-v0.4.0b primitive condition
-v0.4.2  relational condition
+id + version
+question
+preserves
+randomizes
+assumptions
+limitations
+admissible metrics
+quality diagnostics
 ```
 
-Next:
+The generator must be deterministic under the recorded seed/RNG.
+
+Preservation violations are errors, not caveats to hide.
+
+Constrained mixing limitations must be surfaced.
+
+## 11. Adding a hyperedge type
+
+Declare:
+
+- hyperedge class;
+- participant roles;
+- minimum/exact cardinality;
+- geometric/topological template;
+- orb/residual policy;
+- permutation/assignment semantics;
+- derivation payload;
+- hash contract;
+- admissible null models;
+- compact research-state semantics;
+- negative fixtures.
+
+A visually suggestive group is not sufficient.
+
+## 12. Adding hidden geometry — v0.4.8 rule
+
+The future Hidden Geometry Engine must keep coordinate systems explicit.
+
+Examples:
 
 ```text
-v0.4.3 compound condition
+midpoint longitude relation      ≠ ordinary major aspect
+parallel/contraparallel          ≠ ecliptic longitude aspect
+antiscia transformation          ≠ physical conjunction
 ```
 
-Compound rules must be pure consumers of primitive + relational facts.
+Each relation needs explicit geometry, provider/convention where astronomical, source/tradition where astrological, proof, and integration contract into graphs/hypergraphs.
 
-## 13. Current graph research contract
+## 13. Public-shell development rules
 
-Implemented descriptive graph math does not establish astrology's causal truth.
+The next engineering movement must create/promote one authoritative v0.4.7 shell.
 
-Required next gate:
+Required:
+
+- seven coordinated views;
+- Personal | Research;
+- one chart authority;
+- v0.4.6 null laboratory in Research;
+- v0.4.7 hyperedge list/inspector + null profiles;
+- coherent product version chrome;
+- preserved subsystem provenance labels;
+- loading/ready/empty/error state machine;
+- stale null/hypergraph invalidation after chart changes;
+- root redirect update;
+- UI regression of the end-to-end Research path.
+
+Historical shells remain regression artifacts, not competing current apps.
+
+## 14. Bootstrap state machine
+
+Required public bootstrap:
 
 ```text
-geometric longitude null
-label-permutation null
-degree-preserving null where appropriate
-layer-overlap null
+loading
+→ ready
+OR empty
+OR error
 ```
 
-Null findings are acceptable.
+Forbidden presentation state:
 
-## 14. UI development rules
+```text
+truth summary appears current
+while Natal Field / derived research state is uninitialized
+without a loading explanation
+```
 
-When changing the public surface:
-
-- preserve the single-state authority;
-- do not duplicate calculations in wrappers;
-- preserve prior useful projections unless deliberately deprecated and documented;
-- keep relation layers visually distinct;
-- preserve explicit loading/error states;
-- keep reading, finding, metric, condition, route, and proof semantics distinct;
-- preserve graph-linked proof access;
-- add/update UI contract tests;
-- transfer root ownership only to the newest public-contract test while keeping older surface tests intact;
-- update `CURRENT_RELEASE.md`, README, INDEX, ROADMAP, and affected architecture/product docs in the same movement.
+Treat bootstrap ordering as data-integrity behavior, not cosmetic UX.
 
 ## 15. AI integration rules
 
-AI may explain, navigate, compare, trace, synthesize, and hypothesize. It may not invent coordinates, silently pick variants, change chart facts, conceal unsupported states, collapse relation types, fabricate proof dependencies, or convert research descriptors into established meaning.
+AI may:
+
+- explain;
+- navigate;
+- compare explicit models;
+- trace provenance;
+- summarize null profiles;
+- formulate hypotheses;
+- generate interpretation from labeled evidence.
+
+AI may not:
+
+- invent coordinates;
+- silently choose variants;
+- modify chart facts;
+- collapse relation types;
+- fabricate proof;
+- convert counterfactual percentile into population rarity;
+- convert graph/hypergraph novelty into meaning;
+- promote Experimental/Discovery results into Operational state.
 
 ## 16. Privacy
 
-Birth data and life-event annotations are sensitive. Production work must include data minimization, deletion/retention controls, encryption, separate research consent, pseudonymous research IDs, and no private-text training without explicit permission.
+Birth data and life-event annotations are sensitive. Population-cohort work will require stronger consent, provenance, retention, pseudonymization, and access controls than the current synthetic/canonical research workflow.
 
 ## 17. Definition of done
 
-A feature is not complete until:
+A framework feature is not complete until:
 
-- [ ] owner layer is identified;
-- [ ] formal definition exists;
-- [ ] source/model ID exists where applicable;
+- [ ] owner layer identified;
+- [ ] formal definition/model ID exists;
 - [ ] deterministic implementation exists where applicable;
-- [ ] edge cases are tested;
-- [ ] provenance/applicability is represented;
-- [ ] new relational/route facts have derivation references;
-- [ ] unsupported/ambiguous states are explicit;
-- [ ] UI consumes computed output rather than reimplementing it;
-- [ ] prior useful views remain regression-protected;
-- [ ] living documentation is updated;
+- [ ] boundaries and negative cases are tested;
+- [ ] provenance/applicability represented;
+- [ ] research-status effects are explicit;
+- [ ] null semantics are declared where used;
+- [ ] unsupported/not-admissible states explicit;
 - [ ] interpretation remains downstream;
-- [ ] release-entry contract is updated if public behavior changed.
+- [ ] living documentation updated.
+
+A **public product feature** additionally requires:
+
+- [ ] current shell exposes it;
+- [ ] root entry reaches that shell;
+- [ ] version chrome is coherent;
+- [ ] bootstrap state is coherent;
+- [ ] historical shells no longer compete for current status;
+- [ ] public/UI contract tests exercise the feature;
+- [ ] Pages deployment is successful;
+- [ ] real browser behavior is verified.
 
 ## 18. Reading order
 
 ```text
 README
 → CURRENT_RELEASE
-→ V042_RELATIONAL_CONDITION
+→ V047_PUBLIC_PRODUCTIZATION_GATE
+→ V047_FORMAL_CONFIGURATIONS_HYPERGRAPHS
+→ V046_NULL_MODEL_LABORATORY
+→ RESEARCH_CONSTITUTION
 → CURRENT_STATE_AND_SCIENTIFIC_RATIONALE
-→ THEORY_AND_PURPOSE
-→ DEVELOPER_GUIDE
 → ARCHITECTURE
-→ ASTROLOGICAL_MODEL
-→ CONDITION_ENGINE_SPEC
-→ INTEGRITY_AND_PROVENANCE
-→ V041_GRAPH_ANALYTICS_AND_FINDINGS
-→ V0413_RESONANCE_FIELD
-→ V0412_ENERGETIC_SYNTHESIS
+→ RESEARCH_DISCOVERY
+→ RESEARCH_PROGRAM
+→ PRODUCT
 → ROADMAP
 → tests/
 ```
 
-When implementation and living documentation disagree, treat the disagreement as a defect.
+When implementation, living documentation, and public behavior disagree, treat the disagreement as a defect.

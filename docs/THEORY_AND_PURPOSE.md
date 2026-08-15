@@ -4,386 +4,344 @@
 
 Noetic Atlas is being built to investigate astrology as a structured symbolic system rather than merely to generate horoscope text.
 
-The project has two simultaneous purposes:
+It has two simultaneous purposes:
 
-1. **Public utility** — give people a clearer, more inspectable way to understand astrological structure, condition, interpretation, and timing.
-2. **Research utility** — create computational instruments capable of exposing relational, topological, qualitative, and temporal questions that are difficult to formulate or inspect in a conventional horoscope wheel.
-
-Commercial viability can support continued research, but revenue is not the epistemic objective.
+1. **Human utility** — make astrological geometry, houses, rulership, condition, higher-order configuration, and interpretive evidence easier to inspect.
+2. **Research utility** — create computational instruments capable of formulating and testing structural questions that are difficult to express in a conventional horoscope wheel.
 
 > **Noetic Atlas should not protect astrology from the truth. It should make astrology inspectable enough to pursue it.**
 
-Current release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
+Current framework baseline: **v0.4.7**.  
+Canonical release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
 
 ## 2. Current epistemic status
 
-Noetic Atlas is currently strongest as an **instrumentation and interpretation layer over formalized astrological models**, not as a validated predictive theory.
+Noetic Atlas is strongest today as a **formalization, visualization, and counterfactual-testing instrument over explicit astrological models**.
 
 It has demonstrated:
 
 - deterministic computation of substantial natal structure;
-- graph-theoretic treatment of rulership/dispositorship;
-- explicit SCC, terminal basin, route-depth, articulation/bridge, motif, and overlap derivation;
-- provenance-backed Hermetic lots;
-- primitive classical condition;
-- source-locked relational condition for reception, exchange, overcoming, and domination;
-- reusable categorical Condition Signatures;
-- a House River route-count projection;
-- a shared Derivation Walker contract for all new v0.4.2 relations/bands;
-- coordinated wheel/graph/matrix/routing/resonance/river representations;
-- modern/transpersonal interpretation of outer planets;
-- a versioned energetic whole-chart synthesis;
-- an additive preservation chain through v0412c/v0413/v042.
+- source/model-identified traditional rulership and condition;
+- graph-theoretic treatment of dispositorship and aspects;
+- SCC, basin, route, bottleneck, motif, and House River derivation;
+- provenance-backed lots and rule outputs;
+- Operational / Experimental / Discovery separation;
+- named null models with finite Monte Carlo inference;
+- higher-order astrological hyperedges;
+- immutable derivation for those hyperedges;
+- candidate-specific null profiles;
+- a research-status firewall that withholds population frequency and interpretation.
 
 It has **not** demonstrated:
 
-- that graph descriptors predict life events;
-- that terminal SCC/basin concentration reveals psychological/spiritual primacy;
-- that reception/overcoming formalization proves empirical efficacy;
-- that House River route count equals importance, strength, or fate;
-- that the current interpretations outperform expert astrologers;
-- that astrological relations correspond to measured physical fields/forces;
-- that current graph values are statistically unusual without null comparison;
-- that current interpretation profiles predict external outcomes.
+- that counterfactually unusual structures are rare in real natal populations;
+- that graph/hypergraph features have validated psychological or spiritual meaning;
+- that the current interpretation layer predicts external outcomes;
+- that astrological symbolism corresponds to measured physical forces;
+- that a specific rule model is empirically superior merely because it is reproducible;
+- that the public browser currently exposes all of the v0.4.7 framework.
 
-A mathematically exact result inside a selected model is not the same thing as empirical validation of that model's interpretation.
+A mathematically exact result inside a selected model is not the same thing as empirical validation of that model or its interpretation.
 
-## 3. Foundational representational claim
+## 3. The key conceptual progression
 
-The horoscope wheel is not astrology itself. It is one highly effective representation of part of the model.
+The research program now distinguishes four questions that astrology software often collapses:
 
-The wheel is excellent at preserving zodiacal longitude, sign placement, house placement, angular separation, and aspect geometry.
+```text
+1. Is a structure present?
+2. Is it unexpected under a named counterfactual?
+3. How common is it in real populations?
+4. What, if anything, does it mean for human experience?
+```
 
-Astrology also contains categorical state, directed rulership/dispositor dependencies, lots, reception/exchange/overcoming, higher-order configurations, hierarchical timing regimes, time-varying relations, and longitudinal recurrence.
+Current infrastructure can systematically address 1 and 2.
+
+Question 3 belongs to v0.5.0 Population Cohort Engine.
+
+Question 4 belongs to later external-association, replication, and interpretation research.
+
+Thus:
+
+```text
+Detection ≠ Unexpectedness ≠ Population Frequency ≠ Interpretation
+```
+
+## 4. Foundational representational claim
+
+The horoscope wheel is not astrology itself. It is one highly effective projection of part of the model.
+
+The wheel preserves zodiacal longitude, sign/house placement, and angular geometry very efficiently.
+
+Astrology also contains:
+
+- categorical state;
+- directed rulership/dispositor dependencies;
+- reception/exchange/overcoming;
+- lots/derived points;
+- higher-order configurations;
+- model alternatives;
+- time-varying activation;
+- longitudinal recurrence;
+- interpretive overlays.
 
 These are not all the same mathematical object.
 
-Current abstract ontology:
+Current abstract ontology can be thought of as:
 
 ```text
-A = {P, H, S, E, R, L, C, T}
+A = {P, H, S, E, R, L, C, X, N, T}
 ```
 
 where:
 
-- `P` = planets, angles, nodes, lots, selected points;
-- `H` = houses/places;
-- `S` = zodiacal/categorical state;
-- `E` = pairwise geometric relations;
-- `R` = rulership, dispositorship, reception, exchange, overcoming, directed dependencies;
-- `L` = lots/derived coordinates;
-- `C` = primitive, relational, and later compound condition;
-- `T` = time-dependent activation/timing regimes.
+- `P` — planets, angles, lots, selected points;
+- `H` — houses/places;
+- `S` — zodiacal/categorical state;
+- `E` — pairwise geometric relations;
+- `R` — rulership/dispositorship/reception/exchange/overcoming;
+- `L` — lots and other derived coordinates;
+- `C` — primitive, relational, and compound condition;
+- `X` — higher-order configurations/hyperedges;
+- `N` — named counterfactual/null comparison state;
+- `T` — future temporal activation/timing state.
 
-The formal benefit is decomposition: each layer can be calculated, visualized, versioned, compared, and tested independently.
+The benefit is decomposition: each layer can be calculated, versioned, visualized, compared, and tested independently.
 
-## 4. Frozen architecture law
+## 5. Frozen architecture
 
 ```text
-one chart state
+one astronomical/chart state
+→ many explicit models
 → many coordinated projections
 ```
 
 A new representation does not receive permission to create a second chart calculator.
 
-Current preservation chain:
+A new hypothesis does not receive permission to overwrite Operational state.
+
+A new null result does not receive permission to become population prevalence.
+
+A new mathematical structure does not receive permission to become interpretation.
+
+## 6. Tradition as prior knowledge
+
+Historical astrology supplies a rich body of formal priors: aspect families, rulerships, sect, lots, dignities, reception, timing, and other techniques.
+
+Noetic Atlas treats these as **versioned rule models**.
+
+This posture avoids two opposite failures:
+
+### Dogmatism
 
 ```text
-v042
-└── v0413
-    └── v0412c
-        └── deterministic visual core
+historically inherited = unquestionably true
 ```
 
-This rule protects the project from internal divergence while allowing the visual language to expand.
-
-## 5. Current development progression
+### Historical flattening
 
 ```text
-Geometry
-→ Topology
-→ Primitive Condition
-→ Graph Analytics
-→ Energetic / Explainable Synthesis
-→ Resonance
-→ Relational Condition
-→ Compound Condition
-→ Time
-→ Recurrence
-→ Discovery
+all traditions/eras use equivalent concepts
 ```
 
-### Geometry
-What coordinates/aspects/houses exist?
-
-### Topology
-Where do directed dependencies route?
-
-### Primitive condition
-What rule-defined state does each classical planet have independently?
-
-### Graph analytics
-What additional mathematical structure follows from the encoded graph?
-
-### Energetic / explainable synthesis
-How can deterministic structure be translated into readable hypotheses without discarding houses, ruler pathways, condition, or proof?
-
-### Resonance
-How does the actual Whole-Sign sequence transform the explicitly secondary natural-house element/mode sequence?
-
-### Relational condition
-Which source-locked receptions, exchanges, overcoming relations, and domination relations qualify planets relative to one another?
-
-### Compound condition
-What higher-order traditional testimonies emerge from primitive + relational facts?
-
-### Time
-Which characterized natal structures activate, and when?
-
-### Recurrence / discovery
-Which temporal/structural patterns repeat, and do they survive comparison and replication?
-
-## 6. Why graph theory belongs here
-
-Traditional rulership contains directed dependency:
+The framework instead asks:
 
 ```text
-house → ruler
-planet → domicile ruler
-lot → ruler
-ruler → dispositor → ...
+Which source/model is being encoded?
+What exact transformation does it define?
+What changes under an alternative model?
+What survives comparison?
 ```
 
-These are graph relations whether or not software draws them.
+## 7. Why graph theory entered the project
 
-Noetic Atlas currently derives SCCs/SCC condensation, terminal basins, route depth, upstream route capture, nonterminal bottlenecks, aspect components, clustering/betweenness, articulation points/bridges, typed motifs, cross-layer overlap, and House River route counts.
+Rulership creates directed dependency. A planet in a sign routes to that sign's ruler; houses route to their rulers; rulers themselves route onward.
 
-The epistemic distinction is critical:
+Graph representation makes latent structures explicit:
+
+- closed cycles;
+- terminal attractors;
+- basins;
+- route depth;
+- bottlenecks;
+- cross-layer overlap.
+
+The mathematical fact is about the encoded graph.
+
+The interpretive question is separate.
+
+## 8. Why hypergraphs were the next dependency
+
+Many astrological structures are not binary.
+
+A Grand Trine, T-Square, Grand Cross, Kite, basin-capture set, or hybrid geometry-routing motif is a relation among k≥3 objects or a set-valued routing structure.
+
+Representing a Grand Trine as three independent trine edges loses the identity of the whole configuration.
+
+v0.4.7 therefore introduces first-class hyperedges:
 
 ```text
-Mercury and Venus form a terminal SCC under the selected ruler graph
+geometric_polygon
+topological_basin
+compound_hybrid
 ```
 
-is graph-derived.
+The whole object can now carry:
+
+- cardinality;
+- closure/residual metrics;
+- routing state;
+- provenance;
+- derivation hash;
+- null profile;
+- research status.
+
+This is more faithful to the research question than informal visual pattern recognition.
+
+## 9. Why null models came before population claims
+
+Detection alone rewards anything the system is designed to detect.
+
+The Null Model Laboratory asks:
+
+> Compared with what?
+
+A named counterfactual makes an unexpectedness claim explicit.
+
+Examples:
 
 ```text
-Mercury and Venus are therefore the deepest circuit of the psyche
+N_G → broad geometry counterfactual
+N_L → identity alignment counterfactual
+N_D → degree-sequence-constrained topology counterfactual
+N_T → routing-codebook counterfactual
 ```
 
-is an interpretive hypothesis.
+These do not simulate “random people.” They isolate particular model dependencies.
 
-The second cannot be smuggled into the first.
+That is why a null percentile is not a population percentile.
 
-## 7. Why relation types remain separate
+## 10. Why the Population Cohort Engine is v0.5.0
 
-Dispositorship, reception, exchange, mutual-reception compatibility, overcoming, and domination answer different traditional questions.
+The word `rare` requires a reference population.
 
-The system therefore refuses:
+A future Population Cohort Engine must address:
+
+- sampling frame;
+- data provenance;
+- astronomy-provider consistency;
+- birth-time quality;
+- cohort identity/version;
+- stratification;
+- uncertainty;
+- multiple testing;
+- sensitivity to cohort construction;
+- privacy.
+
+Only then can the framework characterize population frequency in a general way.
+
+This is why v0.5.0 is reserved for the cohort layer rather than Life Spectrum.
+
+## 11. Interpretation and field language
+
+Noetic Atlas may use energetic language as a structured phenomenological vocabulary:
 
 ```text
-all astrological links → generic edge
+expansion
+compression
+coherence
+friction
+phase
+resonance
+standing-wave polarity
+quadrature torque
 ```
 
-Current relational ontology:
+These can be useful for symbolic synthesis.
+
+They are not currently evidence of measured planetary physical fields.
+
+A precise symbolic formalism can be valuable without being mislabeled as experimental physics.
+
+## 12. The research-status idea
+
+A research object should not have one number answering every epistemic question.
+
+The framework therefore tracks independent status dimensions such as:
 
 ```text
-G_R = {
-  G_dispositor,
-  G_reception,
-  G_exchange,
-  G_mutual_reception,
-  G_overcoming
-}
+geometry
+derivation
+historical analogue
+null comparison
+population frequency
+phenomenological association
+replication
+interpretation
 ```
 
-A relation may qualify a route without becoming the route.
+A structure can be perfectly derived but population-unknown and interpretation-withheld.
 
-For example, reception can describe the environment of a dispositorship handoff while the underlying dispositor edge remains unchanged.
+That is not a weakness. It is a more accurate state description.
 
-This distinction is important both historically and computationally.
+## 13. Negative evidence is part of the theory
 
-## 8. Why multiple coordinated representations belong here
+The project must preserve:
 
-Different tasks favor different representations.
+- detectors that return no configuration;
+- no-departure null results;
+- sensitivity to orb or rulership policy;
+- weak constrained-null mixing;
+- non-replicating candidates;
+- alternative models that add no useful information.
 
-Current coordinated grammar:
+An observatory that only displays impressive positive structure would be epistemically broken.
 
-- **Natal Field** — neighborhoods, paths, overall relational architecture;
-- **Aspect Matrix** — exact pairwise lookup;
-- **Flow Map** — directed dispositorship;
-- **Condition** — primitive classical state;
-- **Resonance Field** — qualitative sign/house phase transformation;
-- **Relations** — source-locked reception/exchange/overcoming objects;
-- **Qualified Flow** — routing plus distinct relation layers and condition signatures;
-- **House River** — lived domains entering ruler/dispositor routes;
-- **Graph Findings/Metrics** — derived mathematical structure;
-- **Energetic Analysis** — downstream interpretation;
-- **Integrity / Proof Walker** — evidence and reversible derivation.
+## 14. Public product and research framework are distinct
 
-The wheel remains a useful reference/control for angular geometry and future HCI evaluation.
+The framework is currently ahead of the public browser.
 
-## 9. What “energy” means
+`main` contains v0.4.7, but the root public entry still lands on the v0.4.5 shell.
 
-The interpretation layer uses terms such as energy, current, field, resonance, compression, expansion, friction, permeability, coherence, standing-wave polarity, and quadrature torque.
+This matters theoretically because an instrument cannot be evaluated through a feature users cannot reach.
 
-These are **symbolic/phenomenological metaphors** for interacting astrological functions.
+Therefore productization is now an explicit dependency of the research program, not merely presentation work.
 
-Noetic Atlas does not currently claim that an astrological aspect corresponds to a measured electromagnetic field, voltage, energy density, frequency, or other established physical quantity.
+See [`V047_PUBLIC_PRODUCTIZATION_GATE.md`](V047_PUBLIC_PRODUCTIZATION_GATE.md).
 
-> **The mathematics of the representation may be exact even when the metaphysical interpretation remains open.**
-
-## 10. Houses are first-class
-
-The interpretation layer distinguishes:
+## 15. Locked progression from here
 
 ```text
-planet/point = what current?
-sign         = how does it move/organize?
-house        = where does it become lived?
-ruler        = where is that house agenda handed next?
-condition    = what rule-defined state qualifies the function/relationship?
+v0.4.7 Public Productization Gate
+        ↓
+v0.4.8 Hidden Geometry Engine
+        Midpoints · Declination/Parallels · Antiscia
+        ↓
+v0.4.9 Experimental Model Laboratory
+        Ceres–Taurus · Alternative Rulership Tensors
+        ↓
+v0.5.0 Population Cohort Engine
+        100k+ empirical reference distributions
 ```
 
-Graph topology is not allowed to erase house fields.
+After those foundations, the project can more responsibly expand into spectral hypergraph methods, extended k-body configurations, timing/Life Spectrum, longitudinal recurrence, external association, and broader theory development.
 
-The optional modern natural-house overlay is secondary and explicitly labeled. It does not replace the actual sign on an actual Whole Sign house.
+## 16. What would count as real progress
 
-House River deliberately begins with lived house domains rather than starting with abstract planet nodes.
+Not every new visualization is progress.
 
-## 11. Condition is not graph centrality
+Real progress includes:
 
-Primitive and relational condition now exist as independently auditable rule-defined facts.
+- a new source rule becoming reconstructible;
+- a previously informal pattern becoming a formal object;
+- a counterfactual eliminating an apparently special pattern;
+- a population study showing a feature is common rather than rare;
+- a model comparison revealing no advantage;
+- a UI study showing a conventional wheel is faster for a task;
+- an interpretive hypothesis failing independent replication;
+- a new representation making a difficult question easier to inspect.
 
-Noetic Atlas refuses to equate:
+The project should be able to become **less impressed by its own ideas** as evidence improves.
 
-```text
-graph centrality
-=
-traditional condition
-=
-House River route count
-=
-planetary importance
-```
+## 17. Epistemic mission
 
-Future research may compare these under explicit hypotheses, but no hidden surrogate is allowed.
-
-## 12. Interpretation is downstream
-
-Current synthesis may consume:
-
-```text
-placement
-+ actual sign
-+ actual Whole Sign house
-+ ruler/dispositor route
-+ aspects
-+ graph findings
-+ primitive condition
-+ relational condition where exposed by the selected projection
-+ explicit interpretation profile
-```
-
-It may discuss balanced/depleted/excess expressions, material-life examples, soul/spirit questions, and embodiment experiments.
-
-It may not modify upstream coordinates/rules.
-
-## 13. Outer planets and Ceres
-
-Uranus, Neptune, and Pluto participate in modern/transpersonal interpretation while remaining outside classical Hellenistic primitive/relational condition applicability.
-
-Ceres is interpreted only when a coordinate is explicitly supplied. Automatic validated Ceres astronomy is not implemented.
-
-This separation of astronomical capability, rule applicability, and interpretive capability is intentional.
-
-## 14. Epistemic layers
-
-```text
-Input
-Astronomical computation
-Astrological rule
-Graph/mathematical derivation
-Research-exploratory
-Interpretive inference
-```
-
-A downstream layer cannot rewrite an upstream layer.
-
-## 15. Provenance is part of the theory
-
-A user/researcher should be able to ask:
-
-> Why is this here?
-
-and recover original input, astronomy provider/version, rule-set/model IDs, formulas/algorithms, intermediate values, graph derivation, condition applicability, interpretation profile, and limitation/completeness state.
-
-v0.4.2 formalizes this further by attaching `derivation_ref` at creation time to every new relation and House River band.
-
-Missing older proof dependencies remain visible as missing/unindexed rather than being invented.
-
-## 16. Relationship to traditions
-
-Noetic Atlas should not flatten Hellenistic, medieval, Jyotish, modern psychological, and transpersonal astrology into one hidden hybrid.
-
-Conceptually:
-
-```text
-Astronomy
-   ↓
-+-----------------------------+
-| Hellenistic rules           |
-| Medieval/traditional rules  |
-| Jyotish rules               |
-| Modern/transpersonal rules  |
-+-----------------------------+
-   ↓
-Comparable structured outputs
-```
-
-Agreement and disagreement are both data.
-
-The v0.4.2 distinction between Hellenistic `exchange` and the separately identified later-tradition `mutual_reception` compatibility label is an example of this rule in practice.
-
-## 17. Research truth protocol
-
-```text
-formal definition
-→ deterministic implementation
-→ tests
-→ cross-chart replication
-→ null/randomized comparison where relevant
-→ sensitivity analysis
-→ expert inspection
-→ blinded/preregistered testing where feasible
-→ independent replication
-→ only then candidate theory
-```
-
-A failed hypothesis is valid output.
-
-## 18. Social purpose
-
-Noetic Atlas should increase agency rather than dependence.
-
-Prefer inspectability over pronouncement, education over mystification, comparison over dogma, source transparency over synthetic authority, range of expression over deterministic fear, and inquiry over certainty theater.
-
-The public proposition is:
-
-> **Here is the structure. Here is how it was calculated. Here is what the selected model says. Here is what remains uncertain. Explore it.**
-
-## 19. Non-goals
-
-Noetic Atlas is not intended to disguise astrology as established physics, generate planetary positions with an LLM, invent missing astronomical quantities, collapse traditions into one interpretation, collapse relation types into a generic edge, assign opaque cosmic-strength scores, treat route count as strength, treat one canonical chart as evidence for theory, call graph values rare without baselines, use dimensionality reduction before state semantics stabilize, or make impressive diagrams whose quantities cannot be reconstructed.
-
-## 20. Decision rule
-
-A future feature should answer at least one:
-
-- Does it expose a relation hard to inspect manually?
-- Does it make a calculation/relation reproducible?
-- Does it reduce cognitive load for a defined task?
-- Does it make competing rule systems comparable?
-- Does it turn an interpretive intuition into a testable hypothesis?
-- Does it make the evidence chain clearer?
-
-If a feature merely makes astrology look interesting, it does not belong.
+> **Noetic Atlas is not trying to make astrology look scientific. It is trying to make astrological claims formal enough that calculation, source, model dependence, counterfactual unexpectedness, population prevalence, interpretation, and failure can finally be kept apart.**

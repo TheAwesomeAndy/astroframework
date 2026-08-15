@@ -2,256 +2,363 @@
 
 ## 1. Goal
 
-The research layer searches for higher-order relationships that conventional chart displays may make difficult to notice. It must not manufacture astrological meaning from mathematical novelty.
+The Discovery layer searches for reproducible higher-order relationships that conventional chart displays or inherited naming schemes may obscure.
+
+It must not manufacture astrological meaning from mathematical novelty.
 
 ```text
-pattern detected ≠ astrological significance established
+pattern detected ≠ unexpected under a null
+unexpected under a null ≠ rare in real charts
+rare in real charts ≠ meaningful
+meaningful ≠ causal
 ```
 
-Current release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
+Current framework baseline: **v0.4.7**.  
+Canonical release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
 
-## 2. Current promotion status
-
-Primitive and relational condition are now implemented for the classical seven, and v0.4.1 graph analytics plus v0.4.2 House River route counts are implemented.
-
-Current status:
+## 2. Current capability state
 
 ```text
-primitive_condition_complete = true
-relational_condition_complete = true
-compound_condition_complete = false
-graph_analytics_complete_for_v0.4.1_scope = true
-house_river_route_counts_complete = true
-derivation_walker_v042_objects_complete = true
-graph_null_models_complete = false
-temporal_engine_complete = false
-promotion_status_for_new_astrological_meaning = hold
+primitive_condition_complete              = true
+relational_condition_complete             = true
+compound_condition_complete               = true_for_source_secure_v043_subset
+graph_analytics_complete                  = true_for_declared_scope
+house_river_route_counts_complete         = true
+research_regime_separation_complete       = true
+null_model_laboratory_complete            = true
+formal_hypergraph_core_complete           = true
+hypergraph_null_integration_complete      = true
+population_cohort_engine_complete         = false
+external_association_layer_complete       = false
+general_replication_layer_complete        = false
+interpretive_validation_complete          = false
+public_v047_product_shell_complete         = false
+promotion_status_for_new_meaning          = hold
 ```
 
-The hold remains because reproducible graph/rule calculations are not enough to establish psychological, predictive, spiritual, or causal meaning. Relevant descriptors must survive null/comparison tests, sensitivity analysis, replication, and domain review before interpretive promotion.
+The framework has crossed an important line: novel structures can now be formally detected **and** compared against named counterfactuals. It has not crossed the population or interpretive line.
 
-## 3. Implemented graph analytics
+## 3. Research regimes
+
+Discovery exists beside, not inside, the Operational model.
+
+```text
+Operational  → reproducible named astrological model
+Experimental → named reversible alternative model
+Discovery    → reproducible structure not assumed to have meaning
+```
+
+Detection may create a Discovery candidate. It may not silently modify Operational chart facts.
+
+## 4. Current graph substrate
 
 ### Classical dispositor functional graph
 
-Current deterministic derivations include SCC condensation, terminal SCCs, terminal basin membership/fraction, route depth, upstream route capture, and largest nonterminal path bottleneck.
+Deterministic derivations include:
+
+- SCC condensation;
+- terminal SCCs;
+- terminal basin membership/fraction;
+- route depth;
+- upstream route capture;
+- largest nonterminal path bottleneck.
 
 ### Aspect graph
 
-Current calculations include connected components, degree, local/mean clustering, normalized unweighted betweenness, articulation points, bridges, typed closed three-node motifs, Grand Trine/T-square/triple-conjunction templates, and exact ≤1° subset.
+Current calculations include:
 
-### Cross-layer overlap
+- connected components;
+- degree;
+- local/mean clustering;
+- normalized unweighted betweenness;
+- articulation points;
+- bridges;
+- typed motifs;
+- exact-edge subsets.
 
-Current explicit comparison:
+### Relational condition
 
-```text
-E_aspect ∩ E_dispositor
-```
+Distinct source-backed layers include reception, exchange, separately identified mutual-reception compatibility, overcoming, and domination.
 
-Layers remain semantically distinct.
-
-## 4. Relational-condition graphs — implemented
-
-v0.4.2 adds source-locked relation objects for:
-
-```text
-G_reception
-G_exchange
-G_mutual_reception
-G_overcoming
-```
-
-with domination separately typed inside the superiority relation family.
-
-These relations are astrological-rule objects, not research-discovered correlations. Research may later examine their graph consequences, but must preserve their source/rule identity.
-
-Relational condition **qualifies** the selected dispositor topology. It does not rewrite house/ruler routes by default.
-
-## 5. House River — implemented graph-derived projection
-
-House River starts with the 12 existing Whole-Sign house-ruler routes.
+### House River
 
 For each dispositor edge `e`:
 
 ```text
-w(e) = number of house-ruler paths traversing e
+w(e) = number of Whole Sign house-ruler routes traversing e
 ```
 
-This route count is reproducible and graph-derived. It is not currently interpreted as strength, destiny, soul power, energetic intensity, or statistical importance.
+This is routing evidence, not a strength score.
 
-The canonical specimen currently serves as a regression fixture for the calculation, not evidence that a particular route-count distribution is rare or meaningful.
+## 5. v0.4.6 — Null Model Laboratory
 
-## 6. Existing exploratory descriptors
+Discovery candidates no longer stop at detection.
 
-### Circular harmonic spectrum
+The laboratory provides four named counterfactual families:
 
-For longitudes `θ_i`:
+### N_G — geometric null
+
+Broad independent-geometry randomization. Useful for questions about structures induced by angular/sign placement under a deliberately simple baseline.
+
+It is **not** a model of the real natal population.
+
+### N_L — class-preserving label/identity permutation
+
+Preserves a selected structure while breaking identity alignment within declared object classes.
+
+Useful for asking whether a cross-layer coincidence depends on the observed identity assignment.
+
+### N_D — degree-preserving topology rewire
+
+Preserves the declared aspect-network degree sequence and related graph constraints while randomizing adjacency.
+
+Useful for asking whether a motif/role coincidence exceeds a constrained network baseline.
+
+### N_T — routing-codebook permutation
+
+Preserves selected chart occupancy/frame properties while permuting ruler labels under a multiplicity-preserving artificial codebook.
+
+Useful for testing dependence on the observed traditional routing assignment.
+
+It is not a proposed historical rulership system.
+
+## 6. Statistical contract
+
+For upper-tail statistics:
 
 ```text
-R_n = |(1/N) Σ exp(i n θ_i)|
+p_hat = (1 + count(T_i >= T_obs)) / (B + 1)
 ```
 
-Angular-organization descriptor, not an established astrological technique.
+The +1 correction is mandatory. `p = 0` is impossible.
 
-### Ruler-route convergence
+Every completed comparison includes:
 
-Measures how strongly multiple house-ruler/dispositor paths terminate on common nodes/components under a selected ruler model. v0.4.1 basin/depth/bottleneck analytics and v0.4.2 House River route counts now provide more explicit decompositions of this older descriptor.
+- raw p;
+- BH-FDR-adjusted p where declared;
+- family ID / family size / rank;
+- empirical percentile;
+- null mean/median/SD/range;
+- standardized displacement when defined;
+- seed and RNG identity;
+- metric/null versions;
+- distribution hash;
+- preserved/randomized properties;
+- assumptions/limitations;
+- simulation-quality diagnostics.
 
-### Multilayer participation
-
-Counts or records participation across distinct relation layers. It is not a planet-strength score.
-
-Candidate/current layers include aspects, dispositors, house rulership, lots, primitive condition, reception/exchange/overcoming, and future time activation.
-
-## 7. What changed through v0.4.2
-
-Earlier research notes treated bridge/bottleneck analysis, condition-aware graph work, reception/overcoming layers, and House River as future. That is no longer accurate.
-
-Implemented now:
+The vocabulary is:
 
 ```text
-articulation points
-bridges
-nonterminal path bottlenecks
-primitive condition
-relational condition
-reception / exchange / overcoming / domination graph layers
-House River route counts
-proof references for all new v0.4.2 relation/river objects
+departure-detected
+no-departure-detected
 ```
 
-Still future:
+not `passed` / `failed` astrology.
+
+Different nulls answer different counterfactual questions. No cross-null vote, pass count, or universal significance score is allowed.
+
+## 7. Candidate promotion after v0.4.6
+
+A candidate may move:
 
 ```text
-compound condition
-graph-null distributions
-statistical motif enrichment
-validated condition-weighted graph measures
-motif + condition field geometry
-comparative rule-set experiments
-temporal activation / recurrence
+detected-no-baseline
+→ null-tested
 ```
 
-## 8. Null models are mandatory
+when an admissible counterfactual comparison is complete.
 
-Before qualitative claims such as `rare`, `high`, `unusual`, `dominant`, `exceptional`, or `enriched`, define an explicit baseline.
+Only the null-comparison dimension advances.
 
-### Geometric longitude null
-Randomize longitudes and recompute aspects under the same edge policy.
+The candidate retains:
 
-### Label permutation
-Keep geometry fixed while permuting object identities.
+```text
+population_frequency = unknown
+replication           = none unless separately established
+interpretation        = withheld
+```
 
-### Degree-preserving graph null
-Rewire edges while preserving degree sequence where graph semantics make this mathematically appropriate.
+## 8. v0.4.7 — Formal hyperedges
 
-### Layer-overlap null
-Preserve layer sizes/densities while randomizing pair assignments.
+Discovery now has a first-class higher-order object model.
 
-### Relational-layer nulls
-Future relation research must define what aspects of rulership, signs, and relation frequencies are preserved before claiming unusual reception/overcoming overlap or qualified motifs.
+Hyperedge classes:
 
-### Matched astronomical null — later
-Sample realistic birth instants/locations when independent random longitudes would destroy astronomy-specific dependencies relevant to the hypothesis.
+```text
+geometric_polygon
+topological_basin
+compound_hybrid
+```
 
-The null must preserve what is irrelevant to the hypothesis and disrupt what is being tested.
+### Pure geometric configurations
 
-## 9. Discovery protocol
+Initial k=3/k=4 templates:
+
+- Grand Trine;
+- T-Square;
+- Yod;
+- Grand Cross;
+- Kite;
+- T-Square Anchor Cluster.
+
+The detector evaluates whole-pattern geometry rather than treating a named configuration as a loose bag of edges.
+
+### Topological routing hyperedges
+
+Promoted structures include:
+
+- closed Tarjan SCCs;
+- terminal basin-capture sets.
+
+### Compound hybrid hyperedges
+
+Hybrid objects record verified coupling between a geometric configuration and independently derived routing/topology.
+
+The parent layers remain semantically intact.
+
+## 9. Hyperedge research state
+
+At detection:
+
+```text
+[D,V,B,P,I] = [1,1,0,0,0]
+```
+
+After all admissible candidate-specific null comparisons are complete:
+
+```text
+[D,V,B,P,I] = [1,1,1,0,0]
+```
+
+v0.4.7 cannot change `P` or `I`.
+
+Every hyperedge retains an immutable SHA-256 derivation hash and explicit provenance.
+
+## 10. Canonical specimen: regression, not evidence
+
+The canonical specimen verifies implementation stability for structures including:
+
+- Sun–Moon–Jupiter Grand Trine;
+- Spirit-closed Kite;
+- Venus–Mars / Uranus–Chiron T-Square Anchor Cluster;
+- Mercury–Venus closed dispositor SCC;
+- Mercury–Venus terminal basin;
+- a compound geometry × routing hyperedge.
+
+The negative regression is equally important: Sun + Mercury in Libra is two bodies and is **not** allowed to become a k≥3 hyperedge because a desired narrative calls it a cluster.
+
+`NAF-CANON-0001` and related fixtures are regression instruments, not population evidence.
+
+Do not tune thresholds to make the canonical chart interesting.
+
+## 11. Population frequency is still blocked
+
+The Null Model Laboratory answers:
+
+> Compared with what explicitly defined counterfactual?
+
+It does not answer:
+
+> How often does this occur in real natal charts?
+
+The latter requires v0.5.0 Population Cohort Engine with real comparison distributions, sampling design, provider consistency, cohort provenance, stratification/sensitivity analysis, and multiplicity control.
+
+Until then, avoid:
+
+```text
+rare
+uncommon among people
+population-enriched
+exceptional natal signature
+```
+
+when those words imply empirical prevalence.
+
+## 12. Discovery protocol — current
 
 ```text
 formal definition
 → deterministic implementation
-→ unit/boundary tests
-→ cross-chart replication
-→ explicit null/comparison
+→ unit/boundary regression
+→ derivation proof
+→ explicit named counterfactual
+→ finite-Monte-Carlo comparison
 → sensitivity analysis
-→ expert inspection
-→ longitudinal/cohort testing where appropriate
+→ independent-chart replication
+→ empirical population reference where appropriate
+→ external criterion / phenomenology where appropriate
 → interpretive hypothesis
 → independent replication
 ```
 
 A candidate can fail any gate and remain useful as a mathematical diagnostic.
 
-## 10. Canonical-chart overfitting is prohibited
+## 13. Negative results are first-class
 
-`NAF-CANON-0001` is a regression fixture, not evidence for theory.
+The Observatory should preserve:
 
-Do not tune thresholds to make it interesting, infer prevalence from one chart, call its relation/river pattern rare without a population/null reference, or convert regression stability into astrological validation.
+- no-departure under a null;
+- detector non-instantiation;
+- sensitivity to orb/model choices;
+- weak constrained-null mixing;
+- non-replicating candidates;
+- under-cardinality rejections;
+- alternative models that do not improve a criterion.
 
-Use synthetic fixtures for boundaries and independent charts for research.
+A research framework that shows only interesting positive patterns is not behaving as an observatory.
 
-## 11. Condition-aware research — current position
+## 14. Current public limitation
 
-The system can now preserve distinct statements such as:
+The browser product does not yet expose v0.4.7 hyperedges through the authoritative public entry.
 
-```text
-terminal basin fraction                → graph-derived
-Venus depression in Virgo              → primitive astrological rule
-Jupiter receives another planet        → relational astrological rule
-Mars dominates Jupiter                 → relational astrological rule
-12 house routes traverse edge X        → graph-derived House River count
-```
-
-What is **not** justified is collapsing these into one weighted importance score.
-
-High-value comparative research design:
+Current observed public state:
 
 ```text
-topology only
-vs
-primitive condition only
-vs
-relational condition only
-vs
-primitive + relational condition
-vs
-condition + topology
-vs
-condition + topology + resonance/House River presentation
+root → v0.4.5 shell
+v0.4.6 side shell reachable
+v0.4.7 shell absent
 ```
 
-Each comparison needs an explicit task or external criterion.
+This blocks normal end-to-end Research-path use of hyperedge inspection + null profiles.
 
-## 12. Future directions
+See [`V047_PUBLIC_PRODUCTIZATION_GATE.md`](V047_PUBLIC_PRODUCTIZATION_GATE.md).
 
-High-priority research families:
+## 15. Next research dependencies
 
-- graph null distributions for current metrics;
-- motif enrichment under defined nulls;
-- layer-overlap baselines;
-- reception/overcoming multiplex motifs;
-- sensitivity to orb/rulership/object-set/relation-variant choices;
-- condition-aware house-route structures;
-- comparative chart architecture;
-- HCI evaluation of House River versus tables/graphs;
-- HCI evaluation of relation-type reconstruction;
-- motif + condition field geometry;
-- comparative rule-set visualization;
-- temporal activation motifs after Life Spectrum;
-- family/synastry multiplex structures;
-- cross-tradition agreement/disagreement;
-- birth-time sensitivity/Monte Carlo analysis.
+After the productization gate:
 
-## 13. Promotion rule
+### v0.4.8 Hidden Geometry Engine
 
-A research descriptor may move toward interpretive use only when documentation records formal definition, implementation version, graph/object scope, datasets/charts examined, rule-set versions, null models, sensitivity analyses, replication attempts, effect estimates/uncertainty where applicable, known failures, competing explanations, expert commentary, and current confidence state.
+- midpoints;
+- declination / parallels / contraparallels;
+- antiscia / contra-antiscia.
 
-Suggested labels:
+These become additional formal geometry, not interpretation shortcuts.
 
-```text
-experimental
-observational
-replicated
-provisional-theory
-traditional-source-backed
-retired
-```
+### v0.4.9 Experimental Model Laboratory
 
-`traditional-source-backed` and `empirically replicated` remain different statuses.
+- Ceres–Taurus hypothesis;
+- alternative rulership tensors;
+- other named model alternatives;
+- reversible comparison against Operational control.
 
-## 14. Research principle
+### v0.5.0 Population Cohort Engine
 
-> **The Observatory should make negative results visible.**
+- 100k+ empirical reference distributions;
+- prevalence estimates;
+- stratified/reference cohorts;
+- real sampling uncertainty;
+- population-frequency research-status advancement.
 
-A graph feature that disappears under replication or null testing is information, not failure.
+## 16. Promotion rule
+
+No Discovery descriptor becomes Operational because it is visually striking, historically suggestive, statistically displaced under one null, or intuitively persuasive.
+
+Promotion requires the evidence appropriate to the intended claim.
+
+`traditional-source-backed`, `counterfactually displaced`, `empirically prevalent`, `externally associated`, `replicated`, and `interpreted` are different states and must remain different states.
+
+## 17. Research principle
+
+> **The Observatory should make both invisible structure and negative evidence visible.**

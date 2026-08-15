@@ -2,338 +2,278 @@
 
 ## 1. Purpose
 
-Noetic Atlas is built as an inspectable research instrument, not a black-box horoscope generator.
+Noetic Atlas is built as an inspectable research instrument rather than a black-box horoscope generator.
 
-> **Every displayed claim should be reversible to its input, formula/rule, model version, source tradition, mathematical derivation, applicability, and known limitation.**
+> **Every displayed or research claim should be reversible to its input, formula/rule, model version, mathematical derivation, counterfactual where applicable, applicability, and known limitation.**
 
-Current release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
+Current framework baseline: **v0.4.7**.  
+Canonical release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
 
 Frozen architecture:
 
 ```text
-one chart state
+one astronomical/chart state
+→ many explicit models
 → many coordinated projections
 ```
 
 No proof-bearing projection may silently create a second source of chart truth.
 
-## 2. Epistemic classes
+## 2. Epistemic statement classes
 
-Noetic Atlas distinguishes six primary statement classes:
+Noetic Atlas distinguishes at least these classes:
 
 1. **Input** — user-supplied or explicitly imported values.
-2. **Astronomical computation** — ephemeris positions, observer geometry, angles, velocities, civil-time resolution.
-3. **Astrological rule** — Whole Sign assignment, aspect admission, domicile rulership, sect, lots, primitive condition, reception, exchange, overcoming, and later compound rules.
-4. **Graph-derived / mathematical derivation** — SCCs, terminal basins, route depth, centrality, motifs, overlap, House River counts, and related properties of explicitly encoded graphs.
-5. **Research-exploratory** — descriptors/comparisons whose astrological significance has not been established.
-6. **Interpretive inference** — traditional, modern, transpersonal, energetic, spiritual, psychological, or AI-assisted meaning.
+2. **Astronomical computation** — ephemeris positions, observer geometry, velocities, civil-time resolution.
+3. **Astrological rule output** — house/sign assignment, aspect admission, rulership, sect, lots, primitive/relational/compound condition.
+4. **Graph/hypergraph derivation** — SCCs, basins, routes, graph metrics, typed higher-order configurations, incidence structure.
+5. **Counterfactual research result** — observed-versus-null comparison under an explicit generator/statistic.
+6. **Population result** — empirical prevalence/reference-distribution claim from real comparison cohorts. **Not generally implemented yet.**
+7. **External association / replication** — relation to independent criteria and repeated evidence. **Not generally implemented yet.**
+8. **Interpretive inference** — traditional, modern, transpersonal, energetic, spiritual, psychological, or AI-assisted meaning.
 
-Interpretation never retroactively changes classes 1–5.
+Later classes may consume earlier classes; they may not rewrite them.
 
-## 3. Current release evidence chain
+## 3. Current reversible evidence chain
 
-The v0.4.2 public instrument is conceptually reversible through:
+The mature chain is now:
 
 ```text
-visible relation / route / interpretation
-→ projection model
-→ condition / graph / house-route / interpretation evidence
-→ rule or graph result
+visible reading / research claim
+→ projection/model identity
+→ hyperedge / graph / condition / route fact
+→ null experiment where applicable
+→ source-locked metric + named counterfactual
+→ astrological rule/model
 → derivation object / ledger object
-→ astronomical/chart coordinate(s)
+→ astronomical coordinate(s)
 → civil-time resolution where applicable
 → original input
 ```
 
-A user should not need to open every proof to understand a reading, but proof must remain available.
+A user should not need to inspect every proof to use the system, but the system should be capable of producing the proof.
 
-## 4. Civil-time provenance
+## 4. Deterministic provenance
 
-The birth-input contract retains resolved IANA zone, historical UTC offset, UTC instant, lookup/conversion method, ambiguity alternatives when present, and expert override if used.
+### Civil time
 
-Repeated DST times are not guessed. Nonexistent local times are rejected.
+Record:
 
-## 5. Astronomy provenance
+- local civil input;
+- IANA zone or explicit override;
+- historical UTC offset;
+- UTC instant;
+- ambiguity/nonexistence state;
+- resolution method.
 
-Current open adapter: Astronomy Engine 2.1.19.
+Repeated DST times are not guessed. Nonexistent local times are rejected or explicitly handled under a documented policy.
 
-Noetic Atlas records provider/version and coordinate/convention metadata for supported numerical primitives.
+### Astronomy
 
-Automatic birth-time astronomy supports Sun through Pluto, ASC, MC, longitudinal motion, and solar altitude. It does **not** invent coordinates for Ceres, Chiron, lunar-node variants, Lilith/apogee variants, Vertex, or fixed stars.
+Current provider: Astronomy Engine 2.1.19.
 
-## 6. Angles and sect
+Record provider/version and coordinate/convention metadata. Unsupported automatic objects are not fabricated.
 
-ASC/MC are computed from observer geometry, not supplied by an LLM.
+### Angles / sect / lots
 
-Sect uses geometric solar altitude when birth-data astronomy is available:
+ASC/MC derive from observer geometry. Sect and Hermetic lots retain formula/sect provenance, inputs, arcs, results, houses, rulers, and validation/completeness state.
 
-```text
-altitude > 0° → day
-altitude < 0° → night
-altitude = 0° → indeterminate/horizon
-```
+### Aspects
 
-Fallback chart-geometry sect methods must identify themselves as fallback.
+Every admitted aspect retains endpoints, exact aspect family/angle, measured separation, orb, active policy identity, phase when computable, and provenance.
 
-## 7. Hermetic lots
+Rounded display values never override full-precision calculations.
 
-Current lot family: seven Paulus/Panaretus Hermetic lots with sect reversal and directed zodiacal arcs.
+## 5. Rulership/topology provenance
 
-Each lot retains sect, formula family, source/target points and longitudes, directed arc, ASC, raw/normalized result, Whole Sign house, ruler, source/rule identity, and validation/completeness state.
+Traditional domicile rulership creates directed dispositor edges under an explicit ruler map.
 
-Historical variants are not silently merged.
+SCCs and basin structure are algorithmically re-derived from the graph.
 
-## 8. Aspects
-
-Each admitted aspect preserves endpoints, exact family/angle, measured separation, orb, active orb policy, applying/separating phase when motion exists, and provenance.
-
-Rounded display coordinates never override full-precision calculations.
-
-## 9. Rulership/topology provenance
-
-Traditional domicile rulers create directed dispositor edges. SCCs are rediscovered algorithmically from submitted chart state.
-
-Graph proof identifies graph scope/model before reporting SCC/terminal SCC, terminal basin, route depth, upstream capture, or nonterminal path bottleneck.
-
-For example, `Mercury ↔ Venus is a terminal SCC` is incomplete unless it means the selected traditional-domicile classical dispositor graph.
-
-## 10. Primitive condition provenance
-
-Model:
+A statement such as:
 
 ```text
-naf.condition.primitive.hellenistic.v0.4.0b
+Mercury ↔ Venus is a terminal SCC
 ```
 
-Each classical planet receives independent factor records for domicile, adversity, exaltation, depression/fall, triplicity, Egyptian bound, planetary sect family, in/out-of-sect relation, and Whole-Sign angular-triad class.
+is incomplete unless its graph/model scope is identified.
 
-Each factor has its own rule/source identity and ledger reference. There is no opaque condition total.
+House River additionally retains the contributing Whole-Sign house routes for each route-count band.
 
-## 11. Relational condition provenance
+## 6. Condition provenance
 
-Model:
+Primitive, relational, and compound condition remain independently inspectable.
+
+Noetic Atlas does not convert multidimensional condition into an opaque total.
+
+Every implemented condition rule should preserve:
+
+- model/rule ID;
+- source/tradition or reconstruction label;
+- applicability;
+- inputs;
+- result;
+- limitations/variant boundaries;
+- ledger/derivation reference.
+
+## 7. Research-regime provenance
+
+Every research object should identify whether it belongs to:
 
 ```text
-naf.condition.relational.hellenistic.v0.4.2
+Operational
+Experimental
+Discovery
 ```
 
-Rule registry:
+Experimental objects require a hypothesis/model identity and reversible comparison against control.
+
+Discovery objects may carry temporary labels and incomplete research status.
+
+No research object is permitted to change its regime implicitly because later evidence is favorable.
+
+## 8. v0.4.6 Null Model Laboratory provenance
+
+Every null experiment must preserve enough information to reconstruct the comparison.
+
+Required fields include:
+
+- laboratory model/version;
+- null model ID/version;
+- metric ID/version;
+- metric implementation fingerprint;
+- observed-state fingerprint;
+- base and derived seed;
+- RNG algorithm/version;
+- iteration count;
+- observed statistic;
+- null-distribution hash;
+- finite-Monte-Carlo method;
+- raw p;
+- adjusted p;
+- multiple-testing procedure/family/rank/size;
+- empirical percentile/effect position;
+- preserved properties;
+- randomized properties;
+- assumptions;
+- limitations;
+- constrained-generator diagnostics;
+- simulation-quality state;
+- population-frequency state;
+- interpretation state.
+
+The same executable statistic must evaluate observed and simulated state.
+
+### Finite Monte Carlo integrity
+
+Use +1 correction:
 
 ```text
-naf.rules.relational_condition.hellenistic.v0.4.2
+p_hat = (1 + exceedance_count) / (B + 1)
 ```
 
-Every v0.4.2 relation object retains:
+`p = 0` is invalid under the v0.4.6 contract.
+
+### Multiple testing
+
+Raw and adjusted p-values must remain separately visible. A threshold decision cannot erase the underlying values or family definition.
+
+### Cross-null integrity
+
+N_G, N_L, N_D, and N_T answer different questions. They are not replicate trials of one universal null.
+
+Do not create:
 
 ```text
-id
-type
-endpoints / direction
-model_id
-rule_id
-source_reference
-tradition label
-inputs
-result
-dependencies
-derivation_ref
-applicability / completeness context
+3/4 nulls passed
+universal null score
+overall cosmic significance
 ```
 
-Distinct relation types remain distinct:
+## 9. v0.4.7 Hypergraph provenance
+
+Every hyperedge is a first-class provenance-bearing object.
+
+Required identity:
+
+- hyperedge ID;
+- hyperedge class;
+- participant set;
+- cardinality;
+- template/model identity;
+- exact measurements;
+- derivation payload;
+- SHA-256 derivation hash;
+- research status;
+- population-frequency state;
+- interpretation state.
+
+### Geometric hyperedges
+
+Retain target-angle assignment, observed separations, residuals/orbs, max/RMS residual, symmetry/fidelity metric, and policy identity.
+
+### Topological hyperedges
+
+Retain SCC/basin identity, internal routing edges, terminal/closed-cycle state, basin membership/volume, and the ruler-map/model that produced the topology.
+
+### Compound hybrid hyperedges
+
+Retain both parent layers and the explicit rule for declaring their coupling. Never replace the parent objects with an opaque combined score.
+
+### Cardinality integrity
+
+A missing participant is not an uncertainty to fill with narrative. If a definition requires k≥3 and only two qualifying bodies exist, the hyperedge does not exist under that definition.
+
+## 10. Hypergraph null-profile provenance
+
+A hyperedge null profile must distinguish:
 
 ```text
-reception
-exchange
-mutual_reception compatibility
-overcoming
-domination
+completed
+not-admissible
 ```
 
-The later-tradition mutual-reception compatibility label never silently replaces Hellenistic exchange.
+An inapplicable null is not an empty p-value and not a failed test.
 
-## 12. Condition Signature provenance
+Every completed row retains the candidate-specific metric identity and the named counterfactual that produced it.
 
-Model:
+Research status may advance baseline/null comparison only when the required admissible comparisons are complete under the current v0.4.7 rule.
+
+Population and interpretation remain unchanged.
+
+## 11. Population-frequency integrity
+
+Counterfactual simulations are not real cohorts.
+
+The following inference is invalid:
 
 ```text
-naf.condition.signature.v0.4.2
+99th percentile under N_G
+→ occurs in only 1% of real natal charts
 ```
 
-A Condition Signature is a **projection** of already-computed primitive + relational condition. It is not an additional condition calculator.
+Population prevalence requires an empirical cohort/reference engine with sampling design, chart provenance, provider consistency, cohort identity, uncertainty, sensitivity, and multiplicity handling.
 
-Tokens retain their categorical identity and, where available, derivation references. No scalar-strength total is produced.
+Until v0.5.0 Population Cohort Engine exists, population-frequency state remains unknown in the general framework.
 
-## 13. House River provenance
+## 12. Interpretation provenance
 
-Model:
+Interpretation should state:
 
-```text
-naf.research.house_river.v0.4.2
-```
+- interpretation model/profile;
+- evidence consumed;
+- tradition/posture;
+- applicability;
+- uncertainty/limitations;
+- distinction from deterministic or research facts.
 
-House River consumes the deterministic Whole-Sign house routes and selected traditional dispositor graph.
+Graph/hypergraph structure may inform interpretation but may not be presented as psychological, spiritual, medical, causal, or predictive validation merely because it is mathematically well-defined.
 
-For planetary routing edge `e`:
+Energy/current/field vocabulary remains symbolic/phenomenological unless independent physical evidence exists.
 
-```text
-w(e) = number of Whole Sign house-ruler paths traversing e
-```
+## 13. Completeness states
 
-Each House River source band and planetary routing band retains source house/topic, endpoints, contributing houses where applicable, route count, width semantics, model/version, and `derivation_ref`.
-
-The route count is graph-derived evidence, not an energetic/fate/strength score.
-
-## 14. Derivation Walker contract
-
-Model:
-
-```text
-naf.integrity.derivation_walker.v0.4.2
-```
-
-The walker indexes:
-
-- deterministic analysis ledger entries;
-- primitive condition ledger entries;
-- relational condition ledger entries;
-- House River derivation entries;
-- future explicitly supplied proof objects.
-
-The desired proof direction is:
-
-```text
-visible claim
-→ derivation_ref
-→ rule/graph object
-→ source + inputs + result
-→ dependencies
-→ coordinate / house / aspect / ruler proof
-→ civil-time / astronomy provenance when relevant
-```
-
-Not every pre-v0.4.2 ledger object is normalized into the shared index yet. Missing legacy dependencies are explicitly returned as:
-
-```text
-external_or_unindexed_dependency
-```
-
-They are never fabricated.
-
-## 15. Graph metric integrity
-
-A complete metric object should retain ID, label, value/unit, scope, definition, formula, observation, graph-theory meaning, astrological-rule context, interpretive status, limits, integrity inputs/calculation/result, and ledger references.
-
-A naked number is not a complete finding.
-
-## 16. Explainable Finding integrity
-
-A graph finding retains finding ID, title/category, statement, measurement, graph scope, mathematical meaning, astrological context, interpretive hypothesis if any, limits, proof formula, proof inputs/result, and ledger refs.
-
-The UI should preserve:
-
-```text
-observation
-→ measurement
-→ mathematical meaning
-→ astrological context
-→ interpretive hypothesis
-→ limits
-→ proof
-```
-
-## 17. Energetic interpretation provenance
-
-Model:
-
-```text
-naf.interpretation.energetic_synthesis.v0.4.1.2
-```
-
-Optional natural-house overlay:
-
-```text
-naf.interpretation.natural_house_overlay.modern.v1
-```
-
-Interpretive cards may consume actual sign, actual Whole Sign house, ruler/dispositor route, aspect geometry, graph findings, and condition.
-
-Energy/current/field language is explicitly classified as symbolic/phenomenological `interpretive-inference`, not measured physics.
-
-## 18. Resonance provenance
-
-House-resonance model:
-
-```text
-naf.interpretation.house_resonance.v0.4.1.3
-```
-
-Qualified Resonance in v0.4.2 consumes this existing projection plus Condition Signatures. It does not recalculate signs/houses or elevate the optional natural-house correspondence into primary doctrine.
-
-## 19. Outer planets and applicability
-
-Uranus, Neptune, and Pluto can be valid modern/transpersonal interpretation objects while Hellenistic primitive/relational condition remains `not_applicable`.
-
-Noetic Atlas never coerces `not_applicable` into neutral/zero condition.
-
-## 20. Ceres provenance
-
-Ceres can participate in interpretation only when a coordinate is supplied through an explicit input path.
-
-Current Ceres profile is custom/modern and must be identified as such. Automatic Ceres astronomy is not implemented. Supplied and automatically calculated coordinates are distinct provenance states.
-
-## 21. Public-shell operational integrity
-
-Current preservation chain:
-
-```text
-v042
-└── v0413
-    └── v0412c
-        └── deterministic visual core
-```
-
-The new shell must:
-
-- preserve all earlier useful views;
-- consume the same serialized chart state;
-- resynchronize through observed chart-state changes;
-- expose errors rather than blank state;
-- keep relation layers visually distinguishable;
-- preserve proof controls on v0.4.2 relations and route bands.
-
-A blank panel or silent fallback is not an acceptable error representation.
-
-## 22. Research-exploratory integrity
-
-Graph descriptors are reproducible mathematical descriptions of encoded charts. They are not automatically astrological claims.
-
-Noetic Atlas blocks prevalence language such as `rare`, `high`, `exceptional`, `dominant`, or `enriched` until an explicit comparison/null model exists.
-
-Planned null families include geometric longitude randomization, label permutation, appropriate degree-preserving rewiring, and layer-overlap randomization.
-
-## 23. Truth protocol
-
-A new technique is not promoted because it looks compelling in the canonical specimen.
-
-```text
-formal definition
-→ deterministic implementation
-→ tests
-→ cross-chart replication
-→ null/comparison where applicable
-→ sensitivity analysis
-→ expert inspection
-→ empirical/phenomenological testing where relevant
-→ interpretive hypothesis
-→ independent replication
-```
-
-A negative result is acceptable.
-
-## 24. Completeness states
-
-Use explicit states:
+Use explicit states such as:
 
 ```text
 valid
@@ -343,15 +283,46 @@ invalid
 not_implemented
 not_applicable
 indeterminate
-external_or_unindexed_dependency
+not_admissible
+pending
+completed
+limited
 ```
 
-Never encode unsupported or nonapplicable as `0` or `false` merely to simplify a UI.
+Do not encode unsupported or not-admissible as zero/false.
 
-## 25. Documentation provenance
+## 14. Public-product provenance
 
-Living documentation is part of integrity.
+A public release claim itself has provenance.
 
-`CURRENT_RELEASE.md` is the canonical human-readable release contract. README, INDEX, architecture, developer, product, astrological-model, research, glossary, and integrity docs must agree with it and with implementation.
+The product version displayed at the root entry must correspond to the shell and features actually exposed.
 
-Historical/release docs remain historical and should be labeled by their release context rather than rewritten as present-tense truth.
+Current framework v0.4.7 is ahead of the public product, which remains on the v0.4.5 shell. Documentation therefore reports a release-packaging defect instead of pretending that a successful repository/Page deployment made the hypergraph UI public.
+
+See [`V047_PUBLIC_PRODUCTIZATION_GATE.md`](V047_PUBLIC_PRODUCTIZATION_GATE.md).
+
+## 15. Reproducibility package
+
+A publishable research result should ideally retain:
+
+```text
+commit SHA
+schema/model versions
+astronomy provider/version
+rule IDs
+orb/configuration policy
+metric implementation fingerprints
+null-model versions
+seeds/RNG
+iteration count
+multiple-testing family
+population cohort/version where applicable
+input/data provenance
+limitations
+negative/sensitivity results
+exact analysis command/notebook
+```
+
+## 16. Integrity principle
+
+> **A result is not auditable merely because code exists. It is auditable when the system preserves the full chain of why this object exists, under which model, compared with what, and which claims remain unavailable.**

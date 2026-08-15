@@ -1,315 +1,242 @@
 # Noetic Atlas
 
-**An auditable visual-analytics framework for astrological structure, topology, condition, energetic synthesis, graph analysis, and time.**
+**An auditable visual-analytics and research framework for formal astrological structure, topology, condition, higher-order configuration, counterfactual testing, interpretation, and provenance.**
 
-> **See the structure. Follow the flow. Understand the pattern. Show the work.**
+> **See the structure. Follow the flow. Test the pattern. Show the work.**
 
-Noetic Atlas is an experimental computational framework for representing astrology as a multilayer symbolic system rather than forcing every relationship into a single horoscope wheel. The underlying research framework is the **Noetic Atlas Framework (NAF)**.
+Noetic Atlas treats an astrological chart as a multilayer symbolic system rather than forcing every relationship into one wheel or one prose reading. The underlying research framework is the **Noetic Atlas Framework (NAF)**.
 
-The project has two linked goals:
+The project has two linked purposes:
 
-1. build a useful public/professional instrument for exploring astrological structure, condition, interpretation, and timing;
-2. build a research environment in which structural, interpretive, and temporal claims can be formulated, reproduced, compared, and rejected when they fail.
+1. build a useful instrument for exploring chart geometry, houses, rulership, condition, configurations, readable synthesis, and proof;
+2. build a research environment in which astrological structures can be formally defined, reproduced, compared against named counterfactuals, replicated, and rejected when they fail.
 
-## Current release
+## Current state
 
 See [`docs/CURRENT_RELEASE.md`](docs/CURRENT_RELEASE.md) for the canonical release contract.
 
-**Current public release:** v0.4.3 — Compound Condition  
-**Current browser surface:** `prototype/v043.html`  
-**Deployed/default branch:** `main`
+There are currently **two release axes that must not be conflated**:
 
-Current model identifiers include:
+| Axis | Current state |
+|---|---|
+| Framework / research implementation | **v0.4.7 — Formal Configurations & Astrological Hypergraphs** |
+| `main` package identifier | `0.4.7-alpha.1` |
+| Public browser product | **not yet packaged to v0.4.7** |
+| Root public entry | currently redirects to `prototype/app.html?build=research-045` |
+| Reachable null-lab shell | `prototype/v046.html` |
+| v0.4.7 public shell | **not yet implemented** |
 
-```text
-naf.condition.system.v0.4.3
-naf.condition.compound.hellenistic.v0.4.3
-naf.rules.compound_condition.hellenistic.v0.4.3
-naf.condition.relational.hellenistic.v0.4.2
-naf.condition.signature.v0.4.2
-naf.research.house_river.v0.4.2
-naf.integrity.derivation_walker.v0.4.3
-naf.interpretation.house_resonance.v0.4.1.3
-naf.interpretation.energetic_synthesis.v0.4.1.2
-naf.interpretation.natural_house_overlay.modern.v1
-naf.research.graph_analytics.v0.4.1
-naf.condition.primitive.hellenistic.v0.4.0b
-naf.condition.record.v0.4.0a
-naf.analysis.v0.3.1
-```
+That distinction is intentional documentation truth, not release polish. v0.4.6 and v0.4.7 research code are merged, CI-green, and present on `main`, but the public application shell has not yet been advanced to expose the full Null Model Laboratory + Hypergraph research surface.
 
-The root `index.html` redirects to v043. v043 embeds the complete v042 Atlas, which embeds v0413, which embeds v0412c, which reads the serialized chart state from the existing deterministic visual core. There is still only **one chart calculator/state authority**.
+The packaging defect is tracked in [`docs/V047_PUBLIC_PRODUCTIZATION_GATE.md`](docs/V047_PUBLIC_PRODUCTIZATION_GATE.md). **v0.4.8 is blocked until that gate is green.**
 
-## Frozen architecture law
+## Frozen architectural laws
 
 ```text
-one chart state
+one astronomical/chart state
+→ many explicit models
 → many coordinated projections
 ```
 
-A new representation does not get to recalculate the astronomical or kernel substrate. It must project the state already produced by the deterministic pipeline.
-
-Preservation chain:
-
 ```text
-v043 Compound Condition
-└── v042 Relational Condition
-    └── v0413 Resonance Field
-        └── v0412c Energetic Analysis observatory
-            └── prototype/index.html deterministic visual core
+Operational ≠ Experimental ≠ Discovery
 ```
 
-## Current architecture
+```text
+Detection ≠ Unexpectedness ≠ Population Frequency ≠ Interpretation
+```
+
+A visualization, experiment, or interpretive layer does not get to recalculate or silently rewrite upstream chart facts.
+
+## Current implemented stack
 
 ```text
 Civil input
 → time-zone / DST resolution
 → astronomy
 → deterministic astrological kernel
-→ traditional integrity + lots
+→ Hellenistic integrity + sect + lots
 → primitive condition
 → relational condition
 → compound condition
-→ graph analytics / findings
-→ resonance / House River / qualified flow projections
-→ energetic astrological synthesis
+→ graph analytics / House River / derivation
+→ auditable Reading + interpretation projections
+→ research-regime separation
+→ v0.4.6 Null Model Laboratory
+→ v0.4.7 Formal Configurations / Hypergraphs
 → proof / provenance
 ```
 
-Governing epistemic rules:
+### Deterministic substrate
 
-```text
-graph ≠ reading
-metric ≠ meaning
-relation type ≠ generic connection
-route count ≠ strength
-compound testimony ≠ net score
-symbolic-energy language ≠ measured physical energy
-```
+Implemented foundations include:
 
-## Implemented structural substrate
-
-- local birth date/time + latitude/longitude input;
-- historical civil-time/time-zone resolution with DST ambiguity handling;
+- local civil date/time + latitude/longitude input;
+- IANA time-zone and DST ambiguity handling;
 - Astronomy Engine 2.1.19 adapter for Sun through Pluto;
-- independently calculated ASC and MC;
-- planetary longitudinal velocity / retrograde state;
-- geometric solar altitude and sect;
-- tropical zodiac;
-- Whole Sign houses;
-- major aspects under an explicit orb policy;
-- applying/separating when motion data exist;
+- ASC/MC, planetary longitudinal velocity, retrograde state, and solar altitude;
+- tropical zodiac and Whole Sign houses;
+- major aspects under a named orb policy;
 - traditional domicile rulership;
-- directed dispositor graph;
-- Tarjan SCCs and terminal SCCs;
-- all-house ruler routes;
+- directed dispositor graph, Tarjan SCCs, terminal SCCs, and all-house ruler routes;
 - seven Paulus/Panaretus Hermetic lots with sect reversal;
-- derivation/provenance ledger and derivation tree;
-- Natal Field, Aspect Matrix, Flow Map, Lots/Sect, Research Lab, and Audit surfaces;
-- automated integrity/boundary tests in GitHub Actions.
+- primitive, relational, and source-secure compound condition;
+- Derivation Ledger / Walker and proof-bearing downstream objects;
+- graph analytics, House River, Resonance, Reading, and research projections.
 
-## Primitive condition
+Noetic Atlas does **not** emit a hidden scalar planet-strength score.
 
-For Sun through Saturn the primitive engine independently computes domicile/adversity, sign-level exaltation/depression, standard/Dorothean triplicity, Egyptian bound, planetary sect family, in/out-of-sect relation, and Whole-Sign angular-triad class.
+## Research regimes — v0.4.5
 
-Every factor is independently represented and provenance-bearing. **No scalar planet-strength score is calculated.**
+The research layer distinguishes three first-class regimes.
 
-## Relational condition — v0.4.2
+| Regime | Purpose | Contamination rule |
+|---|---|---|
+| Operational | reproducible techniques inside an explicitly named astrological model | experiments may not silently rewrite it |
+| Experimental | named/versioned alternative models and hypotheses | results remain reversible deltas from Operational |
+| Discovery | search for reproducible structures not assumed in advance | detection precedes naming; baseline precedes rarity language |
 
-Machine-readable source lock:
+The research-status registry keeps independent dimensions for geometry, derivation, historical analogue, population frequency, null comparison, phenomenological association, replication, and interpretation. These dimensions are never collapsed into one confidence score.
 
-```text
-data/rules/hellenistic/relational-condition-v1.registry.json
-```
+## Null Model Laboratory — v0.4.6
 
-Distinct layers remain separate:
+v0.4.6 introduced the first statistical-inference subsystem.
 
-```text
-G_dispositor
-G_reception
-G_exchange
-G_mutual_reception
-G_overcoming
-```
+Named counterfactuals:
 
-Current relation types include configured domicile reception, domicile exchange, a separately identified later-tradition mutual-reception compatibility label, right-hand overcoming, and right-hand-square domination/upon-the-tenth.
+- **N_G** — geometric randomization;
+- **N_L** — class-preserving identity/label permutation;
+- **N_D** — degree-preserving aspect-network rewire;
+- **N_T** — rulership/routing-codebook permutation.
 
-Dispositorship, reception, exchange, and overcoming never collapse into one generic astrological edge.
+Every null states what it preserves, what it randomizes, what question it can answer, and what it cannot establish.
 
-## Compound condition — v0.4.3
-
-Machine-readable source lock:
+Finite Monte Carlo inference uses the +1 correction:
 
 ```text
-data/rules/hellenistic/compound-condition-v1.registry.json
+p_hat = (1 + count(T_i >= T_obs)) / (B + 1)
 ```
 
-Executable model:
+so `p = 0` is impossible. Results retain raw and BH-FDR-adjusted p-values, family/rank metadata, empirical percentile/effect position, generator diagnostics, deterministic seeds, implementation/version identities, and distribution hashes.
+
+Different nulls answer different questions. **There is no `3/4 nulls passed` score and no universal significance number.**
+
+A Discovery candidate may advance to `null-tested` while population frequency remains unknown and interpretation remains withheld.
+
+## Formal Configurations & Astrological Hypergraphs — v0.4.7
+
+Standard graphs encode pairwise relations. v0.4.7 makes higher-order structures first-class attributed hyperedges.
+
+Implemented classes:
 
 ```text
-naf.condition.compound.hellenistic.v0.4.3
+geometric_polygon
+topological_basin
+compound_hybrid
 ```
 
-Implemented source-secure subset:
+Initial k=3 / k=4 configuration registry:
 
-- bonification by benefic overcoming through superior trine/square;
-- maltreatment by malefic superior square/domination;
-- benefic sign-based trine testimony;
-- malefic sign-based opposition testimony;
-- degree-based seven-degree ray enclosure;
-- intervention that can break enclosure;
-- sect qualification of the acting benefic/malefic;
-- reception qualification that may enhance bonification or mitigate maltreatment;
-- mixed condition when bonification and maltreatment coexist.
+- Grand Trine;
+- T-Square;
+- Yod;
+- Grand Cross;
+- Kite;
+- Noetic Discovery template: T-Square Anchor Cluster.
 
-Noetic Atlas does **not** average these into a hidden strength number. Independent testimonies remain inspectable.
+Topology is also elevated into hyperedges:
 
-Selected historically ambiguous variants remain explicitly deferred rather than guessed, including unresolved bodily/sign-containment enclosure variants and not-yet-source-locked adherence, engagement, striking-with-a-ray, and related compound testimonies.
+- closed dispositor SCCs;
+- terminal basin-capture sets.
 
-## Reusable condition signatures
+Hybrid objects couple verified geometry to independently derived routing while preserving the distinction between those layers.
 
-Categorical condition tokens continue to follow classical planets across views. Primitive and relational state remain visible without red/green compression or scalar scoring. Compound testimonies are presented as separate evidence objects rather than folded into a single token score.
+Every hyperedge carries participant/cardinality data, geometric and/or topological metrics, an immutable SHA-256 derivation hash, provenance, and a compact research state. Hypergraph null evaluation reuses the accepted v0.4.6 counterfactual machinery.
 
-## Graph analytics + explainable findings
-
-### Classical dispositor graph
-
-Implemented derivations include SCC condensation, terminal basin membership/fraction, route depth, upstream route capture, and the largest nonterminal path bottleneck.
-
-For `NAF-CANON-0001` under traditional domicile rulership:
+Canonical regressions require, among other structures:
 
 ```text
-terminal SCC: Mercury ↔ Venus
-terminal basin: 7 / 7
-Jupiter route depth: 3
-Saturn route depth: 2
-Mars route depth: 1
-largest nonterminal route bottleneck: Mars
+Sun–Moon–Jupiter Grand Trine
+Spirit-closed Kite
+Venus–Mars / Uranus–Chiron T-Square Anchor Cluster
+Mercury–Venus closed dispositor SCC
+Mercury–Venus terminal basin
+compound geometry × routing hyperedge
 ```
 
-These are graph-derived facts conditional on the selected ruler model, not claims of psychological or spiritual primacy.
+and explicitly reject a two-body Sun–Mercury copresence as a k≥3 hyperedge. Cardinality rules outrank desired narrative output.
 
-### Aspect graph
+Binary incidence matrix `H`, vertex degree `D_v`, and hyperedge cardinality `D_e` are implemented. Hypergraph-Laplacian eigenanalysis and k=5–6 libraries are deferred.
 
-Current calculations include connected components, degree, local/mean clustering, normalized unweighted betweenness, articulation points, bridges, typed closed three-node motifs, Grand Trine/T-square/triple-conjunction templates, and an exact ≤1° subset.
+## Epistemic ceiling
 
-## Resonance Field
+The framework may currently establish statements such as:
 
-The v0.4.1.3 Resonance Field remains preserved. Under Whole Sign houses it makes the chart-wide rotation between the optional modern natural-house sequence and the actual house-sign sequence explicit.
+- a typed structure was detected under a named rule/configuration policy;
+- its derivation is reproducible;
+- it occupies a given percentile under a named counterfactual;
+- a departure or no-departure was observed under a declared FDR-controlled family.
 
-For the canonical Leo-rising chart:
+It may **not** infer from those facts alone that a configuration is:
+
+- rare among real people;
+- a validated psychological or spiritual signature;
+- predictive or causal;
+- a measured physical energy field.
+
+Population prevalence is deliberately unavailable until a real cohort/reference-distribution engine exists.
+
+Energy/current/field vocabulary in interpretation remains symbolic or phenomenological unless separately supported by physical evidence.
+
+## Personal and Research apertures
+
+The product contract remains:
 
 ```text
-rotation: +4 signs / 120°
-element preserved: 12 / 12
-mode preserved: 0 / 12
-phase character: element-preserving / mode-rotating
+Personal | Research
 ```
 
-The natural-house overlay remains secondary and explicitly modern; it never replaces the actual Whole Sign or actual domicile ruler.
+Personal keeps Operational material primary and hides Monte Carlo/research machinery by default. Research exposes model identities, candidates, null profiles, provenance, and experimental/discovery state without creating a second chart authority.
 
-## House River
+The current public shell does not yet expose the complete v0.4.7 research surface. That is the active release blocker.
 
-House River begins from lived Whole-Sign domains and traces their existing ruler routes into the traditional dispositor network.
+## Immediate release gate
 
-For every planetary dispositor edge `e`:
+Before v0.4.8 begins, the public product must provide one authoritative current shell that:
+
+1. preserves the seven coordinated views;
+2. preserves `Personal | Research`;
+3. exposes the v0.4.6 Null Model Laboratory in Research mode;
+4. exposes v0.4.7 hyperedges and candidate-specific null profiles;
+5. uses one coherent version label;
+6. has deterministic loading/empty/error bootstrap states;
+7. prevents a populated truth summary from coexisting with an uninitialized graph;
+8. redirects the root entry to the true current shell;
+9. preserves Personal-mode hiding of Monte Carlo data;
+10. passes a public-surface regression before release is called productized.
+
+See [`docs/V047_PUBLIC_PRODUCTIZATION_GATE.md`](docs/V047_PUBLIC_PRODUCTIZATION_GATE.md).
+
+## Locked research dependency chain
 
 ```text
-w(e) = number of Whole Sign house-ruler paths traversing e
+v0.4.6 Null Model Laboratory                         DONE
+        ↓
+v0.4.7 Formal Configurations & Astrological Hypergraphs DONE (implementation)
+        ↓
+PUBLIC PRODUCTIZATION GATE                           BLOCKING
+        ↓
+v0.4.8 Hidden Geometry Engine
+        Midpoints · Declination/Parallels · Antiscia
+        ↓
+v0.4.9 Experimental Model Laboratory
+        Ceres–Taurus · Alternative Rulership Tensors
+        ↓
+v0.5.0 Population Cohort Engine
+        100k+ empirical reference distributions
 ```
 
-Band thickness therefore has a precise integer routing meaning. It does **not** mean soul power, fate, energetic intensity, or planet strength.
-
-## Derivation Walker
-
-The shared proof infrastructure is now versioned as:
-
-```text
-naf.integrity.derivation_walker.v0.4.3
-```
-
-It indexes deterministic, primitive, relational, compound, and House River proof objects. Every v0.4.3 compound testimony is born with a `derivation_ref`.
-
-Visible proof can traverse:
-
-```text
-claim / testimony / relation / band
-→ derivation object
-→ rule ID + source
-→ inputs / result
-→ dependencies
-→ deterministic proof where indexed
-```
-
-Missing legacy dependencies remain explicit; they are never fabricated.
-
-## Energetic whole-chart synthesis
-
-The preserved energetic synthesis remains downstream:
-
-```text
-archetypal current
-→ actual sign
-→ actual Whole Sign house
-→ optional natural-house resonance
-→ ruler / dispositor route
-→ aspect geometry
-→ graph architecture
-→ traditional condition where applicable
-→ balanced / depleted / excessive expression
-→ material-life manifestation
-→ soul/spirit inquiry
-→ evidence / proof
-```
-
-Uranus, Neptune, and Pluto participate in modern/transpersonal interpretation while remaining outside classical Hellenistic dignity applicability. Ceres is supported as an interpretive minor body when a coordinate is supplied; the birth-time astronomy adapter does not automatically generate a validated Ceres coordinate.
-
-Energy/current/field vocabulary is symbolic/phenomenological language, not experimentally established field physics.
-
-## Public v0.4.3 hierarchy
-
-```text
-Existing Atlas        → all prior Structure/Analysis + Resonance + Relational work
-Compound Condition    → independent compound testimonies
-Compound Map          → condition-qualified compound relationships
-Proof Walker          → compound-aware reversible derivation infrastructure
-Source Boundary       → implemented versus deferred source reconstructions
-```
-
-Nothing in v0412c, v0413, or v042 is deleted.
-
-## Current limitations
-
-Still absent or intentionally blocked:
-
-- automatic validated Ceres/small-body astronomy;
-- complete Chiron/node/Lilith/Vertex/fixed-star birth-time support;
-- complete independent cross-provider astronomy validation;
-- deferred compound-condition variants described above;
-- degree-based quadrant dynamic strength;
-- graph null distributions;
-- statistical motif enrichment;
-- validated condition-weighted graph descriptors;
-- full motif + condition field geometry;
-- side-by-side rule-set comparison;
-- complete normalization of all legacy derivation entries into the shared walker contract;
-- Life Spectrum;
-- production annual profections/zodiacal releasing;
-- externally validated predictive interpretation.
-
-## Next engineering sequence
-
-```text
-source-lock remaining compound variants where justified
-condition-aware synthesis
-motif + condition field geometry
-side-by-side rule-set comparison
-research graph nulls / multilayer baselines
-validated extended-body astronomy where justified
-v0.5 Life Spectrum
-v0.6 traditional timing systems
-v0.7 recurrence / Life Space research
-```
+Life Spectrum and production timing systems remain later work; v0.5.0 is now reserved for the Population Cohort Engine because population-frequency claims require an actual empirical reference layer.
 
 ## Tests
 
@@ -318,58 +245,30 @@ npm install
 npm test
 ```
 
-The standard suite includes kernel, integrity, condition registry, primitive condition, relational condition, compound condition, graph analytics, astrological analysis, energetic synthesis, house resonance, House River/Derivation Walker, all preserved UI contracts through v042, the v043 UI/public-entry contract, boundary geometry, timezone, and astronomy-adapter tests.
-
-Serve locally:
-
-```bash
-python -m http.server 8000
-```
-
-Open:
+The current suite includes the historical kernel/condition/reading/UI contracts plus:
 
 ```text
-http://localhost:8000/prototype/v043.html
+v0.4.6 null model laboratory
+v0.4.6 research lab integration
+v0.4.7 formal hypergraph core
+v0.4.7 hypergraph null integration
+v0.4.7 research lab wrapper
 ```
 
-## Design rules
-
-1. Calculation before narration.
-2. One chart state, many coordinated projections.
-3. Structure before meaning.
-4. Houses remain first-class life fields.
-5. Ruler/dispositor pathways remain visible.
-6. Relation types remain distinct.
-7. Compound testimonies remain distinct.
-8. A graph term is never the final interpretation.
-9. No naked graph metric.
-10. No opaque condition/strength score.
-11. Route count is routing evidence, not energetic strength.
-12. Show the work.
-13. New relational/compound/flow objects are born with provenance and derivation references.
-14. Never manufacture missing coordinates or false precision.
-15. Ambiguity and unsupported states are data.
-16. Traditions are explicit rule models, not hidden mixtures.
-17. Graph fact and interpretation remain separately labeled.
-18. A graph is an encoded model, not evidence that astrology is a physical network.
-19. Do not call a graph feature rare/high/unusual without a defined baseline.
-20. The wheel remains a useful reference and future HCI control.
-21. AI consumes deterministic state; it does not replace it.
-22. A failed hypothesis is an acceptable result.
-23. Energetic language may be spiritually useful without being mislabeled as experimental physics.
+Feature completion is not equivalent to public productization. Public entrypoint and shell behavior require their own release contract and regression coverage.
 
 ## Documentation
 
 Start with:
 
 1. [`docs/CURRENT_RELEASE.md`](docs/CURRENT_RELEASE.md)
-2. [`docs/V043_COMPOUND_CONDITION.md`](docs/V043_COMPOUND_CONDITION.md)
-3. [`docs/V042_RELATIONAL_CONDITION.md`](docs/V042_RELATIONAL_CONDITION.md)
-4. [`docs/CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md`](docs/CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md)
-5. [`docs/V0413_RESONANCE_FIELD.md`](docs/V0413_RESONANCE_FIELD.md)
-6. [`docs/V0412_ENERGETIC_SYNTHESIS.md`](docs/V0412_ENERGETIC_SYNTHESIS.md)
-7. [`docs/CONDITION_ENGINE_SPEC.md`](docs/CONDITION_ENGINE_SPEC.md)
+2. [`docs/V047_PUBLIC_PRODUCTIZATION_GATE.md`](docs/V047_PUBLIC_PRODUCTIZATION_GATE.md)
+3. [`docs/V047_FORMAL_CONFIGURATIONS_HYPERGRAPHS.md`](docs/V047_FORMAL_CONFIGURATIONS_HYPERGRAPHS.md)
+4. [`docs/V046_NULL_MODEL_LABORATORY.md`](docs/V046_NULL_MODEL_LABORATORY.md)
+5. [`docs/RESEARCH_CONSTITUTION.md`](docs/RESEARCH_CONSTITUTION.md)
+6. [`docs/CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md`](docs/CURRENT_STATE_AND_SCIENTIFIC_RATIONALE.md)
+7. [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 8. [`docs/ROADMAP.md`](docs/ROADMAP.md)
 9. [`docs/INDEX.md`](docs/INDEX.md)
 
-Historical milestone docs remain historical records. Living docs must agree with the current release contract and implementation.
+Historical milestone documents remain historical records. Living documents must describe repository and public-surface reality, even when that reality exposes an incomplete release.

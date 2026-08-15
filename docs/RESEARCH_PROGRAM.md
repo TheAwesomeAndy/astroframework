@@ -2,140 +2,86 @@
 
 ## 1. Purpose
 
-Noetic Atlas is intended to do more than digitize existing astrological practice. Its research purpose is to expose structures, recurrences, and cross-layer relationships that conventional chart interfaces may conceal, then evaluate whether those structures are useful, reproducible, and—only where evidence supports it—astrologically meaningful.
+Noetic Atlas is intended to do more than digitize inherited astrological practice. Its research purpose is to expose structures, model dependencies, recurrences, and cross-layer relationships that conventional interfaces may conceal, then evaluate them under increasingly demanding evidence regimes.
 
-Current release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
+Current framework baseline: **v0.4.7**.  
+Canonical release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
 
 The project distinguishes:
 
 1. historical-rule reproduction;
-2. deterministic mathematical properties of the encoded model;
-3. exploratory descriptors;
-4. visualization/HCI performance;
-5. empirical or phenomenological evidence;
-6. candidate interpretive theory.
+2. deterministic mathematical properties of an encoded model;
+3. Discovery structure;
+4. counterfactual unexpectedness;
+5. empirical population frequency;
+6. visualization/HCI performance;
+7. phenomenological or outcome association;
+8. replication;
+9. candidate interpretive theory.
 
-These categories must not be collapsed.
+These categories may not be collapsed.
 
-Frozen architecture:
+## 2. Frozen research architecture
 
 ```text
-one chart state
+one astronomical/chart state
+→ many explicit models
 → many coordinated projections
 ```
 
-## 2. Current substrate
+and:
 
-Implemented now:
+```text
+Operational ≠ Experimental ≠ Discovery
+```
 
-- deterministic chart kernel;
+The Operational model is a reproducible control, not a claim of physical truth. Experimental models are reversible alternatives. Discovery structures are allowed to exist before anyone knows what they mean.
+
+## 3. Current implemented research substrate
+
+Implemented:
+
+- deterministic chart kernel and astronomy adapter;
 - sect + seven Hermetic lots;
-- primitive classical condition;
-- relational classical condition;
-- graph analytics/findings for the v0.4.1 scope;
-- Resonance Field;
-- House River route-count projection;
-- reusable condition signatures;
-- Derivation Walker infrastructure for all new v0.4.2 relations and river bands;
-- current energetic interpretation layer;
-- preservation of every prior useful public surface through v0413/v0412c.
+- primitive, relational, and source-secure compound condition;
+- graph analytics and House River;
+- auditable Reading/proof infrastructure;
+- model-overlay and Discovery machinery;
+- v0.4.5 research-regime separation;
+- v0.4.6 Null Model Laboratory;
+- v0.4.7 formal hypergraph engine;
+- candidate-specific hypergraph null evaluation;
+- SHA-256 hyperedge derivation;
+- binary hypergraph incidence matrix / degree structures;
+- deterministic CI regressions for historical and current research contracts.
 
-Still absent:
+Not implemented as general infrastructure:
 
-- compound condition;
-- graph-null distributions;
-- statistically validated condition-weighted graph descriptors;
-- complete legacy-proof normalization into the shared walker;
-- Life Spectrum/temporal engine;
-- externally validated predictive/psychological interpretation.
+- public v0.4.7 browser productization;
+- real population cohort/reference distributions;
+- generalized external association/phenomenology engine;
+- independent replication program at scale;
+- validated predictive/psychological/spiritual interpretation;
+- hypergraph spectral eigensystem;
+- full k=5–6 configuration library;
+- production timing/Life Spectrum.
 
-The promotion status for novel astrological claims therefore remains **hold** even though both primitive and relational traditional condition are now executable.
-
-## 3. Research posture
+## 4. Research posture
 
 ```text
 represent faithfully
 → derive transparently
-→ visualize clearly
-→ formulate a question
-→ specify comparison/null
-→ measure
+→ detect reproducibly
+→ specify counterfactual
+→ compare
+→ estimate prevalence only from real cohorts
+→ test external criteria
 → replicate
+→ interpret cautiously
 → refine or reject
 ```
 
-A negative result is useful. A descriptor that performs no better than a plausible baseline should not be promoted because it produces attractive charts.
-
-## 4. What can be studied now
-
-### 4.1 Pure mathematical questions
-
-Examples:
-
-- What SCCs exist under a selected ruler model?
-- What fraction of classical planets drain into each terminal SCC?
-- What is the route-depth distribution?
-- Which nonterminal nodes capture the most upstream routes?
-- What articulation points/bridges exist in the admitted aspect graph?
-- Which typed motifs occur under a named orb policy?
-- Which aspect pairs overlap with dispositor pairs?
-- How many Whole Sign house-ruler paths traverse each dispositor edge?
-
-These are deterministic once the graph/model is defined.
-
-### 4.2 Historical-rule reproduction
-
-Current examples:
-
-- Hermetic lot formulas;
-- Egyptian-bound lookup;
-- triplicity/sect logic;
-- Whole-Sign angular-triad classification;
-- configured domicile reception;
-- domicile exchange;
-- right-hand overcoming;
-- domination/upon-the-tenth.
-
-Success means expert reconstructability under a named source/variant, not empirical proof of astrology.
-
-### 4.3 Visualization/HCI questions
-
-Examples:
-
-- Does Flow Map reduce time to trace a ruler chain?
-- Does Aspect Matrix improve exact pairwise lookup?
-- Does Resonance Field improve comprehension of actual versus optional natural-house relationships?
-- Does Qualified Flow reduce errors distinguishing dispositorship, reception, exchange, and overcoming?
-- Does House River reduce the cognitive cost of tracing lived house domains through ruler chains?
-- Do Condition Signatures improve reconstruction of multidimensional state without inducing a misleading good/bad score?
-- Does Proof Walker improve confidence calibration by exposing derivation paths?
-- Does the graph/findings/metrics/condition separation improve understanding of what is calculation versus interpretation?
-
-Candidate measures:
-
-- completion time;
-- error rate;
-- confidence calibration;
-- recall;
-- learning rate;
-- workload;
-- expert inter-rater agreement.
-
-The wheel remains an appropriate control condition for geometry-heavy tasks; tables and conventional dignity grids may also be appropriate controls for condition tasks.
-
-### 4.4 Astrological-significance questions
-
-These ask whether formal features correspond to independent expert judgments, phenomenology, autobiographical data, or prospective outcomes.
-
-Examples:
-
-- Does terminal-basin concentration correspond to independently rated topical integration?
-- Do primitive + relational condition-qualified graph structures add reproducible information beyond standard delineation?
-- Are articulation/bottleneck structures associated with independently coded interpretive themes?
-- Do House River routing patterns add useful information beyond ordinary house-ruler tables?
-- Do preregistered timing windows correspond to event density above time-shift nulls?
-
-These require stronger controls and cannot be answered from `NAF-CANON-0001`.
+A negative result is useful. A descriptor that fails to depart from a plausible baseline should remain visible rather than being hidden because the chart looks less interesting.
 
 ## 5. Research layers
 
@@ -147,257 +93,330 @@ Success criteria:
 
 - source identified;
 - variant named;
-- formula/rule formalized;
+- transformation formalized;
 - boundaries documented;
 - independent/manual reconstruction possible;
-- proof object available.
+- provenance and proof available.
+
+Examples include Hermetic lots, Egyptian bounds, triplicity/sect logic, configured reception/exchange, overcoming/domination, and the current compound-condition subset.
 
 ### R1 — Mathematical characterization
 
-Goal: calculate properties of the encoded chart/network without asserting new astrological meaning.
+Goal: calculate exact properties of an encoded model without asserting new astrological meaning.
 
-Current examples:
+Examples:
 
-- terminal SCC/basin;
-- route depth;
-- upstream capture;
-- aspect clustering/betweenness;
+- SCCs and terminal basins;
+- route depth/upstream capture;
+- aspect graph connectivity;
 - articulation/bridge structure;
-- typed motifs;
-- House River route counts;
-- harmonic magnitude;
-- multilayer overlap/participation.
+- House River counts;
+- formal hyperedge detection;
+- configuration RMS residuals;
+- hypergraph incidence structure.
 
-### R2 — Exploratory astrological hypothesis
+### R2 — Counterfactual comparison
 
-Goal: test whether an R1 property or source-backed condition structure corresponds to an independently measured criterion.
+Goal: ask whether an R1 statistic departs from a named reference process.
 
-### R3 — Replication
+Implemented in v0.4.6/v0.4.7.
 
-Goal: reproduce relationships in independent charts, periods, astrologers, or datasets.
-
-### R4 — Candidate theory
-
-Only repeated support justifies movement toward a new interpretive technique.
-
-## 6. Current graph + relation research
-
-Current graph model:
+Examples:
 
 ```text
-naf.research.graph_analytics.v0.4.1
+N_G independent geometry
+N_L identity/label permutation
+N_D degree-preserving rewire
+N_T routing-codebook permutation
 ```
 
-Current relational condition:
+A result here establishes conditional unexpectedness only.
+
+### R3 — Population characterization
+
+Goal: estimate prevalence in real chart populations.
+
+Not implemented. Reserved for v0.5.0 Population Cohort Engine.
+
+### R4 — External association
+
+Goal: test whether formal features correspond to independent expert judgments, phenomenology, behavior, events, or other external criteria.
+
+Not generally implemented.
+
+### R5 — Replication
+
+Goal: reproduce results in independent charts, cohorts, periods, researchers, or sites.
+
+### R6 — Candidate theory / interpretation
+
+Only repeated support under appropriate controls justifies movement toward a new interpretive technique.
+
+## 6. v0.4.6 Null Model Laboratory
+
+The Null Model Laboratory is the first formal inference subsystem.
+
+### Source-locked statistics
+
+The observed chart and every simulation are evaluated with the same executable statistic `T(C)`.
+
+### Finite Monte Carlo
+
+Upper-tail example:
 
 ```text
-naf.condition.relational.hellenistic.v0.4.2
+p_hat = (1 + # {T_i >= T_obs}) / (B + 1)
 ```
 
-Current House River:
+No p=0.
+
+### Multiple testing
+
+Raw and adjusted p-values remain separate. BH-FDR is the current default exploratory procedure within declared null-model families.
+
+### No pseudo-replication across nulls
+
+N_G, N_L, N_D, and N_T ask different questions. A favorable result under three different nulls is not a three-vote replication of one hypothesis.
+
+### Effect position
+
+Empirical percentile and null-distribution position are reported alongside p-values so results are not reduced to a binary threshold.
+
+## 7. v0.4.7 Formal Hypergraph program
+
+v0.4.7 moves from pairwise-only graph objects to first-class k-body structures.
+
+Hyperedge classes:
 
 ```text
-naf.research.house_river.v0.4.2
+geometric_polygon
+topological_basin
+compound_hybrid
 ```
 
-### Classical dispositor graph
+The initial typed registry deliberately covers k=3/k=4:
 
-Functional digraph under traditional domicile rulership. Current analytics include SCC condensation, terminal basins, route depth, upstream capture, and nonterminal bottlenecks.
+- Grand Trine;
+- T-Square;
+- Yod;
+- Grand Cross;
+- Kite;
+- T-Square Anchor Cluster.
 
-### Aspect graph
+Topological hyperedges elevate closed SCCs and terminal basin-capture sets.
 
-Current analytics include components, degree, clustering, normalized unweighted betweenness, articulation points, bridges, typed triangle motifs, and exact ≤1° subsets.
+Compound hybrids record coupling between independently derived geometry and routing.
 
-### Relational layers
+This creates a more appropriate research unit: the whole configuration can now carry derivation, metrics, null profile, and research status.
 
-Source-backed layers include reception, exchange, separately identified mutual-reception compatibility, overcoming, and domination.
+## 8. Hypergraph research questions now possible
 
-These are not automatically “research discoveries”; their novel research use begins when we ask comparative/multiplex questions about them.
+Pure geometry:
 
-### House River
+- How tightly does a detected configuration fit its template?
+- How symmetric is the closure?
+- Does a typed k-body closure depart from N_G?
+- Is the geometry specific to the observed identities under N_L?
 
-For dispositor edge `e`:
+Routing topology:
+
+- How large is a terminal basin?
+- Is a closed routing object sensitive to the traditional codebook under N_T?
+
+Hybrid structure:
+
+- Does a geometric configuration disproportionately coincide with a routing attractor?
+- Does that coincidence survive degree-preserving rewiring under N_D?
+- Does it survive routing-codebook permutation under N_T?
+
+No answer to these questions automatically grants human meaning.
+
+## 9. Canonical-chart discipline
+
+The canonical specimen is a regression fixture.
+
+It currently verifies structures including:
 
 ```text
-w(e) = number of Whole Sign house-ruler paths traversing e
+Sun–Moon–Jupiter Grand Trine
+Spirit-closed Kite
+Venus–Mars / Uranus–Chiron T-Square Anchor Cluster
+Mercury–Venus closed SCC
+Mercury–Venus terminal basin
+compound geometry × routing hyperedge
 ```
 
-This is a route count, not a strength score.
-
-### Multiplex overlap
-
-Existing explicit overlap:
-
-```text
-E_aspect ∩ E_dispositor
-```
-
-Future research may compare reception/overcoming overlap and motif participation, but relation layers must not be collapsed into one undifferentiated power network.
-
-## 7. Null models — mandatory next gate
-
-### Geometric longitude null
-Randomize longitudes, then recompute aspects.
-
-### Label permutation
-Preserve geometry, permute object identities.
-
-### Degree-preserving graph null
-Rewire while preserving degree sequence where graph semantics make this appropriate.
-
-### Layer-overlap null
-Preserve layer size/density, randomize pair assignment.
-
-### Relational-layer null
-Future reception/overcoming research must specify which sign/ruler/configuration marginals are preserved before asking whether multiplex overlap is unusual.
-
-### Matched astronomical null
-Use realistic birth instants/locations when independent longitude randomization would destroy dependencies material to the question.
-
-### Rotation null
-Rotate a full chart while preserving internal geometry when isolating house/angle dependence.
-
-### Time-shift null
-For future event/timing research, shift event dates/windows within valid observation periods.
-
-No `rare`, `high`, `dominant`, `exceptional`, or `enriched` graph language before comparison.
-
-## 8. Condition and graph research
-
-The question has evolved from “wait for condition” to:
-
-```text
-What incremental information do primitive and relational condition add to graph/topical representations?
-```
-
-Useful comparisons:
-
-```text
-topology only
-vs
-primitive condition only
-vs
-relational condition only
-vs
-primitive + relational condition
-vs
-condition + topology
-vs
-condition + topology + House River / Resonance presentation
-```
-
-After v0.4.3:
-
-```text
-primitive + relational + compound condition + topology
-```
-
-Do not create a condition-weighted centrality score merely because weighting is mathematically possible. Every weighting must answer a defined research question and undergo sensitivity/null evaluation.
-
-## 9. Interpretation research
-
-The energetic synthesis is a versioned interpretation model, not a validated predictive theory.
-
-Research questions may include:
-
-- Do users distinguish graph facts, astrological-rule facts, and interpretive hypotheses more accurately with the current hierarchy?
-- Do house+ruler+condition explanations improve expert agreement or novice understanding?
-- Does showing relation type prevent the generic-edge misunderstanding common in network visualizations?
-- Which interpretation profiles generate stable, useful descriptions across independent charts?
-- Which statements are too generic to discriminate among chart structures?
-- Do balanced/depleted/excess framings improve agency without increasing deterministic belief?
-
-Interpretation text remains downstream from deterministic evidence.
-
-## 10. Canonical-chart overfitting is prohibited
-
-`NAF-CANON-0001` exists for regression stability.
+It also verifies a negative cardinality case.
 
 Rules:
 
-- do not tune thresholds to make it interesting;
-- use synthetic fixtures for edge cases and relation types;
+- do not tune thresholds to make the canonical chart interesting;
+- use synthetic fixtures for boundaries;
 - use independent charts for research;
 - record proposal timing relative to samples examined;
-- retain boring/failed outputs where feasible.
+- retain boring/failed outputs.
 
-## 11. N-of-1 longitudinal research
+## 10. HCI / product research
 
-Future workflow:
+Noetic Atlas should also be tested as an information instrument.
+
+Candidate questions:
+
+- Does Flow Map reduce ruler-chain tracing error?
+- Does Aspect Matrix improve exact pairwise lookup?
+- Does House River reduce cognitive load for house-to-ruler routing?
+- Does explicit relation typing prevent dispositorship/reception confusion?
+- Does the Proof surface improve confidence calibration?
+- Does formal hyperedge presentation improve multi-body pattern identification over a conventional wheel?
+- Does showing null profiles help users distinguish detected from unexpected?
+
+Candidate outcomes:
+
+- completion time;
+- error rate;
+- recall;
+- workload;
+- confidence calibration;
+- novice learning;
+- expert agreement.
+
+The conventional wheel remains an appropriate control for geometry-heavy tasks.
+
+## 11. Public-product research dependency
+
+The current public browser does not expose the full v0.4.7 research stack.
+
+Until [`V047_PUBLIC_PRODUCTIZATION_GATE.md`](V047_PUBLIC_PRODUCTIZATION_GATE.md) is green, end-to-end HCI research on hyperedge + null-profile interaction would be testing an incomplete product surface.
+
+Therefore productization precedes v0.4.8.
+
+## 12. Locked next milestones
+
+### v0.4.8 — Hidden Geometry Engine
+
+Formalize additional geometric relations:
+
+- midpoints;
+- declination / parallels / contraparallels;
+- antiscia / contra-antiscia.
+
+These should enter as provenance-bearing geometry, not interpretive shortcuts.
+
+### v0.4.9 — Experimental Model Laboratory
+
+Provide a stronger generalized home for contested model alternatives:
+
+- Ceres–Taurus;
+- alternative rulership tensors;
+- alternative configuration/orb policies;
+- other named reversible hypotheses.
+
+Operational state remains control.
+
+### v0.5.0 — Population Cohort Engine
+
+Build real empirical reference distributions at 100k+ scale where data/provenance permit.
+
+Core requirements include:
+
+- sampling-frame disclosure;
+- astronomy-provider/version control;
+- chart-quality/birth-time metadata;
+- stratification and sensitivity analysis;
+- prevalence confidence/uncertainty;
+- cohort/version identity;
+- multiple-testing controls;
+- no conflation of population frequency with interpretation.
+
+Only this layer can advance the population-frequency research dimension in a general way.
+
+## 13. Hidden-geometry and hypergraph interaction
+
+v0.4.8 should not bypass the hypergraph architecture. Midpoints, declination relations, and antiscia may become new edges, attributes, or higher-order configuration inputs under explicit model/version contracts.
+
+A future pattern may therefore be represented as:
 
 ```text
-calculate symbolic state through time
-→ predefine event categories
-→ compare event/non-event windows
-→ inspect recurrence/technique overlap
-→ use time-shift baselines
+visible zodiac geometry
++ hidden geometry relation
++ routing topology
++ condition
 ```
 
-Risks include retrospective selection, memory distortion, post-hoc interpretation, and multiple testing.
-
-## 12. Cohort research
-
-With explicit consent, future datasets may test expert agreement about structural/condition descriptors, associations between graph/condition features and independently coded domains, timing-window event density, chart-architecture similarity versus independent life-history similarity, and incremental value of traditional techniques.
-
-Always distinguish mathematical chart similarity from empirical psychological/life similarity.
-
-## 13. Birth-time uncertainty
-
-Future analyses should quantify sensitivity to plausible birth-time uncertainty, especially for ASC, houses, MC, lots, Moon-sensitive boundaries, and timing.
-
-Useful states:
-
-```text
-stable under ±5 min
-changes under ±15 min
-undefined without reliable time
-```
+but each layer must remain separately recoverable in provenance.
 
 ## 14. Theory-promotion requirements
 
-A descriptor or interpretation technique moving toward theory must document formal definition, implementation version, object/graph scope, datasets examined, rule-set versions, null models, preregistration status where relevant, replication attempts, effect estimates/uncertainty, multiple-comparison handling, sensitivity tests, known failures, competing explanations, expert commentary, and current confidence status.
+A descriptor moving toward theory should document:
 
-Suggested labels:
+- formal definition;
+- implementation version;
+- object/graph/hypergraph scope;
+- data examined;
+- rule-set versions;
+- counterfactual models;
+- population cohort where relevant;
+- preregistration status where relevant;
+- effect estimates/uncertainty;
+- multiplicity handling;
+- sensitivity tests;
+- known failures;
+- competing explanations;
+- replication attempts;
+- expert commentary;
+- current research-status vector.
+
+Suggested labels remain distinct:
 
 ```text
-experimental
-observational
+traditional-source-backed
+mathematically-detected
+counterfactually-displaced
+population-characterized
+observationally-associated
 replicated
 provisional-theory
-traditional-source-backed
 retired
 ```
 
-`traditional-source-backed` and `empirically replicated` are different statuses.
-
 ## 15. Reproducibility package
 
-Publishable results should ideally retain code commit SHA, schema/model versions, astronomy provider/version, rule IDs, orb policy, feature definitions, data provenance/consent, random seeds, preprocessing, exact analysis command/notebook, limitations, and negative/failed analyses relevant to the hypothesis.
+Publishable research should retain:
 
-## 16. External technical anchors
+- commit SHA;
+- schema/model versions;
+- astronomy provider/version;
+- rule IDs;
+- orb/configuration policy;
+- metric implementation fingerprints;
+- null generator versions;
+- seeds/RNG;
+- cohort/data provenance and consent;
+- exact analysis command/notebook;
+- multiple-testing family;
+- sensitivity/negative analyses;
+- limitations.
 
-Technical references justify methods, not astrological validity. Examples include Tarjan SCCs, Brandes betweenness, node-link/matrix HCI research, multilayer-network theory, W3C PROV, FAIR principles, and network-motif methodology.
+## 16. Long-term objective
 
-## 17. Long-term objective
-
-Noetic Atlas should become an astrological observatory capable of asking:
+Noetic Atlas should become an astrological observatory capable of asking, in order:
 
 > What structure is present?
 
 > How was it produced?
 
-> What primitive and relational traditional condition qualifies it?
+> Under which explicit astrological model?
 
-> How do lived house domains route through it?
+> Is the higher-order structure formally closed?
 
-> What does the selected interpretation model infer?
+> Does it depart from a named counterfactual?
 
-> What would falsify that inference?
+> How common is it in real charts?
 
-> When does the structure activate or recur?
+> Does it correspond to anything outside the chart?
 
-> Does another rule model produce the same result?
+> Does it replicate?
 
-> Does the visualization actually help users recover it?
+> What, if anything, should a human interpreter infer from it?
 
-> Does a proposed descriptor survive a null comparison and independent replication?
+The framework should be equally capable of returning **yes**, **no**, and **not yet knowable**.

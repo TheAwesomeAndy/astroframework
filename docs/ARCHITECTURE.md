@@ -2,34 +2,32 @@
 
 ## 1. Architectural purpose
 
-Noetic Atlas is designed so that a displayed claim can be traced backward through every layer that produced it.
+Noetic Atlas is designed so that a displayed claim can be traced backward through the layers that produced it.
 
 Core rule:
 
-> **Civil time, astronomy, astrological rules, graph derivation, condition, research descriptors, interpretation, visualization, and provenance are separate layers with explicit interfaces.**
+> **Civil time, astronomy, astrological rules, condition, graph/hypergraph derivation, research inference, interpretation, visualization, and provenance are separate layers with explicit interfaces.**
 
 No downstream layer may silently rewrite an upstream fact.
 
 Frozen representation law:
 
 ```text
-one chart state
+one astronomical/chart state
+→ many explicit models
 → many coordinated projections
 ```
 
-A visualization is a projection of serialized state, not another calculator.
+Current framework baseline: **v0.4.7 — Formal Configurations & Astrological Hypergraphs**.
 
-Current release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).  
-Current public release: **v0.4.2 — Relational Condition**.  
-Current browser surface: **`prototype/v042.html`**.  
-Current minimum deterministic analysis envelope: **`naf.analysis.v0.3.1`**.
+Current public browser product: **not yet packaged to v0.4.7**. The root still reaches the v0.4.5 shell. See [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md) and [`V047_PUBLIC_PRODUCTIZATION_GATE.md`](V047_PUBLIC_PRODUCTIZATION_GATE.md).
 
 ## 2. End-to-end system
 
 ```text
 USER INPUT
 local date/time + latitude/longitude
-OR imported calculated placements
+or imported calculated placements
         ↓
 CIVIL TIME
 IANA zone + DST/history
@@ -39,74 +37,50 @@ ASTRONOMY
 longitudes, velocities, ASC, MC, solar altitude
 src/astronomy/
         ↓
-GENERAL ASTROLOGICAL KERNEL
-signs, Whole Sign houses, aspects, rulers, topology
+DETERMINISTIC ASTROLOGICAL KERNEL
+signs, Whole Sign houses, major aspects, rulers, topology
 src/kernel/noetic-kernel.mjs
         ↓
 HELLENISTIC INTEGRITY / DERIVED POINTS
 sect, seven Hermetic lots, provenance
 src/kernel/hellenistic-integrity.mjs
         ↓
-PRIMITIVE CONDITION
-local classical condition factors
-src/conditions/primitive-condition-engine.mjs
+CONDITION SYSTEM
+primitive → relational → compound
+src/conditions/
         ↓
-RELATIONAL CONDITION
-reception, exchange, overcoming, domination
-src/conditions/relational-condition-engine.mjs
-        ↓
-CONDITION SYSTEM / SIGNATURES
-src/conditions/condition-system.mjs
-src/conditions/condition-signature.mjs
-        ↓
-GRAPH ANALYTICS
-SCC condensation, basin/depth, aspect graph, motifs, overlap
+GRAPH / ROUTING DERIVATION
+dispositor topology, aspect graph, House River, findings
 src/research/graph-analytics-engine.mjs
-        ↓
-HOUSE RIVER / RESEARCH PROJECTIONS
 src/research/house-river-engine.mjs
-src/research/pattern-engine.mjs
         ↓
-INTERPRETATION / RESONANCE
+OPERATIONAL READING / INTERPRETIVE PROJECTIONS
 src/interpretation/
         ↓
-DERIVATION INDEX / WALKER
-src/integrity/derivation-walker.mjs
+RESEARCH REGIME BOUNDARY
+Operational | Experimental | Discovery
+src/research/research-regime-registry.mjs
         ↓
-CURRENT PUBLIC SHELL
-prototype/v042.html
-        ├── Existing Atlas
-        ├── Qualified Resonance
-        ├── Relations
-        ├── Qualified Flow
-        ├── House River
-        └── Proof Walker
+NULL MODEL LABORATORY v0.4.6
+N_G · N_L · N_D · N_T
+src/research/null-*.mjs
+        ↓
+FORMAL HYPERGRAPH LAYER v0.4.7
+geometric_polygon · topological_basin · compound_hybrid
+src/research/hypergraph-engine.mjs
+src/research/hypergraph-null-evaluator.mjs
+        ↓
+RESEARCH LAB WRAPPER v0.4.7
+src/research/research-lab-v047.mjs
+        ↓
+DERIVATION / PROOF
+src/integrity/
+        ↓
+PUBLIC APPLICATION SHELL
+currently stale at v0.4.5; v0.4.7 shell pending
 ```
 
-## 3. Preservation architecture
-
-The public root `index.html` redirects to:
-
-```text
-prototype/v042.html
-```
-
-The current shell preserves the previous interfaces rather than replacing them:
-
-```text
-prototype/v042.html
-└── prototype/v0413.html
-    └── prototype/v0412c.html
-        └── prototype/index.html
-```
-
-This means the v0.4.1.x wheel/core views, Natal Field, Aspect Matrix, Flow Map, Lots/Sect, Research Lab, Audit, energetic analysis, graph findings, metrics, condition, integrity, and Resonance Field remain available.
-
-v042 reads the same nested core JSON state and attaches a `MutationObserver` so recalculation or imported chart state propagates into all new projections.
-
-No v042 module reimplements birth astronomy, aspect admission, house assignment, lot formulas, or dispositor topology.
-
-## 4. Dependency direction
+## 3. Authority and dependency direction
 
 Allowed:
 
@@ -115,14 +89,13 @@ pipeline → time
 pipeline → astronomy
 pipeline → kernel
 integrity → kernel outputs
-primitive condition → deterministic analysis
-relational condition → deterministic analysis + selected source-locked relation rules
-condition signatures → primitive + relational condition
-research → deterministic analysis + condition
-House River → existing house routes / dispositor graph
-interpretation → analysis + graph + condition
-Derivation Walker → existing proof/ledger objects
-visualization → canonical/output state
+condition → deterministic analysis
+research graph derivation → deterministic analysis + condition
+null laboratory → frozen research state + named metrics/null generators
+hypergraph → deterministic geometry/topology
+hypergraph null evaluator → hyperedges + accepted v0.4.6 inference machinery
+interpretation → analysis + condition + research facts
+visualization → serialized state / explicit research result
 AI → structured state + provenance
 ```
 
@@ -132,37 +105,28 @@ Disallowed:
 astronomy → interpretation
 kernel → UI DOM
 UI → reimplemented aspect/lot/rulership formulas
-relation view → mutate dispositor graph
-House River width → become planet-strength score
-interpretation → natal longitude
-research metric → change a house or aspect
+Experimental → mutate Operational facts
+Discovery → silently become Operational
+null result → become population prevalence
+counterfactual percentile → become psychological/spiritual meaning
+hypergraph detector → invent missing participants
+interpretation → rewrite coordinates/houses/aspects
 AI → invent missing ephemeris values or proof steps
 ```
 
-## 5. Civil-time architecture
+## 4. Deterministic substrate
 
-Canonical birth input:
+### Civil time
 
-```json
-{
-  "local_datetime": "YYYY-MM-DDTHH:MM:SS",
-  "latitude": 0.0,
-  "longitude": 0.0,
-  "elevation_m": 0,
-  "timezone_override": null,
-  "ambiguity_index": null
-}
-```
+`src/time/` owns local civil input, approximate IANA zone lookup, expert override, historical offset resolution, repeated/nonexistent DST handling, UTC conversion, and provenance.
 
-`src/time/` owns approximate IANA zone lookup, expert override, historical UTC offset, repeated DST-time detection, nonexistent-time rejection, conversion to an unambiguous UTC instant, and provenance for the resolution path.
+Astronomy consumes an unambiguous UTC instant.
 
-Astronomy consumes resolved time, never ambiguous wall time.
-
-## 6. Astronomy layer
+### Astronomy
 
 Current provider: Astronomy Engine 2.1.19.
 
-Current automatic birth-time support:
+Current automatic support:
 
 - Sun through Pluto;
 - geocentric ecliptic longitude;
@@ -171,93 +135,51 @@ Current automatic birth-time support:
 - MC;
 - geometric solar altitude.
 
-Current unsupported automatic objects include Ceres, Chiron, node variants, Black Moon Lilith/apogee variants, Vertex, and fixed stars.
+Automatic validated coordinates for Ceres, Chiron, node variants, Lilith/apogee variants, Vertex, and fixed stars remain outside the present provider contract unless explicitly supplied through supported import paths.
 
-Precomputed/imported coordinates may be consumed only through explicit supported input paths. Unsupported values are never fabricated.
+### Kernel
 
-## 7. General astrological kernel
-
-`src/kernel/noetic-kernel.mjs` owns reusable geometry/topology:
+`src/kernel/noetic-kernel.mjs` owns:
 
 - longitude normalization;
 - chart parsing;
 - sign conversion;
 - Whole Sign house assignment;
 - major-aspect geometry and orb policy;
-- applying/separating when motion exists;
-- traditional domicile ruler map;
+- applying/separating where motion exists;
+- traditional domicile rulership;
 - dispositor graph construction;
-- Tarjan SCC detection;
-- terminal SCC detection;
+- Tarjan SCC / terminal SCC;
 - house-ruler routes;
 - element/modality composition.
 
-It does not own psychological or spiritual prose, and v0.4.2 does not move relation doctrine into the kernel.
+It does not own psychological, spiritual, or research-significance claims.
 
-## 8. Hellenistic integrity layer
+### Hellenistic integrity
 
-`src/kernel/hellenistic-integrity.mjs` owns sect, seven Paulus/Panaretus Hermetic lots, formula proof objects, version/completeness metadata, and Derivation Ledger/tree enrichment.
+`src/kernel/hellenistic-integrity.mjs` owns sect, seven Paulus/Panaretus Hermetic lots, formula proof objects, completeness metadata, and deterministic ledger/tree enrichment.
 
-Tradition variants receive distinct rule/model identifiers rather than hidden toggles.
+## 5. Condition architecture
 
-## 9. Condition architecture
-
-### Primitive
+Noetic Atlas keeps condition multidimensional.
 
 ```text
-src/conditions/primitive-condition-engine.mjs
-model = naf.condition.primitive.hellenistic.v0.4.0b
+primitive
+→ relational
+→ compound
 ```
 
-For the classical seven it computes separate records for domicile, adversity, sign-level exaltation/depression, triplicity, Egyptian bound, planetary sect family, in/out-of-sect relation, and Whole-Sign angular-triad class.
+Primitive condition covers local classical factors. Relational condition covers typed reception/exchange/overcoming families. Compound condition composes source-secure higher-order testimonies such as selected bonification, maltreatment, and enclosure rules.
 
-### Relational
+No condition layer emits a hidden universal planet-strength scalar.
 
-```text
-src/conditions/relational-condition-engine.mjs
-model = naf.condition.relational.hellenistic.v0.4.2
-registry = naf.rules.relational_condition.hellenistic.v0.4.2
-```
+Dispositorship, reception, exchange, mutual-reception compatibility, overcoming, domination, and compound testimony remain distinct typed objects.
 
-Current typed relations:
-
-```text
-reception
-exchange
-mutual_reception compatibility label
-overcoming
-domination
-```
-
-Hellenistic exchange and later-tradition mutual-reception terminology remain separate rule IDs.
-
-Reception, exchange, and overcoming qualify relationships; they do not alter the existing dispositor graph.
-
-### Condition composition
-
-```text
-src/conditions/condition-system.mjs
-model = naf.condition.system.v0.4.2
-```
-
-Combines primitive + relational state without flattening them.
-
-### Condition signature
-
-```text
-src/conditions/condition-signature.mjs
-model = naf.condition.signature.v0.4.2
-```
-
-Provides reusable categorical tokens for visual projections. No single edge weight or strength scalar is produced.
-
-Future compound conditions consume already-computed primitive + relational facts.
-
-## 10. Graph architecture
+## 6. Graph architecture
 
 Noetic Atlas does not define one undifferentiated astrology graph.
 
-### Dispositor graph
+### Classical dispositor graph
 
 Directed:
 
@@ -265,191 +187,229 @@ Directed:
 planet → traditional domicile ruler of occupied sign
 ```
 
-For the classical seven it is a functional digraph. Graph analysis derives SCC condensation, terminal basins, route depth, upstream capture, and nonterminal path bottlenecks.
+Derived properties include SCC condensation, terminal basins, route depth, upstream capture, and nonterminal bottlenecks.
 
 ### Aspect graph
 
-Undirected typed graph under the current major-aspect/orb policy. Current analytics include connected components, degree, clustering, normalized unweighted betweenness, articulation points, bridges, typed triangle motifs, and exact ≤1° subset.
+Undirected typed graph under the current major-aspect/orb policy. Analytics include components, degree, clustering, betweenness, articulation points, bridges, typed motifs, and exact-edge subsets.
 
-### Relational-condition graphs
+### Relational graphs
 
-```text
-G_reception       directed host → guest
-G_exchange        undirected pair
-G_mutual_reception separate compatibility pair
-G_overcoming      directed superior → inferior
-```
-
-Domination is a typed overcoming relation for the right-hand square.
-
-### House dependency
-
-Directed topical routing:
+Examples:
 
 ```text
-house → ruler → ruler's dispositor → ...
+G_reception
+G_exchange
+G_mutual_reception
+G_overcoming
 ```
+
+These qualify relationships without silently replacing dispositorship.
 
 ### House River
 
-House River is a projection of the already-computed house routes. It does not calculate a new ruler graph.
+House River projects already-computed Whole-Sign house-ruler routes into route-count bands.
 
-For planetary routing edge `e`:
-
-```text
-w(e) = number of Whole Sign house-ruler paths traversing e
-```
-
-Width is an integer route-count encoding only.
-
-### Lot layer
-
-Lots retain formula provenance, longitude, house, ruler, aspects, and future timing relations.
-
-### Multiplex intent
+For dispositor edge `e`:
 
 ```text
-G = {
-  G_aspect,
-  G_dispositor,
-  G_house,
-  G_lot,
-  G_reception,
-  G_exchange,
-  G_overcoming,
-  G_temporal(t)
-}
+w(e) = number of house-ruler paths traversing e
 ```
 
-Relation types remain separate unless a research method explicitly defines an aggregation and its consequences.
+Width means routing count only.
 
-## 11. Graph-analysis layer
+## 7. Research-regime architecture — v0.4.5
 
-`src/research/graph-analytics-engine.mjs` produces deterministic graph-derived facts and explainable research objects.
-
-Current graph facts may be mathematically exact while their astrological significance remains unvalidated.
-
-Example:
+Three regimes are first-class:
 
 ```text
-Mercury ↔ Venus is the terminal SCC of the selected classical dispositor graph
+Operational
+Experimental
+Discovery
 ```
 
-is graph-derived.
+Operational is the reproducible control model. Experimental models are named reversible alternatives. Discovery contains reproducible structures whose meaning is not assumed in advance.
+
+The registry preserves independent research-status dimensions rather than collapsing them into one confidence score.
+
+Personal mode exposes Operational material by default. Research mode opens the aperture to Experimental/Discovery information without creating a second chart.
+
+## 8. Null Model Laboratory architecture — v0.4.6
+
+The Null Model Laboratory is an explicit-run research subsystem.
+
+Core modules:
 
 ```text
-therefore Mercury/Venus is the deepest psychological circuit
+src/research/null-state.mjs
+src/research/null-metric-registry.mjs
+src/research/null-model-registry.mjs
+src/research/null-model-laboratory.mjs
+src/research/null-model-worker.mjs
 ```
 
-is interpretive and remains separately labeled.
-
-No `rare`, `high`, `dominant`, or `enriched` language is permitted without an explicit comparison/null model.
-
-## 12. House River architecture
+Named nulls:
 
 ```text
-src/research/house-river-engine.mjs
-model = naf.research.house_river.v0.4.2
+N_G geometric
+N_L label/identity permutation
+N_D degree-preserving topology rewire
+N_T routing-codebook permutation
 ```
 
-House River consumes `analysis.topology.house_routes` and aggregates edge traversal counts. Source bands retain house number/topic/sign/entry ruler; planetary bands retain route count and contributing houses.
+Every null declares preserves/randomizes/question/assumptions/limitations/admissible metrics.
 
-Every new band has a `derivation_ref` and derivation entry.
+The same source-locked executable statistic `T(C)` is applied to observed and simulated state.
 
-## 13. Interpretation and resonance architecture
+Finite Monte Carlo uses +1 correction; multiple testing uses BH-FDR per declared null family; empirical percentile/effect position is retained; deterministic seed/RNG/version/hash metadata is stored; p=0 and cross-null pass counts are forbidden.
 
-Current files include:
+A null result may advance only the null-comparison/baseline status. Population frequency and interpretation remain unchanged.
+
+## 9. Hypergraph architecture — v0.4.7
+
+Pairwise graphs cannot represent a k-body structure as one first-class object. v0.4.7 therefore introduces attributed hyperedges.
+
+Classes:
 
 ```text
-src/interpretation/astrological-analysis-engine.mjs
-src/interpretation/energetic-synthesis-engine.mjs
-src/interpretation/energetic-synthesis-display.mjs
-src/interpretation/house-resonance-engine.mjs
+geometric_polygon
+topological_basin
+compound_hybrid
 ```
 
-Current models:
+Initial geometric registry is deliberately k=3 / k=4:
 
 ```text
-naf.interpretation.energetic_synthesis.v0.4.1.2
-naf.interpretation.house_resonance.v0.4.1.3
-naf.interpretation.natural_house_overlay.modern.v1
+Grand Trine
+T-Square
+Yod
+Grand Cross
+Kite
+T-Square Anchor Cluster
 ```
 
-Interpretation consumes actual placement, actual Whole Sign house, ruler/dispositor path, aspects, graph facts, condition, and optional explicit modern natural-house overlay.
+Topological hyperedges promote:
 
-v0.4.2 Qualified Resonance attaches the reusable condition signature to actual rulers and classical occupants. It does not alter the v0.4.1.3 house-resonance engine.
+- closed classical dispositor SCCs;
+- terminal basin-capture sets.
 
-Outer planets participate in modern/transpersonal interpretation without inheriting classical Hellenistic condition. Ceres can participate when a supplied coordinate exists; automatic Ceres astronomy remains unimplemented.
+Compound hybrid hyperedges couple independently derived geometry and routing while preserving both parent models in provenance.
 
-Energy/current/field language remains symbolic/interpretive, not astronomical or physical measurement.
+Every hyperedge contains participants, cardinality, metrics, derivation object, SHA-256 derivation hash, research status, and null-profile readiness.
 
-## 14. Derivation Walker
+The engine rejects under-cardinality expectations rather than satisfying desired narratives.
+
+### Incidence representation
+
+Implemented deterministic outputs:
 
 ```text
-src/integrity/derivation-walker.mjs
-model = naf.integrity.derivation_walker.v0.4.2
+H   binary incidence matrix
+D_v vertex-degree structure
+D_e hyperedge-cardinality structure
 ```
 
-The walker normalizes/indexes:
+Hypergraph-Laplacian eigensystems are explicitly deferred.
 
-- deterministic analysis ledger;
-- primitive condition ledger;
-- relational condition ledger;
-- House River derivations;
-- future explicit proof objects.
+## 10. Hypergraph null integration
 
-Every v0.4.2 relation and House River band is born with a derivation reference.
+`src/research/hypergraph-null-evaluator.mjs` reuses the v0.4.6 RNG/statistical contract.
 
-Traversal is designed to move:
+Not every null is admissible for every hyperedge. An inapplicable counterfactual is represented as `not-admissible`, not forced into a four-number score.
+
+Examples:
+
+- pure geometry primarily uses geometric/identity counterfactuals;
+- routing objects use routing-relevant counterfactuals;
+- compound hybrids can additionally use degree-preserving and routing-codebook tests where semantically justified.
+
+Research-state progression is limited to baseline/null completion. Population frequency and interpretation cannot advance in v0.4.7.
+
+## 11. Version-preservation architecture
+
+The accepted v0.4.6 `research-lab-engine.mjs` remains v0.4.6. v0.4.7 adds `research-lab-v047.mjs` as a wrapper.
+
+This preserves the historical executable contract:
 
 ```text
-visible claim / relation / band
-→ proof object
-→ rule/source
-→ inputs/result
-→ dependencies
-→ deterministic coordinate/house/aspect/ruler proof where indexed
+v0.4.6 research lab
+        ↓ extended by
+v0.4.7 hypergraph research surface
 ```
 
-Legacy dependencies that have not yet been normalized are surfaced as `external_or_unindexed_dependency`, never fabricated.
+A newer version does not have permission to falsify the provenance of an accepted older model simply to make version labels aesthetically uniform.
 
-## 15. Canonical analysis envelope
+## 12. Interpretation boundary
 
-Minimum deterministic envelope:
+Interpretation remains downstream.
+
+A useful read order is:
 
 ```text
-schemas/naf-analysis-v0.3.1.schema.json
+archetypal current
+→ actual sign
+→ actual Whole Sign house
+→ actual ruler / dispositor route
+→ aspect geometry
+→ condition
+→ graph/hypergraph structure
+→ optional explicit modern overlays
+→ readable interpretive hypothesis
+→ proof
 ```
 
-The public interface can advance through additive downstream layers without breaking this minimum envelope.
+Graph/hypergraph terms are not the final interpretation. Energy/current/field language remains symbolic/phenomenological unless separately supported as physical measurement.
 
-## 16. Research architecture
+## 13. Provenance architecture
 
-`src/research/` is a read-only consumer of deterministic state.
-
-Current research families include circular harmonic spectrum, ruler-route convergence, multilayer participation, graph analytics/findings, and House River route counts.
-
-Research descriptors must state definition, scope, assumptions, status, and null-model plan. They may not mutate natal facts.
-
-## 17. Temporal architecture — planned
-
-Conceptually:
+The mature reversible path is:
 
 ```text
-N_i = natal geometry + topology + primitive condition + relational condition + resonance + metadata
-T(t) = temporal input
-X_i(t) = F(N_i, T(t), rule-set versions)
+interpretation
+→ evidence object
+→ hyperedge / graph / condition / route fact
+→ null experiment where applicable
+→ source-locked metric + named counterfactual
+→ astrological rule
+→ mathematical derivation
+→ astronomical coordinate
+→ civil-time resolution
+→ original input
 ```
 
-Life Spectrum is not implemented yet. Temporal interpretation remains downstream from exact time-dependent astronomy/rules.
+Unsupported or unindexed states remain explicit; they are never fabricated.
 
-## 18. AI architecture
+## 14. Public application architecture — current defect
 
-AI may navigate, explain, compare, trace provenance, synthesize selected interpretation profiles, and generate research hypotheses.
+The intended product contract is:
 
-AI may not invent astronomical values, hide unsupported states, silently choose historical variants, rewrite houses/aspects/condition, collapse relation types, invent proof dependencies, or promote exploratory metrics into established meaning.
+```text
+Chart · Reading · Resonance · Network · House Flow · Condition · Proof
+Personal | Research
+```
 
-## 19. Completeness states
+But the root public entry still reaches the v0.4.5 shell, `prototype/v046.html` is a side surface, and there is no v0.4.7 shell exposing hypergraphs.
+
+This means the current architecture is **implemented below the presentation boundary but incomplete at the product boundary**.
+
+The remediation contract is frozen in [`V047_PUBLIC_PRODUCTIZATION_GATE.md`](V047_PUBLIC_PRODUCTIZATION_GATE.md).
+
+## 15. Bootstrap architecture requirement
+
+The current application must use an explicit initialization state machine:
+
+```text
+loading
+→ ready
+OR empty
+OR error
+```
+
+A populated truth summary may not be presented as coherent current state while the graph or derived research layers are still unattached.
+
+Changing chart state invalidates stale attached null/hypergraph research results before new ones are calculated.
+
+## 16. Completeness states
 
 Every layer should distinguish at least:
 
@@ -461,45 +421,57 @@ invalid
 not_implemented
 not_applicable
 indeterminate
+not_admissible
 ```
 
-Unsupported is never encoded as numeric zero or false.
+Unsupported is never encoded as zero or false.
 
-## 20. Privacy
-
-Birth data and life-event annotations are sensitive. Production principles include data minimization, explicit retention/deletion, encryption, separation of identity from chart/research records, explicit research consent, no raw birth data in analytics logs, and no training on private chart/event text without explicit permission.
-
-## 21. Extension policy
+## 17. Extension policy
 
 Before adding a feature, identify its owner layer.
 
 Examples:
 
-- Ceres longitude → astronomy adapter;
-- domicile ruler → kernel/rule substrate;
-- SCC → graph derivation;
-- reception → relational condition;
-- condition signature → presentation projection of condition;
-- House River count → graph-derived research projection;
-- graph-null percentile → research;
-- readable meaning → interpretation;
-- card layout → presentation.
+```text
+Ceres longitude                  → astronomy adapter
+midpoint / antiscia              → hidden-geometry research engine
+parallel/contraparallel          → declination geometry
+alternative rulership tensor    → Experimental model laboratory
+SCC / basin                      → graph/hypergraph derivation
+counterfactual percentile        → inference research layer
+population prevalence            → future cohort engine
+readable meaning                 → interpretation
+card layout                      → presentation
+```
 
 If ownership is unclear, document the decision before implementation.
 
-## 22. Architectural north star
-
-The mature system should allow:
+## 18. Locked next dependency chain
 
 ```text
-interpretation
-→ evidence object
-→ graph/condition/route finding
-→ astrological rule
-→ mathematical derivation
-→ astronomical coordinate
-→ civil-time resolution
-→ original input
+v0.4.6 Null Model Laboratory                         DONE
+v0.4.7 Formal Configurations & Hypergraphs            DONE — implementation
+PUBLIC PRODUCTIZATION GATE                            BLOCKING
+v0.4.8 Hidden Geometry Engine                         NEXT
+v0.4.9 Experimental Model Laboratory                  LATER
+v0.5.0 Population Cohort Engine                       LATER
 ```
 
-and forward again into alternative rule models or visualizations without silently changing source facts.
+No population-frequency field may become authoritative before the cohort engine exists.
+
+## 19. Architectural north star
+
+Noetic Atlas should allow movement backward and forward across evidence without losing model identity:
+
+```text
+input
+↔ astronomy
+↔ astrological rule state
+↔ graph / hypergraph structure
+↔ named counterfactual comparison
+↔ research status
+↔ interpretation
+↔ coordinated visualization
+```
+
+The system should make both positive and negative results inspectable, and it must remain possible for the instrument to disagree with its creators' expectations.

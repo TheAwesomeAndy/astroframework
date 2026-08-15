@@ -2,259 +2,377 @@
 
 ## Guiding principle
 
-> **Do not visualize, weight, interpret, or time-activate a layer that the framework cannot derive and audit.**
+> **Do not visualize, weight, interpret, null-test, population-rank, or time-activate a layer that the framework cannot derive and audit.**
 
-Current release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
+Canonical release contract: [`CURRENT_RELEASE.md`](CURRENT_RELEASE.md).
 
-Frozen representation law:
+Frozen laws:
 
 ```text
-one chart state
+one astronomical/chart state
+→ many explicit models
 → many coordinated projections
 ```
 
-Current sequence:
+```text
+Detection ≠ Unexpectedness ≠ Population Frequency ≠ Interpretation
+```
+
+## Current position
+
+Framework/research implementation is complete through **v0.4.7**.
+
+The immediate blocker is not new theory. It is **public productization of the already-merged v0.4.6/v0.4.7 stack**.
 
 ```text
-Geometry
-→ Topology
-→ Primitive Condition
-→ Graph Analytics
-→ Energetic / Explainable Synthesis
-→ Resonance
-→ Relational Condition
-→ Compound Condition
-→ Time
-→ Recurrence
-→ Discovery
+v0.4.6 Null Model Laboratory                         DONE
+        ↓
+v0.4.7 Formal Configurations & Astrological Hypergraphs DONE — implementation
+        ↓
+PUBLIC PRODUCTIZATION GATE                           BLOCKING
+        ↓
+v0.4.8 Hidden Geometry Engine                        NEXT
+        ↓
+v0.4.9 Experimental Model Laboratory
+        ↓
+v0.5.0 Population Cohort Engine
 ```
+
+See [`V047_PUBLIC_PRODUCTIZATION_GATE.md`](V047_PUBLIC_PRODUCTIZATION_GATE.md).
+
+---
 
 ## v0.1 — Visual hypothesis
 
 **Status: complete historical milestone**
 
-Delivered first Natal Field/Flow Map/Life Spectrum concepts, canonical specimen, and explicit distinction between mathematical representation and physical claims.
+Introduced Natal Field, Flow Map, Life Spectrum concepts, canonical specimen work, and the distinction between mathematical representation and physical claims.
 
 ## v0.2 — Natal Field instrument
 
 **Status: complete historical milestone**
 
-Delivered interactive Natal Field, node inspector, Aspect Matrix, all-house ruler routing, composition views, and model/method surfaces.
+Delivered interactive Natal Field, node inspector, Aspect Matrix, house-ruler routing, composition views, and explicit model/method surfaces.
 
-## v0.3.0–v0.3.2 — Deterministic kernel + Visual Observatory
+## v0.3.x — Deterministic kernel + input/astronomy foundation
 
 **Status: complete foundation milestone**
 
-Delivered runtime chart parsing, birth-data input, IANA time-zone/DST handling, Astronomy Engine adapter, ASC/MC and planetary velocities, Whole Sign houses, major aspects/orb policy, applying/separating where possible, traditional domicile rulers, generic dispositor graph, Tarjan SCC/terminal SCC, sect, seven Hermetic lots, derivation ledger/tree, experimental pattern engine, schema/version manifest, tests/CI, and restored Natal Field/Aspect Matrix/Flow Map/Audit surfaces.
+Delivered chart parsing, civil-time input, IANA time-zone/DST handling, Astronomy Engine adapter, ASC/MC, planetary velocities, Whole Sign houses, major-aspect/orb policy, applying/separating where possible, traditional domicile rulers, dispositor topology, Tarjan SCCs, house routes, sect, seven Hermetic lots, derivation ledger/tree, tests, CI, and deterministic visual-core restoration.
 
-## v0.4.0a — Condition ontology
-
-**Status: complete**
-
-Delivered registry/schema/applicability/table definitions and synthetic fixture contract.
-
-## v0.4.0b — Primitive Condition Engine
+## v0.4.0a/b — Condition ontology + primitive condition
 
 **Status: complete**
 
-Delivered for Sun through Saturn: domicile, adversity, sign-level exaltation/depression, standard/Dorothean triplicity, Egyptian bounds, planetary sect family, in/out-of-sect relation, Whole-Sign angular-triad class, independent ledger entries, inspectable Condition UI, and boundary/canonical tests.
+Delivered source/model registries and multidimensional primitive condition for the classical seven.
 
-No scalar strength score.
+No scalar planet-strength score.
 
-## v0.4.1 — Graph Analytics + Explainable Findings
+## v0.4.1.x — Graph analytics, interpretation, resonance
 
 **Status: complete**
 
-Delivered SCC condensation, terminal basin membership/fraction, route depth, upstream route capture, nonterminal path bottleneck, aspect components/degree/clustering/betweenness, articulation points, bridges, typed motifs, Grand Trine/T-square/triple-conjunction templates, exact ≤1° subset, aspect × dispositor overlap, and explainable metric/finding proof objects.
+Delivered graph analytics/findings, terminal basin/depth/bottleneck structure, aspect graph metrics, typed motifs, energetic whole-chart synthesis, outer-planet downstream interpretation, and the Resonance Field / natural-house comparison model.
 
-## v0.4.1.1 — Outer-planet interpretive restoration
+## v0.4.2 — Relational Condition + House River
 
-**Status: complete compatibility milestone**
+**Status: complete**
 
-Delivered Uranus/Neptune/Pluto participation in downstream interpretation while keeping classical Hellenistic dignity `not_applicable` to them.
-
-## v0.4.1.2 — Energetic Whole-Chart Synthesis
-
-**Status: complete release milestone**
-
-Delivered the astrological-analysis, energetic-synthesis, and display layers; actual sign + Whole Sign house synthesis; optional modern natural-house overlay; ruler/dispositor routing; aspect-energy translation; topology translation into house/planet circuits; primitive condition qualifiers; balanced/depleted/excess framing; material-life examples; soul/spirit inquiry; outer-planet modern/transpersonal synthesis; and supplied-coordinate Ceres interpretation.
-
-The resilient v0412c wrapper remains preserved.
-
-## v0.4.1.3 — Resonance Field
-
-**Status: complete additive release milestone**
-
-Delivered Whole-Sign Ascensional Phase Map, Element–Mode Resonance Lattice, actual-sign versus optional natural-house comparison, actual house-ruler continuation and ruler-placement context, all-twelve-house phase mapping, global phase signature, and preservation of the complete earlier observatory beneath the additive shell.
-
-Canonical Leo-rising result:
-
-```text
-rotation: +4 signs / 120°
-element preserved: 12/12
-mode preserved: 0/12
-phase character: element-preserving / mode-rotating
-```
-
-## v0.4.2 — Relational Condition + Qualified Routing
-
-**Status: complete release milestone**
-
-Delivered:
-
-- source-locked configured domicile reception;
-- domicile exchange;
-- separately identified later-tradition mutual-reception compatibility label;
-- right-hand sextile/square/trine overcoming;
-- domination / upon-the-tenth;
-- relation-level ledger entries and `derivation_ref`s;
-- reusable categorical condition signatures;
-- House River with integer route-count width;
-- Derivation Walker infrastructure;
-- Qualified Resonance, Relations, Qualified Flow, House River, and Proof Walker projections;
-- preservation of all earlier v0.4.1.x surfaces.
+Delivered source-locked reception/exchange/overcoming families, reusable condition signatures, House River route counts, qualified relational projections, and Derivation Walker infrastructure.
 
 ## v0.4.3 — Compound Condition
 
-**Status: current public release**
+**Status: complete**
 
-Purpose: compute higher-order condition testimonies as pure functions over deterministic geometry plus already-computed primitive and relational condition.
+Delivered the source-secure subset of compound testimonies including selected bonification, maltreatment, enclosure/intervention, sect qualification, reception qualification, mixed-state preservation, and proof/derivation integration.
 
-### Delivered source-secure subset
+Ambiguous historical variants remain deferred rather than guessed.
 
-Machine-readable registry:
+## v0.4.4 — Auditable Reading + expanded Discovery substrate
 
-```text
-data/rules/hellenistic/compound-condition-v1.registry.json
-```
+**Status: complete**
 
-Executable model:
+Delivered auditable Reading/Evidence Pack behavior, model overlays, multi-basin preservation, expanded aspect-family research projections, cross-layer Discovery candidates, and integrity boundaries that kept explanatory prose downstream from formal evidence.
 
-```text
-naf.condition.compound.hellenistic.v0.4.3
-```
+## v0.4.5 — Research Regimes & Hypothesis Architecture
 
-Implemented:
+**Status: complete**
 
-- bonification by benefic superior trine/square;
-- maltreatment by malefic superior square/domination;
-- benefic sign-based trine testimony;
-- malefic sign-based opposition testimony;
-- degree-based seven-degree ray enclosure;
-- intervention that can break enclosure;
-- sect qualification of acting benefics/malefics;
-- reception qualification enhancing bonification or mitigating maltreatment;
-- mixed bonification+maltreatment preservation;
-- compound ledger entries and derivation refs;
-- compound-aware Derivation Walker integration;
-- additive v043 interface with Existing Atlas, Compound Condition, Compound Map, Proof Walker, and Source Boundary.
-
-No scalar strength score. Multiple testimonies may coexist.
-
-### Explicitly deferred
-
-Selected historically ambiguous or not-yet-frozen variants remain deferred rather than guessed, including unresolved bodily/sign-containment enclosure variants and not-yet-source-locked counteraction/adherence/engagement/striking-with-a-ray details.
-
-## Parallel representation-depth track
-
-High-value next work:
-
-- deeper condition-aware energetic synthesis;
-- motif + condition field geometry;
-- side-by-side rule-set comparison;
-- expanded Derivation Walker normalization for legacy proof objects;
-- repeated-axis/configuration synthesis;
-- curated interpretation profiles;
-- selected minor-body profiles;
-- yogic/Ayurvedic/contemplative practice layers with explicit source/posture labels;
-- selectable Traditional, Energetic, Psychological, Mystical, and Research lenses.
-
-Every new view remains a projection of the single chart state.
-
-## Parallel graph-research track
-
-High-priority gates:
+Delivered explicit first-class regimes:
 
 ```text
-geometric longitude nulls
-label-permutation nulls
-degree-preserving nulls where appropriate
-layer-overlap nulls
-motif enrichment
-multilayer baselines
-comparative chart architecture
-condition-qualified graph hypotheses
+Operational
+Experimental
+Discovery
 ```
 
-Do not use rarity/enrichment language before comparison.
+with hypothesis packs, reversible model comparisons, Discovery candidate registry, independent research-status dimensions, Personal/Research aperture, and contamination guards.
 
-## Extended-body astronomy track
+Research status includes independent fields for geometry, derivation, historical analogue, population frequency, null comparison, phenomenological association, replication, and interpretation.
 
-Potentially add Ceres, Chiron, node variants, Lilith/apogee variants, Vertex, and fixed stars only after definitions, provider provenance, licensing, validation, and boundary tests are explicit.
+## v0.4.6 — Null Model Laboratory
 
-Ceres interpretation support exists for supplied coordinates; automatic astronomy remains separate future capability.
+**Status: complete framework milestone; merged to `main`**
 
-## v0.5 — Life Spectrum v1
+Delivered the first statistical-inference subsystem.
 
-Purpose: introduce continuous time only after natal state is structurally and conditionally mature.
-
-Planned:
-
-- transit ephemeris over arbitrary windows;
-- exact transit hits;
-- stations;
-- applying/separating temporal evolution;
-- stable natal-target lanes;
-- house activation lanes;
-- activated ruler pathways;
-- explicit activation functions;
-- decades-to-days zoom;
-- life-event annotations;
-- provenance for every marker/band;
-- birth-time sensitivity where relevant.
-
-Concept:
+Named counterfactuals:
 
 ```text
-N_i = geometry + topology + primitive condition + relational condition + compound condition + resonance + metadata
-T(t) = temporal input
-X_i(t) = F(N_i, T(t), rule-set versions)
+N_G geometric randomization
+N_L class-preserving identity/label permutation
+N_D degree-preserving aspect-network rewire
+N_T routing-codebook permutation
 ```
 
-Interpretive prose remains downstream.
+Core contract:
 
-## v0.6 — Traditional timing systems
+- explicit preserves/randomizes/question/limitations for every null;
+- source-locked executable statistics;
+- identical `T(C)` on observed and simulated state;
+- finite Monte Carlo +1 correction;
+- no p=0;
+- empirical percentile/effect position;
+- raw + BH-FDR-adjusted p-values;
+- family/rank metadata;
+- deterministic seeds and RNG identity;
+- simulation-quality diagnostics;
+- immutable experiment ledger;
+- no cross-null pass count;
+- null comparison advances only the null-comparison research dimension;
+- population frequency remains unknown;
+- interpretation remains withheld.
 
-Planned annual profections, zodiacal releasing, and carefully source-locked return techniques after relevant provider/rule definitions are frozen.
+## v0.4.7 — Formal Configurations & Astrological Hypergraphs
 
-## v0.7 — Life Space / recurrence research
+**Status: complete framework milestone; merged to `main`; public shell not yet productized**
 
-Potential research objects include state vectors through time, recurring activation motifs, condition-qualified ruler pathways, temporal clustering, event-annotation similarity, and state-space visualization.
+Delivered first-class higher-order structure.
 
-Dimensionality reduction belongs here only after state semantics are stable.
-
-## Research validation track
-
-### HCI
-
-Compare wheel versus Atlas on ruler-chain recovery, aspect lookup, motif identification, primitive/relational/compound condition reconstruction, house-route recovery, and evidence-chain tasks.
-
-### Astrological empirical research
-
-Test graph/condition/timing descriptors against independent criteria only with appropriate nulls, controls, and replication. Null findings remain acceptable.
-
-## Current immediate priorities
+Hyperedge classes:
 
 ```text
-1. source-lock any remaining compound variants worth implementing
-2. condition-aware whole-chart synthesis
-3. motif + condition field geometry
-4. graph null models / multilayer baselines
-5. side-by-side rule-set comparison
-6. validated extended-body astronomy where justified
-7. Life Spectrum
+geometric_polygon
+topological_basin
+compound_hybrid
 ```
 
-## Governing product standard
+Initial k=3/k=4 configuration registry:
 
-> **If a feature merely makes astrology look interesting, it does not belong. If it exposes a structural or experiential question difficult to inspect, reproduce, compare, or test with traditional representation, it may belong.**
+- Grand Trine;
+- T-Square;
+- Yod;
+- Grand Cross;
+- Kite;
+- T-Square Anchor Cluster.
+
+Also delivered:
+
+- closed Tarjan SCC hyperedges;
+- terminal basin-capture hyperedges;
+- compound aspect-routing hyperedges;
+- immutable SHA-256 derivation hashes;
+- candidate-specific null profiles using v0.4.6 machinery;
+- compact `[D,V,B,P,I]` research state;
+- binary incidence matrix and degree structures;
+- canonical positive and negative regression cases;
+- preservation of the accepted v0.4.6 research-lab artifact through a v0.4.7 wrapper.
+
+Deferred:
+
+- k=5–6 template library;
+- hypergraph-Laplacian eigensystem;
+- spectral clustering/connectivity claims.
+
+---
+
+# Immediate blocker — v0.4.7 Public Productization Gate
+
+**Status: active / must close before v0.4.8**
+
+Current defect:
+
+```text
+repository main = v0.4.7 implementation
+root public app = v0.4.5 shell
+v0.4.6 = side shell
+v0.4.7 shell = absent
+```
+
+Required work:
+
+1. create/promote one authoritative v0.4.7 shell;
+2. preserve seven coordinated views;
+3. preserve Personal | Research;
+4. expose v0.4.6 Null Model Laboratory in Research mode;
+5. expose v0.4.7 hyperedges + null profiles;
+6. unify current-product version chrome;
+7. distinguish current product version from historical subsystem/model versions;
+8. harden loading/empty/error bootstrap;
+9. prevent truth-state/graph desynchronization;
+10. invalidate stale null/hypergraph state after chart changes;
+11. point root `index.html` to the accepted current shell;
+12. add a public Research-path UI regression;
+13. deploy Pages and verify the real public behavior.
+
+Only after this gate is green may documentation call v0.4.7 the public product baseline.
+
+---
+
+## v0.4.8 — Hidden Geometry Engine
+
+**Status: next milestone, blocked until public productization gate closes**
+
+Purpose: formalize important geometric relations that are not visible as ordinary longitude major-aspect edges.
+
+Initial scope:
+
+### Midpoints
+
+- direct and indirect midpoint definitions;
+- circular wrap-safe arithmetic;
+- midpoint trees/chains where formally justified;
+- explicit orb policies;
+- derivation/provenance;
+- sensitivity to object set and orb policy.
+
+### Declination
+
+- declination coordinates under explicit astronomical provider/convention;
+- parallels;
+- contraparallels;
+- orb policy;
+- distinction between ecliptic longitude geometry and equatorial geometry.
+
+### Antiscia
+
+- antiscia;
+- contra-antiscia;
+- exact transformation definitions;
+- sign/degree derivation;
+- proof objects;
+- explicit tradition/source model identity.
+
+Architectural requirement: hidden geometry must become first-class formal structure and may feed graphs/hypergraphs only through explicit provenance-bearing interfaces.
+
+It must not be smuggled directly into interpretation.
+
+## v0.4.9 — Experimental Model Laboratory
+
+**Status: planned**
+
+Purpose: generalize the current hypothesis architecture into an explicit experimental-model execution environment.
+
+Initial targets:
+
+- Ceres–Taurus hypothesis;
+- alternative rulership tensors;
+- alternative aspect/configuration policies;
+- historically attested alternate rule models;
+- named modern hypotheses.
+
+Every experimental model must:
+
+```text
+name the control
+name the hypothesis
+produce reversible deltas
+preserve Operational state
+carry assumptions/provenance
+support appropriate counterfactual comparison
+```
+
+No experimental result becomes Operational by default.
+
+## v0.5.0 — Population Cohort Engine
+
+**Status: planned; replaces the old v0.5 Life Spectrum slot**
+
+Purpose: provide the first real empirical prevalence/reference-distribution layer.
+
+Target scale:
+
+```text
+100k+ charts where data provenance and quality permit
+```
+
+Core requirements:
+
+- cohort identity/version;
+- birth-data provenance and consent/legal basis;
+- astronomy-provider/version consistency;
+- birth-time quality metadata;
+- stratified/reference sampling;
+- population frequency and uncertainty;
+- matched-cohort logic where needed;
+- multiple-testing handling;
+- sensitivity to cohort construction;
+- null-versus-population distinction;
+- reproducible feature extraction;
+- privacy/data-minimization architecture.
+
+Only this milestone can generally advance:
+
+```text
+population_frequency: unknown
+→ population_frequency: characterized
+```
+
+A population frequency still does not establish interpretation or causality.
+
+---
+
+## Parallel research tracks after v0.5.0
+
+### Hypergraph spectral track
+
+Potential work:
+
+- normalized hypergraph Laplacian;
+- eigenspectrum;
+- multi-body connectivity/bottlenecks;
+- spectral sensitivity under configuration policies;
+- null/population baselines for spectral descriptors.
+
+### Extended k-body configuration track
+
+Potential k=5/k=6 typed configurations only after the object model and baselines remain stable.
+
+### Timing / Life Spectrum track
+
+Life Spectrum remains an important future product/research direction but is no longer the v0.5 milestone.
+
+Future timing work may include:
+
+- transit ephemeris;
+- exact hits/stations;
+- time-dependent activation;
+- profections;
+- zodiacal releasing;
+- returns;
+- recurring state motifs;
+- event annotations;
+- time-shift nulls;
+- birth-time sensitivity.
+
+Temporal research should consume the mature natal/research state rather than racing ahead of it.
+
+### HCI validation
+
+Compare the wheel, tables, graph views, House River, hyperedge inspectors, and null-profile displays on tasks such as:
+
+- ruler-chain recovery;
+- exact aspect lookup;
+- multi-body configuration recognition;
+- condition reconstruction;
+- house-route tracing;
+- distinction between detected and unexpected;
+- evidence/proof recovery.
+
+## Governing release standard
+
+> **A feature is not finished when code exists. It is finished when its formal definition, implementation, tests, provenance, release documentation, and intended public surface agree.**
+
+And the product standard remains:
+
+> **If a feature merely makes astrology look interesting, it does not belong. If it exposes a structural or experiential question that becomes easier to inspect, reproduce, compare, or test, it may belong.**
