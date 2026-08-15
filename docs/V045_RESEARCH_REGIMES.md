@@ -1,6 +1,6 @@
 # Noetic Atlas v0.4.5 — Research Regimes & Hypothesis Architecture
 
-Status: feature-branch candidate. Public release remains v0.4.4 until separately promoted.
+Status: **merged historical framework milestone**. v0.4.5 established the regime/aperture architecture now inherited by v0.4.6 and v0.4.7. Planning language near the end of this document is preserved as the historical outlook from the v0.4.5 milestone and is superseded by the living [`ROADMAP.md`](ROADMAP.md).
 
 ## Objective
 
@@ -99,7 +99,7 @@ Personal mode is the default and displays Operational astrology.
 
 Research mode reveals hypothesis identifiers, Experimental model deltas, Discovery candidates, status vectors, and the hypothesis registry within the same views.
 
-The candidate uses exactly one iframe, directly to the deterministic chart core. No historical release wrapper is embedded.
+The milestone shell uses exactly one iframe, directly to the deterministic chart core. No historical release wrapper is embedded.
 
 ## Research lifecycle
 
@@ -107,11 +107,13 @@ The candidate uses exactly one iframe, directly to the deterministic chart core.
 Detect -> Describe -> Compare -> Test -> Replicate -> Interpret
 ```
 
-v0.4.5 implements the bookkeeping and comparison layers needed before v0.4.6 null-model infrastructure. It deliberately does not claim population rarity, causal force, or empirical validation for current Discovery findings.
+v0.4.5 implemented the bookkeeping and comparison layers needed before null-model infrastructure. It deliberately did not claim population rarity, causal force, or empirical validation for Discovery findings.
 
-## Next research milestones
+## Historical next-research outlook from v0.4.5
 
-### v0.4.6 — Null Model Laboratory
+The following section records what was planned at the v0.4.5 milestone. It is retained for provenance, not as the current roadmap.
+
+### Then-planned v0.4.6 — Null Model Laboratory
 
 - geometric controls
 - label-permutation controls
@@ -119,17 +121,23 @@ v0.4.5 implements the bookkeeping and comparison layers needed before v0.4.6 nul
 - baseline distributions for existing detectors
 - explicit separation of observed frequency, null expectation, and effect/enrichment measures
 
-### v0.4.7 — Controlled Experimental Programs
+**Subsequent status:** delivered in v0.4.6.
 
-Use the generic Hypothesis Pack and null infrastructure to run multiple research programs. Ceres–Taurus may be one, but the architecture is intended equally for historical rule variants, alternative aspect families, outer-planet models, new objects, and subsequently discovered questions.
+### Then-planned v0.4.7 — Controlled Experimental Programs
 
-### Later
+The original v0.4.5 outlook anticipated broader controlled programs at v0.4.7.
 
-- hypergraph configuration objects
-- orb-persistence measurements
-- routing entropy and related network statistics
-- multilayer intersection discovery
-- historical-model equivalence studies
-- population-scale candidate motif discovery
+**Subsequent architectural decision:** the actual v0.4.7 dependency became **Formal Configurations & Astrological Hypergraphs**, because higher-order first-class objects were required before expanding the experimental program. Controlled alternative-model work is now staged for v0.4.9 Experimental Model Laboratory.
 
-The standing constitutional principle is: **Noetic Atlas must remain capable of surprising its creators.**
+### Originally listed later work
+
+- hypergraph configuration objects — **delivered in v0.4.7 core**;
+- orb-persistence measurements — later research;
+- routing entropy and related network statistics — later research;
+- multilayer intersection discovery — partially present / expandable;
+- historical-model equivalence studies — future experimental work;
+- population-scale candidate motif discovery — staged after v0.5.0 cohort infrastructure.
+
+Current dependency order is maintained in [`ROADMAP.md`](ROADMAP.md).
+
+The standing constitutional principle remains: **Noetic Atlas must remain capable of surprising its creators.**
